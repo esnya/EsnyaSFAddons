@@ -231,7 +231,7 @@ namespace EsnyaAircraftAssets
             }
         }
 
-        private static readonly GUILayoutOption[] miniButotnLayout = {
+        private static readonly GUILayoutOption[] miniButtotnLayout = {
             GUILayout.ExpandWidth(false),
             GUILayout.Width(120),
         };
@@ -257,7 +257,7 @@ namespace EsnyaAircraftAssets
             var isConfigured = IsConfigured(controller) && (effectsController == null || IsConfigured(effectsController));
             using (new EditorGUI.DisabledGroupScope(isConfigured))
             {
-                if (GUILayout.Button(isConfigured ? "Configured" : "Configure", style ?? EditorStyles.miniButton, miniButotnLayout))
+                if (GUILayout.Button(isConfigured ? "Configured" : "Configure", style ?? EditorStyles.miniButton, miniButtotnLayout))
                 {
                     Configure(controller);
                     if (effectsController != null) Configure(effectsController);
@@ -359,7 +359,7 @@ namespace EsnyaAircraftAssets
                         EditorGUILayout.ObjectField(windChanger, typeof(WindChanger), true);
                         using (new EditorGUI.DisabledGroupScope(windChangersConfigured))
                         {
-                            if (GUILayout.Button("Configure", EditorStyles.miniButton, miniButotnLayout))
+                            if (GUILayout.Button("Configure", EditorStyles.miniButton, miniButtotnLayout))
                             {
                                 windChanger.SetProgramVariable("VehicleEngines", engineControllers.ToArray());
                                 windChanger.ApplyProxyModifications();
@@ -388,11 +388,11 @@ namespace EsnyaAircraftAssets
 
                         if (respawner == null)
                         {
-                            if (GUILayout.Button("Place Respawner", EditorStyles.miniButtonRight, miniButotnLayout)) PlaceRespawner(planeRoot.transform);
+                            if (GUILayout.Button("Place Respawner", EditorStyles.miniButtonRight, miniButtotnLayout)) PlaceRespawner(planeRoot.transform);
                         }
                         else
                         {
-                            if (GUILayout.Button("Remove Respawner", EditorStyles.miniButtonRight, miniButotnLayout)) Undo.DestroyObjectImmediate(respawner.gameObject);
+                            if (GUILayout.Button("Remove Respawner", EditorStyles.miniButtonRight, miniButtotnLayout)) Undo.DestroyObjectImmediate(respawner.gameObject);
                         }
                     }
 

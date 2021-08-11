@@ -87,6 +87,8 @@ namespace EsnyaAircraftAssets
                 engineController.SetProgramVariable(nameof(EngineController.RepeatingWorldDistance), repeatingWorldDistance);
                 engineController.SetProgramVariable(nameof(EngineController.SeaLevel), sea.position.y);
                 engineController.SetProgramVariable(nameof(EngineController.KillsBoard), scoreboard);
+                var hudController = (HUDController)engineController.GetProgramVariable(nameof(EngineController.HUDControl));
+                if (hudController != null) hudController.gameObject.SetActive(false);
             }
 
             if (windChangers != null)

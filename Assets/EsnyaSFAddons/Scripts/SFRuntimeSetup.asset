@@ -401,7 +401,7 @@ MonoBehaviour:
       Data: 26|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: Scoreboard_Kills, Assembly-CSharp
+      Data: Scoreboard_Kills, SaccFlightAndVehicles.Runtime
     - Name: 
       Entry: 8
       Data: 
@@ -464,7 +464,7 @@ MonoBehaviour:
       Data: 30|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: WindChanger[], Assembly-CSharp
+      Data: WindChanger[], SaccFlightAndVehicles.Runtime
     - Name: 
       Entry: 8
       Data: 
@@ -590,7 +590,7 @@ MonoBehaviour:
       Data: 38|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: EngineController[], Assembly-CSharp
+      Data: EngineController[], SaccFlightAndVehicles.Runtime
     - Name: 
       Entry: 8
       Data: 

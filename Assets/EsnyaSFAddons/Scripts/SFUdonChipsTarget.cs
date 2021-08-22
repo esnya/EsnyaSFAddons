@@ -47,12 +47,16 @@ namespace EsnyaAircraftAssets
         {
             animaor.SetTrigger("explode");
             hitPoints = fullHealth;
-            foreach (GameObject Exploder in ExplodeOther)
+
+            if (ExplodeOther != null)
             {
-                UdonBehaviour ExploderUdon = (UdonBehaviour)Exploder.GetComponent(typeof(UdonBehaviour));
-                if (ExploderUdon != null)
+                foreach (GameObject Exploder in ExplodeOther)
                 {
-                    ExploderUdon.SendCustomEvent("Explode");
+                    UdonBehaviour ExploderUdon = (UdonBehaviour)Exploder.GetComponent(typeof(UdonBehaviour));
+                    if (ExploderUdon != null)
+                    {
+                        ExploderUdon.SendCustomEvent("Explode");
+                    }
                 }
             }
         }

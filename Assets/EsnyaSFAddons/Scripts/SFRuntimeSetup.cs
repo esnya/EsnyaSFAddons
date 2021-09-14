@@ -5,6 +5,9 @@ using UdonSharp;
 using UdonToolkit;
 using UnityEngine;
 using VRC.SDK3.Components;
+using System.Net.Mail;
+using Ludiq.OdinSerializer;
+using VRC.Udon;
 
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
 using System.Linq;
@@ -23,64 +26,24 @@ namespace EsnyaAircraftAssets
     public class SFRuntimeSetup : UdonSharpBehaviour
     {
 #if ESFA
-        [Header("EngineController Detection")]
-        public LayerMask planeLayers = 1 << 17;
-        public float searchRadius = 100000;
 
         [Header("World Configuration")]
         public Transform sea;
         public bool repeatingWorld = true;
         [HideIf("@!repeatingWorld")] public float repeatingWorldDistance = 20000;
+
+        [Header("SaccSync")]
+        public bool enableSaccSync;
+        [HideIf("@!enableSaccSync")] public GameObject saccSyncPrefab;
+
+
+        [Header("Detected Components")]
         public Scoreboard_Kills scoreboard;
         public WindChanger[] windChangers = {};
-
-        private int targetCount;
-        private EngineController[] engineControllers;
-
-        private bool ContainsUntilNull(object[] array, object value)
-        {
-            foreach (var item in array)
-            {
-                if (item == null) return false;
-                if (item == value) return true;
-            }
-            return false;
-        }
-        private object[] Take(object[] array, int length)
-        {
-            if (array == null) return null;
-
-            length = Mathf.Min(array.Length, length);
-
-            var resized = new object[length];
-            Array.Copy(array, resized, length);
-
-            return resized;
-        }
+        public EngineController[] engineControllers;
 
         private void Start()
         {
-            var colliders = Physics.OverlapSphere(transform.position, 100000, planeLayers, QueryTriggerInteraction.Ignore);
-
-            engineControllers = new EngineController[colliders.Length];
-            targetCount = 0;
-            foreach (var collider in colliders)
-            {
-                if (collider == null) continue;
-
-                var rigidbody = collider.GetComponentInParent<Rigidbody>();
-                if (rigidbody == null) continue;
-
-                var hitDetector = rigidbody.GetComponent<HitDetector>();
-                if (hitDetector == null) continue;
-
-                var engineController = hitDetector.EngineControl;
-                if (engineController == null || ContainsUntilNull(engineControllers, engineController)) continue;
-
-                engineControllers[targetCount++] = engineController;
-            }
-            engineControllers = (EngineController[])Take(engineControllers, targetCount);
-
             foreach (var engineController in engineControllers)
             {
                 engineController.SetProgramVariable(nameof(EngineController.RepeatingWorld), repeatingWorld);
@@ -96,7 +59,7 @@ namespace EsnyaAircraftAssets
                 foreach (var changer in windChangers) if (changer) changer.SetProgramVariable("VehicleEngines", engineControllers);
             }
 
-            Log("Info", $"Initialized {targetCount} vehicles");
+            Log("Info", $"Initialized {engineControllers.Length} vehicles");
 
             enabled = false;
         }
@@ -113,8 +76,88 @@ namespace EsnyaAircraftAssets
         private void Reset()
         {
             sea = GameObject.Find("SF_SEA")?.transform;
-            // scoreboard = SceneManager.GetActiveScene().GetRootGameObjects().Select(o => o.GetUdonSharpComponentInChildren<Scoreboard_Kills>()).FirstOrDefault();
-            // windChangers = SceneManager.GetActiveScene().GetRootGameObjects().SelectMany(o => o.GetUdonSharpComponentsInChildren<WindChanger>()).ToArray();
+            saccSyncPrefab = Resources.Load<GameObject>("SaccSync");
+        }
+
+        private static string GetNameWithId(UnityEngine.Object obj)
+        {
+            return $"{obj}/{obj.GetInstanceID():x}";
+        }
+
+        [Button("Editor Setup Now", true)]
+        public void EditorSetup()
+        {
+            var rootObjects = gameObject.scene.GetRootGameObjects();
+
+            engineControllers = rootObjects.SelectMany(o => o.GetUdonSharpComponentsInChildren<EngineController>(true)).ToArray();
+            scoreboard = rootObjects.Select(o => o.GetUdonSharpComponentInChildren<Scoreboard_Kills>()).Concat(rootObjects.Select(o => o.GetUdonSharpComponentInChildren<Scoreboard_Kills>(true))).Append(scoreboard).FirstOrDefault();
+            windChangers = rootObjects.SelectMany(o => o.GetUdonSharpComponentsInChildren<WindChanger>(true)).ToArray();
+
+            var saccSyncType = UdonSharpEditorUtility.GetUdonSharpBehaviourType(saccSyncPrefab.GetComponent<UdonBehaviour>());
+
+            foreach (var engineController in engineControllers)
+            {
+                var vehicleMainObj = engineController.VehicleMainObj;
+                var hasSaccSync = vehicleMainObj.GetUdonSharpComponentInChildren(saccSyncType, true) != null;
+                var objectSync = vehicleMainObj.GetComponent<VRCObjectSync>();
+
+                if (enableSaccSync && saccSyncPrefab)
+                {
+                    if (!hasSaccSync)
+                    {
+                        Debug.Log($"[{GetNameWithId(this)}] Adding SaccSync to {GetNameWithId(vehicleMainObj)}");
+                        var saccSync = (PrefabUtility.InstantiatePrefab(saccSyncPrefab, vehicleMainObj.transform) as GameObject).GetUdonSharpComponent(saccSyncType);
+                        saccSync.SetProgramVariable("EngineControl", engineController);
+                        saccSync.SetProgramVariable("VehicleTransform", vehicleMainObj.transform);
+                        saccSync.ApplyProxyModifications();
+                        saccSync.gameObject.SetActive(false);
+
+                        engineController.SetProgramVariable("SaccSync", saccSync);
+                        engineController.ApplyProxyModifications();
+                    }
+
+                    if (objectSync)
+                    {
+                        Debug.Log($"[{GetNameWithId(this)}] Removing ObjectSync from {GetNameWithId(vehicleMainObj)}");
+                        DestroyImmediate(objectSync);
+                    }
+                }
+                else
+                {
+                    if (hasSaccSync)
+                    {
+                        Debug.Log($"[{GetNameWithId(this)}] Removing SaccSync from {GetNameWithId(vehicleMainObj)}");
+                        foreach (var saccSync in vehicleMainObj.GetUdonSharpComponentsInChildren(saccSyncType))
+                        {
+                            DestroyImmediate(saccSync.gameObject);
+                        }
+                    }
+
+                    if (objectSync == null)
+                    {
+                        Debug.Log($"[{GetNameWithId(this)}] Adding ObjectSync to {GetNameWithId(vehicleMainObj)}");
+                        vehicleMainObj.AddComponent<VRCObjectSync>().AllowCollisionOwnershipTransfer = false;
+                    }
+                }
+            }
+
+            Debug.Log($"[{this}] detected {engineControllers.Length} EngineControllers, {scoreboard?.ToString() ?? "No Scoreboard"} and {windChangers.Length} WindChangers.");
+        }
+
+        public static void EditorSetup(Scene scene)
+        {
+            scene.GetRootGameObjects().SelectMany(o => o.GetUdonSharpComponentsInChildren<SFRuntimeSetup>(true)).ToList().ForEach(target => {
+                target.EditorSetup();
+                target.ApplyProxyModifications();
+                EditorUtility.SetDirty(UdonSharpEditorUtility.GetBackingUdonBehaviour(target));
+            });
+        }
+
+        [InitializeOnLoadMethod]
+        public static void RegisterCallbacks()
+        {
+            EditorSceneManager.sceneOpened += (scene, _) => EditorSetup(scene);
+            EditorSceneManager.sceneSaving += (scene, _) => EditorSetup(scene);
         }
 #endif
 

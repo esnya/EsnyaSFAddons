@@ -36,6 +36,8 @@ namespace EsnyaAircraftAssets
         public bool enableSaccSync;
         [HideIf("@!enableSaccSync")] public GameObject saccSyncPrefab;
 
+        // [Header("Advanced Features")]
+        // public bool revertPrefabOverrides;
 
         [Header("Detected Components")]
         public Scoreboard_Kills scoreboard;
@@ -100,6 +102,28 @@ namespace EsnyaAircraftAssets
                 var vehicleMainObj = engineController.VehicleMainObj;
                 var hasSaccSync = vehicleMainObj.GetUdonSharpComponentInChildren(saccSyncType, true) != null;
                 var objectSync = vehicleMainObj.GetComponent<VRCObjectSync>();
+                var prefabRoot = PrefabUtility.GetOutermostPrefabInstanceRoot(engineController.gameObject);
+/*
+                if (revertPrefabOverrides && prefabRoot == vehicleMainObj || prefabRoot?.transform == vehicleMainObj.transform.parent)
+                {
+                    Debug.Log($"[{GetNameWithId(this)}] Reverting Prefab Overrides of {GetNameWithId(vehicleMainObj)}");
+
+                    foreach (var gameObject in vehicleMainObj.GetComponentsInChildren<Transform>(true).Select(t => t.gameObject))
+                    {
+                        if (gameObject == vehicleMainObj) continue;
+
+                        Undo.RecordObject(gameObject, "Revert Prefab Overrides");
+                        PrefabUtility.RevertObjectOverride(gameObject, InteractionMode.AutomatedAction);
+                    }
+
+                    foreach (var component in vehicleMainObj.GetComponentsInChildren<Component>(true))
+                    {
+                        if (!PrefabUtility.IsPartOfAnyPrefab(component)) continue;
+                        Undo.RecordObject(component, "Revert Prefab Overrides");
+                        PrefabUtility.RevertObjectOverride(component, InteractionMode.AutomatedAction);
+                    }
+                }
+*/
 
                 if (enableSaccSync && saccSyncPrefab)
                 {
@@ -141,7 +165,7 @@ namespace EsnyaAircraftAssets
                 }
             }
 
-            Debug.Log($"[{this}] detected {engineControllers.Length} EngineControllers, {scoreboard?.ToString() ?? "No Scoreboard"} and {windChangers.Length} WindChangers.");
+            Debug.Log($"[{GetNameWithId(this)}] detected {engineControllers.Length} EngineControllers, {scoreboard?.ToString() ?? "No Scoreboard"} and {windChangers.Length} WindChangers.");
         }
 
         public static void EditorSetup(Scene scene)

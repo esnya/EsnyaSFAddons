@@ -21,7 +21,7 @@ namespace EsnyaAircraftAssets
 {
     [
         DefaultExecutionOrder(100), // After EngineController, WindChanger
-        UdonBehaviourSyncMode(BehaviourSyncMode.NoVariableSync),
+        UdonBehaviourSyncMode(BehaviourSyncMode.None),
     ]
     public class SFRuntimeSetup : UdonSharpBehaviour
     {
@@ -48,17 +48,17 @@ namespace EsnyaAircraftAssets
         {
             foreach (var engineController in engineControllers)
             {
-                engineController.SetProgramVariable(nameof(EngineController.RepeatingWorld), repeatingWorld);
-                engineController.SetProgramVariable(nameof(EngineController.RepeatingWorldDistance), repeatingWorldDistance);
-                engineController.SetProgramVariable(nameof(EngineController.SeaLevel), sea.position.y);
-                engineController.SetProgramVariable(nameof(EngineController.KillsBoard), scoreboard);
-                var hudController = (HUDController)engineController.GetProgramVariable(nameof(EngineController.HUDControl));
+                engineController.RepeatingWorld = repeatingWorld;
+                engineController.RepeatingWorldDistance = repeatingWorldDistance;
+                engineController.SeaLevel = sea.position.y;
+                engineController.KillsBoard = scoreboard;
+                var hudController = engineController.HUDControl;
                 if (hudController != null) hudController.gameObject.SetActive(false);
             }
 
             if (windChangers != null)
             {
-                foreach (var changer in windChangers) if (changer) changer.SetProgramVariable("VehicleEngines", engineControllers);
+                foreach (var changer in windChangers) if (changer) changer.VehicleEngines = engineControllers;
             }
 
             Log("Info", $"Initialized {engineControllers.Length} vehicles");
@@ -138,6 +138,7 @@ namespace EsnyaAircraftAssets
 
                         engineController.SetProgramVariable("SaccSync", saccSync);
                         engineController.ApplyProxyModifications();
+                        EditorUtility.SetDirty(UdonSharpEditorUtility.GetBackingUdonBehaviour(engineController));
                     }
 
                     if (objectSync)

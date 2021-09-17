@@ -41,7 +41,7 @@ namespace EsnyaAircraftAssets
 
         [Header("Detected Components")]
         public Scoreboard_Kills scoreboard;
-        public WindChanger[] windChangers = {};
+        public WindChanger[] windChangers = { };
         public EngineController[] engineControllers;
 
         private void Start()
@@ -103,27 +103,30 @@ namespace EsnyaAircraftAssets
                 var hasSaccSync = vehicleMainObj.GetUdonSharpComponentInChildren(saccSyncType, true) != null;
                 var objectSync = vehicleMainObj.GetComponent<VRCObjectSync>();
                 var prefabRoot = PrefabUtility.GetOutermostPrefabInstanceRoot(engineController.gameObject);
-/*
-                if (revertPrefabOverrides && prefabRoot == vehicleMainObj || prefabRoot?.transform == vehicleMainObj.transform.parent)
-                {
-                    Debug.Log($"[{GetNameWithId(this)}] Reverting Prefab Overrides of {GetNameWithId(vehicleMainObj)}");
+                /*
+                                if (revertPrefabOverrides && prefabRoot == vehicleMainObj || prefabRoot?.transform == vehicleMainObj.transform.parent)
+                                {
+                                    Debug.Log($"[{GetNameWithId(this)}] Reverting Prefab Overrides of {GetNameWithId(vehicleMainObj)}");
 
-                    foreach (var gameObject in vehicleMainObj.GetComponentsInChildren<Transform>(true).Select(t => t.gameObject))
-                    {
-                        if (gameObject == vehicleMainObj) continue;
+                                    foreach (var gameObject in vehicleMainObj.GetComponentsInChildren<Transform>(true).Select(t => t.gameObject))
+                                    {
+                                        if (gameObject == vehicleMainObj) continue;
 
-                        Undo.RecordObject(gameObject, "Revert Prefab Overrides");
-                        PrefabUtility.RevertObjectOverride(gameObject, InteractionMode.AutomatedAction);
-                    }
+                                        Undo.RecordObject(gameObject, "Revert Prefab Overrides");
+                                        PrefabUtility.RevertObjectOverride(gameObject, InteractionMode.AutomatedAction);
+                                    }
 
-                    foreach (var component in vehicleMainObj.GetComponentsInChildren<Component>(true))
-                    {
-                        if (!PrefabUtility.IsPartOfAnyPrefab(component)) continue;
-                        Undo.RecordObject(component, "Revert Prefab Overrides");
-                        PrefabUtility.RevertObjectOverride(component, InteractionMode.AutomatedAction);
-                    }
-                }
-*/
+                                    foreach (var component in vehicleMainObj.GetComponentsInChildren<Component>(true))
+                                    {
+                                        if (!PrefabUtility.IsPartOfAnyPrefab(component)) continue;
+                                        Undo.RecordObject(component, "Revert Prefab Overrides");
+                                        PrefabUtility.RevertObjectOverride(component, InteractionMode.AutomatedAction);
+                                    }
+                                }
+                */
+                var hudController = engineController.HUDControl;
+                if (hudController?.gameObject?.activeSelf ?? false) hudController.gameObject.SetActive(false);
+
 
                 if (enableSaccSync && saccSyncPrefab)
                 {
@@ -171,7 +174,8 @@ namespace EsnyaAircraftAssets
 
         public static void EditorSetup(Scene scene)
         {
-            scene.GetRootGameObjects().SelectMany(o => o.GetUdonSharpComponentsInChildren<SFRuntimeSetup>(true)).ToList().ForEach(target => {
+            scene.GetRootGameObjects().SelectMany(o => o.GetUdonSharpComponentsInChildren<SFRuntimeSetup>(true)).ToList().ForEach(target =>
+            {
                 target.EditorSetup();
                 target.ApplyProxyModifications();
                 EditorUtility.SetDirty(UdonSharpEditorUtility.GetBackingUdonBehaviour(target));
@@ -181,6 +185,10 @@ namespace EsnyaAircraftAssets
         [InitializeOnLoadMethod]
         public static void RegisterCallbacks()
         {
+            EditorApplication.playModeStateChanged += (c) =>
+            {
+                if (c == PlayModeStateChange.EnteredPlayMode) EditorSetup(SceneManager.GetActiveScene());
+            };
             EditorSceneManager.sceneOpened += (scene, _) => EditorSetup(scene);
             EditorSceneManager.sceneSaving += (scene, _) => EditorSetup(scene);
         }

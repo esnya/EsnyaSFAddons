@@ -90,17 +90,16 @@ namespace EsnyaAircraftAssets
             scoreboard = rootObjects.Select(o => o.GetUdonSharpComponentInChildren<Scoreboard_Kills>()).Concat(rootObjects.Select(o => o.GetUdonSharpComponentInChildren<Scoreboard_Kills>(true))).Append(scoreboard).Where(s => s != null).FirstOrDefault();
             windChangers = rootObjects.SelectMany(o => o.GetUdonSharpComponentsInChildren<WindChanger>(true)).ToArray();
 
-            var saccSyncType = UdonSharpEditorUtility.GetUdonSharpBehaviourType(saccSyncPrefab.GetComponent<UdonBehaviour>());
+            var saccSyncType = saccSyncPrefab != null ? UdonSharpEditorUtility.GetUdonSharpBehaviourType(saccSyncPrefab.GetComponent<UdonBehaviour>()) : null;
 
             foreach (var engineController in engineControllers)
             {
                 var vehicleMainObj = engineController.VehicleMainObj;
-                var hasSaccSync = vehicleMainObj.GetUdonSharpComponentInChildren(saccSyncType, true) != null;
+                var hasSaccSync = saccSyncType != null && vehicleMainObj.GetUdonSharpComponentInChildren(saccSyncType, true) != null;
                 var objectSync = vehicleMainObj.GetComponent<VRCObjectSync>();
                 var prefabRoot = PrefabUtility.GetOutermostPrefabInstanceRoot(engineController.gameObject);
                 var hudController = engineController.HUDControl;
                 if (hudController?.gameObject?.activeSelf ?? false) hudController.gameObject.SetActive(false);
-
 
                 if (enableSaccSync && saccSyncPrefab)
                 {

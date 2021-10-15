@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: VehicleLockAuthorizer
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: f2313be46b348c6499315d581b4247a8,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 72707b618f73b534ba2e179ae7829c30,
     type: 2}
   udonAssembly: 
   assemblyError: 

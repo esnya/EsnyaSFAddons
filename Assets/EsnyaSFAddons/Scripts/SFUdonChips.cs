@@ -20,7 +20,7 @@ namespace EsnyaAircraftAssets
 {
     [
         DefaultExecutionOrder(100), // After Engine Controller
-        UdonBehaviourSyncMode(BehaviourSyncMode.None),
+        UdonBehaviourSyncMode(/*BehaviourSyncMode.None*/ BehaviourSyncMode.NoVariableSync),
     ]
     public class SFUdonChips : UdonSharpBehaviour
     {

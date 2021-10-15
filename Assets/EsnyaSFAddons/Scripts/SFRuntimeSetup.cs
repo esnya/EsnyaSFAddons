@@ -1,12 +1,9 @@
-using System.Collections.ObjectModel;
 using InariUdon.UI;
 using System;
 using UdonSharp;
 using UdonToolkit;
 using UnityEngine;
 using VRC.SDK3.Components;
-using System.Net.Mail;
-using Ludiq.OdinSerializer;
 using VRC.Udon;
 
 #if !COMPILER_UDONSHARP && UNITY_EDITOR

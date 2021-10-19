@@ -7,3 +7,4 @@ do
   echo "$src > $dst"
   mv dist/$src dist/$dst
 done
+ls -lh dist

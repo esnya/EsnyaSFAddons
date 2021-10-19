@@ -9,7 +9,7 @@ Addons and utilities for [SaccFlightAndVehicles](https://github.com/Sacchan-VRC/
 
 
 ## Requirements (Use latest version!!)
-- [SaccFlightAndVehicles](https://github.com/Sacchan-VRC/SaccFlightAndVehicles): v1.4 but developd on [Enginecontroller Extensions](https://github.com/Sacchan-VRC/SaccFlightAndVehicles/commit/db5249c1d1b42a35208fedf3b18a3608e2c065a8)
+- [SaccFlightAndVehicles](https://github.com/Sacchan-VRC/SaccFlightAndVehicles): v1.4
 - [UdonToolkit](https://github.com/orels1/UdonToolkit)
 - [InariUdon](https://github.com/esnya/InariUdon): Using UdonLogger.
 

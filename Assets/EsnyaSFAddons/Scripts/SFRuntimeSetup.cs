@@ -5,6 +5,8 @@ using UdonToolkit;
 using UnityEngine;
 using VRC.SDK3.Components;
 using VRC.Udon;
+using VRC.SDKBase;
+using System.Collections;
 
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
 using System.Linq;
@@ -17,8 +19,8 @@ using UnityEngine.SceneManagement;
 namespace EsnyaAircraftAssets
 {
     [
-        DefaultExecutionOrder(100), // After SaccAirVehicle, SAV_WindChanger
-        UdonBehaviourSyncMode(BehaviourSyncMode.NoVariableSync),
+        DefaultExecutionOrder(100), // After SaccEntity/SaccAirVehicle/SAV_WindChanger
+        UdonBehaviourSyncMode(BehaviourSyncMode.None),
     ]
     public class SFRuntimeSetup : UdonSharpBehaviour
     {
@@ -28,14 +30,13 @@ namespace EsnyaAircraftAssets
         public bool repeatingWorld = true;
         [HideIf("@!repeatingWorld")] public float repeatingWorldDistance = 20000;
 
-        [Header("SaccSync")]
-        public bool enableSaccSync;
-        [HideIf("@!enableSaccSync")] public GameObject saccSyncPrefab;
+        [Header("Inject Extentions")]
+        public UdonSharpBehaviour[] injectExtentions = {};
 
         [Header("Detected Components")]
-        public SaccScoreboard_Kills scoreboard;
-        public SAV_WindChanger[] windChangers = { };
-        public SaccAirVehicle[] airVehicles;
+        [UdonSharpComponentInject] public SAV_WindChanger[] windChangers = { };
+        [UdonSharpComponentInject] public SaccAirVehicle[] airVehicles;
+
 
         private void Start()
         {
@@ -43,23 +44,14 @@ namespace EsnyaAircraftAssets
             {
                 if (airVehicle == null) continue;
 
-                var entity = airVehicle.GetComponentInParent<SaccEntity>();
-                if (entity != null)
-                {
-                    foreach (var extention in entity.ExtensionUdonBehaviours) SetupExtention(entity, extention);
-                    foreach (var extention in entity.Dial_Functions_L) SetupExtention(entity, extention);
-                    foreach (var extention in entity.Dial_Functions_R) SetupExtention(entity, extention);
-                }
+                var entity = airVehicle.EntityControl;
+                if (entity == null) continue;
+
+                InjectExtentions(entity, airVehicle);
 
                 airVehicle.SetProgramVariable(nameof(SaccAirVehicle.RepeatingWorld), repeatingWorld);
                 airVehicle.SetProgramVariable(nameof(SaccAirVehicle.RepeatingWorldDistance), repeatingWorldDistance);
                 airVehicle.SetProgramVariable(nameof(SaccAirVehicle.SeaLevel), sea.position.y);
-
-                var killTracker = airVehicle.GetComponentInChildren<SAV_KillTracker>();
-                if (killTracker != null) killTracker.SetProgramVariable(nameof(SAV_KillTracker.KillsBoard), scoreboard);
-
-                var hudController = airVehicle.GetComponentInChildren<SAV_HUDController>();
-                if (hudController != null) hudController.gameObject.SetActive(false);
             }
 
             if (windChangers != null)
@@ -69,12 +61,37 @@ namespace EsnyaAircraftAssets
 
             Log("Info", $"Initialized {airVehicles.Length} vehicles");
 
-            enabled = false;
+            gameObject.SetActive(false);
         }
 
-        private void SetupExtention(SaccEntity entity, UdonSharpBehaviour extention)
+        private void SetupExtentionReference(UdonBehaviour extention, string variableName, UdonSharpBehaviour value)
         {
-            if (extention == null) return;
+            // if (extention.GetProgramVariableType(variableName) == null) return;
+            extention.SetProgramVariable(variableName, value);
+        }
+
+        private void InjectExtentions(SaccEntity entity, SaccAirVehicle airVehicle)
+        {
+            var currentArray = (Component[])entity.GetProgramVariable(nameof(entity.ExtensionUdonBehaviours));
+            var currentLength = currentArray.Length;
+            var nextLength = currentLength + injectExtentions.Length;
+            var nextArray = new UdonSharpBehaviour[nextLength];
+            Array.Copy(currentArray, nextArray, currentLength);
+
+            Debug.Log(entity);
+
+            for (var i = 0; i < injectExtentions.Length; i++)
+            {
+                var obj = VRCInstantiate(injectExtentions[i].gameObject);
+                var extention = (UdonBehaviour)obj.GetComponent(typeof(UdonBehaviour));
+                obj.transform.SetParent(entity.transform, false);
+                nextArray[currentLength + i] = (UdonSharpBehaviour)(Component)extention;
+
+                SetupExtentionReference(extention, "EntityControl", entity);
+                SetupExtentionReference(extention, "SAVControl", airVehicle);
+            }
+
+            entity.SetProgramVariable(nameof(entity.ExtensionUdonBehaviours), nextArray);
         }
 
         [Header("Logger")]
@@ -89,55 +106,6 @@ namespace EsnyaAircraftAssets
         private void Reset()
         {
             sea = GameObject.Find("SF_SEA")?.transform;
-            saccSyncPrefab = Resources.Load<GameObject>("SaccSync");
-        }
-
-        private static string GetNameWithId(UnityEngine.Object obj)
-        {
-            return $"{obj}/{obj.GetInstanceID():x}";
-        }
-
-        [Button("Editor Setup Now", true)]
-        public void EditorSetup()
-        {
-            var rootObjects = gameObject.scene.GetRootGameObjects();
-
-            airVehicles = rootObjects.SelectMany(o => o.GetUdonSharpComponentsInChildren<SaccAirVehicle>(true)).ToArray();
-            scoreboard = rootObjects.Select(o => o.GetUdonSharpComponentInChildren<SaccScoreboard_Kills>()).Concat(rootObjects.Select(o => o.GetUdonSharpComponentInChildren<SaccScoreboard_Kills>(true))).Append(scoreboard).Where(s => s != null).FirstOrDefault();
-            windChangers = rootObjects.SelectMany(o => o.GetUdonSharpComponentsInChildren<SAV_WindChanger>(true)).ToArray();
-
-            foreach (var airVehicle in airVehicles)
-            {
-                var vehicleMainObj = airVehicle.GetComponentInParent<SaccEntity>()?.gameObject;
-                if (vehicleMainObj == null) continue;
-                var objectSync = vehicleMainObj.GetComponent<VRCObjectSync>();
-                var prefabRoot = PrefabUtility.GetOutermostPrefabInstanceRoot(airVehicle.gameObject);
-                var hudController = airVehicle.GetComponentInChildren<SAV_HUDController>();
-                if (hudController?.gameObject?.activeSelf ?? false) hudController.gameObject.SetActive(false);
-            }
-
-            Debug.Log($"[{GetNameWithId(this)}] detected {airVehicles.Length} SaccAirVehicles, {scoreboard?.ToString() ?? "No Scoreboard"} and {windChangers.Length} SAV_WindChangers.");
-        }
-
-        public static void EditorSetup(Scene scene)
-        {
-            scene.GetRootGameObjects().SelectMany(o => o.GetUdonSharpComponentsInChildren<SFRuntimeSetup>(true)).ToList().ForEach(target =>
-            {
-                target.EditorSetup();
-                target.ApplyProxyModifications();
-                EditorUtility.SetDirty(UdonSharpEditorUtility.GetBackingUdonBehaviour(target));
-            });
-        }
-
-        [InitializeOnLoadMethod]
-        public static void RegisterCallbacks()
-        {
-            EditorApplication.playModeStateChanged += (c) =>
-            {
-                if (c == PlayModeStateChange.EnteredPlayMode) EditorSetup(SceneManager.GetActiveScene());
-            };
-            EditorSceneManager.sceneOpened += (scene, _) => EditorSetup(scene);
-            EditorSceneManager.sceneSaving += (scene, _) => EditorSetup(scene);
         }
 #endif
 

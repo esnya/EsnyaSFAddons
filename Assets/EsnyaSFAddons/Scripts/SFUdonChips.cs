@@ -25,7 +25,7 @@ namespace EsnyaAircraftAssets
     public class SFUdonChips : UdonSharpBehaviour
     {
 #if ESFA && ESFA_UCS
-        [Header("EngineController Detection")]
+        [Header("SaccAirVehicle Detection")]
         public LayerMask planeLayers = 1 << 17;
         public float searchRadius = 100000;
 
@@ -44,9 +44,9 @@ namespace EsnyaAircraftAssets
         public float onEscaped = -500.0f, onDead = -1000.0f;
         public float darkBonus = 500, fogBonus = 3000, fogBonusCurve = 2, fogMaxValue = 140;
 
-        private EngineController[] engineControllers;
-        private EngineController pilotingController;
-        private Scoreboard_Kills scoreboard;
+        private SaccAirVehicle[] engineControllers;
+        private SaccAirVehicle pilotingController;
+        private SaccScoreboard_Kills scoreboard;
         private UdonChips udonChips;
         private float seaLevel, fullFuel, landedFogLevel;
         private int prevFuel;
@@ -84,7 +84,7 @@ namespace EsnyaAircraftAssets
 
             var colliders = Physics.OverlapSphere(transform.position, 100000, planeLayers, QueryTriggerInteraction.Ignore);
 
-            engineControllers = new EngineController[colliders.Length];
+            engineControllers = new SaccAirVehicle[colliders.Length];
             targetCount = 0;
             foreach (var collider in colliders)
             {
@@ -93,12 +93,12 @@ namespace EsnyaAircraftAssets
                 var sync = collider.GetComponentInParent(typeof(VRCObjectSync));
                 if (sync == null) continue;
 
-                var engineController = sync.GetComponentInChildren<EngineController>();
+                var engineController = sync.GetComponentInChildren<SaccAirVehicle>();
                 if (engineController == null || ContainsUntilNull(engineControllers, engineController)) continue;
 
                 engineControllers[targetCount++] = engineController;
             }
-            engineControllers = (EngineController[])Take(engineControllers, targetCount);
+            engineControllers = (SaccAirVehicle[])Take(engineControllers, targetCount);
 
             Log("Info", $"Initialized (tracking {targetCount} vehicles)");
         }
@@ -129,13 +129,14 @@ namespace EsnyaAircraftAssets
             return health == fullHealth;
         }
 
-        private void OnEntered(EngineController engineController)
+        private void OnEntered(SaccAirVehicle engineController)
         {
             pilotingController = engineController;
 
             fullFuel = pilotingController.FullFuel;
             seaLevel = pilotingController.SeaLevel;
-            scoreboard = pilotingController.KillsBoard;
+            var killTracker = pilotingController.GetComponentInChildren<SAV_KillTracker>();
+            if (killTracker != null) scoreboard = (SaccScoreboard_Kills)killTracker.GetProgramVariable("SaccScoreboard_Kills");
         }
         private void OnExited()
         {
@@ -145,11 +146,11 @@ namespace EsnyaAircraftAssets
                 for (int i = 0; i < kills; i++) AddMoney(onKill, "Kill");
             }
 
-            if (pilotingController.dead)
+            if ((bool)pilotingController.GetProgramVariable("dead"))
             {
                 AddMoney(onDead, "Dead");
             }
-            else if (!pilotingController.Taxiing && pilotingController.HasGear)
+            else if (!pilotingController.Taxiing && pilotingController.GetComponentInChildren<DFUNC_Gear>() != null)
             {
                 AddMoney(onEscaped, "Escaped");
             }

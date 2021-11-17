@@ -19,20 +19,23 @@ namespace EsnyaAircraftAssets
 
         private static void DrawSaccVehicleSeatGizmos(SaccVehicleSeat saccVehicleSeat)
         {
-            if (!saccVehicleSeat.AdjustSeat || saccVehicleSeat.TargetEyePosition == null) return;
+            var targetEyePosition = saccVehicleSeat.GetProgramVariable("TargetEyePosition") as Transform;
+            if (!((bool)saccVehicleSeat.GetProgramVariable("AdjustSeat")) || targetEyePosition == null) return;
 
             Gizmos.color = GizmoColors.eyePosition;
-            Gizmos.DrawWireSphere(saccVehicleSeat.TargetEyePosition.position, 0.1f);
+            Gizmos.DrawWireSphere(targetEyePosition.position, 0.1f);
         }
 
         private static void DrawSAV_FloatScriptGizmos(SAV_FloatScript floatScript)
         {
-            if (floatScript.FloatPoints != null)
+            var floatPoints = floatScript.GetProgramVariable("FloatPoints") as object[];
+            if (floatPoints != null)
             {
+                var radius = (float)floatScript.GetProgramVariable("FloatRadius");
                 Gizmos.color = GizmoColors.floatPoint;
-                foreach (var floatPoint in floatScript.FloatPoints)
+                foreach (var floatPoint in floatPoints.Select(p => p as Transform))
                 {
-                    Gizmos.DrawWireSphere(floatPoint.position, floatScript.FloatRadius);
+                    Gizmos.DrawWireSphere(floatPoint.position, radius);
                 }
             }
         }

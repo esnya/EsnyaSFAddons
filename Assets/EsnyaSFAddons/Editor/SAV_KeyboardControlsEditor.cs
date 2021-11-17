@@ -27,16 +27,17 @@ public class SAV_KeyboardControlsEditor : Editor
         { typeof(DFUNC_Smoke), KeyCode.Alpha5 },
     };
 
-    private static void FindDFUNC<T>(ref UdonSharpBehaviour target, IEnumerable<UdonSharpBehaviour> dialFunctions) where T : UdonSharpBehaviour
+    private static void FindDFUNC<T>(UdonSharpBehaviour target, string variableName, IEnumerable<UdonSharpBehaviour> dialFunctions) where T : UdonSharpBehaviour
     {
-        target = dialFunctions.FirstOrDefault(f => f is T) ?? target;
+        target.SetProgramVariable(variableName, dialFunctions.FirstOrDefault(f => f is T) ?? target.GetProgramVariable(variableName));
     }
 
-    private static void SetDefaultKey(ref KeyCode target, UdonSharpBehaviour dfunc)
+    private static void SetDefaultKey(SAV_KeyboardControls target, string dstVariableName, string srcVariableName)
     {
+        var dfunc = target.GetProgramVariable(srcVariableName) as UdonSharpBehaviour;
         if (dfunc == null) return;
         var type = dfunc.GetType();
-        if (defaultKeyCodes.ContainsKey(type)) target = defaultKeyCodes[type];
+        if (defaultKeyCodes.ContainsKey(type)) target.SetProgramVariable(dstVariableName, defaultKeyCodes[type]);
     }
 
     public override void OnInspectorGUI()
@@ -75,22 +76,22 @@ public class SAV_KeyboardControlsEditor : Editor
             Undo.RecordObject(udon, "Find Default DFUNCs");
             var entity = target.gameObject.GetUdonSharpComponentInParent<SaccEntity>();
 
-            FindDFUNC<DFUNC_Limits>(ref target.Lfunc2, entity.Dial_Functions_L);
-            FindDFUNC<DFUNC_Flares>(ref target.Lfunc3, entity.Dial_Functions_L);
-            FindDFUNC<DFUNC_Catapult>(ref target.Lfunc4, entity.Dial_Functions_L);
-            FindDFUNC<DFUNC_Brake>(ref target.Lfunc5, entity.Dial_Functions_L);
-            FindDFUNC<DFUNC_AltHold>(ref target.Lfunc6, entity.Dial_Functions_L);
-            FindDFUNC<DFUNC_Canopy>(ref target.Lfunc7, entity.Dial_Functions_L);
-            FindDFUNC<DFUNC_Cruise>(ref target.Lfunc8, entity.Dial_Functions_L);
+            FindDFUNC<DFUNC_Limits>(entity, "Lfunc2", entity.Dial_Functions_L);
+            FindDFUNC<DFUNC_Flares>(entity, "Lfunc3", entity.Dial_Functions_L);
+            FindDFUNC<DFUNC_Catapult>(entity, "Lfunc4", entity.Dial_Functions_L);
+            FindDFUNC<DFUNC_Brake>(entity, "Lfunc5", entity.Dial_Functions_L);
+            FindDFUNC<DFUNC_AltHold>(entity, "Lfunc6", entity.Dial_Functions_L);
+            FindDFUNC<DFUNC_Canopy>(entity, "Lfunc7", entity.Dial_Functions_L);
+            FindDFUNC<DFUNC_Cruise>(entity, "Lfunc8", entity.Dial_Functions_L);
 
-            FindDFUNC<DFUNC_Gun>(ref target.Rfunc1, entity.Dial_Functions_R);
-            FindDFUNC<DFUNC_AAM>(ref target.Rfunc2, entity.Dial_Functions_R);
-            FindDFUNC<DFUNC_AGM>(ref target.Rfunc3, entity.Dial_Functions_R);
-            FindDFUNC<DFUNC_Bomb>(ref target.Rfunc4, entity.Dial_Functions_R);
-            FindDFUNC<DFUNC_Gear>(ref target.Rfunc5, entity.Dial_Functions_R);
-            FindDFUNC<DFUNC_Flaps>(ref target.Rfunc6, entity.Dial_Functions_R);
-            FindDFUNC<DFUNC_Hook>(ref target.Rfunc7, entity.Dial_Functions_R);
-            FindDFUNC<DFUNC_Smoke>(ref target.Rfunc8, entity.Dial_Functions_R);
+            FindDFUNC<DFUNC_Gun>(entity, "Rfunc1", entity.Dial_Functions_R);
+            FindDFUNC<DFUNC_AAM>(entity, "Rfunc2", entity.Dial_Functions_R);
+            FindDFUNC<DFUNC_AGM>(entity, "Rfunc3", entity.Dial_Functions_R);
+            FindDFUNC<DFUNC_Bomb>(entity, "Rfunc4", entity.Dial_Functions_R);
+            FindDFUNC<DFUNC_Gear>(entity, "Rfunc5", entity.Dial_Functions_R);
+            FindDFUNC<DFUNC_Flaps>(entity, "Rfunc6", entity.Dial_Functions_R);
+            FindDFUNC<DFUNC_Hook>(entity, "Rfunc7", entity.Dial_Functions_R);
+            FindDFUNC<DFUNC_Smoke>(entity, "Rfunc8", entity.Dial_Functions_R);
             target.ApplyProxyModifications();
             EditorUtility.SetDirty(udon);
         }
@@ -98,22 +99,22 @@ public class SAV_KeyboardControlsEditor : Editor
         if (GUILayout.Button("Set Default Key Bindings"))
         {
             Undo.RecordObject(udon, "Set Default Key Bindings");
-            SetDefaultKey(ref target.Lfunc1key, target.Lfunc1);
-            SetDefaultKey(ref target.Lfunc2key, target.Lfunc2);
-            SetDefaultKey(ref target.Lfunc3key, target.Lfunc3);
-            SetDefaultKey(ref target.Lfunc4key, target.Lfunc4);
-            SetDefaultKey(ref target.Lfunc5key, target.Lfunc5);
-            SetDefaultKey(ref target.Lfunc6key, target.Lfunc6);
-            SetDefaultKey(ref target.Lfunc7key, target.Lfunc7);
-            SetDefaultKey(ref target.Lfunc8key, target.Lfunc8);
-            SetDefaultKey(ref target.Rfunc1key, target.Rfunc1);
-            SetDefaultKey(ref target.Rfunc2key, target.Rfunc2);
-            SetDefaultKey(ref target.Rfunc3key, target.Rfunc3);
-            SetDefaultKey(ref target.Rfunc4key, target.Rfunc4);
-            SetDefaultKey(ref target.Rfunc5key, target.Rfunc5);
-            SetDefaultKey(ref target.Rfunc6key, target.Rfunc6);
-            SetDefaultKey(ref target.Rfunc7key, target.Rfunc7);
-            SetDefaultKey(ref target.Rfunc8key, target.Rfunc8);
+            SetDefaultKey(target, "Lfunc1key", "Lfunc1");
+            SetDefaultKey(target, "Lfunc2key", "Lfunc2");
+            SetDefaultKey(target, "Lfunc3key", "Lfunc3");
+            SetDefaultKey(target, "Lfunc4key", "Lfunc4");
+            SetDefaultKey(target, "Lfunc5key", "Lfunc5");
+            SetDefaultKey(target, "Lfunc6key", "Lfunc6");
+            SetDefaultKey(target, "Lfunc7key", "Lfunc7");
+            SetDefaultKey(target, "Lfunc8key", "Lfunc8");
+            SetDefaultKey(target, "Rfunc1key", "Rfunc1");
+            SetDefaultKey(target, "Rfunc2key", "Rfunc2");
+            SetDefaultKey(target, "Rfunc3key", "Rfunc3");
+            SetDefaultKey(target, "Rfunc4key", "Rfunc4");
+            SetDefaultKey(target, "Rfunc5key", "Rfunc5");
+            SetDefaultKey(target, "Rfunc6key", "Rfunc6");
+            SetDefaultKey(target, "Rfunc7key", "Rfunc7");
+            SetDefaultKey(target, "Rfunc8key", "Rfunc8");
             target.ApplyProxyModifications();
             EditorUtility.SetDirty(udon);
         }

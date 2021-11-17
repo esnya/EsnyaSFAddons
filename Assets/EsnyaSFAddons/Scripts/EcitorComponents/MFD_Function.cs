@@ -19,7 +19,6 @@ namespace EsnyaAircraftAssets
 
 
 #if UNITY_EDITOR
-
         private void Setup()
         {
             hideFlags = HideFlags.DontSaveInBuild;
@@ -36,11 +35,12 @@ namespace EsnyaAircraftAssets
                 var count = indexL >= 0 ? entity.Dial_Functions_L.Length : entity.Dial_Functions_R.Length;
                 var dfuncIndex = Mathf.Max(indexL, indexR);
                 var localRotation = Quaternion.AngleAxis(360.0f * dfuncIndex / count, Vector3.back);
-                transform.localPosition = localRotation * Vector3.up * 0.15f;
+                var localPosition = localRotation * Vector3.up * 0.15f;
+                if (Vector3.Distance(transform.localPosition, localPosition) > 0.001f) transform.localPosition = localPosition;
                 if (displayHighlighter)
                 {
-                    displayHighlighter.transform.position = transform.parent.position;
-                    displayHighlighter.transform.localRotation = localRotation;
+                    if (Vector3.Distance(displayHighlighter.transform.position, transform.parent.position) > 0.001f) displayHighlighter.transform.position = transform.parent.position;
+                    if (Quaternion.Angle(displayHighlighter.transform.localRotation, localRotation) > 0.001f) displayHighlighter.transform.localRotation = localRotation;
                 }
             }
 

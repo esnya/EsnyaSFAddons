@@ -29,8 +29,8 @@ namespace EsnyaAircraftAssets
             var dfunc = entity.GetUdonSharpComponentsInChildren<UdonSharpBehaviour>(true).FirstOrDefault(u => u.GetType().Name == dfuncType);
             if (dfunc == null) return;
 
-            var indexL = entity.Dial_Functions_L.ToList().IndexOf(dfunc);
-            var indexR = entity.Dial_Functions_R.ToList().IndexOf(dfunc);
+            var indexL = entity.Dial_Functions_L?.ToList().IndexOf(dfunc) ?? -1;
+            var indexR = entity.Dial_Functions_R?.ToList().IndexOf(dfunc) ?? -1;
             if (indexL >= 0 || indexR >= 0)
             {
                 var count = indexL >= 0 ? entity.Dial_Functions_L.Length : entity.Dial_Functions_R.Length;

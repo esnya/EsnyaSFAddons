@@ -29,13 +29,12 @@ namespace EsnyaAircraftAssets
             var dfunc = entity.GetUdonSharpComponentsInChildren<UdonSharpBehaviour>(true).FirstOrDefault(u => u.GetType().Name == dfuncType);
             if (dfunc == null) return;
 
-            var indexL = entity.Dial_Functions_L?.ToList().IndexOf(dfunc) ?? -1;
-            var indexR = entity.Dial_Functions_R?.ToList().IndexOf(dfunc) ?? -1;
-            if (indexL >= 0 || indexR >= 0)
+            var mfds = transform.parent.GetComponentsInChildren<MFD_Function>(true).ToList();
+            var index = mfds.IndexOf(this);
+            if (index >= 0)
             {
-                var count = indexL >= 0 ? entity.Dial_Functions_L.Length : entity.Dial_Functions_R.Length;
-                var dfuncIndex = Mathf.Max(indexL, indexR);
-                var localRotation = Quaternion.AngleAxis(360.0f * dfuncIndex / count, Vector3.back);
+                var count = mfds.Count;
+                var localRotation = Quaternion.AngleAxis(360.0f * index / count, Vector3.back);
                 var localPosition = localRotation * Vector3.up * 0.14f;
                 if (Vector3.Distance(transform.localPosition, localPosition) > 0.0001f) transform.localPosition = localPosition;
                 if (displayHighlighter)

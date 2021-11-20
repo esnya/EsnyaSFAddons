@@ -64,12 +64,13 @@ namespace EsnyaAircraftAssets
         {
             var extentions = SFUtils.FindExtentions(entity.gameObject);
             var dfuncs = SFUtils.FindDFUNCs(entity.gameObject);
-            var seats = entity.GetUdonSharpComponentsInChildren<SaccVehicleSeat>();
+            var seats = entity.GetUdonSharpComponentsInChildren<SaccVehicleSeat>(true);
             var animator = entity.GetComponent<Animator>();
             var airVehicle = extentions.FirstOrDefault(e => e is SaccAirVehicle);
             var savSoundController = extentions.FirstOrDefault(e => e is SAV_SoundController);
+            var resupplyTriggers = entity.GetUdonSharpComponentsInChildren<SaccResupplyTrigger>(true);
 
-            foreach (var extention in extentions.Concat(dfuncs).Concat(seats))
+            foreach (var extention in extentions.Concat(dfuncs).Concat(seats).Concat(resupplyTriggers))
             {
                 var isDirty = false;
 

@@ -4,6 +4,7 @@ using System.Linq;
 using UdonSharp;
 using System.Reflection;
 using UnityEngine.SceneManagement;
+using VRC.Udon;
 #if UNITY_EDITOR
 using UnityEditor.SceneManagement;
 using UnityEditor;
@@ -35,7 +36,7 @@ namespace EsnyaAircraftAssets
                 var count = indexL >= 0 ? entity.Dial_Functions_L.Length : entity.Dial_Functions_R.Length;
                 var dfuncIndex = Mathf.Max(indexL, indexR);
                 var localRotation = Quaternion.AngleAxis(360.0f * dfuncIndex / count, Vector3.back);
-                var localPosition = localRotation * Vector3.up * 0.15f;
+                var localPosition = localRotation * Vector3.up * 0.14f;
                 if (Vector3.Distance(transform.localPosition, localPosition) > 0.001f) transform.localPosition = localPosition;
                 if (displayHighlighter)
                 {
@@ -76,9 +77,12 @@ namespace EsnyaAircraftAssets
         {
             serializedObject.Update();
 
-            var dfuncTypes = SceneManager.GetActiveScene().GetRootGameObjects()
-                .SelectMany(o => o.GetUdonSharpComponentsInChildren<UdonSharpBehaviour>(true))
-                .Select(u => u.GetType())
+            var dfuncTypes = SceneManager.GetActiveScene()
+                .GetRootGameObjects()
+                .SelectMany(o => o.GetComponentsInChildren<UdonBehaviour>(true))
+                .Where(u => u.programSource != null && UdonSharpEditorUtility.IsUdonSharpBehaviour(u))
+                .Select(u => UdonSharpEditorUtility.GetUdonSharpBehaviourType(u))
+                .Where(u => u != null)
                 .OrderBy(u => u.Name)
                 .Distinct()
                 .Where(u => u.GetMethods(BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.Public).Any(m => m.Name.StartsWith("DFUNC_")))

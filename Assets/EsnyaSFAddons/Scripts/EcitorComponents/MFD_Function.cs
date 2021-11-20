@@ -37,10 +37,10 @@ namespace EsnyaAircraftAssets
                 var dfuncIndex = Mathf.Max(indexL, indexR);
                 var localRotation = Quaternion.AngleAxis(360.0f * dfuncIndex / count, Vector3.back);
                 var localPosition = localRotation * Vector3.up * 0.14f;
-                if (Vector3.Distance(transform.localPosition, localPosition) > 0.001f) transform.localPosition = localPosition;
+                if (Vector3.Distance(transform.localPosition, localPosition) > 0.0001f) transform.localPosition = localPosition;
                 if (displayHighlighter)
                 {
-                    if (Vector3.Distance(displayHighlighter.transform.position, transform.parent.position) > 0.001f) displayHighlighter.transform.position = transform.parent.position;
+                    if (Vector3.Distance(displayHighlighter.transform.position, transform.parent.position) > 0.0001f) displayHighlighter.transform.position = transform.parent.position;
                     if (Quaternion.Angle(displayHighlighter.transform.localRotation, localRotation) > 0.001f) displayHighlighter.transform.localRotation = localRotation;
                 }
             }
@@ -55,7 +55,7 @@ namespace EsnyaAircraftAssets
 
         private void OnValidate() => Setup();
 
-        private static void SetupAll(Scene scene)
+        public static void SetupAll(Scene scene)
         {
             foreach (var c in scene.GetRootGameObjects().SelectMany(o => o.GetComponentsInChildren<MFD_Function>())) c.Setup();
         }
@@ -105,6 +105,8 @@ namespace EsnyaAircraftAssets
             while (property.NextVisible(false));
 
             serializedObject.ApplyModifiedProperties();
+
+            if (GUILayout.Button("Align")) MFD_Function.SetupAll((target as Component).gameObject.scene);
         }
     }
 #endif

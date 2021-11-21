@@ -5,6 +5,8 @@ using UdonToolkit;
 using UnityEngine;
 using VRC.SDK3.Components;
 using VRC.Udon;
+using VRC.SDKBase;
+using System.Collections;
 
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
 using System.Linq;
@@ -17,48 +19,78 @@ using UnityEngine.SceneManagement;
 namespace EsnyaAircraftAssets
 {
     [
-        DefaultExecutionOrder(100), // After EngineController, WindChanger
-        UdonBehaviourSyncMode(BehaviourSyncMode.NoVariableSync),
+        DefaultExecutionOrder(100), // After SaccEntity/SaccAirVehicle/SAV_WindChanger
+        UdonBehaviourSyncMode(BehaviourSyncMode.None),
     ]
     public class SFRuntimeSetup : UdonSharpBehaviour
     {
-#if ESFA
-
         [Header("World Configuration")]
         public Transform sea;
         public bool repeatingWorld = true;
         [HideIf("@!repeatingWorld")] public float repeatingWorldDistance = 20000;
 
-        [Header("SaccSync")]
-        public bool enableSaccSync;
-        [HideIf("@!enableSaccSync")] public GameObject saccSyncPrefab;
+        [Header("Inject Extentions")]
+        public UdonSharpBehaviour[] injectExtentions = {};
 
         [Header("Detected Components")]
-        public Scoreboard_Kills scoreboard;
-        public WindChanger[] windChangers = { };
-        public EngineController[] engineControllers;
+        [UdonSharpComponentInject] public SAV_WindChanger[] windChangers = { };
+        [UdonSharpComponentInject] public SaccAirVehicle[] airVehicles;
+
 
         private void Start()
         {
-            foreach (var engineController in engineControllers)
+            foreach (var airVehicle in airVehicles)
             {
-                if (engineController == null) continue;
-                engineController.SetProgramVariable(nameof(EngineController.RepeatingWorld), repeatingWorld);
-                engineController.SetProgramVariable(nameof(EngineController.RepeatingWorldDistance), repeatingWorldDistance);
-                engineController.SetProgramVariable(nameof(EngineController.SeaLevel), sea.position.y);
-                engineController.SetProgramVariable(nameof(EngineController.KillsBoard), scoreboard);
-                var hudController = engineController.HUDControl;
-                if (hudController != null) hudController.gameObject.SetActive(false);
+                if (airVehicle == null) continue;
+
+                var entity = airVehicle.EntityControl;
+                if (entity == null) continue;
+
+                InjectExtentions(entity, airVehicle);
+
+                airVehicle.SetProgramVariable(nameof(SaccAirVehicle.RepeatingWorld), repeatingWorld);
+                airVehicle.SetProgramVariable(nameof(SaccAirVehicle.RepeatingWorldDistance), repeatingWorldDistance);
+                airVehicle.SetProgramVariable(nameof(SaccAirVehicle.SeaLevel), sea.position.y);
             }
 
             if (windChangers != null)
             {
-                foreach (var changer in windChangers) if (changer) changer.VehicleEngines = engineControllers;
+                foreach (var changer in windChangers) if (changer) changer.SetProgramVariable("SaccAirVehicles", airVehicles);
             }
 
-            Log("Info", $"Initialized {engineControllers.Length} vehicles");
+            Log("Info", $"Initialized {airVehicles.Length} vehicles");
 
-            enabled = false;
+            gameObject.SetActive(false);
+        }
+
+        private void SetupExtentionReference(UdonBehaviour extention, string variableName, UdonSharpBehaviour value)
+        {
+            // if (extention.GetProgramVariableType(variableName) == null) return;
+            extention.SetProgramVariable(variableName, value);
+        }
+
+        private void InjectExtentions(SaccEntity entity, SaccAirVehicle airVehicle)
+        {
+            var currentArray = (Component[])entity.GetProgramVariable(nameof(entity.ExtensionUdonBehaviours));
+            var currentLength = currentArray.Length;
+            var nextLength = currentLength + injectExtentions.Length;
+            var nextArray = new UdonSharpBehaviour[nextLength];
+            Array.Copy(currentArray, nextArray, currentLength);
+
+            Debug.Log(entity);
+
+            for (var i = 0; i < injectExtentions.Length; i++)
+            {
+                var obj = VRCInstantiate(injectExtentions[i].gameObject);
+                var extention = (UdonBehaviour)obj.GetComponent(typeof(UdonBehaviour));
+                obj.transform.SetParent(entity.transform, false);
+                nextArray[currentLength + i] = (UdonSharpBehaviour)(Component)extention;
+
+                SetupExtentionReference(extention, "EntityControl", entity);
+                SetupExtentionReference(extention, "SAVControl", airVehicle);
+            }
+
+            entity.SetProgramVariable(nameof(entity.ExtensionUdonBehaviours), nextArray);
         }
 
         [Header("Logger")]
@@ -73,104 +105,7 @@ namespace EsnyaAircraftAssets
         private void Reset()
         {
             sea = GameObject.Find("SF_SEA")?.transform;
-            saccSyncPrefab = Resources.Load<GameObject>("SaccSync");
         }
-
-        private static string GetNameWithId(UnityEngine.Object obj)
-        {
-            return $"{obj}/{obj.GetInstanceID():x}";
-        }
-
-        [Button("Editor Setup Now", true)]
-        public void EditorSetup()
-        {
-            var rootObjects = gameObject.scene.GetRootGameObjects();
-
-            engineControllers = rootObjects.SelectMany(o => o.GetUdonSharpComponentsInChildren<EngineController>(true)).ToArray();
-            scoreboard = rootObjects.Select(o => o.GetUdonSharpComponentInChildren<Scoreboard_Kills>()).Concat(rootObjects.Select(o => o.GetUdonSharpComponentInChildren<Scoreboard_Kills>(true))).Append(scoreboard).Where(s => s != null).FirstOrDefault();
-            windChangers = rootObjects.SelectMany(o => o.GetUdonSharpComponentsInChildren<WindChanger>(true)).ToArray();
-
-            var saccSyncType = saccSyncPrefab != null ? UdonSharpEditorUtility.GetUdonSharpBehaviourType(saccSyncPrefab.GetComponent<UdonBehaviour>()) : null;
-
-            foreach (var engineController in engineControllers)
-            {
-                var vehicleMainObj = engineController.VehicleMainObj;
-                var hasSaccSync = saccSyncType != null && vehicleMainObj.GetUdonSharpComponentInChildren(saccSyncType, true) != null;
-                var objectSync = vehicleMainObj.GetComponent<VRCObjectSync>();
-                var prefabRoot = PrefabUtility.GetOutermostPrefabInstanceRoot(engineController.gameObject);
-                var hudController = engineController.HUDControl;
-                if (hudController?.gameObject?.activeSelf ?? false) hudController.gameObject.SetActive(false);
-
-                if (enableSaccSync && saccSyncPrefab)
-                {
-                    if (!hasSaccSync)
-                    {
-                        Undo.RecordObject(UdonSharpEditorUtility.GetBackingUdonBehaviour(engineController), "Add SaccSync");
-                        Debug.Log($"[{GetNameWithId(this)}] Adding SaccSync to {GetNameWithId(vehicleMainObj)}");
-                        var saccSync = (PrefabUtility.InstantiatePrefab(saccSyncPrefab, vehicleMainObj.transform) as GameObject).GetUdonSharpComponent(saccSyncType);
-                        saccSync.SetProgramVariable("EngineControl", engineController);
-                        saccSync.SetProgramVariable("VehicleTransform", vehicleMainObj.transform);
-                        saccSync.ApplyProxyModifications();
-                        saccSync.gameObject.SetActive(false);
-                        Undo.RegisterCreatedObjectUndo(objectSync, "Add SaccSync");
-
-                        engineController.SetProgramVariable("SaccSync", saccSync);
-                        engineController.ApplyProxyModifications();
-                        EditorUtility.SetDirty(UdonSharpEditorUtility.GetBackingUdonBehaviour(engineController));
-                    }
-
-                    if (objectSync)
-                    {
-                        Debug.Log($"[{GetNameWithId(this)}] Removing ObjectSync from {GetNameWithId(vehicleMainObj)}");
-                        Undo.DestroyObjectImmediate(objectSync);
-                    }
-                }
-                else
-                {
-                    if (hasSaccSync)
-                    {
-                        Debug.Log($"[{GetNameWithId(this)}] Removing SaccSync from {GetNameWithId(vehicleMainObj)}");
-                        foreach (var saccSync in vehicleMainObj.GetUdonSharpComponentsInChildren(saccSyncType))
-                        {
-                            Undo.DestroyObjectImmediate(saccSync.gameObject);
-                        }
-                    }
-
-                    if (objectSync == null)
-                    {
-                        Debug.Log($"[{GetNameWithId(this)}] Adding ObjectSync to {GetNameWithId(vehicleMainObj)}");
-                        var objecySync = vehicleMainObj.AddComponent<VRCObjectSync>();
-                        objectSync.AllowCollisionOwnershipTransfer = false;
-                        Undo.RegisterCreatedObjectUndo(objectSync, "Add ObjectSync");
-                    }
-                }
-            }
-
-            Debug.Log($"[{GetNameWithId(this)}] detected {engineControllers.Length} EngineControllers, {scoreboard?.ToString() ?? "No Scoreboard"} and {windChangers.Length} WindChangers.");
-        }
-
-        public static void EditorSetup(Scene scene)
-        {
-            scene.GetRootGameObjects().SelectMany(o => o.GetUdonSharpComponentsInChildren<SFRuntimeSetup>(true)).ToList().ForEach(target =>
-            {
-                target.EditorSetup();
-                target.ApplyProxyModifications();
-                EditorUtility.SetDirty(UdonSharpEditorUtility.GetBackingUdonBehaviour(target));
-            });
-        }
-
-        [InitializeOnLoadMethod]
-        public static void RegisterCallbacks()
-        {
-            EditorApplication.playModeStateChanged += (c) =>
-            {
-                if (c == PlayModeStateChange.EnteredPlayMode) EditorSetup(SceneManager.GetActiveScene());
-            };
-            EditorSceneManager.sceneOpened += (scene, _) => EditorSetup(scene);
-            EditorSceneManager.sceneSaving += (scene, _) => EditorSetup(scene);
-        }
-#endif
-
 #endif
     }
 }

@@ -29,6 +29,9 @@ namespace EsnyaAircraftAssets
             get => _fogStrength;
         }
 
+        public float MinStrength => slider.minValue;
+        public float MaxStrength => slider.maxValue;
+
         private MaterialPropertyBlock properties;
         void Start()
         {

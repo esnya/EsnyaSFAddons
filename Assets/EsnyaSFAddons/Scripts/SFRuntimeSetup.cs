@@ -24,7 +24,6 @@ namespace EsnyaAircraftAssets
     ]
     public class SFRuntimeSetup : UdonSharpBehaviour
     {
-#if ESFA
         [Header("World Configuration")]
         public Transform sea;
         public bool repeatingWorld = true;
@@ -107,8 +106,6 @@ namespace EsnyaAircraftAssets
         {
             sea = GameObject.Find("SF_SEA")?.transform;
         }
-#endif
-
 #endif
     }
 }

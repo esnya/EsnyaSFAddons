@@ -5,7 +5,7 @@ using VRC.SDKBase;
 using InariUdon.UI;
 using VRC.SDK3.Components;
 
-#if ESFA && ESFA_UCS
+#if ESFA_UCS
 using UCS;
 #endif
 
@@ -28,7 +28,7 @@ namespace EsnyaAircraftAssets
         public float onEscaped = -500.0f, onDead = -1000.0f;
         public float darkBonus = 500, fogBonus = 3000, fogBonusCurve = 2, fogMaxValue = 140;
 
-#if ESFA && ESFA_UCS
+#if ESFA_UCS
         private bool initialized = false;
         private UdonChips udonChips;
         private float maxAltitude;
@@ -97,7 +97,8 @@ namespace EsnyaAircraftAssets
                     if (GetIsDark()) AddMoney(darkBonus, "Night Bonus");
                     if (fogController)
                     {
-                        var calculatedFogBonus = Mathf.Floor(Mathf.Pow(fogController.FogStrength, fogBonusCurve) * fogBonus);
+                        var normalizedFogStrength = (fogController.FogStrength - fogController.MinStrength) / (fogController.MaxStrength - fogController.MinStrength);
+                        var calculatedFogBonus = Mathf.Floor(Mathf.Pow(normalizedFogStrength, fogBonusCurve) * fogBonus);
                         if (calculatedFogBonus > 0) AddMoney(fogBonus, "Weather Bonus");
                     }
                 }

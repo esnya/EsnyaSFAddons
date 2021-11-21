@@ -16,6 +16,7 @@ namespace EsnyaAircraftAssets
             GameObject,
             Transform,
             AudioSource,
+            GameObjectArray,
         }
 
         public ReferenceType referenceType;
@@ -23,6 +24,20 @@ namespace EsnyaAircraftAssets
         public bool forceDeactivate;
 
 #if UNITY_EDITOR
+        private object GetValue(SaccEntity entity)
+        {
+            switch (referenceType)
+            {
+                case ReferenceType.GameObject: return gameObject;
+                case ReferenceType.Transform: return transform;
+                case ReferenceType.AudioSource: return GetComponent<AudioSource>();
+                case ReferenceType.GameObjectArray:
+                    return (entity.GetProgramVariable(variableName) as GameObject[] ?? new GameObject[] {}).Append(gameObject).Distinct().ToArray();
+            }
+
+            return null;
+        }
+
         private void Setup(bool deactivate = true)
         {
             hideFlags = HideFlags.DontSaveInBuild;
@@ -32,17 +47,16 @@ namespace EsnyaAircraftAssets
             var entity = this.GetUdonSharpComponentInParent<SaccEntity>();
             if (!entity) return;
 
-            switch (referenceType)
+            var value = GetValue(entity);
+            if (!value.Equals(entity.GetProgramVariable(variableName)))
             {
-                case ReferenceType.GameObject: entity.SetProgramVariable(variableName, gameObject); break;
-                case ReferenceType.Transform: entity.SetProgramVariable(variableName, transform); break;
-                case ReferenceType.AudioSource: entity.SetProgramVariable(variableName, GetComponent<AudioSource>()); break;
+                entity.SetProgramVariable(variableName, value);
+
+                entity.ApplyProxyModifications();
+                EditorUtility.SetDirty(UdonSharpEditorUtility.GetBackingUdonBehaviour(entity));
             }
 
-            entity.ApplyProxyModifications();
-            EditorUtility.SetDirty(UdonSharpEditorUtility.GetBackingUdonBehaviour(entity));
-
-            if (deactivate && forceDeactivate) gameObject.SetActive(false);
+            if (deactivate && forceDeactivate && gameObject.activeSelf) gameObject.SetActive(false);
         }
 
         private void OnValidate() => Setup(false);

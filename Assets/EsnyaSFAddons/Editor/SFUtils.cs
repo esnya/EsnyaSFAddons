@@ -1,4 +1,3 @@
-#if UDON && ESFA
 using System.Collections;
 using System;
 using System.Collections.Generic;
@@ -47,4 +46,3 @@ namespace EsnyaAircraftAssets
         }
     }
 }
-#endif

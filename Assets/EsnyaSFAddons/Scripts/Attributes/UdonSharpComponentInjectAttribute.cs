@@ -29,6 +29,10 @@ namespace EsnyaAircraftAssets
         {
             EditorGUI.EndDisabledGroup();
             EditorGUILayout.HelpBox("Auto injected by script.", MessageType.Info);
+            if (GUILayout.Button("Force Update"))
+            {
+                AutoSetup((property.serializedObject.targetObject as Component).gameObject.scene);
+            }
         }
 
         private static void AutoSetup(Scene scene)

@@ -27,13 +27,13 @@ namespace EsnyaAircraftAssets
         }
 
 #if !ESFA_UCS
-        [MenuItem("EsnyaSFAddons/Features/Install UdonChips")]
+        [MenuItem("SaccFlight/EsnyaSFAddons/Install UdonChips")]
         public static void EnableUCS()
         {
             AddDefinition("ESFA_UCS");
         }
 #else
-        [MenuItem("EsnyaSFAddons/Features/Uninstall UdonChips")]
+        [MenuItem("SaccFlight/EsnyaSFAddons/Uninstall UdonChips")]
         public static void EnableUCS()
         {
             RemoveDefinition("ESFA_UCS");

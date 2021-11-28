@@ -36,7 +36,6 @@ namespace EsnyaAircraftAssets
         [UdonSharpComponentInject] public SAV_WindChanger[] windChangers = { };
         [UdonSharpComponentInject] public SaccAirVehicle[] airVehicles;
 
-
         private void Start()
         {
             foreach (var airVehicle in airVehicles)
@@ -77,11 +76,10 @@ namespace EsnyaAircraftAssets
             var nextArray = new UdonSharpBehaviour[nextLength];
             Array.Copy(currentArray, nextArray, currentLength);
 
-            Debug.Log(entity);
-
             for (var i = 0; i < injectExtentions.Length; i++)
             {
                 var obj = VRCInstantiate(injectExtentions[i].gameObject);
+                obj.name = injectExtentions[i].name;
                 var extention = (UdonBehaviour)obj.GetComponent(typeof(UdonBehaviour));
                 obj.transform.SetParent(entity.transform, false);
                 nextArray[currentLength + i] = (UdonSharpBehaviour)(Component)extention;

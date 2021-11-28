@@ -133,7 +133,7 @@ namespace EsnyaAircraftAssets
         private void Log(string level, string log)
         {
             if (logger == null) Debug.Log(log);
-            else logger.Log(level, gameObject.name, log);
+            else logger.Log(level, entity.name, log);
         }
     }
 }

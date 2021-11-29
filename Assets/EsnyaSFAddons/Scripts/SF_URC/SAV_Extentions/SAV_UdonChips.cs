@@ -28,14 +28,15 @@ namespace EsnyaAircraftAssets
         public float onEscaped = -500.0f, onDead = -1000.0f;
         public float darkBonus = 500, fogBonus = 3000, fogBonusCurve = 2, fogMaxValue = 140;
 
-#if ESFA_UCS
         private bool initialized = false;
-        private UdonChips udonChips;
         private float maxAltitude;
         private SaccEntity entity;
         private SaccAirVehicle airVehicle;
         private Rigidbody vehicleRigidbody;
         private bool takeOff = false;
+
+#if ESFA_UCS
+        private UdonChips udonChips;
 
         private void Start()
         {

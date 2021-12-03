@@ -23,7 +23,7 @@ namespace EsnyaAircraftAssets
 #if UNITY_EDITOR
         public override void BeforeGUI(SerializedProperty property)
         {
-            EditorGUI.BeginDisabledGroup(true);
+            EditorGUI.BeginDisabledGroup(false);
         }
         public override void AfterGUI(SerializedProperty property)
         {
@@ -74,7 +74,7 @@ namespace EsnyaAircraftAssets
         }
 
         [InitializeOnLoadMethod]
-        private static void InitializeOnLoad()
+        public static void InitializeOnLoad()
         {
             EditorSceneManager.sceneSaving += (scene, _) => AutoSetup(scene);
             SceneManager.activeSceneChanged += (_, next) => AutoSetup(next);

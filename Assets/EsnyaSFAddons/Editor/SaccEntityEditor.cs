@@ -67,9 +67,12 @@ namespace EsnyaAircraftAssets
             var animator = entity.GetComponent<Animator>();
             var airVehicle = extentions.FirstOrDefault(e => e is SaccAirVehicle);
             var savSoundController = extentions.FirstOrDefault(e => e is SAV_SoundController);
-            var resupplyTriggers = entity.GetUdonSharpComponentsInChildren<SaccResupplyTrigger>(true);
 
-            foreach (var extention in extentions.Concat(dfuncs).Concat(seats).Concat(resupplyTriggers))
+            var others = entity.GetUdonSharpComponentsInChildren<SaccResupplyTrigger>(true).Select(t => t as UdonSharpBehaviour)
+                .Concat(entity.GetUdonSharpComponentsInChildren<SAV_AAMController>(true))
+                .Concat(entity.GetUdonSharpComponentsInChildren<SAV_AGMController>(true));
+
+            foreach (var extention in extentions.Concat(dfuncs).Concat(seats).Concat(others))
             {
                 var isDirty = false;
 

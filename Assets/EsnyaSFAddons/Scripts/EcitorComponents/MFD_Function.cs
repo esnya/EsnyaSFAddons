@@ -46,9 +46,13 @@ namespace EsnyaAircraftAssets
 
             if (displayHighlighter)
             {
-                dfunc.SetProgramVariable("Dial_Funcon", displayHighlighter);
-                dfunc.ApplyProxyModifications();
-                EditorUtility.SetDirty(UdonSharpEditorUtility.GetBackingUdonBehaviour(dfunc));
+                try
+                {
+                    dfunc.SetProgramVariable("Dial_Funcon", displayHighlighter);
+                    dfunc.ApplyProxyModifications();
+                    EditorUtility.SetDirty(UdonSharpEditorUtility.GetBackingUdonBehaviour(dfunc));
+                }
+                catch (Exception e) { } // ToDo: i.e. DFUNC_ToggleBool
             }
         }
 

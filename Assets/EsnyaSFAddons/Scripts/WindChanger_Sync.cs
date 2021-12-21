@@ -4,7 +4,7 @@ using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
 
-namespace EsnyaFactory
+namespace EsnyaAircraftAssets
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class WindChanger_Sync : UdonSharpBehaviour

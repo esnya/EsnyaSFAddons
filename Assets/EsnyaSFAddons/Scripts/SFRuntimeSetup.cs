@@ -35,6 +35,7 @@ namespace EsnyaAircraftAssets
         [Header("Detected Components")]
         [UdonSharpComponentInject] public SAV_WindChanger[] windChangers = { };
         [UdonSharpComponentInject] public SaccAirVehicle[] airVehicles;
+        [UdonSharpComponentInject] public Windsock[] windsocks;
 
         private void Start()
         {
@@ -55,6 +56,10 @@ namespace EsnyaAircraftAssets
             if (windChangers != null)
             {
                 foreach (var changer in windChangers) if (changer) changer.SetProgramVariable("SaccAirVehicles", airVehicles);
+                if (windChangers.Length > 0 && windsocks == null)
+                {
+                    foreach (var windsock in windsocks) windsock.windChanger = windChangers[0];
+                }
             }
 
             Log("Info", $"Initialized {airVehicles.Length} vehicles");

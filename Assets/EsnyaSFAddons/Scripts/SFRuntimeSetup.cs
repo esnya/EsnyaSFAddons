@@ -1,33 +1,19 @@
-using InariUdon.UI;
 using System;
 using UdonSharp;
-using UdonToolkit;
 using UnityEngine;
-using VRC.SDK3.Components;
 using VRC.Udon;
-using VRC.SDKBase;
-using System.Collections;
-
-#if !COMPILER_UDONSHARP && UNITY_EDITOR
-using System.Linq;
-using UdonSharpEditor;
-using UnityEditor;
-using UnityEditor.SceneManagement;
-using UnityEngine.SceneManagement;
-#endif
+using InariUdon.UI;
 
 namespace EsnyaAircraftAssets
 {
-    [
-        DefaultExecutionOrder(100), // After SaccEntity/SaccAirVehicle/SAV_WindChanger
-        UdonBehaviourSyncMode(BehaviourSyncMode.None),
-    ]
+    [DefaultExecutionOrder(100)] // After SaccEntity/SaccAirVehicle/SAV_WindChanger
+    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class SFRuntimeSetup : UdonSharpBehaviour
     {
         [Header("World Configuration")]
         public Transform sea;
         public bool repeatingWorld = true;
-        [HideIf("@!repeatingWorld")] public float repeatingWorldDistance = 20000;
+        public float repeatingWorldDistance = 20000;
 
         [Header("Inject Extentions")]
         public UdonSharpBehaviour[] injectExtentions = {};

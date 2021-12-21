@@ -40,8 +40,7 @@ Integrate UdonChips with SaccFlight.
 
 ## Requirements (Use latest version!!)
 - [UdonSharp](https://github.com/MerlinVR/UdonSharp)
-- [SaccFlightAndVehicles](https://github.com/Sacchan-VRC/SaccFlightAndVehicles): 1.5
-- [UdonToolkit](https://github.com/orels1/UdonToolkit)
+- [SaccFlightAndVehicles](https://github.com/Sacchan-VRC/SaccFlightAndVehicles): 1.51 or later
 - [InariUdon](https://github.com/esnya/InariUdon): Using UdonLogger
 
 ### Requirements of SFUdonChips

@@ -28,6 +28,7 @@ MonoBehaviour:
     - {fileID: 11500000, guid: b1bd43a9896d078418aef5d2c4efdb75, type: 3}
     - {fileID: 11500000, guid: a81ed12406633174aa22632458cce3f2, type: 3}
     - {fileID: 11500000, guid: 6c47fadf38500e643a117d8f458244ab, type: 3}
+    - {fileID: 11500000, guid: 66d76adbd6d5c89438faceca6f65786f, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -550,7 +551,7 @@ MonoBehaviour:
       Data: 38|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: UdonSharp.UdonSharpBehaviour, UdonSharp.Runtime
+      Data: InariUdon.UI.UdonLogger, InariUdonRuntime
     - Name: 
       Entry: 8
       Data: 
@@ -597,8 +598,8 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: userBehaviourSource
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 3
     - Name: 
       Entry: 8
       Data: 

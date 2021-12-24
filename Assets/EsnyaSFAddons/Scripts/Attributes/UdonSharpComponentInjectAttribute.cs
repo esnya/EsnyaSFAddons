@@ -39,7 +39,7 @@ namespace EsnyaAircraftAssets
         {
             var rootGameObjects = scene.GetRootGameObjects();
             var usharpComponents = rootGameObjects
-                .SelectMany(o => o.GetUdonSharpComponentsInChildren<UdonSharpBehaviour>())
+                .SelectMany(o => o.GetUdonSharpComponentsInChildren<UdonSharpBehaviour>(true))
                 .Where(c => c != null)
                 .GroupBy(component => component.GetType())
                 .SelectMany(group =>

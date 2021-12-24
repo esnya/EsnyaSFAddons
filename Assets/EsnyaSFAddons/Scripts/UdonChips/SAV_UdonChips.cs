@@ -17,6 +17,7 @@ namespace EsnyaAircraftAssets
     {
         [Header("Weather Sources")]
         public FogController fogController;
+        [UdonSharpComponentInject] public SAV_WindChanger windChanger;
         public Transform sunSource;
 
         [Header("Configurations")]
@@ -26,7 +27,9 @@ namespace EsnyaAircraftAssets
         public float onKill = 2000.0f;
         public float onLanded = 500.0f, onResupplyed = 50.0f;
         public float onEscaped = -500.0f, onDead = -1000.0f;
-        public float darkBonus = 500, fogBonus = 3000, fogBonusCurve = 2, fogMaxValue = 140;
+        public float darkBonus = 500;
+        public float fogBonus = 3000, fogBonusCurve = 2, fogMaxValue = 140;
+        public float windBonus = 3000, windBonusCurve = 2, windMaxStrength = 50;
 
         private bool initialized = false;
         private float maxAltitude;
@@ -100,7 +103,13 @@ namespace EsnyaAircraftAssets
                     {
                         var normalizedFogStrength = (fogController.FogStrength - fogController.MinStrength) / (fogController.MaxStrength - fogController.MinStrength);
                         var calculatedFogBonus = Mathf.Floor(Mathf.Pow(normalizedFogStrength, fogBonusCurve) * fogBonus);
-                        if (calculatedFogBonus > 0) AddMoney(fogBonus, "Weather Bonus");
+                        if (calculatedFogBonus > 0) AddMoney(fogBonus, "Fog Bonus");
+                    }
+                    if (windChanger && windChanger.WindStrengthSlider)
+                    {
+                        var strength = windChanger.WindStrengthSlider.value;
+                        var bonus = Mathf.Floor(Mathf.Pow(Mathf.Clamp01(strength / windMaxStrength), windBonusCurve) * windBonus);
+                        if (bonus > 0) AddMoney(bonus, "Wind Bonus");
                     }
                 }
             }

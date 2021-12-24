@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: Windsock
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 7f11cae043f102442aca3350f69b2963,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: e7bda231e6063354f8d38280238914fe,
     type: 2}
   udonAssembly: 
   assemblyError: 

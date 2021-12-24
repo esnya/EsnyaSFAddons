@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: WindChanger_Sync
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 8340d056cb225074795fd5830b0d1792,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: ff86f05ef6f6b2849bf055d99d5a8990,
     type: 2}
   udonAssembly: 
   assemblyError: 

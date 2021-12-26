@@ -42,7 +42,7 @@ namespace EsnyaAircraftAssets
             if (windChangers != null)
             {
                 foreach (var changer in windChangers) if (changer) changer.SetProgramVariable("SaccAirVehicles", airVehicles);
-                if (windChangers.Length > 0 && windsocks == null)
+                if (windChangers.Length > 0 && windsocks != null)
                 {
                     foreach (var windsock in windsocks) windsock.windChanger = windChangers[0];
                 }

@@ -37,6 +37,8 @@ namespace EsnyaAircraftAssets
         private SaccAirVehicle airVehicle;
         private Rigidbody vehicleRigidbody;
         private UdonChips udonChips;
+        private bool initialized;
+        private bool takeOff;
 
         private void Start()
         {

@@ -31,14 +31,11 @@ namespace EsnyaAircraftAssets
         public float fogBonus = 3000, fogBonusCurve = 2, fogMaxValue = 140;
         public float windBonus = 3000, windBonusCurve = 2, windMaxStrength = 50;
 
-        private bool initialized = false;
+#if ESFA_UCS
         private float maxAltitude;
         private SaccEntity entity;
         private SaccAirVehicle airVehicle;
         private Rigidbody vehicleRigidbody;
-        private bool takeOff = false;
-
-#if ESFA_UCS
         private UdonChips udonChips;
 
         private void Start()
@@ -140,10 +137,13 @@ namespace EsnyaAircraftAssets
 
         [Header("Logger")]
         public UdonLogger logger;
+
+#if ESFA_UCS
         private void Log(string level, string log)
         {
             if (logger == null) Debug.Log(log);
             else logger.Log(level, entity.name, log);
         }
+#endif
     }
 }

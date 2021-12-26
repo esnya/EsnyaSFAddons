@@ -52,7 +52,7 @@ namespace EsnyaAircraftAssets
                     dfunc.ApplyProxyModifications();
                     EditorUtility.SetDirty(UdonSharpEditorUtility.GetBackingUdonBehaviour(dfunc));
                 }
-                catch (Exception e) { } // ToDo: i.e. DFUNC_ToggleBool
+                finally {}
             }
         }
 

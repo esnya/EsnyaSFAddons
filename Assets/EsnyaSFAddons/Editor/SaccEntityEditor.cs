@@ -65,7 +65,7 @@ namespace EsnyaAircraftAssets
             var dfuncs = SFUtils.FindDFUNCs(entity.gameObject);
             var seats = entity.GetUdonSharpComponentsInChildren<SaccVehicleSeat>(true);
             var animator = entity.GetComponent<Animator>();
-            var airVehicle = extentions.FirstOrDefault(e => e is SaccAirVehicle);
+            var airVehicle = extentions.FirstOrDefault(e => e is SaccAirVehicle) as SaccAirVehicle;
             var savSoundController = extentions.FirstOrDefault(e => e is SAV_SoundController);
 
             var others = entity.GetUdonSharpComponentsInChildren<SaccResupplyTrigger>(true).Select(t => t as UdonSharpBehaviour)
@@ -110,6 +110,12 @@ namespace EsnyaAircraftAssets
                     extention.ApplyProxyModifications();
                     EditorUtility.SetDirty(UdonSharpEditorUtility.GetBackingUdonBehaviour(extention));
                 }
+            }
+
+            if (airVehicle && airVehicle.VehicleMesh && airVehicle.VehicleMesh.gameObject.layer != LayerMask.NameToLayer("Walkthrough") && HelpBoxWithAutoFix($"VehicleMesh must be on the layer Walkthrough.", MessageType.Error))
+            {
+                Undo.RecordObject(airVehicle.VehicleMesh.gameObject, "Auto Fix");
+                airVehicle.VehicleMesh.gameObject.layer = LayerMask.NameToLayer("Walkthrough");
             }
 
             if (entity.InVehicleOnly != null && entity.InVehicleOnly.activeSelf && HelpBoxWithAutoFix($"InVehicleOnly should be deactivated.", MessageType.Warning))

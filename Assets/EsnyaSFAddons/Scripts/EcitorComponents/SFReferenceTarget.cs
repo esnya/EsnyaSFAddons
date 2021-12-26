@@ -59,8 +59,6 @@ namespace EsnyaAircraftAssets
             if (deactivate && forceDeactivate && gameObject.activeSelf) gameObject.SetActive(false);
         }
 
-        private void OnValidate() => Setup(false);
-
         private static void SetupAll(Scene scene)
         {
             foreach (var c in scene.GetRootGameObjects().SelectMany(o => o.GetComponentsInChildren<SFReferenceTarget>())) c.Setup();

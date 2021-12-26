@@ -56,8 +56,6 @@ namespace EsnyaAircraftAssets
             }
         }
 
-        private void OnValidate() => Setup();
-
         public static void SetupAll(Scene scene)
         {
             foreach (var c in scene.GetRootGameObjects().SelectMany(o => o.GetComponentsInChildren<MFD_Function>())) c.Setup();

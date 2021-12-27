@@ -19,8 +19,13 @@ namespace EsnyaAircraftAssets {
         public float groundBrakeMultiplier = 1;
         public float waterBrakeMultiplier = 1;
 
-        public void SFEXT_L_EntityStart()
+        private bool initialized = false;
+
+        public void SFEXT_O_PilotEnter()
         {
+            if (initialized) return;
+
+            initialized = true;
             SendCustomEventDelayedSeconds(nameof(_LateStart), 3);
         }
 

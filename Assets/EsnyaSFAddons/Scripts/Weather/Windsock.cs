@@ -43,7 +43,7 @@ namespace EsnyaAircraftAssets
             var gustz = timeGustiness + (transform.position.z * windTurbulanceScale);
             var finalWind = wind + Vector3.Normalize(new Vector3(Mathf.PerlinNoise(gustx + 9000, gustz) - .5f, 0, Mathf.PerlinNoise(gustx, gustz + 9999) - .5f)) * windGustStrength;
 
-            heading = Mathf.LerpAngle(heading, Vector3.SignedAngle(Vector3.forward, Vector3.ProjectOnPlane(finalWind, Vector3.up), Vector3.up), rotationSmooth * Mathf.Clamp01(wind.magnitude) / (Time.deltaTime * updateInterval));
+            heading = Mathf.LerpAngle(heading, Vector3.SignedAngle(Vector3.forward, Vector3.ProjectOnPlane(finalWind, Vector3.up), Vector3.up), rotationSmooth * Mathf.Clamp01(finalWind.magnitude) / (Time.deltaTime * updateInterval));
             transform.rotation = Quaternion.AngleAxis(heading, Vector3.up) * initialRotation;
 
             animator.SetFloat("x", Mathf.Clamp(finalWind.x / maxWindMagnitude, -1.0f, 1.0f));

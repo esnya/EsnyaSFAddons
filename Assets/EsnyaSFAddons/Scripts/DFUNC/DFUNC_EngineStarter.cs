@@ -10,43 +10,61 @@ namespace EsnyaAircraftAssets
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class DFUNC_EngineStarter : UdonSharpBehaviour
     {
-        public KeyCode keyboardControl = KeyCode.LeftShift;
-        [Tooltip("SAVControl.VehicleAnimator when null")] public Animator engineStarterAnimator;
+        public const byte EngineStarting = 1;
+        public const byte EngineStarted = 2;
+        public const byte EngineStopping = 3;
+        public const byte EngineStopped = 4;
+
+        public KeyCode engineStartKey = KeyCode.LeftShift;
+        public KeyCode engineStopKey = KeyCode.None;
+        public Animator engineStarterAnimator;
         public string parameterName = "enginestarted";
         public GameObject Dial_Funcon;
-        // public AudioSource engineStart;
+        public AudioSource audioSource;
+        public AudioClip engineStart, engineStop;
+        public float engineStartDuration = 4.0f, engineStopDuration = 4.0f;
+        public float throttleStrengthTransitionDuration = 1.0f;
 
         private SaccEntity entity;
         private SaccAirVehicle airVehicle;
         private SAV_SoundController soundController;
         private float throttleStrength;
         private AudioSource[] engineSounds;
-        private bool useLeftTrigger, previousTrigger, selected, isOwner, isPilot;
-        [UdonSynced] [FieldChangeCallback(nameof(EngineStarted))] private bool _engineStarted;
-        public bool EngineStarted
+        private bool useLeftTrigger, previousTrigger, selected, isPilot, isOccupied;
+        private float stateChangedTime;
+        private bool disableTaxiRotation;
+        [UdonSynced] [FieldChangeCallback(nameof(EngineState))] private byte _engineState;
+        public byte EngineState
         {
             private set
             {
-                _engineStarted = value;
-
-                if (value)
+                var startingOrStarted = value == EngineStarted || value == EngineStarting;
+                if (value != _engineState)
                 {
-                    if (Networking.IsOwner(gameObject)) entity.SendEventToExtensions("SFEXT_O_StartEngine");
-                    airVehicle.ThrottleStrength = throttleStrength;
+                    MuteEngineSounds(value != EngineStarted);
+                    if (value == EngineStarting) PlayOneShot(engineStart);
+                    else if (value == EngineStopping) PlayOneShot(engineStop);
+
+                    airVehicle.ThrottleStrength = value == EngineStarted || value == EngineStopping ? throttleStrength : 0;
+
+                    stateChangedTime = Time.time;
                 }
-                else
+
+                if (!disableTaxiRotation)
                 {
-                    if (Networking.IsOwner(gameObject)) entity.SendEventToExtensions("SFEXT_O_StopEngine");
-                    airVehicle.ThrottleStrength = 0.0f;
+                    if (value == EngineStopped) airVehicle.DisableTaxiRotation = 1;
+                    else if (value == EngineStarting) airVehicle.DisableTaxiRotation = 0;
                 }
 
-                if (Dial_Funcon) Dial_Funcon.SetActive(value);
+                if (Dial_Funcon) Dial_Funcon.SetActive(startingOrStarted);
 
-                foreach (var engineSound in engineSounds) engineSound.mute = !value;
+                if (engineStarterAnimator) engineStarterAnimator.SetBool(parameterName, startingOrStarted);
 
-                engineStarterAnimator.SetBool(parameterName, value);
+                if (value == EngineStopped && !isOccupied) gameObject.SetActive(false);
+
+                _engineState = value;
             }
-            get => _engineStarted;
+            get => _engineState;
         }
 
         public void DFUNC_LeftDial() { useLeftTrigger = true; }
@@ -69,6 +87,21 @@ namespace EsnyaAircraftAssets
             for (var i = 0; i < soundController.PlaneIdle.Length; i++) engineSounds[i + 4 + soundController.Thrust.Length] = soundController.PlaneIdle[i];
 
             throttleStrength = airVehicle.ThrottleStrength;
+
+            disableTaxiRotation = airVehicle.DisableTaxiRotation != 0;
+
+            EngineState = EngineStopped;
+        }
+
+        public void SFEXT_G_Explode()
+        {
+            EngineState = EngineStopped;
+        }
+
+        public void SFEXT_O_RespawnButton()
+        {
+            EngineState = EngineStopped;
+            RequestSerialization();
         }
 
         public void DFUNC_Selected()
@@ -82,32 +115,40 @@ namespace EsnyaAircraftAssets
             selected = false;
         }
 
-        public void SFEXT_G_PilotEnter() => gameObject.SetActive(true);
+        public void SFEXT_G_PilotEnter()
+        {
+            isOccupied = true;
+            gameObject.SetActive(true);
+        }
 
         public void SFEXT_G_PilotExit()
         {
-            EngineStarted = false;
-            gameObject.SetActive(false);
+            isOccupied = false;
         }
 
         public void SFEXT_O_PilotEnter()
         {
-            EngineStarted = false;
-            RequestSerialization();
-            previousTrigger = true;
+            EngineState = EngineStopped;
             isPilot = true;
+            RequestSerialization();
         }
 
         public void SFEXT_O_PilotExit()
         {
-            EngineStarted = false;
-            RequestSerialization();
+            if (EngineState != EngineStopped)
+            {
+                EngineState = EngineStopping;
+                RequestSerialization();
+            }
+
             isPilot = false;
         }
 
         private float GetInput()
         {
-            if (!EngineStarted && Input.GetKey(keyboardControl)) return 1.0f;
+            if (EngineState == EngineStarting || EngineState == EngineStopping) return 0.0f;
+            if (Input.GetKey(engineStartKey) && EngineState == EngineStopped) return 1.0f;
+            if (Input.GetKeyDown(engineStopKey) && EngineState == EngineStarted && airVehicle.ThrottleInput < 0.001f) return 1.0f;
 
             if (!selected) return 0;
             if (useLeftTrigger) return Input.GetAxisRaw("Oculus_CrossPlatform_PrimaryIndexTrigger");
@@ -116,15 +157,71 @@ namespace EsnyaAircraftAssets
 
         private void Update()
         {
-            if (!isPilot) return;
-
-            var trigger = GetInput() > 0.75f;
-            if (trigger && !previousTrigger)
+            var time = Time.time;
+            var t = time - stateChangedTime;
+            if (EngineState == EngineStarting)
             {
-                EngineStarted = !EngineStarted;
-                RequestSerialization();
+                var throttleStrengthMulti = Mathf.Clamp01((t - engineStartDuration + throttleStrengthTransitionDuration) / throttleStrengthTransitionDuration);
+                airVehicle.ThrottleStrength = throttleStrength * throttleStrengthMulti;
+                if (t >= engineStartDuration && isPilot)
+                {
+                    EngineState = EngineStarted;
+                    RequestSerialization();
+                }
             }
-            previousTrigger = trigger;
+            else if (EngineState == EngineStopping)
+            {
+                var throttleStrengthMulti = Mathf.Clamp01((throttleStrengthTransitionDuration - t) / throttleStrengthTransitionDuration);
+                airVehicle.ThrottleStrength = throttleStrength * throttleStrengthMulti;
+                if (t >= engineStopDuration && isPilot)
+                {
+                    EngineState = EngineStopped;
+                    RequestSerialization();
+                }
+            }
+
+            if (isPilot)
+            {
+                var trigger = GetInput() > 0.75f;
+                if (trigger && !previousTrigger) ToggleEngine();
+                previousTrigger = trigger;
+
+                if (Input.GetKeyDown(engineStartKey)) StartEngine();
+                if (Input.GetKeyDown(engineStopKey) && airVehicle.ThrottleInput < 0.001f) StopEngine();
+            }
+        }
+
+        private void PlayOneShot(AudioClip clip)
+        {
+            if (audioSource && clip) audioSource.PlayOneShot(clip);
+        }
+
+        private void MuteEngineSounds(bool value)
+        {
+            foreach (var engineSound in engineSounds)
+            {
+                if (engineSound) engineSound.mute = value;
+            }
+        }
+
+        private void StartEngine()
+        {
+            if (EngineState != EngineStopped) return;
+            EngineState = EngineStarting;
+            RequestSerialization();
+        }
+
+        private void StopEngine()
+        {
+            if (EngineState != EngineStarted) return;
+            EngineState = EngineStopping;
+            RequestSerialization();
+        }
+
+        private void ToggleEngine()
+        {
+            if (EngineState == EngineStopped) StartEngine();
+            else if (EngineState == EngineStarted) StopEngine();
         }
     }
 }

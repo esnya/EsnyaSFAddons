@@ -8,6 +8,7 @@ using VRC.Udon;
 
 namespace EsnyaAircraftAssets
 {
+
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class DFUNC_ThrustReverser : UdonSharpBehaviour
     {
@@ -21,7 +22,8 @@ namespace EsnyaAircraftAssets
         private SaccEntity EntityControl;
         private SaccAirVehicle SAVControl;
         private float ReversingThrottleStrength, AccelerationResponse, EngineSpoolDownSpeedMulti;
-        private bool UseLeftTrigger, Selected, isPilot;
+        private bool UseLeftTrigger, Selected, isPilot, lowFuel;
+        private bool HasWheelColliders;
         [UdonSynced] [FieldChangeCallback(nameof(Reversing))] private bool _reversing;
         public bool Reversing
         {
@@ -44,6 +46,7 @@ namespace EsnyaAircraftAssets
             get => _reversing;
         }
 
+
         public void DFUNC_LeftDial() { UseLeftTrigger = true; }
         public void DFUNC_RightDial() { UseLeftTrigger = false; }
 
@@ -59,6 +62,8 @@ namespace EsnyaAircraftAssets
             AccelerationResponse = SAVControl.AccelerationResponse;
             EngineSpoolDownSpeedMulti = SAVControl.EngineSpoolDownSpeedMulti;
             ReversingThrottleStrength = SAVControl.ThrottleStrength * ReversingThrottleMultiplier;
+
+            HasWheelColliders = SAVControl.VehicleMesh.GetComponentInChildren<WheelCollider>(true) != null;
         }
 
         public void SFEXT_O_PilotEnter()
@@ -88,9 +93,19 @@ namespace EsnyaAircraftAssets
             ReversingEngineOutput = 0;
         }
 
+        public void SFEXT_G_LowFuel()
+        {
+            lowFuel = true;
+        }
+        public void SFEXT_G_NotLowFuel()
+        {
+            lowFuel = false;
+        }
 
         private float GetInput()
         {
+            if (lowFuel) return 0.0f;
+
             if (Input.GetKey(KeyboardControl)) return 1.0f;
 
             if (!Selected) return 0.0f;
@@ -124,6 +139,18 @@ namespace EsnyaAircraftAssets
             var response = spoolDown ? AccelerationResponse * EngineSpoolDownSpeedMulti : AccelerationResponse;
 
             ReversingEngineOutput = Mathf.Lerp(ReversingEngineOutput, targetOutput, response * Time.deltaTime);
+
+            if (ReversingEngineOutput > 0.1f)
+            {
+                SAVControl.Fuel = Mathf.Max(SAVControl.Fuel - ReversingEngineOutput * SAVControl.FuelConsumption, 0);
+            }
+
+            // Avoid stkicky-wheel-collider
+            if (isPilot && Reversing && Mathf.Abs(SAVControl.Speed) < .2 && HasWheelColliders && ReversingEngineOutput > 0)
+            {
+                VehicleRigidbody.velocity = SAVControl.VehicleTransform.forward * -.25f;
+            }
         }
     }
+
 }

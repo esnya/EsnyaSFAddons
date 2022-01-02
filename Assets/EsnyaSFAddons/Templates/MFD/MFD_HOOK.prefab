@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4941953188387946882}
   - component: {fileID: 4941953188385079718}
   - component: {fileID: 4941953188386046950}
-  - component: {fileID: 7363458681113122984}
   m_Layer: 0
   m_Name: MFD_HOOK
   m_TagString: Untagged
@@ -81,20 +80,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &7363458681113122984
-MonoBehaviour:
-  m_ObjectHideFlags: 16
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4941953188388314530}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdf768eb52cbfbd42adb28a719a9155c, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  dfuncType: DFUNC_Hook
-  displayHighlighter: {fileID: 6739721720552895319}
 --- !u!1001 &1686254998353714205
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -164,12 +149,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c72518123a08ba84ea3e0be0cf7bada0, type: 3}
---- !u!1 &6739721720552895319 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5399405623300566858, guid: c72518123a08ba84ea3e0be0cf7bada0,
-    type: 3}
-  m_PrefabInstance: {fileID: 1686254998353714205}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6739721720553123703 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5399405623300600682, guid: c72518123a08ba84ea3e0be0cf7bada0,

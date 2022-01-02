@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 9119004225588602260}
   - component: {fileID: 9119004225585210760}
   - component: {fileID: 9119004225586309064}
-  - component: {fileID: 7735642379581975163}
   m_Layer: 0
   m_Name: MFD_THRUST_REVERSER
   m_TagString: Untagged
@@ -80,17 +79,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &7735642379581975163
-MonoBehaviour:
-  m_ObjectHideFlags: 16
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9119004225588246964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdf768eb52cbfbd42adb28a719a9155c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dfuncType: DFUNC_ThrustReverser
-  displayHighlighter: {fileID: 0}

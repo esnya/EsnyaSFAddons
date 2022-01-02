@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6506210405531328757}
   - component: {fileID: 6506210405530034329}
   - component: {fileID: 6506210405528904409}
-  - component: {fileID: 3917803664992753746}
   m_Layer: 0
   m_Name: MFD_BRAKE
   m_TagString: Untagged
@@ -80,17 +79,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &3917803664992753746
-MonoBehaviour:
-  m_ObjectHideFlags: 16
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6506210405531171989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdf768eb52cbfbd42adb28a719a9155c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dfuncType: DFUNC_Brake
-  displayHighlighter: {fileID: 0}

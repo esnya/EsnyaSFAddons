@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 771530841819006368}
   - component: {fileID: 771530841818203588}
   - component: {fileID: 771530841817106308}
-  - component: {fileID: 6643818349187898530}
   m_Layer: 0
   m_Name: MFD_CRUISE
   m_TagString: Untagged
@@ -81,20 +80,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &6643818349187898530
-MonoBehaviour:
-  m_ObjectHideFlags: 16
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 771530841819371968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdf768eb52cbfbd42adb28a719a9155c, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  dfuncType: DFUNC_Cruise
-  displayHighlighter: {fileID: 4315118918728070146}
 --- !u!1001 &8146144236292086600
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -164,12 +149,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c72518123a08ba84ea3e0be0cf7bada0, type: 3}
---- !u!1 &4315118918728070146 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5399405623300566858, guid: c72518123a08ba84ea3e0be0cf7bada0,
-    type: 3}
-  m_PrefabInstance: {fileID: 8146144236292086600}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4315118918728230946 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5399405623300600682, guid: c72518123a08ba84ea3e0be0cf7bada0,

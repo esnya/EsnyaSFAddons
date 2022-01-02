@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2012377651154528700}
   - component: {fileID: 2012377651157952920}
   - component: {fileID: 2012377651156954072}
-  - component: {fileID: 530418349836610577}
   m_Layer: 0
   m_Name: MFD_SMOKE
   m_TagString: Untagged
@@ -81,20 +80,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &530418349836610577
-MonoBehaviour:
-  m_ObjectHideFlags: 16
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2012377651155023260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdf768eb52cbfbd42adb28a719a9155c, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  dfuncType: DFUNC_Smoke
-  displayHighlighter: {fileID: 7349211588576297254}
 --- !u!1001 &3392107506608500332
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -165,16 +150,10 @@ PrefabInstance:
     - target: {fileID: 5399405623302500662, guid: c72518123a08ba84ea3e0be0cf7bada0,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
-      value:
+      value: 
       objectReference: {fileID: 2100000, guid: 80242fa653591a446aec58ab8512bf04, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c72518123a08ba84ea3e0be0cf7bada0, type: 3}
---- !u!1 &7349211588576297254 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5399405623300566858, guid: c72518123a08ba84ea3e0be0cf7bada0,
-    type: 3}
-  m_PrefabInstance: {fileID: 3392107506608500332}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7349211588576009478 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5399405623300600682, guid: c72518123a08ba84ea3e0be0cf7bada0,

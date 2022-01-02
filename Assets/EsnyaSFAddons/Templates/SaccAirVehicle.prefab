@@ -508,9 +508,8 @@ GameObject:
   m_Component:
   - component: {fileID: 477032734881787719}
   - component: {fileID: 1624816929812021696}
-  - component: {fileID: 7387920458931242883}
   m_Layer: 17
-  m_Name: MenuSelect
+  m_Name: SwitchFunctionSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -635,21 +634,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7387920458931242883
-MonoBehaviour:
-  m_ObjectHideFlags: 16
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5601908350288427411}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b755149c9ba76b45a48d3324240bbdf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  referenceType: 2
-  variableName: SwitchFunctionSound
-  forceDeactivate: 0
 --- !u!1 &7402452719992924493
 GameObject:
   m_ObjectHideFlags: 0
@@ -1104,9 +1088,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3411963152141659391}
-  - component: {fileID: 7436303815783299206}
   m_Layer: 17
-  m_Name: DisabledAfter10Seconds
+  m_Name: DisableAfter10Seconds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1126,21 +1109,6 @@ Transform:
   m_Father: {fileID: 8725871286039692357}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7436303815783299206
-MonoBehaviour:
-  m_ObjectHideFlags: 16
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8639821717116199128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b755149c9ba76b45a48d3324240bbdf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  referenceType: 3
-  variableName: DisableAfter10Seconds
-  forceDeactivate: 0
 --- !u!1 &8725871284330548614
 GameObject:
   m_ObjectHideFlags: 0
@@ -1435,7 +1403,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3308421434747338081, guid: 7cee128bf2806234284a7b42d450ef6d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7cee128bf2806234284a7b42d450ef6d, type: 3}
 --- !u!114 &3847308026480302866 stripped
 MonoBehaviour:

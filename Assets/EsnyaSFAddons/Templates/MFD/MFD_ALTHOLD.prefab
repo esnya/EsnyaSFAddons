@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2470980360710541233}
   - component: {fileID: 2470980360711311317}
   - component: {fileID: 2470980360712441237}
-  - component: {fileID: 3247118727389479787}
   m_Layer: 0
   m_Name: MFD_ALTHOLD
   m_TagString: Untagged
@@ -81,20 +80,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &3247118727389479787
-MonoBehaviour:
-  m_ObjectHideFlags: 16
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2470980360710247377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdf768eb52cbfbd42adb28a719a9155c, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  dfuncType: DFUNC_AltHold
-  displayHighlighter: {fileID: 2228871219219339461}
 --- !u!1001 &6052838303059326863
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -164,12 +149,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c72518123a08ba84ea3e0be0cf7bada0, type: 3}
---- !u!1 &2228871219219339461 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5399405623300566858, guid: c72518123a08ba84ea3e0be0cf7bada0,
-    type: 3}
-  m_PrefabInstance: {fileID: 6052838303059326863}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2228871219219694821 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5399405623300600682, guid: c72518123a08ba84ea3e0be0cf7bada0,

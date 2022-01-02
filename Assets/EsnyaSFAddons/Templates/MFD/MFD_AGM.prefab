@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1874838828333532367}
   - component: {fileID: 1874838828332237995}
   - component: {fileID: 1874838828331239147}
-  - component: {fileID: 7870246796517932055}
   m_Layer: 0
   m_Name: MFD_AGM
   m_TagString: Untagged
@@ -81,20 +80,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &7870246796517932055
-MonoBehaviour:
-  m_ObjectHideFlags: 16
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1874838828333242543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdf768eb52cbfbd42adb28a719a9155c, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  dfuncType: DFUNC_AGM
-  displayHighlighter: {fileID: 3710108160183302877}
 --- !u!1001 &8760197783254947223
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -164,12 +149,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c72518123a08ba84ea3e0be0cf7bada0, type: 3}
---- !u!1 &3710108160183302877 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5399405623300566858, guid: c72518123a08ba84ea3e0be0cf7bada0,
-    type: 3}
-  m_PrefabInstance: {fileID: 8760197783254947223}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3710108160183723773 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5399405623300600682, guid: c72518123a08ba84ea3e0be0cf7bada0,

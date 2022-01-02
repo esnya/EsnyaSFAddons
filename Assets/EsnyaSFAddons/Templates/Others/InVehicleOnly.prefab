@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 209443655076299287}
-  - component: {fileID: 8011262601583955581}
   m_Layer: 17
   m_Name: InVehicleOnly
   m_TagString: Untagged
@@ -34,21 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8011262601583955581
-MonoBehaviour:
-  m_ObjectHideFlags: 16
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 209443655076299286}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b755149c9ba76b45a48d3324240bbdf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  referenceType: 0
-  variableName: InVehicleOnly
-  forceDeactivate: 1
 --- !u!1001 &2415358044580617172
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -126,7 +110,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6226427560266672002, guid: f514f188259d0334baae2e3ba3e07091, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f514f188259d0334baae2e3ba3e07091, type: 3}
 --- !u!4 &5263214072036682187 stripped
 Transform:
@@ -276,7 +261,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6226427560266672002, guid: f514f188259d0334baae2e3ba3e07091, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f514f188259d0334baae2e3ba3e07091, type: 3}
 --- !u!4 &2701781898866683008 stripped
 Transform:

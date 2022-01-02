@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3241667056432149987}
   - component: {fileID: 3241667056429249927}
   - component: {fileID: 3241667056430249927}
-  - component: {fileID: 4990184025704310596}
   m_Layer: 0
   m_Name: MFD_CATAPULT
   m_TagString: Untagged
@@ -81,20 +80,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &4990184025704310596
-MonoBehaviour:
-  m_ObjectHideFlags: 16
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3241667056432507267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdf768eb52cbfbd42adb28a719a9155c, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  dfuncType: DFUNC_Catapult
-  displayHighlighter: {fileID: 488034986629464641}
 --- !u!1001 &5488572872128507147
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -164,12 +149,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c72518123a08ba84ea3e0be0cf7bada0, type: 3}
---- !u!1 &488034986629464641 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5399405623300566858, guid: c72518123a08ba84ea3e0be0cf7bada0,
-    type: 3}
-  m_PrefabInstance: {fileID: 5488572872128507147}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &488034986629570145 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5399405623300600682, guid: c72518123a08ba84ea3e0be0cf7bada0,

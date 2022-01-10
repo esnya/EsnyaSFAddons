@@ -19,6 +19,12 @@ namespace EsnyaAircraftAssets {
         public float groundBrakeMultiplier = 1;
         public float waterBrakeMultiplier = 1;
 
+        [Header("Custom Override")]
+        public bool customOverride;
+        public string udonTypeName;
+        public string variableName;
+        public float customValueMultiplier;
+
         private bool initialized = false;
 
         public void SFEXT_O_PilotEnter()
@@ -32,7 +38,7 @@ namespace EsnyaAircraftAssets {
         public void _LateStart()
         {
             var entity = GetComponentInParent<SaccEntity>();
-            var airVehicle = GetComponentInChildren<SaccAirVehicle>(true);
+            var airVehicle = entity.GetComponentInChildren<SaccAirVehicle>(true);
 
             if (overrideHealth) airVehicle.SetProgramVariable("FullHealth", ((float)airVehicle.GetProgramVariable("FullHealth")) * healthMultiplier);
             if (overrideFuel) airVehicle.SetProgramVariable("FullFuel", ((float)airVehicle.GetProgramVariable("FullFuel")) * fuelMultiplier);
@@ -45,7 +51,24 @@ namespace EsnyaAircraftAssets {
                 brake.WaterBrakeStrength *= waterBrakeMultiplier;
             }
 
+            if (customOverride)
+            {
+                CustomOverride(entity.ExtensionUdonBehaviours);
+                CustomOverride(entity.Dial_Functions_L);
+                CustomOverride(entity.Dial_Functions_R);
+            }
+
             gameObject.SetActive(false);
+        }
+
+        private void CustomOverride(UdonSharpBehaviour[] extentions)
+        {
+            if (extentions == null) return;
+            foreach (var extention in extentions)
+            {
+                if (!extention || extention.GetUdonTypeName() != udonTypeName) continue;
+                extention.SetProgramVariable(variableName, (float)extention.GetProgramVariable(variableName) * customValueMultiplier);
+            }
         }
     }
 }

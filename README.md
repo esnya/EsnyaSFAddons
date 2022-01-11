@@ -22,18 +22,15 @@ Add gizmos for TargetEyeHeight in SaccVehicleSeat and FloatPoints in FloatScript
 ### Editor-Only Components
 #### MFD_Function
 ![image](https://user-images.githubusercontent.com/2088693/142752111-e808a28b-4587-4741-8d21-f7a69598d841.png)
-
 Editor-Only component that manages the MFD functions. This component automatically adjusts the StickDsiplay and assigns the Dial_Function of DFUNCs.
 
 #### SFReferenceTarget
 ![image](https://user-images.githubusercontent.com/2088693/142752131-c8f3236e-a3be-4059-934e-e92d66e629ec.png)
-
 Editor-Only component to create a prefab easily, and automatically assign a reference to the SaccEntity properties.
 
 ### Udon
 #### SFRuntimeSetup
 ![image](https://user-images.githubusercontent.com/2088693/142752139-16044ef1-ca37-40ce-b437-f3d3f4cec1c8.png)
-
 Applies the parameters specified in the world to all vehicles when world loaded without prefab overrides.
 
 #### SAV_UdonChips (Optional)
@@ -43,8 +40,7 @@ Integrate UdonChips with SaccFlight.
 
 ## Requirements (Use latest version!!)
 - [UdonSharp](https://github.com/MerlinVR/UdonSharp)
-- [SaccFlightAndVehicles](https://github.com/Sacchan-VRC/SaccFlightAndVehicles): 1.5
-- [UdonToolkit](https://github.com/orels1/UdonToolkit)
+- [SaccFlightAndVehicles](https://github.com/Sacchan-VRC/SaccFlightAndVehicles): 1.51 or later
 - [InariUdon](https://github.com/esnya/InariUdon): Using UdonLogger
 
 ### Requirements of SFUdonChips

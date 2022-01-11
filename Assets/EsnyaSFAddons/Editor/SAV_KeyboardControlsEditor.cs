@@ -76,22 +76,22 @@ public class SAV_KeyboardControlsEditor : Editor
             Undo.RecordObject(udon, "Find Default DFUNCs");
             var entity = target.gameObject.GetUdonSharpComponentInParent<SaccEntity>();
 
-            FindDFUNC<DFUNC_Limits>(entity, "Lfunc2", entity.Dial_Functions_L);
-            FindDFUNC<DFUNC_Flares>(entity, "Lfunc3", entity.Dial_Functions_L);
-            FindDFUNC<DFUNC_Catapult>(entity, "Lfunc4", entity.Dial_Functions_L);
-            FindDFUNC<DFUNC_Brake>(entity, "Lfunc5", entity.Dial_Functions_L);
-            FindDFUNC<DFUNC_AltHold>(entity, "Lfunc6", entity.Dial_Functions_L);
-            FindDFUNC<DFUNC_Canopy>(entity, "Lfunc7", entity.Dial_Functions_L);
-            FindDFUNC<DFUNC_Cruise>(entity, "Lfunc8", entity.Dial_Functions_L);
+            FindDFUNC<DFUNC_Limits>(target, "Lfunc2", entity.Dial_Functions_L);
+            FindDFUNC<DFUNC_Flares>(target, "Lfunc3", entity.Dial_Functions_L);
+            FindDFUNC<DFUNC_Catapult>(target, "Lfunc4", entity.Dial_Functions_L);
+            FindDFUNC<DFUNC_Brake>(target, "Lfunc5", entity.Dial_Functions_L);
+            FindDFUNC<DFUNC_AltHold>(target, "Lfunc6", entity.Dial_Functions_L);
+            FindDFUNC<DFUNC_Canopy>(target, "Lfunc7", entity.Dial_Functions_L);
+            FindDFUNC<DFUNC_Cruise>(target, "Lfunc8", entity.Dial_Functions_L);
 
-            FindDFUNC<DFUNC_Gun>(entity, "Rfunc1", entity.Dial_Functions_R);
-            FindDFUNC<DFUNC_AAM>(entity, "Rfunc2", entity.Dial_Functions_R);
-            FindDFUNC<DFUNC_AGM>(entity, "Rfunc3", entity.Dial_Functions_R);
-            FindDFUNC<DFUNC_Bomb>(entity, "Rfunc4", entity.Dial_Functions_R);
-            FindDFUNC<DFUNC_Gear>(entity, "Rfunc5", entity.Dial_Functions_R);
-            FindDFUNC<DFUNC_Flaps>(entity, "Rfunc6", entity.Dial_Functions_R);
-            FindDFUNC<DFUNC_Hook>(entity, "Rfunc7", entity.Dial_Functions_R);
-            FindDFUNC<DFUNC_Smoke>(entity, "Rfunc8", entity.Dial_Functions_R);
+            FindDFUNC<DFUNC_Gun>(target, "Rfunc1", entity.Dial_Functions_R);
+            FindDFUNC<DFUNC_AAM>(target, "Rfunc2", entity.Dial_Functions_R);
+            FindDFUNC<DFUNC_AGM>(target, "Rfunc3", entity.Dial_Functions_R);
+            FindDFUNC<DFUNC_Bomb>(target, "Rfunc4", entity.Dial_Functions_R);
+            FindDFUNC<DFUNC_Gear>(target, "Rfunc5", entity.Dial_Functions_R);
+            FindDFUNC<DFUNC_Flaps>(target, "Rfunc6", entity.Dial_Functions_R);
+            FindDFUNC<DFUNC_Hook>(target, "Rfunc7", entity.Dial_Functions_R);
+            FindDFUNC<DFUNC_Smoke>(target, "Rfunc8", entity.Dial_Functions_R);
             target.ApplyProxyModifications();
             EditorUtility.SetDirty(udon);
         }

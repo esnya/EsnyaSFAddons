@@ -23,19 +23,23 @@ namespace EsnyaAircraftAssets
 #if UNITY_EDITOR
         public override void BeforeGUI(SerializedProperty property)
         {
-            EditorGUI.BeginDisabledGroup(true);
+            EditorGUI.BeginDisabledGroup(false);
         }
         public override void AfterGUI(SerializedProperty property)
         {
             EditorGUI.EndDisabledGroup();
             EditorGUILayout.HelpBox("Auto injected by script.", MessageType.Info);
+            if (GUILayout.Button("Force Update"))
+            {
+                AutoSetup((property.serializedObject.targetObject as Component).gameObject.scene);
+            }
         }
 
         private static void AutoSetup(Scene scene)
         {
             var rootGameObjects = scene.GetRootGameObjects();
             var usharpComponents = rootGameObjects
-                .SelectMany(o => o.GetUdonSharpComponentsInChildren<UdonSharpBehaviour>())
+                .SelectMany(o => o.GetUdonSharpComponentsInChildren<UdonSharpBehaviour>(true))
                 .Where(c => c != null)
                 .GroupBy(component => component.GetType())
                 .SelectMany(group =>
@@ -70,7 +74,7 @@ namespace EsnyaAircraftAssets
         }
 
         [InitializeOnLoadMethod]
-        private static void InitializeOnLoad()
+        public static void InitializeOnLoad()
         {
             EditorSceneManager.sceneSaving += (scene, _) => AutoSetup(scene);
             SceneManager.activeSceneChanged += (_, next) => AutoSetup(next);

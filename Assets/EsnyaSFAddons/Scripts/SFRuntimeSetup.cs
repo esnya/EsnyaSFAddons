@@ -1,33 +1,19 @@
-using InariUdon.UI;
 using System;
 using UdonSharp;
-using UdonToolkit;
 using UnityEngine;
-using VRC.SDK3.Components;
 using VRC.Udon;
-using VRC.SDKBase;
-using System.Collections;
-
-#if !COMPILER_UDONSHARP && UNITY_EDITOR
-using System.Linq;
-using UdonSharpEditor;
-using UnityEditor;
-using UnityEditor.SceneManagement;
-using UnityEngine.SceneManagement;
-#endif
+using InariUdon.UI;
 
 namespace EsnyaAircraftAssets
 {
-    [
-        DefaultExecutionOrder(100), // After SaccEntity/SaccAirVehicle/SAV_WindChanger
-        UdonBehaviourSyncMode(BehaviourSyncMode.None),
-    ]
+    [DefaultExecutionOrder(100)] // After SaccEntity/SaccAirVehicle/SAV_WindChanger
+    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class SFRuntimeSetup : UdonSharpBehaviour
     {
         [Header("World Configuration")]
         public Transform sea;
         public bool repeatingWorld = true;
-        [HideIf("@!repeatingWorld")] public float repeatingWorldDistance = 20000;
+        public float repeatingWorldDistance = 20000;
 
         [Header("Inject Extentions")]
         public UdonSharpBehaviour[] injectExtentions = {};
@@ -35,7 +21,7 @@ namespace EsnyaAircraftAssets
         [Header("Detected Components")]
         [UdonSharpComponentInject] public SAV_WindChanger[] windChangers = { };
         [UdonSharpComponentInject] public SaccAirVehicle[] airVehicles;
-
+        [UdonSharpComponentInject] public Windsock[] windsocks;
 
         private void Start()
         {
@@ -56,6 +42,10 @@ namespace EsnyaAircraftAssets
             if (windChangers != null)
             {
                 foreach (var changer in windChangers) if (changer) changer.SetProgramVariable("SaccAirVehicles", airVehicles);
+                if (windChangers.Length > 0 && windsocks != null)
+                {
+                    foreach (var windsock in windsocks) windsock.windChanger = windChangers[0];
+                }
             }
 
             Log("Info", $"Initialized {airVehicles.Length} vehicles");
@@ -77,11 +67,10 @@ namespace EsnyaAircraftAssets
             var nextArray = new UdonSharpBehaviour[nextLength];
             Array.Copy(currentArray, nextArray, currentLength);
 
-            Debug.Log(entity);
-
             for (var i = 0; i < injectExtentions.Length; i++)
             {
                 var obj = VRCInstantiate(injectExtentions[i].gameObject);
+                obj.name = injectExtentions[i].name;
                 var extention = (UdonBehaviour)obj.GetComponent(typeof(UdonBehaviour));
                 obj.transform.SetParent(entity.transform, false);
                 nextArray[currentLength + i] = (UdonSharpBehaviour)(Component)extention;

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using UdonSharp;
 using UdonSharpEditor;
@@ -10,7 +11,7 @@ namespace EsnyaAircraftAssets
     [CustomEditor(typeof(SaccEntity))]
     public class SaccEntityEditor : Editor
     {
-        public static void ValidationGUI(SaccEntity entity)
+        private static void ValidationGUI(SaccEntity entity)
         {
             var extentions = SFUtils.FindExtentions(entity.gameObject);
             var dfuncs = SFUtils.FindDFUNCs(entity.gameObject);
@@ -76,6 +77,34 @@ namespace EsnyaAircraftAssets
             }
         }
 
+        private void OnDisable()
+        {
+            DisableAllPreview();
+        }
+
+        private Dictionary<string, bool> previewStatus = new Dictionary<string, bool>();
+        private void SetPreview(SerializedProperty property, bool value)
+        {
+            var gameObject = property.objectReferenceValue as GameObject;
+            if (!gameObject) return;
+
+            var key = property.propertyPath;
+            previewStatus.TryGetValue(key, out var currentState);
+
+            if (currentState == value) return;
+
+            Undo.RecordObject(gameObject, "Preview");
+            previewStatus[key] = value;
+            gameObject.SetActive(value);
+        }
+        private void DisableAllPreview()
+        {
+            foreach (var path in previewStatus.Keys)
+            {
+                SetPreview(serializedObject.FindProperty(path), false);
+            }
+        }
+
         public override void OnInspectorGUI()
         {
             if (UdonSharpGUI.DrawDefaultUdonSharpBehaviourHeader(target)) return;
@@ -110,6 +139,7 @@ namespace EsnyaAircraftAssets
                     }
                     else if (property.name == nameof(SaccEntity.InVehicleOnly) || property.name == nameof(SaccEntity.HoldingOnly))
                     {
+                        if (ESFAUI.MiniButton("Preview")) SetPreview(property, true);
                         if (ESFAUI.MiniButton("Find")) property.objectReferenceValue = entity.transform.FindByName(property.name);
                     }
                     else if (property.name == nameof(SaccEntity.CenterOfMass) || property.name == nameof(SaccEntity.LStickDisplayHighlighter) || property.name == nameof(SaccEntity.RStickDisplayHighlighter))

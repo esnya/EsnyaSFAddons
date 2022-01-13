@@ -152,6 +152,7 @@ namespace EsnyaAircraftAssets
 
                 Undo.RecordObject(transform, "Align MFD Function");
                 transform.localPosition = localPosition;
+                transform.localScale = Vector3.one;
 
                 var dialFunction = dialFunctions != null && index < dialFunctions.Length ? dialFunctions[index] : null;
 

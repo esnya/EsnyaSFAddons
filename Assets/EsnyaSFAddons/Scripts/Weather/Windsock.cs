@@ -32,7 +32,7 @@ namespace EsnyaAircraftAssets
         private void Update()
         {
             var prevHeading = heading;
-            heading = Mathf.LerpAngle(heading + 180, targetHeading, Time.deltaTime / rotationSmooth);
+            heading = Mathf.LerpAngle(heading, targetHeading, Time.deltaTime / rotationSmooth);
             if (!Mathf.Approximately(heading, prevHeading)) transform.rotation = Quaternion.AngleAxis(heading + 180, Vector3.up) * initialRotation;
 
             if ((Time.frameCount + updateOffset) % updateInterval == 0 && windChanger)
@@ -47,7 +47,7 @@ namespace EsnyaAircraftAssets
                 var gustz = timeGustiness + (transform.position.z * windTurbulanceScale);
                 var finalWind = wind + Vector3.Normalize(new Vector3(Mathf.PerlinNoise(gustx + 9000, gustz) - .5f, 0, Mathf.PerlinNoise(gustx, gustz + 9999) - .5f)) * windGustStrength;
 
-                targetHeading = Vector3.SignedAngle(Vector3.forward, Vector3.ProjectOnPlane(finalWind, Vector3.up), Vector3.up);
+                targetHeading = Vector3.SignedAngle(Vector3.back, Vector3.ProjectOnPlane(finalWind, Vector3.up), Vector3.up);
 
                 animator.SetFloat("x", Mathf.Clamp(finalWind.x / maxWindMagnitude, -1.0f, 1.0f));
                 animator.SetFloat("z", Mathf.Clamp(finalWind.z / maxWindMagnitude, -1.0f, 1.0f));

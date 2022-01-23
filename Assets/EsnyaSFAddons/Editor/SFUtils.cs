@@ -118,6 +118,20 @@ namespace EsnyaAircraftAssets
                     }
                 }
             }
+
+            var background = display.GetComponentsInChildren<MeshFilter>(true)
+                .FirstOrDefault(f => f.sharedMesh && f.sharedMesh.name.StartsWith("StickDisplay") && char.IsDigit(f.sharedMesh.name.Last()) || f.sharedMesh.name == "StickDisplay");
+            if (background)
+            {
+                var expectedName = count == 8 ? "StkickDisplay" : $"StickDisplay{count}";
+                var expectedMesh = AssetDatabase.LoadAllAssetsAtPath(AssetDatabase.GetAssetPath(background.sharedMesh)).Select(o => o as Mesh).FirstOrDefault(m => m && m.name == expectedName);
+                if (expectedMesh && background.sharedMesh != expectedMesh)
+                {
+                    Undo.RecordObject(background, "Align MFD Function");
+                    background.sharedMesh = expectedMesh;
+                    EditorUtility.SetDirty(background);
+                }
+            }
         }
 
         public static IEnumerable<GameObject> ListByName(this Transform root, string name)

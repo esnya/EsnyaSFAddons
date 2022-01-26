@@ -1,5 +1,6 @@
 using UdonSharp;
 using UnityEngine;
+
 namespace EsnyaAircraftAssets
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]

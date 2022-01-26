@@ -1,9 +1,6 @@
-using System;
 using UdonSharp;
 using UnityEngine;
-using VRC.SDKBase;
 using InariUdon.UI;
-using VRC.SDK3.Components;
 
 #if ESFA_UCS
 using UCS;

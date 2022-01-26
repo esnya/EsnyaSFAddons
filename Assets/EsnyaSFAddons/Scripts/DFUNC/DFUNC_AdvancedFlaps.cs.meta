@@ -5,9 +5,8 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - Dial_Funcon: {instanceID: 0}
-  - breakingSound: {fileID: 8300000, guid: a778a83e783a3d040990aa85ff3141b7, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+  userData:
+  assetBundleName:
+  assetBundleVariant:

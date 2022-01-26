@@ -1,7 +1,8 @@
 using UdonSharp;
 using UnityEngine;
 
-namespace EsnyaAircraftAssets {
+namespace EsnyaAircraftAssets
+{
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class SAV_Override : UdonSharpBehaviour
     {

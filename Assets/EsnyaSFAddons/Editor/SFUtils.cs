@@ -35,14 +35,26 @@ namespace EsnyaAircraftAssets
             return ListCustomEvents(type).Any(m => m.Name.StartsWith("DFUNC_"));
         }
 
-        public static IEnumerable<UdonSharpBehaviour> FindExtentions(GameObject root)
+        public static UdonSharpBehaviour GetNearestController(GameObject o)
         {
-            return root.GetUdonSharpComponentsInChildren<UdonSharpBehaviour>(true).Where(udon => IsExtention(udon.GetType()) && !IsDFUNC(udon.GetType()));
+            var controller = o.GetUdonSharpComponentInParent(typeof(SAV_PassengerFunctionsController)) ?? o.GetUdonSharpComponentInParent(typeof(SaccEntity));
+            if (controller is SAV_PassengerFunctionsController && controller.gameObject == o) return o.GetUdonSharpComponentInParent(typeof(SaccEntity));
+            return controller;
         }
 
-        public static IEnumerable<UdonSharpBehaviour> FindDFUNCs(GameObject root)
+        public static bool IsChildExtention(UdonSharpBehaviour controller, UdonSharpBehaviour extention)
         {
-            return root.GetUdonSharpComponentsInChildren<UdonSharpBehaviour>(true).Where(udon => IsDFUNC(udon.GetType()));
+            return GetNearestController(extention.gameObject) == controller;
+        }
+
+        public static IEnumerable<UdonSharpBehaviour> FindExtentions(UdonSharpBehaviour root)
+        {
+            return root.GetUdonSharpComponentsInChildren<UdonSharpBehaviour>(true).Where(udon => udon.gameObject != root && IsExtention(udon.GetType()) && !IsDFUNC(udon.GetType()) && IsChildExtention(root, udon));
+        }
+
+        public static IEnumerable<UdonSharpBehaviour> FindDFUNCs(UdonSharpBehaviour root)
+        {
+            return root.GetUdonSharpComponentsInChildren<UdonSharpBehaviour>(true).Where(udon => udon.gameObject != root && IsDFUNC(udon.GetType()) && IsChildExtention(root, udon));
         }
 
         public static void SetObjectArrayProperty<T>(SerializedProperty property, IEnumerable<T> enumerable) where T : UnityEngine.Object
@@ -61,11 +73,11 @@ namespace EsnyaAircraftAssets
             Undo.RecordObject(udonSharpBehaviour, name);
         }
 
-        public static bool ValidateReference<T>(UdonSharpBehaviour extention, string variableName, T expectedValue, MessageType messageType) where T : class
+        public static bool ValidateReference<T>(UdonSharpBehaviour extention, string variableName, T expectedValue, MessageType messageType, bool forceFix = false) where T : class
         {
             if (expectedValue == null || extention.GetProgramVariable(variableName) != null) return false;
 
-            if (ESFAUI.HelpBoxWithAutoFix($"{extention}.{variableName} is not set.", messageType))
+            if (forceFix || ESFAUI.HelpBoxWithAutoFix($"{extention}.{variableName} is not set.", messageType))
             {
                 UndoRecordUdonSharpBehaviour(extention, "Auto Fix");
                 extention.SetProgramVariable(variableName, expectedValue);
@@ -75,9 +87,9 @@ namespace EsnyaAircraftAssets
             return false;
         }
 
-        public static void AlignMFDFunctions(this SaccEntity entity, VRC_Pickup.PickupHand side)
+        public static void AlignMFDFunctions(this UdonSharpBehaviour entity, VRC_Pickup.PickupHand side)
         {
-            var parent = entity.InVehicleOnly?.transform ?? entity.transform;
+            var parent = (entity as SaccEntity)?.InVehicleOnly?.transform ?? entity.transform;
             var display = FindByName(parent, $"StickDisplay{side.ToString()[0]}")?.transform;
             if (!display) return;
 
@@ -89,7 +101,7 @@ namespace EsnyaAircraftAssets
                 .ToArray();
 
             var count = functions.Length;
-            var dialFunctions = side == VRC_Pickup.PickupHand.Left ? entity.Dial_Functions_L : entity.Dial_Functions_R;
+            var dialFunctions = (side == VRC_Pickup.PickupHand.Left ? entity.GetProgramVariable(nameof(SaccEntity.Dial_Functions_L)) : entity.GetProgramVariable(nameof(SaccEntity.Dial_Functions_R))) as UdonSharpBehaviour[];
             foreach (var (transform, index) in functions)
             {
                 var localRotation = Quaternion.AngleAxis(360.0f * index / count, Vector3.back);

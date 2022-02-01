@@ -13,8 +13,11 @@ namespace EsnyaAircraftAssets
     {
         private static void ValidationGUI(SaccEntity entity)
         {
-            var extentions = SFUtils.FindExtentions(entity.gameObject);
-            var dfuncs = SFUtils.FindDFUNCs(entity.gameObject);
+            EditorGUILayout.LabelField("SaccEntity Validator");
+            var fixAll = GUILayout.Button("Fix All");
+
+            var extentions = SFUtils.FindExtentions(entity);
+            var dfuncs = SFUtils.FindDFUNCs(entity);
             var seats = entity.GetUdonSharpComponentsInChildren<SaccVehicleSeat>(true);
             var animator = entity.GetComponent<Animator>();
             var airVehicle = extentions.FirstOrDefault(e => e is SaccAirVehicle) as SaccAirVehicle;
@@ -38,20 +41,20 @@ namespace EsnyaAircraftAssets
                         {
                             if (field.FieldType == typeof(SaccEntity))
                             {
-                                isDirty = isDirty || SFUtils.ValidateReference(extention, field.Name, entity, MessageType.Warning);
+                                isDirty = isDirty || SFUtils.ValidateReference(extention, field.Name, entity, MessageType.Warning, fixAll);
                             }
                             else if (field.FieldType == typeof(Animator))
                             {
-                                isDirty = isDirty || SFUtils.ValidateReference(extention, field.Name, animator, MessageType.Info);
+                                isDirty = isDirty || SFUtils.ValidateReference(extention, field.Name, animator, MessageType.Info, fixAll);
                             }
                             else if (field.FieldType == typeof(UdonSharpBehaviour))
                             {
-                                if (field.Name == "SAVControl") isDirty = isDirty || SFUtils.ValidateReference(extention, field.Name, airVehicle, MessageType.Warning);
-                                else if (field.Name == "SoundControl") isDirty = isDirty || SFUtils.ValidateReference(extention, field.Name, savSoundController, MessageType.Warning);
+                                if (field.Name == "SAVControl") isDirty = isDirty || SFUtils.ValidateReference(extention, field.Name, airVehicle, MessageType.Warning, fixAll);
+                                else if (field.Name == "SoundControl") isDirty = isDirty || SFUtils.ValidateReference(extention, field.Name, savSoundController, MessageType.Warning, fixAll);
                             }
                             else if (extention is SaccAirVehicle && field.Name == "VehicleMesh" || extention is SAV_SyncScript && field.Name == "VehicleTransform")
                             {
-                                isDirty = isDirty || SFUtils.ValidateReference(extention, field.Name, entity.transform, MessageType.Warning);
+                                isDirty = isDirty || SFUtils.ValidateReference(extention, field.Name, entity.transform, MessageType.Warning, fixAll);
                             }
                         }
                     }
@@ -125,16 +128,16 @@ namespace EsnyaAircraftAssets
                     EditorGUILayout.PropertyField(property, true);
                     if (property.name == nameof(SaccEntity.ExtensionUdonBehaviours))
                     {
-                        if (ESFAUI.MiniButton("Find")) SFUtils.SetObjectArrayProperty(property, SFUtils.FindExtentions(entity.gameObject));
+                        if (ESFAUI.MiniButton("Find")) SFUtils.SetObjectArrayProperty(property, SFUtils.FindExtentions(entity));
                     }
                     else if (property.name == nameof(SaccEntity.Dial_Functions_L))
                     {
-                        if (ESFAUI.MiniButton("Find")) SFUtils.SetObjectArrayProperty(property, SFUtils.FindDFUNCs(entity.gameObject).Where(dfunc => dfunc.transform.parent.gameObject.name.EndsWith("L")));
+                        if (ESFAUI.MiniButton("Find")) SFUtils.SetObjectArrayProperty(property, SFUtils.FindDFUNCs(entity).Where(dfunc => dfunc.transform.parent.gameObject.name.EndsWith("L")));
                         if (ESFAUI.MiniButton("Align")) SFUtils.AlignMFDFunctions(entity, VRC_Pickup.PickupHand.Left);
                     }
                     else if (property.name == nameof(SaccEntity.Dial_Functions_R))
                     {
-                        if (ESFAUI.MiniButton("Find")) SFUtils.SetObjectArrayProperty(property, SFUtils.FindDFUNCs(entity.gameObject).Where(dfunc => dfunc.transform.parent.gameObject.name.EndsWith("R")));
+                        if (ESFAUI.MiniButton("Find")) SFUtils.SetObjectArrayProperty(property, SFUtils.FindDFUNCs(entity).Where(dfunc => dfunc.transform.parent.gameObject.name.EndsWith("R")));
                         if (ESFAUI.MiniButton("Align")) SFUtils.AlignMFDFunctions(entity, VRC_Pickup.PickupHand.Right);
                     }
                     else if (property.name == nameof(SaccEntity.InVehicleOnly) || property.name == nameof(SaccEntity.HoldingOnly))

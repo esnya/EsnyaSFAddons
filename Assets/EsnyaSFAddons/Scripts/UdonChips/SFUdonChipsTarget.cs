@@ -1,5 +1,8 @@
 using UdonSharp;
 #if ESFA_UCS
+using UnityEngine;
+using VRC.Udon;
+using VRC.Udon.Common.Interfaces;
 using UCS;
 #endif
 

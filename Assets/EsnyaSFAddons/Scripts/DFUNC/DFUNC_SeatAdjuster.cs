@@ -4,7 +4,7 @@ using VRC.SDKBase;
 
 namespace EsnyaAircraftAssets
 {
-    [UdonBehaviourSyncMode(BehaviourSyncMode.NoVariableSync)]
+    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class DFUNC_SeatAdjuster : UdonSharpBehaviour
     {
         public KeyCode desktopUp = KeyCode.Home, desktopDown = KeyCode.End, desktopForward = KeyCode.Insert, desktopBack = KeyCode.Delete;
@@ -38,6 +38,7 @@ namespace EsnyaAircraftAssets
         }
         public void DFUNC_Deselected() => isSelected = false;
 
+        public void SFEXTP_L_EntityStart() => SFEXT_L_EntityStart();
         public void SFEXT_L_EntityStart()
         {
             entity = GetComponentInParent<SaccEntity>();
@@ -50,8 +51,8 @@ namespace EsnyaAircraftAssets
 
         public void SFEXT_O_PilotEnter() => Activate();
         public void SFEXT_O_PilotExit() => Deactivate();
-        public void SFEXT_P_PassengerEnter() => Activate();
-        public void SFEXT_P_PassengerExit() => Deactivate();
+        public void SFEXTP_O_UserEnter() => Activate();
+        public void SFEXTP_O_UserExit() => Deactivate();
 
         private Vector3 sliderOrigin;
         private Vector2 adjustedOrigin;

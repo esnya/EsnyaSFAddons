@@ -175,7 +175,7 @@ namespace EsnyaAircraftAssets
                     var overspeed = maxSpeed > 0 && ias > maxSpeed;
                     var mtbfMultiplier = overspeed ? ias / maxSpeed : 1.0f;
 
-                    if (!broken && Random.value < deltaTime * mtbfMultiplier / (overspeed ? mtbTransitionBraekOnOverspeed : mtbTransitionBraek)) broken = true;
+                    if (!broken && (inTransition || overspeed) && Random.value < deltaTime * mtbfMultiplier / (overspeed ? mtbTransitionBraekOnOverspeed : mtbTransitionBraek)) broken = true;
                     if (!failed && inTransition && Random.value < deltaTime * mtbfMultiplier / (overspeed ? mtbTransitionFailOnOverspeed : mtbTransitionFail)) failed = true;
                 }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace EsnyaAircraftAssets
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    public class SAV_Override : UdonSharpBehaviour
+    public class SFEXT_Override : UdonSharpBehaviour
     {
         [Header("Health")]
         public bool overrideHealth;

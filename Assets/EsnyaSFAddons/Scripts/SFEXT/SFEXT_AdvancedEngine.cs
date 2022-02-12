@@ -160,8 +160,8 @@ namespace EsnyaAircraftAssets
 
         [Header("Reverser")]
         public float reverserRatio = 0.5f;
-        public float reverserExtractResponse = 1.0f;
-        public float reverserRetractResponse = 0.1f;
+        public float reverserExtractResponse = 0.5f;
+        public float reverserRetractResponse = 0.5f;
 
         // [Header("Runtime Synced Variables")]
         [NonSerialized] [UdonSynced] public bool reversing, starter, fuel;
@@ -192,6 +192,7 @@ namespace EsnyaAircraftAssets
         {
             airVehicle.ThrottleStrength = 0;
             airVehicle.AccelerationResponse = 0;
+            airVehicle.DisableStickyWheelWorkaround_ += 1;
 
             gripAxis = airVehicle.SwitchHandsJoyThrottle ? "Oculus_CrossPlatform_SecondaryHandTrigger" : "Oculus_CrossPlatform_PrimaryHandTrigger";
 
@@ -216,6 +217,12 @@ namespace EsnyaAircraftAssets
             ect = externalTempurature;
             oilTempurature = externalTempurature;
             oilPressure = 1100;
+
+            if (vehicleAnimator)
+            {
+                vehicleAnimator.SetBool("reverse", false);
+                vehicleAnimator.SetFloat("reverser", 0);
+            }
         }
 
         private void Power_OwnerFixedUpdate()
@@ -230,7 +237,9 @@ namespace EsnyaAircraftAssets
 
         private void Power_OwnerUpdate(float deltaTime)
         {
-            throttleInput = reversing && Mathf.Approximately(reverserPosition, 1.0f) ? 1.0f : (airVehicle.ThrottleOverridden > 0 && Input.GetAxis(gripAxis) < 0.75f ? airVehicle.ThrottleOverride : airVehicle.ThrottleInput);
+            var reverserInterlocked = reversing && reverserPosition < 0.5f;
+            if (reverserInterlocked) airVehicle.ThrottleInput = 0;
+            throttleInput = reverserInterlocked ? 0.0f : (airVehicle.ThrottleOverridden > 0 && Input.GetAxis(gripAxis) < 0.75f ? airVehicle.ThrottleOverride : airVehicle.ThrottleInput);
 
             var isStarterAvailable = starter && (apu == null || apu.started);
             var isN2Runnning = fuel && n2 >= minN2 && !stall;
@@ -257,7 +266,11 @@ namespace EsnyaAircraftAssets
         private void Power_Update(float deltaTime)
         {
             reverserPosition = TowWayMoveTowards(reverserPosition, reversing ? 1 : 0, deltaTime, reverserExtractResponse, reverserRetractResponse);
-            if (vehicleAnimator) vehicleAnimator.SetFloat("reverser", reverserPosition);
+            if (vehicleAnimator)
+            {
+                vehicleAnimator.SetBool("reverse", reversing);
+                vehicleAnimator.SetFloat("reverser", reverserPosition);
+            }
 
             oilTempurature = Lerp4(externalTempurature, idleOilTempurature, maxOilTempurature, takeOffOilTempurature, ect, externalTempurature, idleECT, continuousECT, Mathf.Max(egt, continuousEGT));
             oilPressure = Lerp3(1013.25f, idleOilPressure, maxOilPressure, n2, 0, idleN2, takeOffN2);

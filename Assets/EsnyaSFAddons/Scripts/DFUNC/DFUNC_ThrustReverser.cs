@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace EsnyaAircraftAssets
 {
-
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class DFUNC_ThrustReverser : UdonSharpBehaviour
     {
@@ -18,7 +17,7 @@ namespace EsnyaAircraftAssets
         private Rigidbody VehicleRigidbody;
         private SaccEntity EntityControl;
         private SaccAirVehicle SAVControl;
-        private float ReversingThrottleStrength, AccelerationResponse, EngineSpoolDownSpeedMulti;
+        private float ThrottleStrength, ReversingThrottleStrength, AccelerationResponse, EngineSpoolDownSpeedMulti;
         private bool UseLeftTrigger, Selected, isPilot, lowFuel;
         private bool HasWheelColliders;
         [UdonSynced] [FieldChangeCallback(nameof(Reversing))] private bool _reversing;
@@ -29,6 +28,14 @@ namespace EsnyaAircraftAssets
                 if (value == _reversing) return;
 
                 _reversing = value;
+
+                if (isPilot)
+                {
+                    SAVControl.ThrottleStrength = value ? -ReversingThrottleStrength : ThrottleStrength;
+
+                    SAVControl.ThrottleOverridden += value ? 1 : -1;
+                    SAVControl.ThrottleOverride = value ? 1.0f : 0.0f;
+                }
 
                 if (value)
                 {
@@ -58,6 +65,7 @@ namespace EsnyaAircraftAssets
             VehicleRigidbody = EntityControl.GetComponent<Rigidbody>();
             AccelerationResponse = SAVControl.AccelerationResponse;
             EngineSpoolDownSpeedMulti = SAVControl.EngineSpoolDownSpeedMulti;
+            ThrottleStrength = SAVControl.ThrottleStrength;
             ReversingThrottleStrength = SAVControl.ThrottleStrength * ReversingThrottleMultiplier;
 
             HasWheelColliders = SAVControl.VehicleMesh.GetComponentInChildren<WheelCollider>(true) != null;
@@ -111,43 +119,17 @@ namespace EsnyaAircraftAssets
             return Input.GetAxisRaw("Oculus_CrossPlatform_SecondaryIndexTrigger");
         }
 
-        private void FixedUpdate()
-        {
-            if (ReversingEngineOutput > 0.01f)
-            {
-                VehicleRigidbody.AddRelativeForce(Vector3.forward * ReversingEngineOutput * ReversingThrottleStrength);
-            }
-        }
-
         private void Update()
         {
             if (isPilot)
             {
-                var trigger = GetInput() > 0.75f && SAVControl.ThrottleInput < 0.01f;
+                var trigger = GetInput() > 0.75f && SAVControl.EngineOn;
                 if (trigger != Reversing)
                 {
                     Reversing = trigger;
                     RequestSerialization();
                 }
             }
-
-            var targetOutput = Reversing ? 1.0f : 0.0f;
-            var spoolDown = ReversingEngineOutput > targetOutput;
-            var response = spoolDown ? AccelerationResponse * EngineSpoolDownSpeedMulti : AccelerationResponse;
-
-            ReversingEngineOutput = Mathf.Lerp(ReversingEngineOutput, targetOutput, response * Time.deltaTime);
-
-            if (ReversingEngineOutput > 0.1f)
-            {
-                SAVControl.Fuel = Mathf.Max(SAVControl.Fuel - ReversingEngineOutput * SAVControl.FuelConsumption, 0);
-            }
-
-            // Avoid stkicky-wheel-collider
-            if (isPilot && Reversing && Mathf.Abs(SAVControl.Speed) < .2 && HasWheelColliders && ReversingEngineOutput > 0)
-            {
-                VehicleRigidbody.velocity = SAVControl.VehicleTransform.forward * -.25f;
-            }
         }
     }
-
 }

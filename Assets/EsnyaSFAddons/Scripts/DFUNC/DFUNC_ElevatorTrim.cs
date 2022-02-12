@@ -17,7 +17,7 @@ namespace EsnyaAircraftAssets
         private Transform controlsRoot;
         private Rigidbody vehicleRigidbody;
         private Animator vehicleAnimator;
-        private bool initialized, hasPilot, isPilot, isOwner, isSelected, isDirty, triggered, prevTriggered;
+        private bool hasPilot, isPilot, isOwner, isSelected, isDirty, triggered, prevTriggered;
         private Vector3 prevTrackingPosition;
         private float sliderInput;
         private float rotMultiMaxSpeed;
@@ -53,7 +53,6 @@ namespace EsnyaAircraftAssets
 
             trimStrength = airVehicle.PitchStrength * trimStrengthMultiplier;
 
-            initialized = true;
             ResetStatus();
         }
 

@@ -104,30 +104,37 @@ namespace EsnyaAircraftAssets
             var dialFunctions = (side == VRC_Pickup.PickupHand.Left ? entity.GetProgramVariable(nameof(SaccEntity.Dial_Functions_L)) : entity.GetProgramVariable(nameof(SaccEntity.Dial_Functions_R))) as UdonSharpBehaviour[];
             foreach (var (transform, index) in functions)
             {
-                var localRotation = Quaternion.AngleAxis(360.0f * index / count, Vector3.back);
-                var localPosition = localRotation * Vector3.up * 0.14f;
-
-                Undo.RecordObject(transform, "Align MFD Function");
-                transform.localPosition = localPosition;
-                transform.localScale = Vector3.one;
-
-                var dialFunction = dialFunctions != null && index < dialFunctions.Length ? dialFunctions[index] : null;
-
-                var displayHighlighter = transform.Find("MFD_display_funcon")?.gameObject;
-                if (displayHighlighter)
+                try
                 {
-                    Undo.RecordObject(displayHighlighter.transform, "Align MFD Function");
-                    displayHighlighter.transform.position = transform.parent.position;
-                    displayHighlighter.transform.localRotation = localRotation;
+                    var localRotation = Quaternion.AngleAxis(360.0f * index / count, Vector3.back);
+                    var localPosition = localRotation * Vector3.up * 0.14f;
 
-                    if ((UnityEngine.Object)dialFunction.GetProgramVariable("Dial_Funcon") != displayHighlighter)
+                    Undo.RecordObject(transform, "Align MFD Function");
+                    transform.localPosition = localPosition;
+                    transform.localScale = Vector3.one;
+
+                    var dialFunction = dialFunctions != null && index < dialFunctions.Length ? dialFunctions[index] : null;
+
+                    var displayHighlighter = transform.Find("MFD_display_funcon")?.gameObject;
+                    if (displayHighlighter)
                     {
-                        var udon = UdonSharpEditorUtility.GetBackingUdonBehaviour(dialFunction);
-                        Undo.RecordObject(udon, "Align MFD Function");
-                        dialFunction.SetProgramVariable("Dial_Funcon", displayHighlighter);
-                        dialFunction.ApplyProxyModifications();
-                        EditorUtility.SetDirty(udon);
+                        Undo.RecordObject(displayHighlighter.transform, "Align MFD Function");
+                        displayHighlighter.transform.position = transform.parent.position;
+                        displayHighlighter.transform.localRotation = localRotation;
+
+                        if ((UnityEngine.Object)dialFunction?.GetProgramVariable("Dial_Funcon") != displayHighlighter)
+                        {
+                            var udon = UdonSharpEditorUtility.GetBackingUdonBehaviour(dialFunction);
+                            Undo.RecordObject(udon, "Align MFD Function");
+                            dialFunction.SetProgramVariable("Dial_Funcon", displayHighlighter);
+                            dialFunction.ApplyProxyModifications();
+                            EditorUtility.SetDirty(udon);
+                        }
                     }
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError(e);
                 }
             }
 

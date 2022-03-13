@@ -1,8 +1,9 @@
 using System;
+using InariUdon.UI;
 using UdonSharp;
 using UnityEngine;
+using UnityEngine.UI;
 using VRC.Udon;
-using InariUdon.UI;
 
 namespace EsnyaAircraftAssets
 {
@@ -15,8 +16,15 @@ namespace EsnyaAircraftAssets
         public bool repeatingWorld = true;
         public float repeatingWorldDistance = 20000;
 
+        public bool randomWind = false;
+        public float randomWindStrength = 6.0f;
+        public AnimationCurve randomWindCurve = AnimationCurve.Linear(0, 0, 0, 1);
+        public float randomGustStrength = 3.0f;
+        public AnimationCurve randomGustCurve = AnimationCurve.Linear(0, 0, 0, 1);
+
+
         [Header("Inject Extentions")]
-        public UdonSharpBehaviour[] injectExtentions = {};
+        public UdonSharpBehaviour[] injectExtentions = { };
 
         [Header("Detected Components")]
         [UdonSharpComponentInject] public SAV_WindChanger[] windChangers = { };
@@ -25,23 +33,53 @@ namespace EsnyaAircraftAssets
 
         private void Start()
         {
+            var windStrength = randomWindCurve.Evaluate(UnityEngine.Random.value) * randomWindStrength;
+            var wind = Quaternion.AngleAxis(UnityEngine.Random.Range(0, 360), Vector3.up) * Vector3.forward * windStrength;
+            var gustStrength = randomGustCurve.Evaluate(UnityEngine.Random.value) * randomGustStrength;
+
             foreach (var airVehicle in airVehicles)
             {
-                if (airVehicle == null) continue;
+                if (!airVehicle) continue;
 
                 var entity = airVehicle.EntityControl;
-                if (entity == null) continue;
+                if (!entity) continue;
 
                 InjectExtentions(entity, airVehicle);
 
                 airVehicle.SetProgramVariable(nameof(SaccAirVehicle.RepeatingWorld), repeatingWorld);
                 airVehicle.SetProgramVariable(nameof(SaccAirVehicle.RepeatingWorldDistance), repeatingWorldDistance);
                 airVehicle.SetProgramVariable(nameof(SaccAirVehicle.SeaLevel), sea.position.y);
+
+                if (randomWind)
+                {
+                    airVehicle.SetProgramVariable(nameof(SaccAirVehicle.Wind), wind);
+                    airVehicle.SetProgramVariable(nameof(SaccAirVehicle.WindGustStrength), gustStrength);
+                }
             }
 
             if (windChangers != null)
             {
-                foreach (var changer in windChangers) if (changer) changer.SetProgramVariable("SaccAirVehicles", airVehicles);
+                foreach (var changer in windChangers)
+                {
+                    if (!changer) continue;
+
+                    changer.SetProgramVariable(nameof(SAV_WindChanger.SaccAirVehicles), airVehicles);
+
+                    if (randomWind)
+                    {
+                        var synced = changer.SyncedWind;
+                        changer.SyncedWind = false;
+
+                        changer.WindStrenth_3 = wind;
+                        changer.WindGustStrength = gustStrength;
+
+                        changer.SyncedWind = synced;
+
+                        changer.UpdateValuesFromOther();
+
+                        changer.transform.rotation = Quaternion.FromToRotation(Vector3.forward, wind.normalized);
+                    }
+                }
                 if (windChangers.Length > 0 && windsocks != null)
                 {
                     foreach (var windsock in windsocks) windsock.windChanger = windChangers[0];

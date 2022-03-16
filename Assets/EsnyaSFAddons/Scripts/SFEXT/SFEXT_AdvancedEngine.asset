@@ -3820,7 +3820,7 @@ MonoBehaviour:
       Data: 219|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: EsnyaAircraftAssets.SFEXT_AuxiliaryPowerUnit, Assembly-CSharp
+      Data: EsnyaAircraftAssets.SFEXT_AuxiliaryPowerUnit, EsnyaSFAddons.Runtime
     - Name: 
       Entry: 8
       Data: 

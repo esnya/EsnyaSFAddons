@@ -395,7 +395,7 @@ MonoBehaviour:
       Data: 27|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: EsnyaAircraftAssets.SFEXT_AdvancedGear[], Assembly-CSharp
+      Data: EsnyaAircraftAssets.SFEXT_AdvancedGear[], EsnyaSFAddons.Runtime
     - Name: 
       Entry: 8
       Data: 

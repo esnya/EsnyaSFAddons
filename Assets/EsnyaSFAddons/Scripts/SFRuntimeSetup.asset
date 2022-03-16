@@ -668,7 +668,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 41|EsnyaAircraftAssets.UdonSharpComponentInjectAttribute, Assembly-CSharp
+      Data: 41|EsnyaAircraftAssets.UdonSharpComponentInjectAttribute, EsnyaSFAddons.Runtime
     - Name: 
       Entry: 8
       Data: 
@@ -737,7 +737,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 46|EsnyaAircraftAssets.UdonSharpComponentInjectAttribute, Assembly-CSharp
+      Data: 46|EsnyaAircraftAssets.UdonSharpComponentInjectAttribute, EsnyaSFAddons.Runtime
     - Name: 
       Entry: 8
       Data: 
@@ -773,7 +773,7 @@ MonoBehaviour:
       Data: 49|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: EsnyaAircraftAssets.Windsock[], Assembly-CSharp
+      Data: EsnyaAircraftAssets.Windsock[], EsnyaSFAddons.Runtime
     - Name: 
       Entry: 8
       Data: 
@@ -806,7 +806,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 51|EsnyaAircraftAssets.UdonSharpComponentInjectAttribute, Assembly-CSharp
+      Data: 51|EsnyaAircraftAssets.UdonSharpComponentInjectAttribute, EsnyaSFAddons.Runtime
     - Name: 
       Entry: 8
       Data: 

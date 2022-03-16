@@ -64,42 +64,27 @@ namespace EsnyaAircraftAssets
 
             Log("Info", $"Initialized {airVehicles.Length} vehicles");
 
+            SendCustomEventDelayedSeconds(nameof(_SyncDefault), 20);
+
             gameObject.SetActive(false);
         }
 
-        public override void OnPlayerJoined(VRCPlayerApi player)
+
+        public void _SyncDefault()
         {
-            if (randomWind && player.isLocal && player.isMaster)
+            if (randomWind && windChangers != null)
             {
                 var windStrength = randomWindCurve.Evaluate(UnityEngine.Random.value) * randomWindStrength;
                 var wind = Quaternion.AngleAxis(UnityEngine.Random.Range(0, 360), Vector3.up) * Vector3.forward * windStrength;
                 var gustStrength = randomGustCurve.Evaluate(UnityEngine.Random.value) * randomGustStrength;
-
-                foreach (var airVehicle in airVehicles)
+                foreach (var changer in windChangers)
                 {
-                    if (!airVehicle) continue;
-                    airVehicle.SetProgramVariable(nameof(SaccAirVehicle.Wind), wind);
-                    airVehicle.SetProgramVariable(nameof(SaccAirVehicle.WindGustStrength), gustStrength);
-                }
+                    if (!changer || (!Networking.IsOwner(changer.gameObject) && changer.SyncedWind)) continue;
 
-                if (windChangers != null)
-                {
-                    foreach (var changer in windChangers)
-                    {
-                        if (!changer) continue;
-
-                        var synced = changer.SyncedWind;
-                        changer.SyncedWind = false;
-
-                        changer.WindStrenth_3 = wind;
-                        changer.WindGustStrength = gustStrength;
-
-                        changer.SyncedWind = synced;
-
-                        changer.UpdateValuesFromOther();
-
-                        changer.transform.rotation = Quaternion.FromToRotation(Vector3.forward, wind.normalized);
-                    }
+                    changer.transform.rotation = Quaternion.FromToRotation(Vector3.forward, wind.normalized);
+                    changer.WindStrength = windStrength;
+                    changer.WindGustStrength = gustStrength;
+                    changer.RequestSerialization();
                 }
             }
         }

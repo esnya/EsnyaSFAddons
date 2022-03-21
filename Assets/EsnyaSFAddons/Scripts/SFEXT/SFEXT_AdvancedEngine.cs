@@ -192,7 +192,6 @@ namespace EsnyaAircraftAssets
         {
             airVehicle.ThrottleStrength = 0;
             airVehicle.AccelerationResponse = 0;
-            airVehicle.DisableStickyWheelWorkaround_ += 1;
 
             gripAxis = airVehicle.SwitchHandsJoyThrottle ? "Oculus_CrossPlatform_SecondaryHandTrigger" : "Oculus_CrossPlatform_PrimaryHandTrigger";
 

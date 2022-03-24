@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: DFUNC_AutoStarter
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 3abf38d4178d06c48a5d3bd594a98f99,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: ce4ff832965b79a40a435082c1f7dc46,
     type: 2}
   udonAssembly: 
   assemblyError: 
-  sourceCsScript: {fileID: 11500000, guid: c27ca6203ec4bbe47a63fc1c56bd1329, type: 3}
+  sourceCsScript: {fileID: 11500000, guid: 467be92503b6df847b001a02fddf20b6, type: 3}
   behaviourSyncMode: 4
   behaviourIDHeapVarName: __refl_const_intnl_udonTypeID
   compileErrors: []
@@ -26,8 +26,8 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 11500000, guid: a81ed12406633174aa22632458cce3f2, type: 3}
-    - {fileID: 11500000, guid: 3be9fb7ea8a82df4bb16a1d9e1e9b2f7, type: 3}
-    - {fileID: 11500000, guid: 1ad79bcee79fd6c4ea3bfbf0a381eab4, type: 3}
+    - {fileID: 11500000, guid: 43639551d4aca53489258619823e3c9e, type: 3}
+    - {fileID: 11500000, guid: 1c0dd099d6811274f904c98ba9e5b3c3, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -1492,7 +1492,7 @@ MonoBehaviour:
       Data: 86|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: EsnyaAircraftAssets.SFEXT_AuxiliaryPowerUnit, EsnyaSFAddons.Runtime
+      Data: EsnyaSFAddons.SFEXT_AuxiliaryPowerUnit, EsnyaSFAddons.Runtime
     - Name: 
       Entry: 8
       Data: 
@@ -1555,7 +1555,7 @@ MonoBehaviour:
       Data: 90|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: EsnyaAircraftAssets.SFEXT_AdvancedEngine[], EsnyaSFAddons.Runtime
+      Data: EsnyaSFAddons.SFEXT_AdvancedEngine[], EsnyaSFAddons.Runtime
     - Name: 
       Entry: 8
       Data: 

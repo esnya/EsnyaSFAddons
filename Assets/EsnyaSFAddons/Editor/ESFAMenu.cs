@@ -1,6 +1,6 @@
 using UnityEditor;
 
-namespace EsnyaAircraftAssets
+namespace EsnyaSFAddons
 {
     public class ESFAMenu
     {

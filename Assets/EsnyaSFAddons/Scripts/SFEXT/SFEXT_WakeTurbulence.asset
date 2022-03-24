@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: SFEXT_WakeTurbulence
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: c52acf60b46456b46baf5cef7e78f32d,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: bf95a757e8cff2d42b12923932bb6900,
     type: 2}
   udonAssembly: 
   assemblyError: 
-  sourceCsScript: {fileID: 11500000, guid: 8b00da3a90aae944bbaffd2a1ed43af4, type: 3}
+  sourceCsScript: {fileID: 11500000, guid: 64e70003f1c639942b71a3a288515023, type: 3}
   behaviourSyncMode: 1
   behaviourIDHeapVarName: __refl_const_intnl_udonTypeID
   compileErrors: []

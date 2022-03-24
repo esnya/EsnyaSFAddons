@@ -1,10 +1,11 @@
-
+using System;
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
+using VRC.Udon;
 using VRC.Udon.Common.Interfaces;
 
-namespace EsnyaAircraftAssets
+namespace EsnyaSFAddons
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.NoVariableSync)]
     public class DFUNC_LandingLight : UdonSharpBehaviour

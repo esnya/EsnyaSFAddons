@@ -2,7 +2,7 @@
 using UnityEngine;
 using VRC.SDKBase;
 
-namespace EsnyaAircraftAssets
+namespace EsnyaSFAddons
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class DFUNC_SeatAdjuster : UdonSharpBehaviour

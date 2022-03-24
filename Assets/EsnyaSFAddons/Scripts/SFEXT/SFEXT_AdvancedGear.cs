@@ -1,7 +1,6 @@
 using UdonSharp;
 using UnityEngine;
-
-namespace EsnyaAircraftAssets
+namespace EsnyaSFAddons
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
     public class SFEXT_AdvancedGear : UdonSharpBehaviour

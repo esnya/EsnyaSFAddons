@@ -4,7 +4,7 @@ using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon.Common.Interfaces;
 
-namespace EsnyaAircraftAssets
+namespace EsnyaSFAddons
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
     [DefaultExecutionOrder(1000)] // After SoundController
@@ -14,6 +14,7 @@ namespace EsnyaAircraftAssets
         [Header("Misc")]
         public float externalTempurature = 15.0f;
         public float randomRange = 0.2f;
+        public float stickWheelSpinUpForce = 1.0e-6f;
 
         #region SFEXT Core
         private bool initialized, isOwner, isPilot, hasPilot, isPassenger;
@@ -111,6 +112,7 @@ namespace EsnyaAircraftAssets
         #region Power
         [Header("Power")]
         [Tooltip("[N]")] public float maxThrust = 130408.51f;
+        public float thrustCurve = 2.0f;
 
         [Header("N1")]
         [Tooltip("[rpm]")] public float idleN1 = 879.6f;
@@ -164,8 +166,8 @@ namespace EsnyaAircraftAssets
         public float reverserRetractResponse = 0.5f;
 
         // [Header("Runtime Synced Variables")]
-        [NonSerialized] [UdonSynced] public bool reversing, starter, fuel;
-        [NonSerialized] [UdonSynced] public float n1, n2, egt, ect;
+        [NonSerialized][UdonSynced] public bool reversing, starter, fuel;
+        [NonSerialized][UdonSynced] public float n1, n2, egt, ect;
 
         [NonSerialized] public float throttleInput, normalizedThrust, oilTempurature, oilPressure;
         [NonSerialized] public float reverserPosition = 0.0f;
@@ -173,6 +175,7 @@ namespace EsnyaAircraftAssets
         private Rigidbody vehicleRigidbody;
         private bool hasWheelCollider;
         private Animator vehicleAnimator;
+        private DFUNC_AdvancedParkingBrake parkingBrake;
         private SFEXT_AuxiliaryPowerUnit apu;
         private string gripAxis;
 
@@ -199,6 +202,7 @@ namespace EsnyaAircraftAssets
             vehicleAnimator = airVehicle.VehicleAnimator;
 
             brake = entity.GetComponentInChildren<DFUNC_Brake>(true);
+            parkingBrake = (DFUNC_AdvancedParkingBrake)entity.GetExtention(GetUdonTypeName<DFUNC_AdvancedParkingBrake>());
             apu = entity.GetComponentInChildren<SFEXT_AuxiliaryPowerUnit>(true);
             hasWheelCollider = entity.GetComponentInChildren<WheelCollider>(true) != null;
 
@@ -227,11 +231,23 @@ namespace EsnyaAircraftAssets
         private void Power_OwnerFixedUpdate()
         {
             var thrust = normalizedThrust * maxThrust * Mathf.Lerp(1, -reverserRatio, reverserPosition * 2.0f - 1.0f);
-            if (hasWheelCollider && !stall && normalizedThrust > 0.01f && vehicleRigidbody.velocity.magnitude < 0.2f && (brake == null || Mathf.Approximately(brake.BrakeInput, 0)))
+            if (hasWheelCollider && !stall && !Mathf.Approximately(thrust, 0) && vehicleRigidbody.velocity.magnitude < 0.2f)
             {
-                vehicleRigidbody.velocity = Mathf.Sign(thrust) * vehicleRigidbody.transform.forward * .25f;
+                var mass = airVehicle.VehicleRigidbody.mass;
+                foreach (var wheel in airVehicle.EntityControl.gameObject.GetComponentsInChildren<WheelCollider>())
+                {
+                    if (Mathf.Approximately(wheel.motorTorque, 0)) wheel.motorTorque = mass / wheel.radius * stickWheelSpinUpForce;
+                }
+                SendCustomEventDelayedFrames(nameof(_ResetTorque), 1);
             }
             vehicleRigidbody.AddForceAtPosition(transform.forward * thrust, transform.position, ForceMode.Force);
+        }
+        public void _ResetTorque()
+        {
+            foreach (var wheel in airVehicle.EntityControl.gameObject.GetComponentsInChildren<WheelCollider>())
+            {
+                wheel.motorTorque = 0;
+            }
         }
 
         private void Power_OwnerUpdate(float deltaTime)
@@ -248,7 +264,7 @@ namespace EsnyaAircraftAssets
             var targetN1 = Lerp3(0, idleN1, takeOffN1, n2, 0, idleN2, takeOffN2);
             n1 = Mathf.MoveTowards(n1, targetN1, deltaTime * n1Response * continuousN1 * Randomize());
 
-            normalizedThrust = Mathf.Max(Remap01(n1, idleN1, takeOffN1), 0);
+            normalizedThrust = Mathf.Clamp01(Mathf.Pow(n1 / takeOffN1, thrustCurve));
 
             var egtTarget = fire ? fireEGT : Lerp4(externalTempurature, fuel ? idleEGT : externalTempurature, continuousEGT, takeOffEGT, n2, 0, idleN2, continuousN2, takeOffN2);
             egt = Mathf.Lerp(egt, egtTarget, deltaTime * egtResponse * Randomize());
@@ -348,7 +364,7 @@ namespace EsnyaAircraftAssets
         public float mtbFireAtFire = 10;
         public float mtbMeltdownOnFire = 90;
 
-        [NonSerialized] [UdonSynced] public bool fire;
+        [NonSerialized][UdonSynced] public bool fire;
         [NonSerialized] public bool overheat, stall, broken, dished;
 
         public void Dish()
@@ -411,9 +427,19 @@ namespace EsnyaAircraftAssets
 
         private void PlayerStrike_Update()
         {
-            if (!playerStrike || Mathf.Approximately(n1, 0)) return;
-
             var localPlayer = Networking.LocalPlayer;
+            // if (isPilot)
+            // {
+            //     var vehicleVelocity = vehicleRigidbody.velocity;
+            //     if (Vector3.Distance(localPlayer.GetVelocity(), vehicleVelocity) > 1)
+            //     {
+            //         localPlayer.SetVelocity(vehicleVelocity);
+            //     }
+            //     return;
+            // }
+
+            if (!playerStrike || isPilot || isPassenger || Mathf.Approximately(n1, 0)) return;
+
             var playerPosition = localPlayer.GetPosition();
 
             var exhaustPlayerPosition = transform.InverseTransformPoint(playerPosition);

@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using VRC.SDKBase;
 
-namespace EsnyaAircraftAssets
+namespace EsnyaSFAddons
 {
     [CustomEditor(typeof(SAV_PassengerFunctionsController))]
     public class SAV_PassengerFunctionsControllerEditor : Editor

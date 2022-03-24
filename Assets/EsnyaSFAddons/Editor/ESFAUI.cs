@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace EsnyaAircraftAssets
+namespace EsnyaSFAddons
 {
     public static class ESFAUI
     {

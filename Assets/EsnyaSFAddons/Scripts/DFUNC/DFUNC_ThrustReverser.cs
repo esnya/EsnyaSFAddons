@@ -2,8 +2,10 @@
 using System;
 using UdonSharp;
 using UnityEngine;
+using VRC.SDKBase;
+using VRC.Udon;
 
-namespace EsnyaAircraftAssets
+namespace EsnyaSFAddons
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class DFUNC_ThrustReverser : UdonSharpBehaviour

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: SFEXT_AuxiliaryPowerUnit
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 0906d9fc06ea64340aac950481341861,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 6d2d501f011252746855d328d3e7a405,
     type: 2}
   udonAssembly: 
   assemblyError: 
-  sourceCsScript: {fileID: 11500000, guid: 3be9fb7ea8a82df4bb16a1d9e1e9b2f7, type: 3}
+  sourceCsScript: {fileID: 11500000, guid: 43639551d4aca53489258619823e3c9e, type: 3}
   behaviourSyncMode: 4
   behaviourIDHeapVarName: __refl_const_intnl_udonTypeID
   compileErrors: []

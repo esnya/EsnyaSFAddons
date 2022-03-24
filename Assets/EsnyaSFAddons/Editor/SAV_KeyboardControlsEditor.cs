@@ -6,7 +6,7 @@ using UdonSharpEditor;
 using UnityEditor;
 using UnityEngine;
 
-namespace EsnyaAircraftAssets
+namespace EsnyaSFAddons
 {
     [CustomEditor(typeof(SAV_KeyboardControls))]
     public class SAV_KeyboardControlsEditor : Editor

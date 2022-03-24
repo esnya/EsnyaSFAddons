@@ -1,7 +1,7 @@
 using UdonSharp;
 using UnityEngine;
 
-namespace EsnyaAircraftAssets
+namespace EsnyaSFAddons
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class DFUNC_AdvancedParkingBrake : UdonSharpBehaviour

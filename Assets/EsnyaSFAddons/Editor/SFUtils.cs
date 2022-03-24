@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEngine;
 using VRC.SDKBase;
 
-namespace EsnyaAircraftAssets
+namespace EsnyaSFAddons
 {
     public static class SFUtils
     {

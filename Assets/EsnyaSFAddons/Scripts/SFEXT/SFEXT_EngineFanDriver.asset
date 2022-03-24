@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: SFEXT_EngineFanDriver
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: cbd5448c3e3643741b0729af1eef190d,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 398d967f1143fe74eba0fd97779a3ea8,
     type: 2}
   udonAssembly: 
   assemblyError: 
-  sourceCsScript: {fileID: 11500000, guid: 831c7e760d895e94dbb1fd4b922dac19, type: 3}
+  sourceCsScript: {fileID: 11500000, guid: 31649c68d1b1eb74382ac3c4dd92d591, type: 3}
   behaviourSyncMode: 1
   behaviourIDHeapVarName: __refl_const_intnl_udonTypeID
   compileErrors: []
@@ -25,7 +25,7 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 11500000, guid: 1ad79bcee79fd6c4ea3bfbf0a381eab4, type: 3}
+    - {fileID: 11500000, guid: 1c0dd099d6811274f904c98ba9e5b3c3, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -188,7 +188,7 @@ MonoBehaviour:
       Data: 12|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: EsnyaAircraftAssets.SFEXT_AdvancedEngine[], EsnyaSFAddons.Runtime
+      Data: EsnyaSFAddons.SFEXT_AdvancedEngine[], EsnyaSFAddons.Runtime
     - Name: 
       Entry: 8
       Data: 

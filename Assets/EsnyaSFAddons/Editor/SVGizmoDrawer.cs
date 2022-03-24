@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using VRC.Udon;
 
-namespace EsnyaAircraftAssets
+namespace EsnyaSFAddons
 {
     public class VehicleSeat
     {

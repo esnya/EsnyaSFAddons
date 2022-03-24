@@ -3,7 +3,162 @@ using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon.Common.Interfaces;
 
-namespace EsnyaAircraftAssets
+/*
+@startuml(timing)
+box "Client on Lema"
+actor Lema
+participant PilotSeat as R_PilotSeat
+participant PassengerSeat as R_PassengerSeat
+participant SaccEntity as R_SaccEntity
+participant IHaveControl as R_IHaveControl
+end box
+
+participant CaptainSeatPosition
+participant FirstOfficerSeatPosition
+
+box "Client on Romeo"
+actor Romeo
+participant PilotSeat as L_PilotSeat
+participant PassengerSeat as L_PassengerSeat
+participant SaccEntity as L_SaccEntity
+participant IHaveControl as L_IHaveControl
+end box
+
+== Initialize ==
+R_PilotSeat -> CaptainSeatPosition: Inital Placed
+R_PassengerSeat -> FirstOfficerSeatPosition: Initial Placed
+L_PilotSeat -> CaptainSeatPosition: Inital Placed
+L_PassengerSeat -> FirstOfficerSeatPosition: Initial Placed
+
+== Pilot Enter ==
+Lema -> R_PilotSeat: Interact
+activate R_PilotSeat
+    R_PilotSeat -> R_SaccEntity: EnterAsPilot
+    activate R_SaccEntity
+        R_SaccEntity --> R_SaccEntity: SFEXT_O_PilotEnter
+        R_SaccEntity --> R_SaccEntity: SFEXT_G_PilotEnter
+        R_SaccEntity --> L_SaccEntity: SFEXT_G_PilotEnter
+        activate L_SaccEntity
+            L_SaccEntity --> L_IHaveControl: SFEXT_G_PilotEnter
+            activate L_IHaveControl
+                L_IHaveControl -> L_IHaveControl: hasPilot = true
+                L_IHaveControl -> L_SaccEntity: is pilot ?
+                activate L_SaccEntity
+                return no
+                L_IHaveControl -> L_IHaveControl: isPilot = false
+            return
+        deactivate
+        R_SaccEntity --> R_IHaveControl: SFEXT_G_PilotEnter
+        activate R_IHaveControl
+            R_IHaveControl -> R_IHaveControl: hasPilot = true
+            R_IHaveControl -> R_SaccEntity: is pilot ?
+            activate R_SaccEntity
+            return yes
+            R_IHaveControl -> R_IHaveControl: isPilot = true
+        deactivate
+    return
+deactivate
+
+== Passenger Enter ==
+Romeo -> L_PassengerSeat: Interact
+activate L_PassengerSeat
+    L_PassengerSeat -> L_SaccEntity: EnterAsPassenger
+    activate L_SaccEntity
+        L_SaccEntity --> L_IHaveControl: SFEXTP_O_UserEnter
+        activate L_IHaveControl
+            L_IHaveControl -> L_IHaveControl: isUser = true
+        deactivate
+    return
+deactivate
+
+== Swap Control ==
+Romeo -> L_IHaveControl: Take Over Control
+activate L_IHaveControl
+    L_IHaveControl --> L_IHaveControl: SwapControl
+    activate L_IHaveControl
+        L_IHaveControl -> L_PassengerSeat: Move
+        activate L_PassengerSeat
+            L_PassengerSeat -> CaptainSeatPosition: Placed
+        return
+        L_IHaveControl -> L_PilotSeat: Move
+        activate L_PilotSeat
+            L_PilotSeat -> FirstOfficerSeatPosition: Placed
+        return
+        L_IHaveControl -> L_SaccEntity: ExitStation
+        activate L_SaccEntity
+            L_SaccEntity -> L_PassengerSeat: ExitStation
+            activate L_PassengerSeat
+                L_PassengerSeat --> L_SaccEntity: SFEXT_P_PassengerExit
+                activate L_SaccEntity
+                    L_SaccEntity --> L_IHaveControl: SFEXTP_O_UserExit
+                deactivate
+                activate L_IHaveControl
+                    L_IHaveControl -> L_IHaveControl: isUser = false
+                deactivate
+            return
+        return
+    deactivate
+    L_IHaveControl --> R_IHaveControl: SwapControl
+    activate R_IHaveControl
+        R_IHaveControl -> R_PassengerSeat: Move
+        activate R_PassengerSeat
+            R_PassengerSeat -> CaptainSeatPosition: Placed
+        return
+        R_IHaveControl -> R_PilotSeat: Move
+        activate R_PilotSeat
+            R_PilotSeat -> FirstOfficerSeatPosition: Placed
+        return
+        R_IHaveControl -> R_SaccEntity: ExitStation
+        activate R_SaccEntity
+            R_SaccEntity -> R_PilotSeat: ExitStation
+            activate R_PilotSeat
+            return
+            R_SaccEntity --> R_IHaveControl: SFEXT_G_PilotExit
+            activate R_IHaveControl
+            deactivate
+            R_SaccEntity --> L_IHaveControl: SFEXT_G_PilotExit
+            activate L_IHaveControl
+                L_IHaveControl -> L_PilotSeat: Interact
+                activate L_PilotSeat
+                    L_PilotSeat -> L_SaccEntity: EnterAsPilot
+                    activate L_SaccEntity
+                        L_SaccEntity --> L_IHaveControl: SFEXT_G_PilotEnter
+                        activate L_IHaveControl
+                            L_IHaveControl -> L_IHaveControl: hasPilot = true
+                            L_IHaveControl -> L_SaccEntity: is pilot ?
+                            activate L_SaccEntity
+                            return yes
+                            L_IHaveControl -> L_IHaveControl: isPilot = true
+                        deactivate
+                        L_SaccEntity --> R_SaccEntity: SFEXT_G_PilotEnter
+                        activate R_SaccEntity
+                            R_SaccEntity --> R_IHaveControl: SFEXT_G_PilotEnter
+                            activate R_IHaveControl
+                                R_IHaveControl -> R_IHaveControl: hasPilot = true
+                                R_IHaveControl -> R_SaccEntity: is pilot ?
+                                activate R_SaccEntity
+                                return no
+                                R_IHaveControl -> R_IHaveControl: isPilot = false
+                                R_IHaveControl --> R_PassengerSeat: Interact
+                                activate R_PassengerSeat
+                                    R_PassengerSeat -> R_SaccEntity: EnterAsPassenger
+                                    R_SaccEntity --> R_IHaveControl: SFEXTP_O_UserEnter
+                                    activate R_IHaveControl
+                                        R_IHaveControl -> R_IHaveControl: isUser = true
+                                    deactivate
+                                deactivate
+                            deactivate
+                        deactivate
+                    return
+                return
+            deactivate
+        return
+    deactivate
+deactivate
+@enduml
+*/
+
+namespace EsnyaSFAddons
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.NoVariableSync)]
     public class DFUNCP_IHaveControl : UdonSharpBehaviour

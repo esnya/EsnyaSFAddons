@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using VRC.SDKBase;
 
-namespace EsnyaAircraftAssets
+namespace EsnyaSFAddons
 {
     [CustomEditor(typeof(SaccEntity))]
     public class SaccEntityEditor : Editor

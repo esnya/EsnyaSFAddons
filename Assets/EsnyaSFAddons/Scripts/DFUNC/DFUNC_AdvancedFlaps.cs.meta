@@ -1,12 +1,13 @@
 fileFormatVersion: 2
-guid: 1443e9eeb70d967438e930194e881b50
+guid: dd4065657255df84d8e5a6f8c62e4a2a
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
   - Dial_Funcon: {instanceID: 0}
+  - breakingSound: {fileID: 8300000, guid: a778a83e783a3d040990aa85ff3141b7, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
-  userData:
-  assetBundleName:
-  assetBundleVariant:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

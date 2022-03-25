@@ -124,5 +124,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MFD_TMP_Cruise
       objectReference: {fileID: 0}
+    - target: {fileID: 4693228764256051839, guid: 00e4a689e1ff979409f4cbb7dd363f6c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00e4a689e1ff979409f4cbb7dd363f6c, type: 3}

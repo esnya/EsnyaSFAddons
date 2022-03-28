@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using UdonSharp;
 using UnityEngine;
+using VRC.Udon.Common.Interfaces;
 
 namespace EsnyaSFAddons
 {
@@ -31,8 +32,24 @@ namespace EsnyaSFAddons
                 _extend = value;
                 if (Dial_Funcon && Dial_Funcon.activeSelf != value) Dial_Funcon.SetActive(value);
                 if (drogueHeadTrigger.gameObject.activeSelf != value) drogueHeadTrigger.gameObject.SetActive(value);
+                if (Connected) Connected = false;
             }
             get => _extend;
+        }
+
+        [UdonSynced][FieldChangeCallback(nameof(Connected))] private bool _connected;
+        private bool Connected
+        {
+            set
+            {
+                _connected = value;
+                if (!value)
+                {
+                    targetEntity = null;
+                    targetProbe = null;
+                }
+            }
+            get => _connected;
         }
 
         private string triggerAxis;
@@ -161,6 +178,10 @@ namespace EsnyaSFAddons
             {
                 ResolveIK(extendingRatio, drogueRestPosition);
             }
+            else if (Connected)
+            {
+                FindProbe();
+            }
 
             if (retracted && !drogueMoving && !hasPilot)
             {
@@ -172,6 +193,19 @@ namespace EsnyaSFAddons
         {
             if (targetEntity) return;
             Contact(drogueHeadTrigger.targetEntity, drogueHeadTrigger.probeCollider.transform);
+            SendCustomNetworkEvent(NetworkEventTarget.Owner, nameof(OnConnected));
+        }
+
+        public void OnConnected()
+        {
+            Connected = true;
+            RequestSerialization();
+        }
+
+        public void OnDisconnected()
+        {
+            Connected = false;
+            RequestSerialization();
         }
 
         private void Contact(SaccEntity entity, Transform probe)
@@ -188,6 +222,7 @@ namespace EsnyaSFAddons
             targetProbe = null;
             SetPlay(detachSound, true);
             SetPlay(fuelingSound, false);
+            SendCustomNetworkEvent(NetworkEventTarget.Owner, nameof(OnDisconnected));
         }
 
         private bool prevTrigger;
@@ -212,6 +247,38 @@ namespace EsnyaSFAddons
                 var ypos = i * yScaler;
                 var xzpos = Mathf.Max(i - drogueLinearLength, 0) * xzScaler;
                 drogueIKBones[i].position = drogueBase.TransformPoint(ypos * y + xzpos * xz - Parabola1(xzpos) * d * xzpos);
+            }
+        }
+
+        private void FindProbe()
+        {
+            var minDistance = float.MaxValue;
+            var prefix = drogueHeadTrigger.prefix;
+            var headPosition = drogueHeadTrigger.transform.position;
+            Collider foundCollider = null;
+            SaccEntity foundEntity = null;
+            foreach (var collider in Physics.OverlapSphere(headPosition, 10, -1, QueryTriggerInteraction.Collide))
+            {
+                if (!collider || !collider.gameObject.name.StartsWith(prefix)) continue;
+
+                var rigidbody = collider.attachedRigidbody;
+                if (!rigidbody) continue;
+
+                var distance = Vector3.Distance(headPosition, collider.transform.position);
+                if (distance >= minDistance) continue;
+
+                var entity = rigidbody.GetComponent<SaccEntity>();
+                if (!entity) continue;
+
+                foundCollider = collider;
+                foundEntity = entity;
+                minDistance = distance;
+            }
+
+            if (foundCollider && foundEntity)
+            {
+                targetEntity = foundEntity;
+                targetProbe = foundCollider.transform;
             }
         }
 

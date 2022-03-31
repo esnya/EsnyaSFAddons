@@ -23,16 +23,16 @@ namespace EsnyaAircraftAssets
 #if UNITY_EDITOR
         public override void BeforeGUI(SerializedProperty property)
         {
-            EditorGUI.BeginDisabledGroup(false);
+            if (!property.isArray) EditorGUILayout.BeginHorizontal();
         }
         public override void AfterGUI(SerializedProperty property)
         {
-            EditorGUI.EndDisabledGroup();
-            EditorGUILayout.HelpBox("Auto injected by script.", MessageType.Info);
-            if (GUILayout.Button("Force Update"))
+            if (GUILayout.Button("Force Update", GUILayout.ExpandWidth(false)))
             {
                 AutoSetup((property.serializedObject.targetObject as Component).gameObject.scene);
             }
+            if (!property.isArray) EditorGUILayout.EndHorizontal();
+            EditorGUILayout.HelpBox("Auto injected by script.", MessageType.Info);
         }
 
         private static void AutoSetup(Scene scene)
@@ -70,6 +70,8 @@ namespace EsnyaAircraftAssets
                     if (isComponent) field.SetValue(component, rootGameObjects.SelectMany(o => o.GetUdonSharpComponentsInChildren(valueType)).FirstOrDefault());
                     else field.SetValue(component, rootGameObjects.SelectMany(o => o.GetUdonSharpComponentsInChildren(valueType)).FirstOrDefault());
                 }
+
+                EditorUtility.SetDirty(UdonSharpEditorUtility.GetBackingUdonBehaviour(component));
             }
         }
 

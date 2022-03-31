@@ -4,12 +4,13 @@ using UnityEngine;
 using VRC.SDK3.Components;
 using VRC.SDKBase;
 using VRC.Udon;
+using VRC.Udon.Common.Interfaces;
 
 namespace EsnyaSFAddons
 {
     [RequireComponent(typeof(VRCObjectSync))]
     [RequireComponent(typeof(VRCPickup))]
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
+    [UdonBehaviourSyncMode(BehaviourSyncMode.NoVariableSync)]
     public class PickupChock : UdonSharpBehaviour
     {
         [Tooltip("Respawn if placed outside of this range. [m]")] public float maxDistance = 5;
@@ -41,7 +42,7 @@ namespace EsnyaSFAddons
 
         public override void OnPickup()
         {
-            SetTriggerFlags(true);
+            SendCustomNetworkEvent(NetworkEventTarget.All, nameof(RemoteOnPickup));
         }
 
         public override void OnDrop()
@@ -56,6 +57,15 @@ namespace EsnyaSFAddons
                 transform.rotation = Quaternion.AngleAxis(Vector3.SignedAngle(Vector3.forward, transform.forward, hitInfo.normal), hitInfo.normal);
             }
 
+            SendCustomNetworkEvent(NetworkEventTarget.All, nameof(RemoteOnDrop));
+        }
+
+        public void RemoteOnPickup()
+        {
+            SetTriggerFlags(true);
+        }
+        public void RemoteOnDrop()
+        {
             SetTriggerFlags(false);
         }
 

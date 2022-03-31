@@ -438,7 +438,7 @@ namespace EsnyaSFAddons
             //     return;
             // }
 
-            if (!playerStrike || isPilot || isPassenger || Mathf.Approximately(n1, 0)) return;
+            if (!localPlayer || !playerStrike || isPilot || isPassenger || Mathf.Approximately(n1, 0)) return;
 
             var playerPosition = localPlayer.GetPosition();
 

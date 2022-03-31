@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using EsnyaAircraftAssets;
+using TMPro;
 using UdonSharp;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ namespace EsnyaSFAddons
     {
         public float updateInterval = 10.0f;
 
-        public SAV_WindChanger windChanger;
+        [UdonSharpComponentInject] public SAV_WindChanger windChanger;
         public Transform directionIndicator;
         public TextMeshProUGUI speedText;
 

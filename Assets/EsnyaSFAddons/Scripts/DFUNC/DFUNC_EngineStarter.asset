@@ -949,7 +949,7 @@ MonoBehaviour:
       Data: 55|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: SaccEntity, Assembly-CSharp
+      Data: SaccEntity, SaccFlightAndVehicles.Runtime
     - Name: 
       Entry: 8
       Data: 
@@ -1012,7 +1012,7 @@ MonoBehaviour:
       Data: 59|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: SaccAirVehicle, Assembly-CSharp
+      Data: SaccAirVehicle, SaccFlightAndVehicles.Runtime
     - Name: 
       Entry: 8
       Data: 
@@ -1075,7 +1075,7 @@ MonoBehaviour:
       Data: 63|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: SAV_SoundController, Assembly-CSharp
+      Data: SAV_SoundController, SaccFlightAndVehicles.Runtime
     - Name: 
       Entry: 8
       Data: 

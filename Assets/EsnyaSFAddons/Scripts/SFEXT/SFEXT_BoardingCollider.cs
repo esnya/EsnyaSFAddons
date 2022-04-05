@@ -88,6 +88,15 @@ namespace EsnyaSFAddons
             OnBoarding = false;
         }
 
+        public void SFEXT_G_TakeOff()
+        {
+            gameObject.SetActive(false);
+        }
+        public void SFEXT_G_TouchDown()
+        {
+            gameObject.SetActive(true);
+        }
+
         public override void PostLateUpdate()
         {
             if (!DoorsOpened) return;

@@ -14,7 +14,7 @@ namespace EsnyaSFAddons
         [Header("Misc")]
         public float externalTempurature = 15.0f;
         public float randomRange = 0.2f;
-        public float stickWheelSpinUpForce = 1.0e-6f;
+        public float wheelWakeUpTorque = 1.0e-36f;
 
         #region SFEXT Core
         private bool initialized, isOwner, isPilot, hasPilot, isPassenger;
@@ -51,6 +51,24 @@ namespace EsnyaSFAddons
 
         public void SFEXT_G_Explode() => ResetStatus();
         public void SFEXT_G_RespawnButton() => ResetStatus();
+
+        private WheelCollider[] wheels;
+        private void OnEnable()
+        {
+            if (wheels == null) wheels = GetComponentInParent<Rigidbody>().GetComponentsInChildren<WheelCollider>(true);
+            foreach (var wheel in wheels)
+            {
+                wheel.motorTorque += wheelWakeUpTorque;
+            }
+        }
+
+        private void OnDisable()
+        {
+            foreach (var wheel in wheels)
+            {
+                wheel.motorTorque -= wheelWakeUpTorque;
+            }
+        }
 
         private void FixedUpdate()
         {
@@ -231,23 +249,7 @@ namespace EsnyaSFAddons
         private void Power_OwnerFixedUpdate()
         {
             var thrust = normalizedThrust * maxThrust * Mathf.Lerp(1, -reverserRatio, reverserPosition * 2.0f - 1.0f);
-            if (hasWheelCollider && !stall && !Mathf.Approximately(thrust, 0) && vehicleRigidbody.velocity.magnitude < 0.2f)
-            {
-                var mass = airVehicle.VehicleRigidbody.mass;
-                foreach (var wheel in airVehicle.EntityControl.gameObject.GetComponentsInChildren<WheelCollider>())
-                {
-                    if (Mathf.Approximately(wheel.motorTorque, 0)) wheel.motorTorque = mass / wheel.radius * stickWheelSpinUpForce;
-                }
-                SendCustomEventDelayedFrames(nameof(_ResetTorque), 1);
-            }
             vehicleRigidbody.AddForceAtPosition(transform.forward * thrust, transform.position, ForceMode.Force);
-        }
-        public void _ResetTorque()
-        {
-            foreach (var wheel in airVehicle.EntityControl.gameObject.GetComponentsInChildren<WheelCollider>())
-            {
-                wheel.motorTorque = 0;
-            }
         }
 
         private void Power_OwnerUpdate(float deltaTime)

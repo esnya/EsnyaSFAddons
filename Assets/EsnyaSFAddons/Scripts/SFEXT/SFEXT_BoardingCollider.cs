@@ -76,6 +76,7 @@ namespace EsnyaSFAddons
 
         public override void PostLateUpdate()
         {
+            if (!entityTransform) return;
             transform.position = entityTransform.TransformPoint(localPosition);
             transform.rotation = entityTransform.rotation * localRotation;
         }

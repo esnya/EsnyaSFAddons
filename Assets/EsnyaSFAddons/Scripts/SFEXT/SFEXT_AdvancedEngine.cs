@@ -204,6 +204,14 @@ namespace EsnyaSFAddons
             starter = !starter;
         }
 
+        public void FuelOn()
+        {
+            fuel = true;
+        }
+        public void FuelCutoff()
+        {
+            fuel = false;
+        }
         public void ToggleFuel()
         {
             fuel = !fuel;

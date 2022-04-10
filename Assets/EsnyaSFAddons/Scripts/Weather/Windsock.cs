@@ -4,7 +4,6 @@ using UnityEngine;
 namespace EsnyaAircraftAssets
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    [RequireComponent(typeof(Cloth))]
     [RequireComponent(typeof(Animator))]
     public class Windsock : UdonSharpBehaviour
     {
@@ -48,6 +47,10 @@ namespace EsnyaAircraftAssets
 
                 animator.SetFloat("x", Mathf.Clamp(finalWind.x / maxWindMagnitude, -1.0f, 1.0f));
                 animator.SetFloat("z", Mathf.Clamp(finalWind.z / maxWindMagnitude, -1.0f, 1.0f));
+
+                animator.SetFloat("windspeed", wind.magnitude / maxWindMagnitude);
+                animator.SetFloat("gust", windGustStrength / maxWindMagnitude);
+                animator.SetFloat("finalwind", finalWind.magnitude / maxWindMagnitude);
             }
         }
     }

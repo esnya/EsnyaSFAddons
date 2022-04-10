@@ -348,6 +348,22 @@ namespace EsnyaSFAddons
             Networking.LocalPlayer.PlayHapticEventInHand(hand, hapticDuration, hapticAmplitude, hapticFrequency);
         }
 
+
+        private void SetTargetDetentIndex(int value)
+        {
+            targetAngle = detents[Mathf.Clamp(value, 0, detents.Length - 1)];
+            UpdateDetents();
+        }
+        public void NextDetent()
+        {
+            SetTargetDetentIndex(targetDetentIndex + 1);
+        }
+
+        public void PreviousDetent()
+        {
+            SetTargetDetentIndex(targetDetentIndex - 1);
+        }
+
         #region SF Utilities
         private UdonSharpBehaviour GetExtention(SaccEntity entity, string udonTypeName)
         {

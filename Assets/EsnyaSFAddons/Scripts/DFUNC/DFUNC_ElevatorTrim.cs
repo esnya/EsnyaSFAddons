@@ -78,7 +78,6 @@ namespace EsnyaSFAddons
 
         private void Update()
         {
-            var deltaTime = Time.deltaTime;
             isDirty = false;
 
             if (isPilot)
@@ -123,16 +122,6 @@ namespace EsnyaSFAddons
         private void SetDirty()
         {
             isDirty = true;
-        }
-
-        private bool GetTriggerPress()
-        {
-            return triggered;
-        }
-
-        private bool GetTriggerDown()
-        {
-            return triggered && !prevTriggered;
         }
 
         private float GetSliderInput()
@@ -195,12 +184,20 @@ namespace EsnyaSFAddons
             }
         }
 
+        public void TrimUp()
+        {
+            trim += desktopStep;
+        }
+        public void TrimDown()
+        {
+            trim -= desktopStep;
+        }
+
         private void PlayHapticEvent()
         {
             var hand = trackingTarget == VRCPlayerApi.TrackingDataType.LeftHand ? VRC_Pickup.PickupHand.Left : VRC_Pickup.PickupHand.Right;
             Networking.LocalPlayer.PlayHapticEventInHand(hand, hapticDuration, hapticAmplitude, hapticFrequency);
         }
-
 
         private float Remap01(float value, float oldMin, float oldMax)
         {

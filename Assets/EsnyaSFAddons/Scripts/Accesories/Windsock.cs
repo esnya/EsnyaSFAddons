@@ -1,4 +1,5 @@
-﻿using UdonSharp;
+﻿using System.Runtime.CompilerServices;
+using UdonSharp;
 using UnityEngine;
 
 namespace EsnyaAircraftAssets
@@ -11,11 +12,16 @@ namespace EsnyaAircraftAssets
         public int updateInterval = 10;
         public float maxWindMagnitude = 100.0f;
         public float rotationSmooth = 1f;
+        public float rotationOffset = 180.0f;
+
+        public bool cloth = true;
+        public bool animation = false;
 
         private int updateOffset;
         private Animator animator;
         private float heading, targetHeading;
         private Quaternion initialRotation;
+        private float finalWindTarget, finalWindSmoothed;
 
         private void Start()
         {
@@ -29,7 +35,7 @@ namespace EsnyaAircraftAssets
         {
             var prevHeading = heading;
             heading = Mathf.LerpAngle(heading, targetHeading, Time.deltaTime / rotationSmooth);
-            if (!Mathf.Approximately(heading, prevHeading)) transform.rotation = Quaternion.AngleAxis(heading + 180, Vector3.up) * initialRotation;
+            if (!Mathf.Approximately(heading, prevHeading)) transform.rotation = Quaternion.AngleAxis(heading + rotationOffset, Vector3.up) * initialRotation;
 
             if ((Time.frameCount + updateOffset) % updateInterval == 0 && windChanger)
             {
@@ -45,12 +51,19 @@ namespace EsnyaAircraftAssets
 
                 targetHeading = Vector3.SignedAngle(Vector3.back, Vector3.ProjectOnPlane(finalWind, Vector3.up), Vector3.up);
 
-                animator.SetFloat("x", Mathf.Clamp(finalWind.x / maxWindMagnitude, -1.0f, 1.0f));
-                animator.SetFloat("z", Mathf.Clamp(finalWind.z / maxWindMagnitude, -1.0f, 1.0f));
+                if (cloth)
+                {
+                    animator.SetFloat("x", Mathf.Clamp(finalWind.x / maxWindMagnitude, -1.0f, 1.0f));
+                    animator.SetFloat("z", Mathf.Clamp(finalWind.z / maxWindMagnitude, -1.0f, 1.0f));
+                }
 
-                animator.SetFloat("windspeed", wind.magnitude / maxWindMagnitude);
-                animator.SetFloat("gust", windGustStrength / maxWindMagnitude);
-                animator.SetFloat("finalwind", finalWind.magnitude / maxWindMagnitude);
+                finalWindTarget = finalWind.magnitude / maxWindMagnitude;
+            }
+
+            if (animation && !Mathf.Approximately(finalWindSmoothed, finalWindTarget))
+            {
+                finalWindSmoothed = Mathf.LerpAngle(finalWindTarget, finalWindSmoothed, Time.deltaTime / rotationSmooth);
+                animator.SetFloat("finalwind", finalWindSmoothed);
             }
         }
     }

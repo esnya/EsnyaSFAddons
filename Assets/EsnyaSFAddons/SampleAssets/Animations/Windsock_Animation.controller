@@ -7,7 +7,7 @@ AnimatorStateMachine:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Gust
+  m_Name: Flow
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -1649524584767972462}
@@ -106,18 +106,6 @@ AnimatorController:
   m_Name: Windsock_Animation
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: windspeed
-    m_Type: 1
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: gust
-    m_Type: 1
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
   - m_Name: finalwind
     m_Type: 1
     m_DefaultFloat: 0
@@ -138,7 +126,7 @@ AnimatorController:
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
   - serializedVersion: 5
-    m_Name: Gust
+    m_Name: Flow
     m_StateMachine: {fileID: -8182777084627824460}
     m_Mask: {fileID: 0}
     m_Motions: []
@@ -162,23 +150,32 @@ BlendTree:
       type: 3}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
-    m_TimeScale: 0.1
+    m_TimeScale: 0.5
     m_CycleOffset: 0
     m_DirectBlendParameter: Windspeed
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -629101515265569303, guid: 44e06cc6fc1e02146b64609d8c6f0dab,
+    m_Motion: {fileID: -9118772361537019199, guid: 4ff7e876c96241443a8c251f1ef5c58e,
       type: 3}
-    m_Threshold: 1
+    m_Threshold: 0.1
     m_Position: {x: 0, y: 0}
-    m_TimeScale: 4
+    m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Windspeed
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: -9118772361537019199, guid: 4ff7e876c96241443a8c251f1ef5c58e,
+      type: 3}
+    m_Threshold: 0.4
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 5
+    m_CycleOffset: 0
+    m_DirectBlendParameter: finalwind
     m_Mirror: 0
   m_BlendParameter: finalwind
   m_BlendParameterY: Windspeed
   m_MinThreshold: 0
-  m_MaxThreshold: 1
-  m_UseAutomaticThresholds: 1
+  m_MaxThreshold: 0.4
+  m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0

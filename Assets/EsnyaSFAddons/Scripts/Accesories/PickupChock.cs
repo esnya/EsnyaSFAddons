@@ -8,25 +8,54 @@ using VRC.Udon.Common.Interfaces;
 
 namespace EsnyaSFAddons
 {
-    [RequireComponent(typeof(VRCObjectSync))]
     [RequireComponent(typeof(VRCPickup))]
-    [UdonBehaviourSyncMode(BehaviourSyncMode.NoVariableSync)]
+    [UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
     public class PickupChock : UdonSharpBehaviour
     {
-        [Tooltip("Respawn if placed outside of this range. [m]")] public float maxDistance = 5;
-        [Tooltip("[s]")] public float respawnTimeout = 5;
         public LayerMask groundLayerMask = 0x0801;
+        public float raycastDistance = 3.0f;
+        public float raycastOffset = 1.0f;
+        public float sleepTimeout = 3.0f;
 
-        private VRCObjectSync objectSync;
         private VRCPickup pickup;
         private Collider[] colliders;
         private bool[] colliderTriggerFlags;
-        private Vector3 respawnPosition;
-        private Quaternion respawnRotation;
-        private float lastDropTime;
+
+        private float wakeUpTime;
+        private bool _moving;
+        private bool Moving {
+            set {
+                if (value) wakeUpTime = Time.time;
+                SetTriggerFlags(value);
+                _moving = value;
+            }
+            get => _moving;
+        }
+
+        [UdonSynced(UdonSyncMode.Smooth)][FieldChangeCallback(nameof(Position))] private Vector3 _position;
+        private Vector3 Position {
+            set {
+                Moving = true;
+                transform.position = value;
+
+                _position = value;
+            }
+            get => _position;
+        }
+        [UdonSynced(UdonSyncMode.Smooth)] private float _angle;
+        private float Angle {
+            set {
+                Moving = true;
+
+                transform.rotation = Quaternion.AngleAxis(value, Vector3.up);
+
+                _angle = value;
+            }
+            get => _angle;
+        }
+
         private void Start()
         {
-            objectSync = (VRCObjectSync)GetComponent(typeof(VRCObjectSync));
             pickup = (VRCPickup)GetComponent(typeof(VRCPickup));
             colliders = GetComponentsInChildren<Collider>(true);
 
@@ -36,8 +65,15 @@ namespace EsnyaSFAddons
                 colliderTriggerFlags[i] = colliders[i].isTrigger;
             }
 
-            respawnPosition = transform.localPosition;
-            respawnRotation = transform.localRotation;
+            Moving = false;
+        }
+
+        private void Update()
+        {
+            if (Moving && Time.time > wakeUpTime + sleepTimeout)
+            {
+                Moving = false;
+            }
         }
 
         public override void OnPickup()
@@ -47,36 +83,21 @@ namespace EsnyaSFAddons
 
         public override void OnDrop()
         {
-            lastDropTime = Time.time;
-            SendCustomEventDelayedSeconds(nameof(_CheckDistance), respawnTimeout);
-
             RaycastHit hitInfo;
-            if (Physics.Raycast(transform.position, Vector3.down, out hitInfo, maxDistance, groundLayerMask, QueryTriggerInteraction.Ignore))
+            if (Physics.Raycast(transform.position + Vector3.up * raycastOffset, Vector3.down, out hitInfo, raycastDistance, groundLayerMask, QueryTriggerInteraction.Ignore))
             {
-                transform.position = hitInfo.point;
-                transform.rotation = Quaternion.AngleAxis(Vector3.SignedAngle(Vector3.forward, transform.forward, hitInfo.normal), hitInfo.normal);
+                Position = hitInfo.point;
             }
-
-            SendCustomNetworkEvent(NetworkEventTarget.All, nameof(RemoteOnDrop));
+            else
+            {
+                Position = transform.position;
+            }
+            Angle = Vector3.SignedAngle(Vector3.forward, transform.forward, Vector3.up);
         }
 
         public void RemoteOnPickup()
         {
-            SetTriggerFlags(true);
-        }
-        public void RemoteOnDrop()
-        {
-            SetTriggerFlags(false);
-        }
-
-        public void _CheckDistance()
-        {
-            if (!pickup.IsHeld && Time.time - (lastDropTime + respawnTimeout) < 1 && Vector3.Distance(transform.localPosition, respawnPosition) * transform.lossyScale.x > maxDistance)
-            {
-                objectSync.FlagDiscontinuity();
-                transform.localPosition = respawnPosition;
-                transform.localRotation = respawnRotation;
-            }
+            Moving = true;
         }
 
         private void SetTriggerFlags(bool value)

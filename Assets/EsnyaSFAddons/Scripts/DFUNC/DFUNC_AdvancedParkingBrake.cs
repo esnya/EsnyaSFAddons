@@ -91,6 +91,17 @@ namespace EsnyaSFAddons
         public void SFEXT_O_PilotEnter() => isOwner = isPilot = true;
         public void SFEXT_O_PilotExit() => isPilot = false;
 
+        public void Set()
+        {
+            State = true;
+            RequestSerialization();
+        }
+        public void Release()
+        {
+            State = false;
+            RequestSerialization();
+        }
+
         private UdonSharpBehaviour GetExtention(SaccEntity entity, string udonTypeName)
         {
             foreach (var extention in entity.ExtensionUdonBehaviours)

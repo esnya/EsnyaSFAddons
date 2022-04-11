@@ -1,5 +1,7 @@
 using UdonSharp;
 using UnityEngine;
+using VRC.SDKBase;
+
 namespace EsnyaSFAddons
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
@@ -18,8 +20,9 @@ namespace EsnyaSFAddons
 
         [Header("Brake")]
         [Tooltip("N/m")] public float brakeTorque = 10000;
-        [Tooltip("kt")] public float brakeMaxGroundSpeed = 60;
         public float brakeResponse = 1.0f;
+        public bool autoLimitGroundSpeed;
+        public bool autoLimitGroundSpeedOnDesktop = true;
 
         [Header("Indicators")]
         public GameObject transitionIndicator;
@@ -31,23 +34,29 @@ namespace EsnyaSFAddons
 
         [Header("Sounds")]
         public AudioSource transitionSound;
+        public AudioClip burstSound, breakSound;
 
         [Header("Failures")]
         [Tooltip("KIAS")] public float maxExtensionSpeed = 270;
         [Tooltip("KIAS")] public float maxRetractionSpeed = 235;
         [Tooltip("KIAS")] public float maxExtendedSpeed = 320;
+        [Tooltip("KGS")] public float brakeMaxGroundSpeed = 60;
 
         public float mtbTransitionFail = 2 * 60 * 60;
         public float mtbTransitionFailOnOverspeed = 10;
         public float mtbTransitionBraek = 8 * 60 * 60;
         public float mtbTransitionBraekOnOverspeed = 60;
+        public float mtbBurstOnOverGroundSpeed = 10;
+
+        [Header("Effects")]
+        public GameObject burstEffect;
 
         [Header("Misc")]
         public float timeNosieScale = 0.1f;
 
         [System.NonSerialized] public float targetPosition;
-        [System.NonSerialized] [UdonSynced(UdonSyncMode.Smooth)] public float position;
-        [System.NonSerialized] [UdonSynced] public bool moving, inTransition;
+        [System.NonSerialized][UdonSynced(UdonSyncMode.Smooth)] public float position;
+        [System.NonSerialized][UdonSynced] public bool moving, inTransition;
         private bool hasPilot, isOwner;
         private SaccAirVehicle airVehicle;
         private Rigidbody vehicleRigidbody;
@@ -56,7 +65,33 @@ namespace EsnyaSFAddons
         private Vector3 wheelPositionOffset;
         private Quaternion wheelRotationOffset = Quaternion.identity, steerRotationOffset = Quaternion.identity;
         private float wheelAngle;
-        [System.NonSerialized] [UdonSynced] public bool failed, broken, parkingBrake;
+        private GameObject burstEffectInstance;
+        [System.NonSerialized][UdonSynced] public bool failed, broken, parkingBrake;
+        [UdonSynced][FieldChangeCallback(nameof(Bursted))] private bool _bursted;
+        private bool Bursted
+        {
+            set
+            {
+                if (burstEffect)
+                {
+                    if (value && !burstEffectInstance)
+                    {
+                        burstEffectInstance = VRCInstantiate(burstEffect);
+                        burstEffectInstance.transform.SetParent(wheelCollider.transform, false);
+                    }
+                    else if (!value && burstEffectInstance)
+                    {
+                        Destroy(burstEffectInstance);
+                    }
+                }
+
+                if (value && !_bursted && transitionSound) transitionSound.PlayOneShot(burstSound);
+                wheelCollider.enabled = !value;
+                _bursted = value;
+            }
+            get => _bursted;
+        }
+
         private bool initialized;
         public void SFEXT_L_EntityStart()
         {
@@ -134,6 +169,12 @@ namespace EsnyaSFAddons
             var currentBrakeTorque = wheelCollider.brakeTorque;
             wheelCollider.brakeTorque = Mathf.MoveTowards(currentBrakeTorque, targetBrakeTorque, brakeTorque * brakeResponse * deltaTime);
 
+            if (brakeTorque > 0 && groundSpeed > brakeMaxGroundSpeed && wheelCollider.isGrounded && groundSpeed / brakeMaxGroundSpeed * wheelCollider.brakeTorque / brakeTorque / mtbBurstOnOverGroundSpeed * Time.deltaTime > Random.value)
+            {
+                Bursted = true;
+                RequestSerialization();
+            }
+
             if (inTransition)
             {
                 vehicleAnimator.SetFloat(gearPositionParameterName, position);
@@ -206,12 +247,14 @@ namespace EsnyaSFAddons
             failed = false;
             broken = false;
             vehicleAnimator.SetFloat(gearPositionParameterName, position);
+            Bursted = false;
         }
 
         private float GetTargetBrakeStrength(float groundSpeed)
         {
             if (Mathf.Approximately(position, 0.0f) || parkingBrake) return 1.0f;
-            if (!brakeFunction || groundSpeed > brakeMaxGroundSpeed) return 0;
+            if (groundSpeed >= brakeMaxGroundSpeed) Debug.Log($"{gameObject.name}:{autoLimitGroundSpeed}||{!Networking.LocalPlayer.IsUserInVR() && autoLimitGroundSpeedOnDesktop}");
+            if (!brakeFunction || (autoLimitGroundSpeed || !Networking.LocalPlayer.IsUserInVR() && autoLimitGroundSpeedOnDesktop) && groundSpeed >= brakeMaxGroundSpeed) return 0;
             return brakeFunction.BrakeInput;
         }
 

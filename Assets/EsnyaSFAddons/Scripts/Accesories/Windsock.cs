@@ -16,6 +16,7 @@ namespace EsnyaAircraftAssets
 
         public bool cloth = true;
         public bool animation = false;
+        public bool negateClothWind = true;
 
         private int updateOffset;
         private Animator animator;
@@ -53,8 +54,9 @@ namespace EsnyaAircraftAssets
 
                 if (cloth)
                 {
-                    animator.SetFloat("x", Mathf.Clamp(finalWind.x / maxWindMagnitude, -1.0f, 1.0f));
-                    animator.SetFloat("z", Mathf.Clamp(finalWind.z / maxWindMagnitude, -1.0f, 1.0f));
+                    var sign = negateClothWind ? -1.0f : 1.0f;
+                    animator.SetFloat("x", Mathf.Clamp(finalWind.x / maxWindMagnitude, -1.0f, 1.0f) * sign);
+                    animator.SetFloat("z", Mathf.Clamp(finalWind.z / maxWindMagnitude, -1.0f, 1.0f) * sign);
                 }
 
                 finalWindTarget = finalWind.magnitude / maxWindMagnitude;

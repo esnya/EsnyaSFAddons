@@ -1,6 +1,4 @@
-﻿
-using BestHTTP.SecureProtocol.Org.BouncyCastle.Security;
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
@@ -16,7 +14,7 @@ namespace EsnyaSFAddons
 
         [Header("Inputs")]
         public float vrInputDistance = 0.1f;
-        public float step = 0.2f;
+        public float incrementStep = 0.5f;
         public KeyCode desktopKey = KeyCode.B;
 
         [Header("Animation")]
@@ -33,8 +31,11 @@ namespace EsnyaSFAddons
         [UdonSynced(UdonSyncMode.Smooth)][FieldChangeCallback(nameof(TargetAngle))] private float _targetAngle;
         public float TargetAngle
         {
-            private set {
+            private set
+            {
                 vehicleAnimator.SetFloat(floatInputParameterName, value);
+                var extended = value > 0;
+                if (Dial_Funcon && Dial_Funcon.activeSelf != extended) Dial_Funcon.SetActive(extended);
                 _targetAngle = value;
             }
             get => _targetAngle;
@@ -49,15 +50,12 @@ namespace EsnyaSFAddons
             {
                 var clamped = Mathf.Clamp01(value);
 
-                var extended = clamped > 0;
-
                 var diff = clamped - _angle;
                 airVehicle.ExtraLift += diff * liftMultiplier;
                 airVehicle.ExtraDrag += diff * dragMultiplier;
 
                 vehicleAnimator.SetFloat(floatParameterName, clamped);
 
-                if (Dial_Funcon && Dial_Funcon.activeSelf != extended) Dial_Funcon.SetActive(extended);
 
                 _angle = clamped;
             }
@@ -103,6 +101,13 @@ namespace EsnyaSFAddons
             vehicleAnimator = entity.GetComponent<Animator>();
 
             controlsRoot = airVehicle.ControlsRoot ? airVehicle.ControlsRoot : entity.transform;
+            SFEXT_G_ReAppear();
+        }
+
+        public void SFEXT_G_ReAppear()
+        {
+            TargetAngle = 0;
+            Angle = 0;
         }
 
         public void SFEXT_G_PilotEnter()
@@ -124,12 +129,6 @@ namespace EsnyaSFAddons
         {
             isPilot = false;
             isSelected = false;
-        }
-
-        public void SFEXT_G_ReAppear()
-        {
-            TargetAngle = 0;
-            Angle = 0;
         }
 
         private void Update()
@@ -169,11 +168,11 @@ namespace EsnyaSFAddons
 
         public void IncreaseAngle()
         {
-            TargetAngle += step;
+            TargetAngle += incrementStep;
         }
         public void DecreaseAngle()
         {
-            TargetAngle -= step;
+            TargetAngle -= incrementStep;
         }
     }
 }

@@ -125,6 +125,10 @@ namespace EsnyaSFAddons
         {
             hasPilot = false;
         }
+        public void SFEXT_O_PilotExit()
+        {
+            selected = false;
+        }
 
         public void SFEXT_G_TakeOff()
         {

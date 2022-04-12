@@ -12,7 +12,7 @@ namespace EsnyaAircraftAssets
         public Vector3 windsockAxis = Vector3.up;
         public int updateInterval = 10;
         public float maxWindMagnitude = 100.0f;
-        public float rotationResponse =1f;
+        public float rotationResponse = 10f;
         public float rotationOffset = 0.0f;
 
         public bool cloth = true;

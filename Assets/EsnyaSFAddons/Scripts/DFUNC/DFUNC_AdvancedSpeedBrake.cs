@@ -33,10 +33,11 @@ namespace EsnyaSFAddons
         {
             private set
             {
-                vehicleAnimator.SetFloat(floatInputParameterName, value);
-                var extended = value > 0;
+                var clamped = Mathf.Clamp01(value);
+                vehicleAnimator.SetFloat(floatInputParameterName, clamped);
+                var extended = clamped > 0;
                 if (Dial_Funcon && Dial_Funcon.activeSelf != extended) Dial_Funcon.SetActive(extended);
-                _targetAngle = value;
+                _targetAngle = clamped;
             }
             get => _targetAngle;
         }

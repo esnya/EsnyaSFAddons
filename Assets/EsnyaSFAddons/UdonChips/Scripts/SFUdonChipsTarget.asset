@@ -17,11 +17,10 @@ MonoBehaviour:
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: 904c1f7b708bef145a19910ae64aab03, type: 3}
-  scriptVersion: 2
-  compiledVersion: 2
   behaviourSyncMode: 2
+  behaviourIDHeapVarName: __refl_const_intnl_udonTypeID
+  compileErrors: []
   hasInteractEvent: 0
-  scriptID: -1573430850955977272
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 

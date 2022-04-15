@@ -71,6 +71,7 @@ namespace EsnyaAircraftAssets
                     else field.SetValue(component, rootGameObjects.SelectMany(o => o.GetUdonSharpComponentsInChildren(valueType)).FirstOrDefault());
                 }
 
+                component.ApplyProxyModifications();
                 EditorUtility.SetDirty(UdonSharpEditorUtility.GetBackingUdonBehaviour(component));
             }
         }

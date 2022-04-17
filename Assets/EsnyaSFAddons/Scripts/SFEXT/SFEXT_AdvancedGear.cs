@@ -48,6 +48,9 @@ namespace EsnyaSFAddons
         public float mtbTransitionBraekOnOverspeed = 60;
         public float mtbBurstOnOverGroundSpeed = 10;
 
+        [Tooltip("feet/min")] public float verticalSpeedLimit = 600;
+        [Tooltip("feet/min")] public float burstVerticalSpeed = 900;
+
         [Header("Effects")]
         public GameObject burstEffect;
 
@@ -135,6 +138,8 @@ namespace EsnyaSFAddons
         public void SFEXT_O_GearDown() => targetPosition = 1;
 
         private Vector3 prevVehiclePosition;
+        private bool prevIsGrounded;
+
         private void Update()
         {
             if (!initialized) return;
@@ -169,11 +174,6 @@ namespace EsnyaSFAddons
             var currentBrakeTorque = wheelCollider.brakeTorque;
             wheelCollider.brakeTorque = Mathf.MoveTowards(currentBrakeTorque, targetBrakeTorque, brakeTorque * brakeResponse * deltaTime);
 
-            if (brakeTorque > 0 && groundSpeed > brakeMaxGroundSpeed && wheelCollider.isGrounded && groundSpeed / brakeMaxGroundSpeed * wheelCollider.brakeTorque / brakeTorque / mtbBurstOnOverGroundSpeed * Time.deltaTime > Random.value)
-            {
-                Bursted = true;
-                RequestSerialization();
-            }
 
             if (inTransition)
             {
@@ -214,9 +214,23 @@ namespace EsnyaSFAddons
                     var maxSpeed = _GetMaxSpeed();
                     var overspeed = maxSpeed > 0 && ias > maxSpeed;
                     var mtbfMultiplier = overspeed ? ias / maxSpeed : 1.0f;
+                    var isGrounded = wheelCollider.isGrounded;
 
                     if (!broken && (inTransition || overspeed) && Random.value < deltaTime * mtbfMultiplier / (overspeed ? mtbTransitionBraekOnOverspeed : mtbTransitionBraek)) broken = true;
                     if (!failed && inTransition && Random.value < deltaTime * mtbfMultiplier / (overspeed ? mtbTransitionFailOnOverspeed : mtbTransitionFail)) failed = true;
+
+                    if (brakeTorque > 0 && groundSpeed > brakeMaxGroundSpeed && isGrounded && groundSpeed / brakeMaxGroundSpeed * wheelCollider.brakeTorque / brakeTorque / mtbBurstOnOverGroundSpeed * Time.deltaTime > Random.value)
+                    {
+                        Burst();
+                    }
+
+                    var verticalSpeed = -vehicleRigidbody.velocity.y * 197;
+                    if (isGrounded && !prevIsGrounded && verticalSpeed > verticalSpeedLimit && Random.value < (verticalSpeed - verticalSpeedLimit) / (burstVerticalSpeed - verticalSpeedLimit))
+                    {
+                        Burst();
+                    }
+
+                    prevIsGrounded = wheelCollider.isGrounded;
                 }
 
                 if (!failed && !broken)
@@ -227,6 +241,12 @@ namespace EsnyaSFAddons
             }
 
             if (!hasPilot && !moving) gameObject.SetActive(false);
+        }
+
+        private void Burst()
+        {
+            Bursted = true;
+            RequestSerialization();
         }
 
         public float _GetMaxSpeed()

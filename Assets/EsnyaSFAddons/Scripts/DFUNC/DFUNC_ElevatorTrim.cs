@@ -133,6 +133,7 @@ namespace EsnyaSFAddons
         public float trimStrengthMultiplier = 1;
         public float trimStrengthCurve = 2;
         public string animatorParameterName = "elevtrim";
+        public float trimBias = 0;
         private float trimStrength;
 
         [Header("Haptics")]
@@ -155,7 +156,8 @@ namespace EsnyaSFAddons
 
             var airspeed = Vector3.Dot(airVehicle.AirVel, transform.forward);
             var rotlift = Mathf.Clamp(airspeed / rotMultiMaxSpeed, -1, 1);
-            vehicleRigidbody.AddForceAtPosition(transform.up * Mathf.Sign(trim) * Mathf.Pow(Mathf.Abs(trim), trimStrengthCurve) * trimStrength * rotlift * airVehicle.Atmosphere, transform.position, ForceMode.Force);
+            var finalTrim = trim + trimBias;
+            vehicleRigidbody.AddForceAtPosition(transform.up * Mathf.Sign(finalTrim) * Mathf.Pow(Mathf.Abs(finalTrim), trimStrengthCurve) * trimStrength * rotlift * airVehicle.Atmosphere, transform.position, ForceMode.Force);
         }
 
         private void PilotUpdate()

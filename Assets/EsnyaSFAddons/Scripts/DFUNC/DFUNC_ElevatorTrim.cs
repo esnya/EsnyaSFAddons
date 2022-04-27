@@ -131,7 +131,7 @@ namespace EsnyaSFAddons
         #endregion
 
         public float trimStrengthMultiplier = 1;
-        public float trimStrengthCurve = 2;
+        public float trimStrengthCurve = 1;
         public string animatorParameterName = "elevtrim";
         public float trimBias = 0;
         private float trimStrength;
@@ -152,12 +152,13 @@ namespace EsnyaSFAddons
 
         private void FixedUpdate()
         {
-            if (!isOwner || Mathf.Approximately(trim, 0)) return;
+            if (!isOwner) return;
 
             var airspeed = Vector3.Dot(airVehicle.AirVel, transform.forward);
+            if (airspeed < 0.1f) return;
+
             var rotlift = Mathf.Clamp(airspeed / rotMultiMaxSpeed, -1, 1);
-            var finalTrim = trim + trimBias;
-            vehicleRigidbody.AddForceAtPosition(transform.up * Mathf.Sign(finalTrim) * Mathf.Pow(Mathf.Abs(finalTrim), trimStrengthCurve) * trimStrength * rotlift * airVehicle.Atmosphere, transform.position, ForceMode.Force);
+            vehicleRigidbody.AddForceAtPosition(transform.up * (Mathf.Sign(trim) * Mathf.Pow(Mathf.Abs(trim), trimStrengthCurve) + trimBias) * trimStrength * rotlift * airVehicle.Atmosphere, transform.position, ForceMode.Force);
         }
 
         private void PilotUpdate()

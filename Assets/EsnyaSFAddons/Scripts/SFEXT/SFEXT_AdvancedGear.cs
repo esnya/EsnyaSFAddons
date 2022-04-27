@@ -273,7 +273,7 @@ namespace EsnyaSFAddons
         private float GetTargetBrakeStrength(float groundSpeed)
         {
             if (Mathf.Approximately(position, 0.0f) || parkingBrake) return 1.0f;
-            if (groundSpeed >= brakeMaxGroundSpeed) Debug.Log($"{gameObject.name}:{autoLimitGroundSpeed}||{!Networking.LocalPlayer.IsUserInVR() && autoLimitGroundSpeedOnDesktop}");
+            // if (groundSpeed >= brakeMaxGroundSpeed) Debug.Log($"{gameObject.name}:{autoLimitGroundSpeed}||{!Networking.LocalPlayer.IsUserInVR() && autoLimitGroundSpeedOnDesktop}");
             if (!brakeFunction || (autoLimitGroundSpeed || !Networking.LocalPlayer.IsUserInVR() && autoLimitGroundSpeedOnDesktop) && groundSpeed >= brakeMaxGroundSpeed) return 0;
             return brakeFunction.BrakeInput;
         }

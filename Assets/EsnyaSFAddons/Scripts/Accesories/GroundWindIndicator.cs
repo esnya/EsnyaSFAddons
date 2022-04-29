@@ -8,22 +8,24 @@ namespace EsnyaSFAddons
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class GroundWindIndicator : UdonSharpBehaviour
     {
-        public float updateInterval = 10.0f;
+        public int updateIntervalFrames = 90;
 
         [UdonSharpComponentInject] public SAV_WindChanger windChanger;
         public Transform directionIndicator;
         public TextMeshProUGUI speedText;
 
-        private void OnEnable()
+        private int updateOffset;
+        private void Start()
         {
-            SendCustomEventDelayedSeconds(nameof(_ThinUpdate), Random.Range(0, updateInterval));
+            updateOffset = Random.Range(0, updateIntervalFrames);
         }
 
-        public void _ThinUpdate()
+        public void Update()
         {
-            if (!gameObject.activeInHierarchy || !windChanger) return;
+            if ((Time.renderedFrameCount + updateOffset) % updateIntervalFrames != 0 || !gameObject.activeInHierarchy || !windChanger) return;
 
-            var strength = windChanger.WindStrength * 1.944f;
+            var windVector = windChanger.WindStrenth_3;
+            var strength = windVector.magnitude * 1.944f;
             var gust = windChanger.WindGustStrength * 1.944f;
             var angle = Vector3.SignedAngle(windChanger.transform.forward, Vector3.forward, Vector3.up);
 
@@ -36,8 +38,6 @@ namespace EsnyaSFAddons
             {
                 speedText.text = $"{strength:0}\n{strength + gust:0}";
             }
-
-            SendCustomEventDelayedSeconds(nameof(_ThinUpdate), updateInterval);
         }
     }
 }

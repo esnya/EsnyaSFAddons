@@ -102,6 +102,11 @@ namespace EsnyaSFAddons
                     SetGearDown(entity, true);
                     SetFlaps(entity, 1.0f);
                 }
+
+                if (GUILayout.Button("Trim -20%"))
+                {
+                    SetTrim(entity, -0.2f);
+                }
             }
 
             EditorGUILayout.Separator();

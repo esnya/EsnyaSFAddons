@@ -10,11 +10,14 @@ namespace EsnyaSFAddons
         [Tooltip("Pa")] public float dynamicPressure = 10;
         [Tooltip("m^2")] public float referenceArea = 1;
         [Tooltip("m")] public float calacteristicLength = 1;
-        public float maxRollAoA = 60;
+        public float maxRollAoA = 5;
+        public float extraDrag = 0;
         private Rigidbody vehicleRigidbody;
         private Transform vehicleTransform;
         private float maxSpeed;
+        private bool hasDrag;
         private SaccAirVehicle airVehicle;
+        private float dragMultiplier;
         public void SFEXT_L_EntityStart()
         {
             var saccEntity = GetComponentInParent<SaccEntity>();
@@ -23,6 +26,8 @@ namespace EsnyaSFAddons
             vehicleTransform = airVehicle.VehicleTransform;
 
             maxSpeed = airVehicle.RotMultiMaxSpeed;
+            hasDrag = !Mathf.Approximately(extraDrag, 0.0f);
+            dragMultiplier = hasDrag ? airVehicle.AirFriction * (dragMultiplier - 1) : 0.0f;
 
             gameObject.SetActive(false);
         }
@@ -51,7 +56,10 @@ namespace EsnyaSFAddons
             var absSlipSpeed = Mathf.Abs(slipSpeed);
             var rollAoA = Vector3.SignedAngle(Vector3.up, Vector3.ProjectOnPlane(airVel, Vector3.forward), Vector3.forward);
             var roll = torqueMultiplier * Mathf.Pow(absSlipSpeed, 2.0f) * Mathf.Clamp(rollAoA / maxRollAoA, -1, 1) * rotLift;
+            // var normalizedRollAoA = Mathf.Sin(Mathf.Clamp(rollAoA / maxRollAoA,-.5f,.5f) * Mathf.PI);
+            // var roll = torqueMultiplier * Mathf.Pow(absSlipSpeed, 2.0f) * normalizedRollAoA * rotLift;
             vehicleRigidbody.AddRelativeTorque(0, 0, roll);
+            if (hasDrag) vehicleRigidbody.AddRelativeForce(-Vector3.right * Mathf.Pow(absSlipSpeed, 2.0f) * Mathf.Sign(slipSpeed) * dragMultiplier * airVehicle.Atmosphere, ForceMode.Acceleration);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using UdonSharp;
 using UdonSharpEditor;
 using UnityEditor;
+using UnityEditor.Animations;
 using UnityEngine;
 using VRC.SDKBase;
 
@@ -77,6 +78,24 @@ namespace EsnyaSFAddons
             {
                 Undo.RecordObject(entity.InVehicleOnly, "Auto Fix");
                 entity.InVehicleOnly.SetActive(false);
+            }
+
+            var animatorController = animator.runtimeAnimatorController as AnimatorController;
+            if (animatorController)
+            {
+                var existingParameters = animatorController.parameters;
+                existingParameters.ToList().ForEach(p => Debug.Log(p.name));
+                foreach (var (name, type) in SFUtils.AnimatorParameters)
+                {
+                    if (!existingParameters.Any(p => p.name == name))
+                    {
+                        if (ESFAUI.HelpBoxWithAutoFix($"VehicleAnimator does not have parameter \"{name}\"", MessageType.Warning))
+                        {
+                            (animator.runtimeAnimatorController as AnimatorController).AddParameter(name, type);
+                            EditorUtility.SetDirty(animator);
+                        }
+                    }
+                }
             }
         }
 

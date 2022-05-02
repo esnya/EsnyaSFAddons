@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
 using UdonSharp;
@@ -162,5 +163,52 @@ namespace EsnyaSFAddons
         {
             return ListByName(root, name).FirstOrDefault();
         }
+
+        public static (string, AnimatorControllerParameterType)[] AnimatorParameters => new []{
+            // DFUNC_Brake
+            ("brake", AnimatorControllerParameterType.Float),
+
+            // DFUNC_Catapult
+            ("launch", AnimatorControllerParameterType.Trigger),
+            ("oncatapult", AnimatorControllerParameterType.Bool),
+
+            // DFUNC_Gear
+            ("instantgeardown", AnimatorControllerParameterType.Trigger),
+            ("gearup", AnimatorControllerParameterType.Bool),
+
+            // DFUNC_Hook
+            ("hooked", AnimatorControllerParameterType.Trigger),
+            ("hookdown", AnimatorControllerParameterType.Bool),
+
+            // SaccAirVehicle
+            ("EngineOn", AnimatorControllerParameterType.Bool),
+
+            // SAV_EffectsController
+            ("pitchinput", AnimatorControllerParameterType.Float),
+            ("yawinput", AnimatorControllerParameterType.Float),
+            ("rollinput", AnimatorControllerParameterType.Float),
+            ("throttle", AnimatorControllerParameterType.Float),
+            ("engineoutput", AnimatorControllerParameterType.Float),
+            ("vtolangle", AnimatorControllerParameterType.Float),
+            ("health", AnimatorControllerParameterType.Float),
+            ("AoA", AnimatorControllerParameterType.Float),
+            ("mach10", AnimatorControllerParameterType.Float),
+            ("Gs", AnimatorControllerParameterType.Float),
+            ("fuel", AnimatorControllerParameterType.Float),
+            ("occupied", AnimatorControllerParameterType.Bool),
+            ("missilesincoming", AnimatorControllerParameterType.Int),
+            ("localpilot", AnimatorControllerParameterType.Bool),
+            ("localpassenger", AnimatorControllerParameterType.Bool),
+            ("reappear", AnimatorControllerParameterType.Trigger),
+            ("dead", AnimatorControllerParameterType.Bool),
+            ("afterburneron", AnimatorControllerParameterType.Bool),
+            ("resupply", AnimatorControllerParameterType.Trigger),
+            ("bullethit", AnimatorControllerParameterType.Trigger),
+            ("underwater", AnimatorControllerParameterType.Bool),
+            ("onground", AnimatorControllerParameterType.Bool),
+            ("onwater", AnimatorControllerParameterType.Bool),
+            ("explode", AnimatorControllerParameterType.Trigger),
+            ("locked_aam", AnimatorControllerParameterType.Trigger),
+        };
     }
 }

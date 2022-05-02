@@ -84,7 +84,6 @@ namespace EsnyaSFAddons
             if (animatorController)
             {
                 var existingParameters = animatorController.parameters;
-                existingParameters.ToList().ForEach(p => Debug.Log(p.name));
                 foreach (var (name, type) in SFUtils.AnimatorParameters)
                 {
                     if (!existingParameters.Any(p => p.name == name))

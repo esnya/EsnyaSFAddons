@@ -11,6 +11,7 @@ namespace EsnyaSFAddons
         [Tooltip("m^2")] public float referenceArea = 1;
         [Tooltip("m")] public float calacteristicLength = 1;
         public float maxRollAoA = 5;
+        public float aoaCurve = 1;
         public float extraDrag = 0;
         private Rigidbody vehicleRigidbody;
         private Transform vehicleTransform;
@@ -55,7 +56,8 @@ namespace EsnyaSFAddons
 
             var absSlipSpeed = Mathf.Abs(slipSpeed);
             var rollAoA = Vector3.SignedAngle(Vector3.up, Vector3.ProjectOnPlane(airVel, Vector3.forward), Vector3.forward);
-            var roll = torqueMultiplier * Mathf.Pow(absSlipSpeed, 2.0f) * Mathf.Clamp(rollAoA / maxRollAoA, -1, 1) * rotLift;
+            var curvedRollAoA = Mathf.Pow(Mathf.Clamp01(Mathf.Abs(rollAoA) / maxRollAoA), aoaCurve) * Mathf.Sign(rollAoA);
+            var roll = torqueMultiplier * Mathf.Pow(absSlipSpeed, 2.0f) * curvedRollAoA * rotLift;
             // var normalizedRollAoA = Mathf.Sin(Mathf.Clamp(rollAoA / maxRollAoA,-.5f,.5f) * Mathf.PI);
             // var roll = torqueMultiplier * Mathf.Pow(absSlipSpeed, 2.0f) * normalizedRollAoA * rotLift;
             vehicleRigidbody.AddRelativeTorque(0, 0, roll);

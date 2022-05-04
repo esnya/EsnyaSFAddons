@@ -7,18 +7,48 @@ using VRC.Udon.Common.Interfaces;
 
 namespace EsnyaSFAddons
 {
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
+    [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class CatapultController : UdonSharpBehaviour
     {
         public Transform catapultTrigger;
         public float planeDetectionRadius = 2.0f;
         public LayerMask planeDetectionLayerMask = 1 << 31 | 1 << 25 | 1 << 17;
 
-        public override void Interact()
+        private Animator catapultAnimator;
+        [UdonSynced][FieldChangeCallback(nameof(Tension))] private bool _tension;
+
+        public bool Tension {
+            private set {
+                _tension = value;
+                if (catapultAnimator) catapultAnimator.SetBool("tension", value);
+            }
+            get => _tension;
+        }
+
+        private void Start()
+        {
+            catapultAnimator = catapultTrigger.GetComponentInParent<Animator>();
+            Tension = false;
+        }
+
+        public void _Launch()
         {
             var dfunc = FindDFunc();
             if (!dfunc) return;
             dfunc.SendCustomNetworkEvent(NetworkEventTarget.Owner, nameof(DFUNC_Catapult.KeyboardInput));
+            SendCustomEventDelayedSeconds(nameof(_DisableTension), 6);
+        }
+
+        public void _ToggleTension()
+        {
+            if (!Networking.IsOwner(gameObject)) Networking.SetOwner(Networking.LocalPlayer, gameObject);
+            Tension = !Tension;
+            RequestSerialization();
+        }
+
+        public void _DisableTension()
+        {
+            if (Tension) _ToggleTension();
         }
 
         private DFUNC_Catapult FindDFunc()
@@ -33,10 +63,11 @@ namespace EsnyaSFAddons
                 var saccEntity = rigidbody.GetComponent<SaccEntity>();
                 if (!saccEntity) continue;
 
-                var dfunc = (DFUNC_Catapult)saccEntity.GetExtention(GetUdonTypeName<DFUNC_Catapult>());
-                if (!dfunc || !dfunc.OnCatapult) continue;
-
-                return dfunc;
+                foreach (var dfunc in saccEntity.gameObject.GetComponentsInChildren<DFUNC_Catapult>())
+                {
+                    if (!dfunc || !dfunc.OnCatapult) continue;
+                    return dfunc;
+                }
             }
 
             return null;

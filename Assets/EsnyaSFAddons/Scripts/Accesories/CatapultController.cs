@@ -63,9 +63,9 @@ namespace EsnyaSFAddons
                 var saccEntity = rigidbody.GetComponent<SaccEntity>();
                 if (!saccEntity) continue;
 
-                foreach (var dfunc in saccEntity.gameObject.GetComponentsInChildren<DFUNC_Catapult>())
+                foreach (var dfunc in saccEntity.gameObject.GetComponentsInChildren<DFUNC_Catapult>(true))
                 {
-                    if (!dfunc || !dfunc.OnCatapult) continue;
+                    if (!dfunc || !dfunc.OnCatapult || dfunc.Launching) continue;
                     return dfunc;
                 }
             }

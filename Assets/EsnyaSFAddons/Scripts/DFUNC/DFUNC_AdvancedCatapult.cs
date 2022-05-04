@@ -56,7 +56,11 @@ namespace EsnyaSFAddons
             SFEXT_G_ReAppear();
         }
 
-        public void SFEXT_O_TakeOwnership() => catapult.SFEXT_O_TakeOwnership();
+        public void SFEXT_O_TakeOwnership()
+        {
+            Networking.SetOwner(Networking.LocalPlayer, catapult.gameObject);
+            catapult.SFEXT_O_TakeOwnership();
+        }
         public void SFEXT_O_LoseOwnership() => catapult.SFEXT_O_LoseOwnership();
         public void SFEXT_O_Explode() => catapult.SFEXT_O_Explode();
 

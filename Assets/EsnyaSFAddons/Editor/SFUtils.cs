@@ -55,7 +55,7 @@ namespace EsnyaSFAddons
 
         public static IEnumerable<UdonSharpBehaviour> FindDFUNCs(UdonSharpBehaviour root)
         {
-            return root.GetUdonSharpComponentsInChildren<UdonSharpBehaviour>(true).Where(udon => udon.gameObject != root && IsDFUNC(udon.GetType()) && IsChildExtention(root, udon));
+            return root.GetUdonSharpComponentsInChildren<UdonSharpBehaviour>(true).Where(udon => udon.gameObject != root && IsDFUNC(udon.GetType()) && GetNearestController(udon.gameObject) == root);
         }
 
         public static void SetObjectArrayProperty<T>(SerializedProperty property, IEnumerable<T> enumerable) where T : UnityEngine.Object
@@ -123,7 +123,7 @@ namespace EsnyaSFAddons
                         displayHighlighter.transform.position = transform.parent.position;
                         displayHighlighter.transform.localRotation = localRotation;
 
-                        if ((UnityEngine.Object)dialFunction?.GetProgramVariable("Dial_Funcon") != displayHighlighter)
+                        if (displayHighlighter.Equals(dialFunction?.GetProgramVariable("Dial_Funcon")))
                         {
                             var udon = UdonSharpEditorUtility.GetBackingUdonBehaviour(dialFunction);
                             Undo.RecordObject(udon, "Align MFD Function");
@@ -145,6 +145,8 @@ namespace EsnyaSFAddons
             {
                 var expectedName = count == 8 ? "StkickDisplay" : $"StickDisplay{count}";
                 var expectedMesh = AssetDatabase.LoadAllAssetsAtPath(AssetDatabase.GetAssetPath(background.sharedMesh)).Select(o => o as Mesh).FirstOrDefault(m => m && m.name == expectedName);
+                Debug.Log($"{expectedName}");
+                Debug.Log($"{expectedMesh}");
                 if (expectedMesh && background.sharedMesh != expectedMesh)
                 {
                     Undo.RecordObject(background, "Align MFD Function");

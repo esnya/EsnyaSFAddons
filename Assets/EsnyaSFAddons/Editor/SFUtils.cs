@@ -45,7 +45,7 @@ namespace EsnyaSFAddons
 
         public static bool IsChildExtention(UdonSharpBehaviour controller, UdonSharpBehaviour extention)
         {
-            return GetNearestController(extention.gameObject) == controller;
+            return GetNearestController(extention.transform.parent.gameObject) == controller;
         }
 
         public static IEnumerable<UdonSharpBehaviour> FindExtentions(UdonSharpBehaviour root)
@@ -145,8 +145,6 @@ namespace EsnyaSFAddons
             {
                 var expectedName = count == 8 ? "StkickDisplay" : $"StickDisplay{count}";
                 var expectedMesh = AssetDatabase.LoadAllAssetsAtPath(AssetDatabase.GetAssetPath(background.sharedMesh)).Select(o => o as Mesh).FirstOrDefault(m => m && m.name == expectedName);
-                Debug.Log($"{expectedName}");
-                Debug.Log($"{expectedMesh}");
                 if (expectedMesh && background.sharedMesh != expectedMesh)
                 {
                     Undo.RecordObject(background, "Align MFD Function");

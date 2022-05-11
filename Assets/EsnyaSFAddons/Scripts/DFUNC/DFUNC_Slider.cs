@@ -104,7 +104,7 @@ namespace EsnyaSFAddons
 
         public void Decrease()
         {
-            Value = Mathf.Clamp01(Value + desktopStep);
+            Value = Mathf.Clamp01(Value - desktopStep);
         }
 
         private void Update()

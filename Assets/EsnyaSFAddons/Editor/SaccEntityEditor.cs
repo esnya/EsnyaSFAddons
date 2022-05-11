@@ -150,12 +150,13 @@ namespace EsnyaSFAddons
                     }
                     else if (property.name == nameof(SaccEntity.Dial_Functions_L))
                     {
-                        if (ESFAUI.MiniButton("Find")) SFUtils.SetObjectArrayProperty(property, SFUtils.FindDFUNCs(entity).Where(dfunc => dfunc.transform.parent.gameObject.name.EndsWith("L")));
+                        if (ESFAUI.MiniButton("Find")) SFUtils.SetObjectArrayProperty(property, SFUtils.FindDFUNCs(entity, "DialFunctions_L").Where(dfunc => dfunc.transform.parent.gameObject.name.EndsWith("L")));
                         if (ESFAUI.MiniButton("Align")) SFUtils.AlignMFDFunctions(entity, VRC_Pickup.PickupHand.Left);
                     }
                     else if (property.name == nameof(SaccEntity.Dial_Functions_R))
                     {
-                        if (ESFAUI.MiniButton("Find")) SFUtils.SetObjectArrayProperty(property, SFUtils.FindDFUNCs(entity).Where(dfunc => dfunc.transform.parent.gameObject.name.EndsWith("R")));
+                        if (ESFAUI.MiniButton("Find")) SFUtils.SetObjectArrayProperty(property, SFUtils.FindDFUNCs(entity, "DialFunctions_R").Where(dfunc => dfunc.transform.parent.gameObject.name.EndsWith("R")));
+
                         if (ESFAUI.MiniButton("Align")) SFUtils.AlignMFDFunctions(entity, VRC_Pickup.PickupHand.Right);
                     }
                     else if (property.name == nameof(SaccEntity.InVehicleOnly) || property.name == nameof(SaccEntity.HoldingOnly))

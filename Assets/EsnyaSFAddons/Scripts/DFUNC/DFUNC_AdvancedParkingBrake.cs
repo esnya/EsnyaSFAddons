@@ -32,9 +32,9 @@ namespace EsnyaSFAddons
         public void SFEXT_L_EntityStart()
         {
             var entity = GetComponentInParent<SaccEntity>();
-            var airVehicle = (SaccAirVehicle)GetExtention(entity, GetUdonTypeName<SaccAirVehicle>());
+            var airVehicle = (SaccAirVehicle)entity.GetExtention(GetUdonTypeName<SaccAirVehicle>());
             vehicleAnimator = airVehicle.VehicleAnimator;
-            gears = (SFEXT_AdvancedGear[])GetExtentions(entity, GetUdonTypeName<SFEXT_AdvancedGear>());
+            gears = (SFEXT_AdvancedGear[])entity.GetExtentions(GetUdonTypeName<SFEXT_AdvancedGear>());
 
             gameObject.SetActive(false);
 
@@ -48,20 +48,29 @@ namespace EsnyaSFAddons
             prevTriggered = isSelected = false;
         }
 
+        private void Toggle()
+        {
+            State = !State;
+            RequestSerialization();
+        }
+
+        public void DFUNC_TriggerPress() => Toggle();
+
         private bool prevTriggered;
         private void Update()
         {
-            if (isPilot)
-            {
-                var triggered = Input.GetAxis(triggerAxis) > 0.75f;
-                if (Input.GetKeyDown(desktopControl) || isSelected && triggered && !prevTriggered)
-                {
-                    State = !State;
-                    RequestSerialization();
-                }
-                prevTriggered = triggered;
-            }
+            if (isPilot && Input.GetKeyDown(desktopControl)) Toggle();
+            // {
+            //     var triggered = Input.GetAxis(triggerAxis) > 0.75f;
+            //     if (Input.GetKeyDown(desktopControl) || isSelected && triggered && !prevTriggered)
+            //     {
+            //         State = !State;
+            //         RequestSerialization();
+            //     }
+            //     prevTriggered = triggered;
+            // }
         }
+
 
         private void ResetStatus()
         {
@@ -100,55 +109,6 @@ namespace EsnyaSFAddons
         {
             State = false;
             RequestSerialization();
-        }
-
-        private UdonSharpBehaviour GetExtention(SaccEntity entity, string udonTypeName)
-        {
-            foreach (var extention in entity.ExtensionUdonBehaviours)
-            {
-                if (extention && extention.GetUdonTypeName() == udonTypeName) return extention;
-            }
-            foreach (var extention in entity.Dial_Functions_L)
-            {
-                if (extention && extention.GetUdonTypeName() == udonTypeName) return extention;
-            }
-            foreach (var extention in entity.Dial_Functions_R)
-            {
-                if (extention && extention.GetUdonTypeName() == udonTypeName) return extention;
-            }
-            return null;
-        }
-
-        private UdonSharpBehaviour[] GetExtentions(SaccEntity entity, string udonTypeName)
-        {
-            var result = new UdonSharpBehaviour[entity.ExtensionUdonBehaviours.Length + entity.Dial_Functions_L.Length + entity.Dial_Functions_R.Length];
-            var count = 0;
-            foreach (var extention in entity.ExtensionUdonBehaviours)
-            {
-                if (extention && extention.GetUdonTypeName() == udonTypeName)
-                {
-                    result[count++] = extention;
-                }
-            }
-            foreach (var extention in entity.Dial_Functions_L)
-            {
-                if (extention && extention.GetUdonTypeName() == udonTypeName)
-                {
-                    result[count++] = extention;
-                }
-            }
-            foreach (var extention in entity.Dial_Functions_R)
-            {
-                if (extention && extention.GetUdonTypeName() == udonTypeName)
-                {
-                    result[count++] = extention;
-                }
-            }
-
-            var finalResult = new UdonSharpBehaviour[count];
-            System.Array.Copy(result, finalResult, count);
-
-            return finalResult;
         }
         #endregion
     }

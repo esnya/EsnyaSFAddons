@@ -1,5 +1,3 @@
-using System;
-using System.Configuration;
 using System.Linq;
 using UdonSharp;
 using UdonSharpEditor;
@@ -120,6 +118,13 @@ namespace EsnyaSFAddons
                 if (GUILayout.Button("Idle")) SetPower(entity, 0.0f);
             }
 
+            EditorGUILayout.Separator();
+
+            EditorGUILayout.LabelField("Selection");
+            UdonSelector("Select Extension", entity.ExtensionUdonBehaviours);
+            UdonSelector("Select Left DialFunction", entity.Dial_Functions_L);
+            UdonSelector("Select Right DialFunction", entity.Dial_Functions_R);
+            UdonSelector("Select Seat", entity.GetUdonSharpComponentsInChildren<SaccVehicleSeat>(true));
         }
 
         private static void SetPower(SaccEntity entity, float power)
@@ -141,6 +146,13 @@ namespace EsnyaSFAddons
         private static void SetTrim(SaccEntity entity, float trim)
         {
             foreach (var trimFunc in entity.GetUdonSharpComponentsInChildren<DFUNC_ElevatorTrim>(true)) UdonSharpEditorUtility.GetBackingUdonBehaviour(trimFunc).SetProgramVariable(nameof(DFUNC_ElevatorTrim.trim), trim);
+        }
+
+        private static void UdonSelector(string label, UdonSharpBehaviour[] udons)
+        {
+            if (udons == null) return;
+            var selectionIndex = EditorGUILayout.Popup(0, udons.Select(u => u.GetUdonTypeName()).Prepend($"-- {label} --").ToArray());
+            if (selectionIndex > 0) Selection.activeGameObject = udons[selectionIndex - 1].gameObject;
         }
     }
 }

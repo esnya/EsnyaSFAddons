@@ -58,6 +58,17 @@ namespace EsnyaSFAddons
             return root.GetUdonSharpComponentsInChildren<UdonSharpBehaviour>(true).Where(udon => udon.gameObject != root && IsDFUNC(udon.GetType()) && GetNearestController(udon.gameObject) == root);
         }
 
+        public static IEnumerable<UdonSharpBehaviour> FindDFUNCs(UdonSharpBehaviour root, string name)
+        {
+            return FindDFUNCs(root).Where(f => IsChildOfNameRecursive(f.transform, name));
+        }
+
+        public static bool IsChildOfNameRecursive(Transform child, string name)
+        {
+            if (!child?.parent) return false;
+            return child.parent.gameObject.name == name || IsChildOfNameRecursive(child.parent, name);
+        }
+
         public static void SetObjectArrayProperty<T>(SerializedProperty property, IEnumerable<T> enumerable) where T : UnityEngine.Object
         {
             var array = enumerable.ToArray();

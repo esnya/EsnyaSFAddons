@@ -35,7 +35,7 @@ namespace EsnyaSFAddons
                 {
                     SAVControl.ThrottleStrength = value ? -ReversingThrottleStrength : ThrottleStrength;
 
-                    SAVControl.ThrottleOverridden += value ? 1 : -1;
+                    SAVControl.ThrottleOverridden_ += value ? 1 : -1;
                     SAVControl.ThrottleOverride = value ? 1.0f : 0.0f;
                 }
 

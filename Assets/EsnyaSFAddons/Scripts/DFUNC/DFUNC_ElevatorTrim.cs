@@ -114,7 +114,7 @@ namespace EsnyaSFAddons
                     sliderInput = 0;
                 }
 
-                if (Input.GetKeyDown(desktopUp)) sliderInput = +desktopStep;
+                if (Input.GetKeyDown(desktopUp)) sliderInput = desktopStep;
                 if (Input.GetKeyDown(desktopDown)) sliderInput = -desktopStep;
             }
         }

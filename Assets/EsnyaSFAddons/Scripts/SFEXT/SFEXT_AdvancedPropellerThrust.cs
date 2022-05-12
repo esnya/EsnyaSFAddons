@@ -13,28 +13,67 @@ namespace EsnyaSFAddons
         public float maxPropellerEfficiencyAdvanceRatio = 0.8f;
         public float maxPropellerEfficiency = 0.82f;
         public float minAirspeed = 10f;
+        public bool engineStall = true;
+        [Tooltip("G")] public float negativeLoadFactorLimit = -1.8f;
+        public float mtbEngineStallNegativeLoadFactor = 30.0f;
+        public float mtbEngineStallExceedNegativeLoadFactorLimit = 5.0f;
         private SaccAirVehicle airVehicle;
+        private DFUNC_ToggleEngine toggleEngine;
         private Rigidbody vehicleRigidbody;
+        private Transform vehicleTransform;
+        private Vector3 prevVelocity;
+        private bool engineOn;
 
         public void SFEXT_L_EntityStart()
         {
             vehicleRigidbody = GetComponentInParent<Rigidbody>();
+            vehicleTransform = vehicleRigidbody.transform;
             var saccEntity = vehicleRigidbody.GetComponent<SaccEntity>();
             airVehicle = (SaccAirVehicle)saccEntity.GetExtention(GetUdonTypeName<SaccAirVehicle>());
-
+            airVehicle.ThrottleStrength = 0;
+            toggleEngine = (DFUNC_ToggleEngine)saccEntity.GetExtention(GetUdonTypeName<DFUNC_ToggleEngine>());
             gameObject.SetActive(saccEntity.IsOwner);
         }
 
         public void SFEXT_O_TakeOwnership() => gameObject.SetActive(true);
         public void SFEXT_O_LoseOwnership() => gameObject.SetActive(false);
 
+        public void SFEXT_G_EngineOn() => engineOn = true;
+        public void SFEXT_G_EngineOff() => engineOn = false;
+
         private void Update()
         {
+            if (!engineOn) return;
+
             var v = Mathf.Max(Vector3.Dot(vehicleRigidbody.transform.forward, airVehicle.AirVel), minAirspeed);
             var j = v / (maxRPM / 60.0f * diameter);
             var e = Curve(j, maxPropellerEfficiencyAdvanceRatio, maxAdvanceRatio) * maxPropellerEfficiency;
             var t = 75 * e * power * 9.807f / v;
             airVehicle.ThrottleStrength = t;
+
+            if (engineStall)
+            {
+                var deltaTime = Time.deltaTime;
+                var velocity = vehicleRigidbody.velocity;
+                var acceleration = (velocity - prevVelocity) / deltaTime;
+                prevVelocity = velocity;
+
+                var gravity = Physics.gravity;
+                var loadFactor = Vector3.Dot(acceleration - Physics.gravity, vehicleTransform.up) / gravity.magnitude;
+                if (
+                    loadFactor < negativeLoadFactorLimit && Random.value < Mathf.Abs((loadFactor - negativeLoadFactorLimit) / negativeLoadFactorLimit) * deltaTime
+                    || loadFactor < 0 && Random.value < mtbEngineStallNegativeLoadFactor * deltaTime
+                )
+                {
+                    EngineOff();
+                }
+            }
+        }
+
+        private void EngineOff()
+        {
+            if (toggleEngine) toggleEngine.ToggleEngine(true);
+            else airVehicle.SetEngineOff();
         }
 
         private float Curve(float x, float a, float b)

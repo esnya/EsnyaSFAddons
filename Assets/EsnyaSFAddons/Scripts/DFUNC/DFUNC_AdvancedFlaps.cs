@@ -38,6 +38,7 @@ namespace EsnyaSFAddons
 
         [Header("Inputs")]
         public float controllerSensitivity = 0.1f;
+        public Vector3 vrInputAxis = Vector3.forward;
         public KeyCode desktopKey = KeyCode.F;
         public bool seamless = true;
 
@@ -111,7 +112,7 @@ namespace EsnyaSFAddons
         public void SFEXT_L_EntityStart()
         {
             var entity = GetComponentInParent<SaccEntity>();
-            airVehicle = (SaccAirVehicle)GetExtention(entity, GetUdonTypeName<SaccAirVehicle>());
+            airVehicle = (SaccAirVehicle)entity.GetExtention(GetUdonTypeName<SaccAirVehicle>());
 
             vehicleAnimator = airVehicle.VehicleAnimator;
 
@@ -237,7 +238,7 @@ namespace EsnyaSFAddons
                     }
                     else
                     {
-                        targetAngle = Mathf.Clamp(targetAngleOrigin - (trackingPosition.z - trackingOrigin.z) * maxAngle / controllerSensitivity, 0, maxAngle);
+                        targetAngle = Mathf.Clamp(targetAngleOrigin - Vector3.Dot(trackingPosition - trackingOrigin, vrInputAxis) * maxAngle / controllerSensitivity, 0, maxAngle);
                     }
                 }
 
@@ -363,56 +364,5 @@ namespace EsnyaSFAddons
         {
             SetTargetDetentIndex(targetDetentIndex - 1);
         }
-
-        #region SF Utilities
-        private UdonSharpBehaviour GetExtention(SaccEntity entity, string udonTypeName)
-        {
-            foreach (var extention in entity.ExtensionUdonBehaviours)
-            {
-                if (extention && extention.GetUdonTypeName() == udonTypeName) return extention;
-            }
-            foreach (var extention in entity.Dial_Functions_L)
-            {
-                if (extention && extention.GetUdonTypeName() == udonTypeName) return extention;
-            }
-            foreach (var extention in entity.Dial_Functions_R)
-            {
-                if (extention && extention.GetUdonTypeName() == udonTypeName) return extention;
-            }
-            return null;
-        }
-
-        private UdonSharpBehaviour[] GetExtentions(SaccEntity entity, string udonTypeName)
-        {
-            var result = new UdonSharpBehaviour[entity.ExtensionUdonBehaviours.Length + entity.Dial_Functions_L.Length + entity.Dial_Functions_R.Length];
-            var count = 0;
-            foreach (var extention in entity.ExtensionUdonBehaviours)
-            {
-                if (extention && extention.GetUdonTypeName() == udonTypeName)
-                {
-                    result[count++] = extention;
-                }
-            }
-            foreach (var extention in entity.Dial_Functions_L)
-            {
-                if (extention && extention.GetUdonTypeName() == udonTypeName)
-                {
-                    result[count++] = extention;
-                }
-            }
-            foreach (var extention in entity.Dial_Functions_R)
-            {
-                if (extention && extention.GetUdonTypeName() == udonTypeName)
-                {
-                    result[count++] = extention;
-                }
-            }
-
-            var finalResult = new UdonSharpBehaviour[count];
-            System.Array.Copy(result, finalResult, count);
-
-            return finalResult;
-        }
-        #endregion
     }
 }

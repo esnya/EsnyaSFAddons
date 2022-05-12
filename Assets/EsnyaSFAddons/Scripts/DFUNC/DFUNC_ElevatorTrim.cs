@@ -105,7 +105,7 @@ namespace EsnyaSFAddons
 
                     if (prevTriggered)
                     {
-                        sliderInput = Mathf.Clamp((trackingPosition.z - prevTrackingPosition.z) * controllerSensitivity, -1, 1);
+                        sliderInput = Mathf.Clamp(Vector3.Dot(trackingPosition - prevTrackingPosition, vrInputAxis) * controllerSensitivity, -1, 1);
                     }
                     prevTrackingPosition = trackingPosition;
                 }
@@ -133,6 +133,8 @@ namespace EsnyaSFAddons
         public float trimStrengthMultiplier = 1;
         public float trimStrengthCurve = 1;
         public string animatorParameterName = "elevtrim";
+        public Vector3 vrInputAxis = Vector3.forward;
+
         public float trimBias = 0;
         private float trimStrength;
 

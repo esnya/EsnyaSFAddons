@@ -168,9 +168,10 @@ namespace EsnyaSFAddons
 
             if (isOwner) ApplyDamage(deltaTime);
 
-            UpdateSounds(deltaTime);
+            var actuatorMoving = !actuatorBroken && (!powerSource || powerSource.activeInHierarchy);
+            UpdateSounds(deltaTime, actuatorMoving);
 
-            if (!actuatorBroken && (!powerSource || powerSource.activeInHierarchy)) angle = Mathf.MoveTowards(angle, targetAngle, response * deltaTime);
+            if (actuatorMoving) angle = Mathf.MoveTowards(angle, targetAngle, response * deltaTime);
 
             var flapsChanged = !Mathf.Approximately(angle, prevAngle);
             prevAngle = angle;
@@ -274,9 +275,9 @@ namespace EsnyaSFAddons
             speedLimit = speedLimits[detentIndex];
         }
 
-        private void UpdateSounds(float deltaTime)
+        private void UpdateSounds(float deltaTime, bool actuatorAvailable)
         {
-            var moving = !actuatorBroken && !Mathf.Approximately(targetAngle, angle);
+            var moving = actuatorAvailable && !Mathf.Approximately(targetAngle, angle);
 
             for (var i = 0; i < audioSources.Length; i++)
             {

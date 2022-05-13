@@ -8,27 +8,44 @@ namespace EsnyaSFAddons
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class SFEXT_AdvancedPropellerThrust : UdonSharpBehaviour
     {
+        [Header("Specs")]
         [Tooltip("hp")] public float power = 160.0f;
         [Tooltip("m")] public float diameter = 1.9304f;
-        [Tooltip("rpm")] public float maxRPM = 2700;
-        public float maxAdvanceRatio = 0.9f;
-        public float maxPropellerEfficiencyAdvanceRatio = 0.8f;
-        public float maxPropellerEfficiency = 0.82f;
-        public float minAirspeed = 10f;
-        public bool engineStall = true;
+        [Tooltip("rpm")] public float maxRPM = 2450;
+        [Tooltip("rpm")] public float minRPM = 700;
+        public AnimationCurve propellerEfficiency;
+        public float minAirspeed = 20.0f;
+
+        [Header("Startup")]
         public float mixtureCutOffDelay = 1.0f;
         public GameObject batteryBus;
-        [Tooltip("G")] public float negativeLoadFactorLimit = -1.8f;
-        public float mtbEngineStallNegativeLoadFactor = 30.0f;
-        public float mtbEngineStallExceedNegativeLoadFactorLimit = 5.0f;
+
+        [Header("Failure")]
+        public bool engineStall = true;
+        [Tooltip("G")] public float minimumNegativeLoadFactor = -1.72f;
+        public float mtbEngineStallNegativeLoad = 10.0f;
+        public float mtbEngineStallOverNegativeLoad = 1.0f;
+
         private SaccAirVehicle airVehicle;
         private DFUNC_ToggleEngine toggleEngine;
         private Rigidbody vehicleRigidbody;
         private Transform vehicleTransform;
         private Vector3 prevVelocity;
         private bool engineOn;
+        private float thrust;
         private bool mixture;
         private float mixtureCutOffTimer;
+
+#if !COMPILER_UDONSHARP && UNITY_EDITOR
+        private void Reset()
+        {
+            propellerEfficiency = new AnimationCurve(new [] {
+                new Keyframe(0.0f, 0.0f, 1.0f, 1.0f),
+                new Keyframe(0.8f, 0.8f, 0.0f, 0.0f),
+                new Keyframe(0.9f, 0.0f, 1.0f, 1.0f),
+            });
+        }
+#endif
 
         public void SFEXT_L_EntityStart()
         {
@@ -52,15 +69,33 @@ namespace EsnyaSFAddons
             }
         }
 
-        public void SFEXT_G_EngineOn() => engineOn = true;
-        public void SFEXT_G_EngineOff() => engineOn = false;
+        public void SFEXT_G_EngineOn()
+        {
+            engineOn = true;
+            thrust = 0.0f;
+        }
+
+        public void SFEXT_G_EngineOff()
+        {
+            engineOn = false;
+            thrust = 0.0f;
+        }
 
         public void SFEXT_G_MixtureOn()
         {
             mixtureCutOffTimer = 0;
             mixture = true;
         }
-        public void SFEXT_G_MixtureCutOff() => mixture = false;
+
+        public void SFEXT_G_MixtureCutOff()
+        {
+            mixture = false;
+        }
+
+        private void FixedUpdate()
+        {
+            if (thrust > 0) vehicleRigidbody.AddForceAtPosition(transform.forward * thrust, transform.position);
+        }
 
         private void Update()
         {
@@ -76,11 +111,11 @@ namespace EsnyaSFAddons
                 mixtureCutOffTimer += Time.deltaTime * Random.Range(0.9f, 1.1f);
             }
 
-            var v = Mathf.Max(Vector3.Dot(vehicleRigidbody.transform.forward, airVehicle.AirVel), minAirspeed);
-            var j = v / (maxRPM / 60.0f * diameter);
-            var e = Curve(j, maxPropellerEfficiencyAdvanceRatio, maxAdvanceRatio) * maxPropellerEfficiency;
-            var t = 75 * e * power * 9.807f / v;
-            airVehicle.ThrottleStrength = t;
+            var rpm = Mathf.Lerp(minRPM, maxRPM, airVehicle.ThrottleInput);
+            var v = Mathf.Max(Vector3.Dot(transform.forward, airVehicle.AirVel), minAirspeed);
+            var j = v / (rpm / 60.0f * diameter);
+            var e = propellerEfficiency.Evaluate(j);
+            thrust = 75 * 9.807f * e * power / v;
 
             if (engineStall)
             {
@@ -92,8 +127,8 @@ namespace EsnyaSFAddons
                 var gravity = Physics.gravity;
                 var loadFactor = Vector3.Dot(acceleration - Physics.gravity, vehicleTransform.up) / gravity.magnitude;
                 if (
-                    loadFactor < negativeLoadFactorLimit && Random.value < Mathf.Abs((loadFactor - negativeLoadFactorLimit) * deltaTime / negativeLoadFactorLimit)
-                    || loadFactor < 0 && Random.value <  Mathf.Clamp01(-loadFactor) * deltaTime / mtbEngineStallNegativeLoadFactor
+                    loadFactor < minimumNegativeLoadFactor && Random.value < Mathf.Abs((loadFactor - minimumNegativeLoadFactor) * deltaTime / mtbEngineStallOverNegativeLoad)
+                    || loadFactor < 0 && Random.value <  Mathf.Clamp01(-loadFactor) * deltaTime / mtbEngineStallNegativeLoad
                 )
                 {
                     EngineOff();

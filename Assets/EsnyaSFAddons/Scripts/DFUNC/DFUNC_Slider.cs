@@ -20,6 +20,7 @@ namespace EsnyaSFAddons
         [SectionHeader("Desktop Input")]
         public float desktopStep = 0.2f;
         public KeyCode desktopIncrease, desktopDecrease;
+        public bool desktopLoop;
 
         [SectionHeader("Public Variable")]
         public bool writePublicVariable;
@@ -32,6 +33,14 @@ namespace EsnyaSFAddons
         public Animator targetAnimator;
         [HideIf("@!writeAnimatorParameter")][Popup("animatorFloat", "@targetAnimator")] public string targetAnimatorParameterName;
 
+        [SectionHeader("Send Events")]
+        public bool sendOnChange;
+        [HideIf("@!sendOnChange")] public string onChange = "SFEXT_G_SliderValueCange";
+        public bool sendOnMin;
+        [HideIf("@!sendOnMin")] public string onMin = "SFEXT_G_SliderMin";
+        public bool sendOnMax;
+        [HideIf("@!sendOnMax")] public string onMax = "SFEXT_G_SliderMax";
+
         private string triggerAxis;
         private bool prevTrigger;
         private bool isSelected;
@@ -42,14 +51,22 @@ namespace EsnyaSFAddons
 
         [UdonSynced(UdonSyncMode.Smooth)][FieldChangeCallback(nameof(Value))] private float _value;
         private bool isPilot;
+        private SaccEntity entity;
 
         private float Value
         {
             set
             {
-                _value = value;
-                if (writePublicVariable && targetBehaviour) targetBehaviour.SetProgramVariable(targetVariableName, value);
-                if (writeAnimatorParameter && targetAnimator) targetAnimator.SetFloat(targetAnimatorParameterName, value);
+                var clampedValue = Mathf.Clamp01(desktopLoop ? (value < 0.0f ? 1.0f : value > 1.0f ? 0.0f : value) : value);
+                if (writePublicVariable && targetBehaviour) targetBehaviour.SetProgramVariable(targetVariableName, clampedValue);
+                if (writeAnimatorParameter && targetAnimator) targetAnimator.SetFloat(targetAnimatorParameterName, clampedValue);
+                if (clampedValue != _value && entity)
+                {
+                    if (sendOnChange) entity.SendEventToExtensions(onChange);
+                    if (sendOnMin && Mathf.Approximately(clampedValue, 0)) entity.SendEventToExtensions(onMin);
+                    if (sendOnMax && Mathf.Approximately(clampedValue, 1)) entity.SendEventToExtensions(onMax);
+                }
+                _value = clampedValue;
             }
             get => _value;
         }
@@ -77,9 +94,9 @@ namespace EsnyaSFAddons
 
         public void SFEXT_L_EntityStart()
         {
-            var saccEntity = GetComponentInParent<SaccEntity>();
-            var airVehicle = (SaccAirVehicle)saccEntity.GetExtention(GetUdonTypeName<SaccAirVehicle>());
-            controlsRoot = airVehicle.ControlsRoot ?? saccEntity.transform;
+            entity = GetComponentInParent<SaccEntity>();
+            var airVehicle = (SaccAirVehicle)entity.GetExtention(GetUdonTypeName<SaccAirVehicle>());
+            controlsRoot = airVehicle.ControlsRoot ?? entity.transform;
 
             Value = defaultValue;
 
@@ -99,12 +116,12 @@ namespace EsnyaSFAddons
 
         public void Increase()
         {
-            Value = Mathf.Clamp01(Value + desktopStep);
+            Value += desktopStep;
         }
 
         public void Decrease()
         {
-            Value = Mathf.Clamp01(Value - desktopStep);
+            Value -= desktopStep;
         }
 
         private void Update()

@@ -106,7 +106,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'SEAT
 
-    ADJUST'
+    ADJUST
+
+    [IDHE]'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 97bd0ba9cec50fb4499129765f0b4db9, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 3c1c12720a371ca4e9207f9c7410b2d8, type: 2}
@@ -133,8 +135,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.24
-  m_fontSizeBase: 0.3
+  m_fontSize: 0.2
+  m_fontSizeBase: 0.2
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

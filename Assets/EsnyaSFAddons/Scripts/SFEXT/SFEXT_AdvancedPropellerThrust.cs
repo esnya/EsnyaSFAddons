@@ -1,5 +1,7 @@
 using UdonSharp;
 using UnityEngine;
+using VRC.Udon.Common.Interfaces;
+
 namespace EsnyaSFAddons
 {
 
@@ -14,6 +16,8 @@ namespace EsnyaSFAddons
         public float maxPropellerEfficiency = 0.82f;
         public float minAirspeed = 10f;
         public bool engineStall = true;
+        public float mixtureCutOffDelay = 1.0f;
+        public GameObject batteryBus;
         [Tooltip("G")] public float negativeLoadFactorLimit = -1.8f;
         public float mtbEngineStallNegativeLoadFactor = 30.0f;
         public float mtbEngineStallExceedNegativeLoadFactorLimit = 5.0f;
@@ -23,6 +27,8 @@ namespace EsnyaSFAddons
         private Transform vehicleTransform;
         private Vector3 prevVelocity;
         private bool engineOn;
+        private bool mixture;
+        private float mixtureCutOffTimer;
 
         public void SFEXT_L_EntityStart()
         {
@@ -38,12 +44,37 @@ namespace EsnyaSFAddons
         public void SFEXT_O_TakeOwnership() => gameObject.SetActive(true);
         public void SFEXT_O_LoseOwnership() => gameObject.SetActive(false);
 
+        public void SFEXT_G_EngineStartup()
+        {
+            if (batteryBus && toggleEngine && !batteryBus.activeSelf && airVehicle.IsOwner)
+            {
+                toggleEngine.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(DFUNC_ToggleEngine.EngineStartupCancel));
+            }
+        }
+
         public void SFEXT_G_EngineOn() => engineOn = true;
         public void SFEXT_G_EngineOff() => engineOn = false;
+
+        public void SFEXT_G_MixtureOn()
+        {
+            mixtureCutOffTimer = 0;
+            mixture = true;
+        }
+        public void SFEXT_G_MixtureCutOff() => mixture = false;
 
         private void Update()
         {
             if (!engineOn) return;
+
+            if (!mixture)
+            {
+                if (mixtureCutOffTimer > mixtureCutOffDelay)
+                {
+                    EngineOff();
+                    return;
+                }
+                mixtureCutOffTimer += Time.deltaTime * Random.Range(0.9f, 1.1f);
+            }
 
             var v = Mathf.Max(Vector3.Dot(vehicleRigidbody.transform.forward, airVehicle.AirVel), minAirspeed);
             var j = v / (maxRPM / 60.0f * diameter);
@@ -61,8 +92,8 @@ namespace EsnyaSFAddons
                 var gravity = Physics.gravity;
                 var loadFactor = Vector3.Dot(acceleration - Physics.gravity, vehicleTransform.up) / gravity.magnitude;
                 if (
-                    loadFactor < negativeLoadFactorLimit && Random.value < Mathf.Abs((loadFactor - negativeLoadFactorLimit) / negativeLoadFactorLimit) * deltaTime
-                    || loadFactor < 0 && Random.value < mtbEngineStallNegativeLoadFactor * deltaTime
+                    loadFactor < negativeLoadFactorLimit && Random.value < Mathf.Abs((loadFactor - negativeLoadFactorLimit) * deltaTime / negativeLoadFactorLimit)
+                    || loadFactor < 0 && Random.value <  Mathf.Clamp01(-loadFactor) * deltaTime / mtbEngineStallNegativeLoadFactor
                 )
                 {
                     EngineOff();

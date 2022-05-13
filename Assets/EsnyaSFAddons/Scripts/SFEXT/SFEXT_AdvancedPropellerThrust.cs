@@ -46,7 +46,7 @@ namespace EsnyaSFAddons
 
         public void SFEXT_G_EngineStartup()
         {
-            if (batteryBus && toggleEngine && !batteryBus.activeSelf && airVehicle.IsOwner)
+            if (batteryBus && toggleEngine && !batteryBus.activeInHierarchy && airVehicle.IsOwner)
             {
                 toggleEngine.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(DFUNC_ToggleEngine.EngineStartupCancel));
             }

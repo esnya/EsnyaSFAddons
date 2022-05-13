@@ -35,6 +35,7 @@ namespace EsnyaSFAddons
         public float dragMultiplier = 1.4f;
         public float liftMultiplier = 1.35f;
         public float response = 1f;
+        public GameObject powerSource;
 
         [Header("Inputs")]
         public float controllerSensitivity = 0.1f;
@@ -169,7 +170,7 @@ namespace EsnyaSFAddons
 
             UpdateSounds(deltaTime);
 
-            if (!actuatorBroken) angle = Mathf.MoveTowards(angle, targetAngle, response * deltaTime);
+            if (!actuatorBroken && (!powerSource || powerSource.activeInHierarchy)) angle = Mathf.MoveTowards(angle, targetAngle, response * deltaTime);
 
             var flapsChanged = !Mathf.Approximately(angle, prevAngle);
             prevAngle = angle;

@@ -52,6 +52,15 @@ namespace EsnyaSFAddons
         public void SFEXT_G_Explode() => ResetStatus();
         public void SFEXT_G_RespawnButton() => ResetStatus();
 
+        public void SFEXT_G_TouchDownWater()
+        {
+            if (isOwner)
+            {
+                stall = true;
+                broken = true;
+            }
+        }
+
         private WheelCollider[] wheels;
         private void OnEnable()
         {

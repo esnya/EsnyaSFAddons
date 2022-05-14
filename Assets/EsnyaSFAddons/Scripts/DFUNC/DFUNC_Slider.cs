@@ -57,7 +57,7 @@ namespace EsnyaSFAddons
         {
             set
             {
-                var clampedValue = Mathf.Clamp01(desktopLoop ? (value < 0.0f ? 1.0f : value > 1.0f ? 0.0f : value) : value);
+                var clampedValue = Mathf.Clamp01(value);
                 if (writePublicVariable && targetBehaviour) targetBehaviour.SetProgramVariable(targetVariableName, clampedValue);
                 if (writeAnimatorParameter && targetAnimator) targetAnimator.SetFloat(targetAnimatorParameterName, clampedValue);
                 if (clampedValue != _value && entity)
@@ -124,12 +124,34 @@ namespace EsnyaSFAddons
             Value -= desktopStep;
         }
 
+        private float Loop01(float value)
+        {
+            return value > 1.0f ? 0.0f : value < 0.0f ? 1.0f : value;
+        }
+
+        public void IncreaseLooped()
+        {
+            Value = Loop01(Value + desktopStep);
+        }
+        public void DecreaseLooped()
+        {
+            Value = Loop01(Value - desktopStep);
+        }
+
         private void Update()
         {
             if (isPilot)
             {
-                if (Input.GetKeyDown(desktopIncrease)) Increase();
-                else if (Input.GetKeyDown(desktopDecrease)) Decrease();
+                if (Input.GetKeyDown(desktopIncrease))
+                {
+                    if (desktopLoop) IncreaseLooped();
+                    else Increase();
+                }
+                else if (Input.GetKeyDown(desktopDecrease))
+                {
+                    if (desktopLoop) DecreaseLooped();
+                    else Decrease();
+                }
             }
         }
 

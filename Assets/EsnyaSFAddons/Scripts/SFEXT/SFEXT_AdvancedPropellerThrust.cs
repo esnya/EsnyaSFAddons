@@ -111,7 +111,7 @@ namespace EsnyaSFAddons
                 mixtureCutOffTimer += Time.deltaTime * Random.Range(0.9f, 1.1f);
             }
 
-            var rpm = Mathf.Lerp(minRPM, maxRPM, airVehicle.ThrottleInput);
+            var rpm = Mathf.Lerp(minRPM, maxRPM, airVehicle.EngineOutput);
             var v = Mathf.Max(Vector3.Dot(transform.forward, airVehicle.AirVel), minAirspeed);
             var j = v / (rpm / 60.0f * diameter);
             var e = propellerEfficiency.Evaluate(j);

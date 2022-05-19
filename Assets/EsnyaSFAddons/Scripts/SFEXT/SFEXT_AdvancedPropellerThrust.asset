@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: SFEXT_AdvancedPropellerThrust
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: e24b165e5f8e48845b539515adef80e9,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: dfdbf88530ddef94b9119c2369f08c23,
     type: 2}
   udonAssembly: 
   assemblyError: 

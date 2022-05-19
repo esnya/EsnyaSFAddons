@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: PickupChock
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: f84e13949d08790419730540e3f17018,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: da2cafb27bd264b4886f2d81871d3816,
     type: 2}
   udonAssembly: 
   assemblyError: 

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: SFEXT_AuxiliaryPowerUnit
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 6d2d501f011252746855d328d3e7a405,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 200cb1b3d1253df43aea55d897a2c37a,
     type: 2}
   udonAssembly: 
   assemblyError: 

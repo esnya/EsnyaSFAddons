@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: SAV_UdonChips
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 1b70645766ceafe4297d5c2d48787640,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 81986f99ba3bdaf499dac92c6bec2180,
     type: 2}
   udonAssembly: 
   assemblyError: 

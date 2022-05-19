@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: DFUNC_SendCustomEvent
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 87bcb47b7c73b6b4ba22cf5f58975f52,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 5e5eda45c9fcf7548a783935e0550733,
     type: 2}
   udonAssembly: 
   assemblyError: 

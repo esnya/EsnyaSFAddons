@@ -1,7 +1,7 @@
 {
   "name": "com.nekometer.esnya.esnya-sf-addons-ucs",
   "version": "5.0.0-beta.49",
-  "displayName": "EsnyaSFAddons",
+  "displayName": "EsnyaSFAddons UCS",
   "unity": "2019.4",
   "description": "Addon collection for SaccFlightAndVehicles",
   "keywords": [

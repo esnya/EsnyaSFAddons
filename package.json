@@ -1,21 +1,12 @@
 {
-  "name": "com.nekometer.esnya-sf-addons",
-  "version": "5.0.0-beta.49",
-  "displayName": "EsnyaSFAddons",
-  "unity": "2019.4",
-  "description": "Addon collection for SaccFlightAndVehicles",
-  "keywords": [
-    "VRChat",
-    "Unity"
-  ],
-  "author": "esnya",
-  "license": "MIT",
+  "name": "build",
   "private": true,
   "devDependencies": {
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^8.0.4",
     "@semantic-release/npm": "^9.0.1",
+    "semantic-release": "^19.0.2",
     "semantic-release-gitmoji": "^1.4.4"
   }
 }

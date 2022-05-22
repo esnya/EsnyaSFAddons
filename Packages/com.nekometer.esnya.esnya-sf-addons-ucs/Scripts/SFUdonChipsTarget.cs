@@ -1,17 +1,14 @@
 using UdonSharp;
-#if ESFA_UCS
 using UnityEngine;
 using VRC.Udon;
 using VRC.Udon.Common.Interfaces;
 using UCS;
-#endif
 
 namespace EsnyaAircraftAssets
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.NoVariableSync)]
     public class SFUdonChipsTarget : UdonSharpBehaviour
     {
-#if ESFA_UCS
         public float hitPoints = 30f;
         public float fee = 50.0f;
         public GameObject[] ExplodeOther;
@@ -60,6 +57,5 @@ namespace EsnyaAircraftAssets
                 }
             }
         }
-#endif
     }
 }

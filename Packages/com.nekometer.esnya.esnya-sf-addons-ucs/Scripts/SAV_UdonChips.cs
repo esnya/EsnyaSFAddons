@@ -1,10 +1,7 @@
 using UdonSharp;
 using UnityEngine;
 using InariUdon.UI;
-
-#if ESFA_UCS
 using UCS;
-#endif
 
 namespace EsnyaAircraftAssets
 {
@@ -28,7 +25,6 @@ namespace EsnyaAircraftAssets
         public float fogBonus = 3000, fogBonusCurve = 2, fogMaxValue = 140;
         public float windBonus = 3000, windBonusCurve = 2, windMaxStrength = 50;
 
-#if ESFA_UCS
         private float maxAltitude;
         private SaccEntity entity;
         private SaccAirVehicle airVehicle;
@@ -132,17 +128,13 @@ namespace EsnyaAircraftAssets
             if (sunSource == null) return false;
             return Vector3.Dot(sunSource.forward, Vector3.up) > 0;
         }
-#endif
 
         [Header("Logger")]
         public UdonLogger logger;
-
-#if ESFA_UCS
         private void Log(string level, string log)
         {
             if (logger == null) Debug.Log(log);
             else logger.Log(level, entity.name, log);
         }
-#endif
     }
 }

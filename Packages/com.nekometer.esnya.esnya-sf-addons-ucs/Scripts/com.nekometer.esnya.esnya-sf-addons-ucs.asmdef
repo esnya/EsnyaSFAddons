@@ -1,0 +1,23 @@
+{
+    "name": "com.nekometer.esnya.esnya-sf-addons-ucs",
+    "references": [
+        "GUID:99835874ee819da44948776e0df4ff1d",
+        "GUID:823e7b1dbeb8b2a4c9d5014bf2a39093",
+        "GUID:30028048dda6a584cacbcdacfa19980d",
+        "GUID:5733a420a738f014796e614c37f22eca",
+        "GUID:c06a60146d220a445a50a3e2fdd223a6",
+        "GUID:80a8b162ac804404bae7b5fdc3041428",
+        "GUID:3c1bc1267eab5884ebe7f232c09ee0d9"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "UDON"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,3 +1,4 @@
+using System;
 using UdonSharp;
 using UnityEngine;
 using VRC.Udon.Common.Interfaces;
@@ -5,7 +6,7 @@ using VRC.Udon.Common.Interfaces;
 namespace EsnyaSFAddons
 {
 
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
+    [UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
     public class SFEXT_AdvancedPropellerThrust : UdonSharpBehaviour
     {
         [Header("Specs")]
@@ -13,12 +14,18 @@ namespace EsnyaSFAddons
         [Tooltip("m")] public float diameter = 1.9304f;
         [Tooltip("rpm")] public float maxRPM = 2450;
         [Tooltip("rpm")] public float minRPM = 700;
+        public float rpmResponse = 0.2f;
         public AnimationCurve propellerEfficiency;
+        public AnimationCurve mixtureCurve;
         public float minAirspeed = 20.0f;
 
         [Header("Startup")]
         public float mixtureCutOffDelay = 1.0f;
         public GameObject batteryBus;
+
+        [Header("Animation")]
+        public string rpmFloatParameter = "rpm";
+        public float animationMaxRPM = 3000;
 
         [Header("Failure")]
         public bool engineStall = true;
@@ -26,14 +33,24 @@ namespace EsnyaSFAddons
         public float mtbEngineStallNegativeLoad = 10.0f;
         public float mtbEngineStallOverNegativeLoad = 1.0f;
 
+        [NonSerialized] public float mixture = 1.0f;
+        [UdonSynced(UdonSyncMode.Smooth)] private float _rpm;
+        public float RPM {
+            private set {
+                _rpm = value;
+                if (animator) animator.SetFloat(rpmFloatParameter, value / animationMaxRPM);
+            }
+            get => _rpm;
+        }
+
         private SaccAirVehicle airVehicle;
         private DFUNC_ToggleEngine toggleEngine;
         private Rigidbody vehicleRigidbody;
         private Transform vehicleTransform;
+        private Animator animator;
         private Vector3 prevVelocity;
-        private bool engineOn;
+        private bool isOwner, engineOn;
         private float thrust;
-        private bool mixture;
         private float mixtureCutOffTimer;
 
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
@@ -44,6 +61,11 @@ namespace EsnyaSFAddons
                 new Keyframe(0.8f, 0.8f, 0.0f, 0.0f),
                 new Keyframe(0.9f, 0.0f, 1.0f, 1.0f),
             });
+            mixtureCurve = new AnimationCurve(new [] {
+                new Keyframe(0.0f, 0.0f, 1.0f, 1.0f),
+                new Keyframe(0.6f, 1.1f, 0.0f, 0.0f),
+                new Keyframe(1.0f, 1.0f, 1.0f, 1.0f),
+            });
         }
 #endif
 
@@ -51,69 +73,77 @@ namespace EsnyaSFAddons
         {
             vehicleRigidbody = GetComponentInParent<Rigidbody>();
             vehicleTransform = vehicleRigidbody.transform;
+            animator = vehicleRigidbody.GetComponent<Animator>();
+
             var saccEntity = vehicleRigidbody.GetComponent<SaccEntity>();
             airVehicle = (SaccAirVehicle)saccEntity.GetExtention(GetUdonTypeName<SaccAirVehicle>());
             airVehicle.ThrottleStrength = 0;
             toggleEngine = (DFUNC_ToggleEngine)saccEntity.GetExtention(GetUdonTypeName<DFUNC_ToggleEngine>());
-            gameObject.SetActive(saccEntity.IsOwner);
+
+            isOwner = airVehicle.IsOwner;
         }
 
-        public void SFEXT_O_TakeOwnership() => gameObject.SetActive(true);
-        public void SFEXT_O_LoseOwnership() => gameObject.SetActive(false);
+        public void SFEXT_O_TakeOwnership() => isOwner = true;
+        public void SFEXT_O_LoseOwnership() => isOwner = false;
 
         public void SFEXT_G_EngineStartup()
         {
+
             if (batteryBus && toggleEngine && !batteryBus.activeInHierarchy && airVehicle.IsOwner)
             {
                 toggleEngine.SendCustomNetworkEvent(NetworkEventTarget.All, nameof(DFUNC_ToggleEngine.EngineStartupCancel));
+            }
+            else
+            {
+                SFEXT_G_EngineOn();
             }
         }
 
         public void SFEXT_G_EngineOn()
         {
             engineOn = true;
-            thrust = 0.0f;
+            gameObject.SetActive(true);
         }
 
         public void SFEXT_G_EngineOff()
         {
             engineOn = false;
-            thrust = 0.0f;
-        }
-
-        public void SFEXT_G_MixtureOn()
-        {
-            mixtureCutOffTimer = 0;
-            mixture = true;
-        }
-
-        public void SFEXT_G_MixtureCutOff()
-        {
-            mixture = false;
         }
 
         private void FixedUpdate()
         {
-            if (thrust > 0) vehicleRigidbody.AddForceAtPosition(transform.forward * thrust, transform.position);
+            if (isOwner && thrust > 0) vehicleRigidbody.AddForceAtPosition(transform.forward * thrust, transform.position);
         }
 
         private void Update()
         {
-            if (!engineOn) return;
+            if (isOwner) OwnerUpdate();
 
-            if (!mixture)
+            if (!engineOn && Mathf.Approximately(RPM, 0))
+            {
+                gameObject.SetActive(false);
+                return;
+            }
+        }
+
+        private void OwnerUpdate()
+        {
+            if (Mathf.Approximately(mixture, 0))
             {
                 if (mixtureCutOffTimer > mixtureCutOffDelay)
                 {
                     EngineOff();
                     return;
                 }
-                mixtureCutOffTimer += Time.deltaTime * Random.Range(0.9f, 1.1f);
+                mixtureCutOffTimer += Time.deltaTime * UnityEngine.Random.Range(0.9f, 1.1f);
             }
 
-            var rpm = Mathf.Lerp(minRPM, maxRPM, airVehicle.EngineOutput);
+            var targetRPM = engineOn ? Mathf.Lerp(minRPM, maxRPM, airVehicle.ThrottleInput) * mixtureCurve.Evaluate(mixture) : 0;
+            RPM = Mathf.MoveTowards(RPM, targetRPM, maxRPM * rpmResponse * Time.deltaTime);
+            airVehicle.EngineOutput = Mathf.Clamp01(RPM / maxRPM);
+
             var v = Mathf.Max(Vector3.Dot(transform.forward, airVehicle.AirVel), minAirspeed);
-            var j = v / (rpm / 60.0f * diameter);
+            var j = v / (RPM / 60.0f * diameter);
             var e = propellerEfficiency.Evaluate(j);
             thrust = 75 * 9.807f * e * power / v;
 
@@ -127,8 +157,8 @@ namespace EsnyaSFAddons
                 var gravity = Physics.gravity;
                 var loadFactor = Vector3.Dot(acceleration - Physics.gravity, vehicleTransform.up) / gravity.magnitude;
                 if (
-                    loadFactor < minimumNegativeLoadFactor && Random.value < Mathf.Abs((loadFactor - minimumNegativeLoadFactor) * deltaTime / mtbEngineStallOverNegativeLoad)
-                    || loadFactor < 0 && Random.value <  Mathf.Clamp01(-loadFactor) * deltaTime / mtbEngineStallNegativeLoad
+                    loadFactor < minimumNegativeLoadFactor && UnityEngine.Random.value < Mathf.Abs((loadFactor - minimumNegativeLoadFactor) * deltaTime / mtbEngineStallOverNegativeLoad)
+                    || loadFactor < 0 && UnityEngine.Random.value <  Mathf.Clamp01(-loadFactor) * deltaTime / mtbEngineStallNegativeLoad
                 )
                 {
                     EngineOff();
@@ -140,11 +170,6 @@ namespace EsnyaSFAddons
         {
             if (toggleEngine) toggleEngine.ToggleEngine(true);
             else airVehicle.SetEngineOff();
-        }
-
-        private float Curve(float x, float a, float b)
-        {
-            return Mathf.Sin(Mathf.Max(Mathf.Min(x / a, (1 - x / b) / (1 - a / b)), 0.0f) * Mathf.PI * 0.5f);
         }
     }
 }

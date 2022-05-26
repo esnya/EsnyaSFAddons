@@ -23,7 +23,7 @@ namespace EsnyaSFAddons
 
         [Header("Animation")]
         public string rpmFloatParameter = "rpm";
-        public float animationMaxRPM = 3000;
+        public float animationMaxRPM = 3500;
 
         [Header("Failure")]
         public bool engineStall = true;
@@ -35,7 +35,7 @@ namespace EsnyaSFAddons
         public float airDensity = 1.2249f;
 
         [NonSerialized] public float mixture = 1.0f;
-        [UdonSynced(UdonSyncMode.Smooth)] private float _rpm;
+        [UdonSynced(UdonSyncMode.Smooth)][FieldChangeCallback(nameof(RPM))] private float _rpm;
         public float RPM {
             private set {
                 _rpm = value;

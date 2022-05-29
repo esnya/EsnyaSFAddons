@@ -33,6 +33,7 @@ namespace EsnyaSFAddons
 
         public void _Launch()
         {
+            if (!Tension) return;
             SendCustomNetworkEvent(NetworkEventTarget.All, nameof(PreLaunch));
             SendCustomEventDelayedSeconds(nameof(_DisableTension), 6);
         }
@@ -74,7 +75,11 @@ namespace EsnyaSFAddons
         public void PreLaunch()
         {
             var dfunc = FindDFunc();
-            if (!dfunc) SendCustomEventDelayedFrames(nameof(_FakeLaunch), 3);
+            if (!dfunc)
+            {
+                SendCustomEventDelayedFrames(nameof(_FakeLaunch), 3);
+                return;
+            }
 
             dfunc.OnCatapult = true;
             dfunc.Launching = true;

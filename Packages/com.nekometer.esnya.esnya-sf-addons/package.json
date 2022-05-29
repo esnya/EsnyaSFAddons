@@ -8,17 +8,12 @@
     "VRChat",
     "Unity"
   ],
-  "author": "esnya",
+  "author": {
+    "name": "esnya"
+  },
   "license": "MIT",
   "private": true,
-  "legacyFolders": [
-    "Assets\\EsnyaSFAddons"
-  ],
-  "gitDependencies": {
-    "com.github.sacchan-vrc.sacc-flight-and-vehicles": "https://github.com/esnya/SaccFlightAndVehicles.git#esnya-fork",
-    "com.merlinvr.udonsharp": "https://github.com/vrchat-community/UdonSharp.git?path=Assets/UdonSharp#1.0.1",
-    "com.vrchat.base": "https://github.com/vrchat/packages.git?path=/packages/com.vrchat.base#3.0.4",
-    "com.vrchat.worlds": "https://github.com/vrchat/packages.git?path=/packages/com.vrchat.worlds#3.0.4",
-    "sh.orels.udontoolkit": "https://github.com/orels1/UdonToolkit.git#develop"
+  "legacyFolders": {
+    "Assets\\EsnyaSFAddons": ""
   }
 }

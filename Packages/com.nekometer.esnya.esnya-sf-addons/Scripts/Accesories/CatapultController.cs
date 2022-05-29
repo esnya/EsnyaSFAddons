@@ -33,9 +33,7 @@ namespace EsnyaSFAddons
 
         public void _Launch()
         {
-            var dfunc = FindDFunc();
-            if (!dfunc) return;
-            dfunc.SendCustomNetworkEvent(NetworkEventTarget.Owner, nameof(DFUNC_Catapult.KeyboardInput));
+            SendCustomNetworkEvent(NetworkEventTarget.All, nameof(PreLaunch));
             SendCustomEventDelayedSeconds(nameof(_DisableTension), 6);
         }
 
@@ -71,6 +69,21 @@ namespace EsnyaSFAddons
             }
 
             return null;
+        }
+
+        public void PreLaunch()
+        {
+            var dfunc = FindDFunc();
+            if (!dfunc) SendCustomEventDelayedFrames(nameof(_FakeLaunch), 3);
+
+            dfunc.OnCatapult = true;
+            dfunc.Launching = true;
+            dfunc.PreLaunchCatapult();
+        }
+
+        public void _FakeLaunch()
+        {
+            if (catapultAnimator) catapultAnimator.SetTrigger("launch");
         }
     }
 }

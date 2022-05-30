@@ -17,8 +17,10 @@ namespace EsnyaSFAddons
         private Animator catapultAnimator;
         [UdonSynced][FieldChangeCallback(nameof(Tension))] private bool _tension;
 
-        public bool Tension {
-            private set {
+        public bool Tension
+        {
+            private set
+            {
                 _tension = value;
                 if (catapultAnimator) catapultAnimator.SetBool("tension", value);
             }
@@ -64,7 +66,7 @@ namespace EsnyaSFAddons
 
                 foreach (var dfunc in saccEntity.gameObject.GetComponentsInChildren<DFUNC_Catapult>(true))
                 {
-                    if (!dfunc || !dfunc.OnCatapult || dfunc.Launching) continue;
+                    if (!dfunc || !dfunc.OnCatapult || dfunc.Launching || !dfunc.CatapultTransform) continue;
                     return dfunc;
                 }
             }
@@ -81,7 +83,6 @@ namespace EsnyaSFAddons
                 return;
             }
 
-            dfunc.OnCatapult = true;
             dfunc.Launching = true;
             dfunc.PreLaunchCatapult();
         }

@@ -14,6 +14,7 @@ namespace EsnyaSFAddons
         [Tooltip("m")] public float diameter = 1.9304f;
         [Tooltip("rpm")] public float maxRPM = 2700;
         [Tooltip("rpm")] public float minRPM = 600;
+        public AnimationCurve throttleCurve;
         public AnimationCurve mixtureCurve;
         public float rpmResponse = 1.0f;
 
@@ -58,6 +59,10 @@ namespace EsnyaSFAddons
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
         private void Reset()
         {
+            throttleCurve = new AnimationCurve(new [] {
+                new Keyframe(0.0f, 0.0f, 1.0f, 1.0f),
+                new Keyframe(1.0f, 1.0f, 0.0f, 0.0f),
+            });
             mixtureCurve = new AnimationCurve(new [] {
                 new Keyframe(0.0f, 0.0f, 1.0f, 1.0f),
                 new Keyframe(0.6f, 1.0f, 0.0f, 0.0f),
@@ -160,7 +165,7 @@ namespace EsnyaSFAddons
                 mixtureCutOffTimer += Time.deltaTime * UnityEngine.Random.Range(0.9f, 1.1f);
             }
 
-            targetRPM = Mathf.Lerp(targetRPM, engineOn ? Mathf.Lerp(minRPM, maxRPM, airVehicle.ThrottleInput) * mixtureCurve.Evaluate(mixture) : 0, Time.deltaTime * rpmResponse);
+            targetRPM = Mathf.Lerp(targetRPM, engineOn ? Mathf.Lerp(minRPM, maxRPM, throttleCurve.Evaluate(airVehicle.ThrottleInput)) * mixtureCurve.Evaluate(mixture) : 0, Time.deltaTime * rpmResponse);
             UpdatePropeller(targetRPM, Vector3.Dot(airVehicle.AirVel, transform.forward));
 
             airVehicle.EngineOutput = Mathf.Clamp01(RPM / maxRPM);

@@ -311,7 +311,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: maxRollAoA
+      Data: maxSlipAngle
     - Name: $v
       Entry: 7
       Data: 18|UdonSharp.Compiler.FieldDefinition, UdonSharp.Editor
@@ -332,10 +332,10 @@ MonoBehaviour:
       Data: SystemSingle
     - Name: symbolOriginalName
       Entry: 1
-      Data: maxRollAoA
+      Data: maxSlipAngle
     - Name: symbolUniqueName
       Entry: 1
-      Data: maxRollAoA
+      Data: maxSlipAngle
     - Name: symbolDefaultValue
       Entry: 6
       Data: 

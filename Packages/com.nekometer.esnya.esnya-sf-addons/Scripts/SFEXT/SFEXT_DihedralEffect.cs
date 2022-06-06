@@ -6,11 +6,11 @@ namespace EsnyaSFAddons
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class SFEXT_DihedralEffect : UdonSharpBehaviour
     {
-        public float coefficient = 0.1f;
+        public float coefficient = 0.01f;
         [Tooltip("Pa")] public float dynamicPressure = 10;
         [Tooltip("m^2")] public float referenceArea = 1;
         [Tooltip("m")] public float calacteristicLength = 1;
-        public float maxRollAoA = 5;
+        public float maxSlipAngle = 20;
         public float aoaCurve = 1;
         public float extraDrag = 0;
         private Rigidbody vehicleRigidbody;
@@ -34,9 +34,10 @@ namespace EsnyaSFAddons
         }
 
         private float torqueMultiplier;
+
         public void SFEXT_O_PilotEnter()
         {
-            torqueMultiplier = -0.5f * coefficient * dynamicPressure * referenceArea * calacteristicLength;
+            torqueMultiplier = 0.5f * coefficient * dynamicPressure * referenceArea * calacteristicLength;
             gameObject.SetActive(true);
         }
 
@@ -49,19 +50,24 @@ namespace EsnyaSFAddons
         {
             if (!airVehicle) return;
 
+            var vehicleRight = vehicleTransform.right;
+            var vehicleUp = vehicleTransform.up;
+            var vehicleForward = vehicleTransform.forward;
+
             var airVel = airVehicle.AirVel;
             var airSpeed = airVel.magnitude;
             var rotLift = Mathf.Min(airSpeed / maxSpeed, 1);
-            var slipSpeed = Vector3.Dot(airVel, vehicleTransform.right);
-
-            var absSlipSpeed = Mathf.Abs(slipSpeed);
-            var rollAoA = Vector3.SignedAngle(Vector3.up, Vector3.ProjectOnPlane(airVel, Vector3.forward), Vector3.forward);
-            var curvedRollAoA = Mathf.Pow(Mathf.Clamp01(Mathf.Abs(rollAoA) / maxRollAoA), aoaCurve) * Mathf.Sign(rollAoA);
-            var roll = torqueMultiplier * Mathf.Pow(absSlipSpeed, 2.0f) * curvedRollAoA * rotLift;
-            // var normalizedRollAoA = Mathf.Sin(Mathf.Clamp(rollAoA / maxRollAoA,-.5f,.5f) * Mathf.PI);
-            // var roll = torqueMultiplier * Mathf.Pow(absSlipSpeed, 2.0f) * normalizedRollAoA * rotLift;
+            var slipAngle = Vector3.SignedAngle(Vector3.Dot(airVel, vehicleForward) >= 0 ? vehicleForward : -vehicleForward, Vector3.ProjectOnPlane(airVel, vehicleUp), vehicleUp);
+            var normalizedSlipAngle = Mathf.Clamp(slipAngle / maxSlipAngle, -1, 1);
+            var curvedSlipAngle = Mathf.Pow(Mathf.Abs(normalizedSlipAngle), aoaCurve) * Mathf.Sign(normalizedSlipAngle);
+            var roll = torqueMultiplier * Mathf.Pow(airSpeed, 2.0f) * curvedSlipAngle * rotLift;
             vehicleRigidbody.AddRelativeTorque(0, 0, roll);
-            if (hasDrag) vehicleRigidbody.AddRelativeForce(-Vector3.right * Mathf.Pow(absSlipSpeed, 2.0f) * Mathf.Sign(slipSpeed) * dragMultiplier * airVehicle.Atmosphere, ForceMode.Acceleration);
+            if (hasDrag)
+            {
+                var slipSpeed = Vector3.Dot(airVel, vehicleRight);
+                var absSlipSpeed = Mathf.Abs(slipSpeed);
+                vehicleRigidbody.AddRelativeForce(-Vector3.right * Mathf.Pow(absSlipSpeed, 2.0f) * Mathf.Sign(slipSpeed) * dragMultiplier * airVehicle.Atmosphere, ForceMode.Acceleration);
+            }
         }
     }
 }

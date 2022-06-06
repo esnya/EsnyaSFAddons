@@ -13,6 +13,7 @@ namespace EsnyaSFAddons
         public Transform catapultTrigger;
         public float planeDetectionRadius = 2.0f;
         public LayerMask planeDetectionLayerMask = 1 << 31 | 1 << 25 | 1 << 17;
+        public GameObject tensionIndicator;
 
         private Animator catapultAnimator;
         [UdonSynced][FieldChangeCallback(nameof(Tension))] private bool _tension;
@@ -23,6 +24,7 @@ namespace EsnyaSFAddons
             {
                 _tension = value;
                 if (catapultAnimator) catapultAnimator.SetBool("tension", value);
+                if (tensionIndicator) tensionIndicator.SetActive(value);
             }
             get => _tension;
         }

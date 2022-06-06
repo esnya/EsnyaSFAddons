@@ -1,4 +1,5 @@
 ﻿
+using TMPro;
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
@@ -14,10 +15,14 @@ namespace EsnyaSFAddons
         public float planeDetectionRadius = 2.0f;
         public LayerMask planeDetectionLayerMask = 1 << 31 | 1 << 25 | 1 << 17;
         public GameObject tensionIndicator;
+        public TextMeshPro launchSpeedDisplay;
+        public float launchSpeedAnimatroMultiplier = 1.0f;
+        public float launchSpeedDisplayMultiplier = 1.0f;
+        public string launchSpeedDisplayFormat = "P0";
+        public float launchSpeedStep = 0.1f;
 
-        private Animator catapultAnimator;
+
         [UdonSynced][FieldChangeCallback(nameof(Tension))] private bool _tension;
-
         public bool Tension
         {
             private set
@@ -29,10 +34,30 @@ namespace EsnyaSFAddons
             get => _tension;
         }
 
+        [UdonSynced][FieldChangeCallback(targetPropertyName: nameof(LaunchSpeed))] private float _launchSpeed;
+        public float LaunchSpeed
+        {
+            private set
+            {
+                _launchSpeed = value;
+                if (catapultAnimator) catapultAnimator.SetFloat("launchspeed", value * launchSpeedAnimatroMultiplier);
+                if (launchSpeedDisplay) launchSpeedDisplay.text = (value * launchSpeedDisplayMultiplier).ToString(launchSpeedDisplayFormat);
+            }
+            get => _launchSpeed;
+        }
+
+        private Animator catapultAnimator;
+
         private void Start()
         {
             catapultAnimator = catapultTrigger.GetComponentInParent<Animator>();
             Tension = false;
+            LaunchSpeed = 1.0f;
+        }
+
+        public void _TakeOwnership()
+        {
+            if (!Networking.IsOwner(gameObject)) Networking.SetOwner(Networking.LocalPlayer, gameObject);
         }
 
         public void _Launch()
@@ -44,7 +69,7 @@ namespace EsnyaSFAddons
 
         public void _ToggleTension()
         {
-            if (!Networking.IsOwner(gameObject)) Networking.SetOwner(Networking.LocalPlayer, gameObject);
+            _TakeOwnership();
             Tension = !Tension;
             RequestSerialization();
         }
@@ -93,5 +118,14 @@ namespace EsnyaSFAddons
         {
             if (catapultAnimator) catapultAnimator.SetTrigger("launch");
         }
+
+        private void AddLaunchSpeed(float value)
+        {
+            _TakeOwnership();
+            LaunchSpeed = Mathf.Clamp01(LaunchSpeed + value);
+            RequestSerialization();
+        }
+        public void _IncrementLaunchSpeed() => AddLaunchSpeed(launchSpeedStep);
+        public void _DecrementLaunchSpeed() => AddLaunchSpeed(value: -launchSpeedStep);
     }
 }

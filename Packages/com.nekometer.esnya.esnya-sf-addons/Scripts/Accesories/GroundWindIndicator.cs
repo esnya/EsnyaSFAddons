@@ -44,7 +44,7 @@ namespace EsnyaSFAddons
 
         private float GetHeding(Vector3 vector)
         {
-            return (Vector3.SignedAngle(vector.normalized, Vector3.forward, Vector3.up) + 360.0f) % 360.0f;
+            return (Vector3.SignedAngle(Vector3.forward, vector.normalized, Vector3.up) + 360.0f) % 360.0f;
         }
 
         private void OnEnable()

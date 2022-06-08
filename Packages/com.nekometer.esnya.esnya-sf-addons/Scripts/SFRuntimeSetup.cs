@@ -1,14 +1,11 @@
 using System;
-using InariUdon.UI;
 using UdonSharp;
 using UnityEngine;
-using UnityEngine.UI;
-using VRC.SDKBase;
 using VRC.Udon;
 
 namespace EsnyaAircraftAssets
 {
-    [DefaultExecutionOrder(100)] // After SaccEntity/SaccAirVehicle/SAV_WindChanger
+    [DefaultExecutionOrder(order: 100)] // After SaccEntity/SaccAirVehicle/SAV_WindChanger
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class SFRuntimeSetup : UdonSharpBehaviour
     {
@@ -17,11 +14,6 @@ namespace EsnyaAircraftAssets
         public bool repeatingWorld = true;
         public float repeatingWorldDistance = 20000;
 
-        public bool randomWind = false;
-        public float randomWindStrength = 6.0f;
-        public AnimationCurve randomWindCurve = AnimationCurve.Linear(0, 0, 0, 1);
-        public float randomGustStrength = 3.0f;
-        public AnimationCurve randomGustCurve = AnimationCurve.Linear(0, 0, 0, 1);
 
         [Header("Inject Extentions")]
         public UdonSharpBehaviour[] injectExtentions = { };
@@ -49,45 +41,24 @@ namespace EsnyaAircraftAssets
 
             if (windChangers != null)
             {
-                foreach (var changer in windChangers)
+                foreach (SAV_WindChanger changer in windChangers)
                 {
                     if (!changer) continue;
 
-                    changer.SetProgramVariable(nameof(SAV_WindChanger.SaccAirVehicles), airVehicles);
+                    changer.SetProgramVariable(name: nameof(SAV_WindChanger.SaccAirVehicles), airVehicles);
 
                 }
                 if (windChangers.Length > 0 && windsocks != null)
                 {
-                    foreach (var windsock in windsocks) windsock.windChanger = windChangers[0];
+                    foreach (Windsock windsock in windsocks) windsock.windChanger = windChangers[0];
                 }
             }
 
-            Log("Info", $"Initialized {airVehicles.Length} vehicles");
-
-            SendCustomEventDelayedSeconds(nameof(_SyncDefault), 20);
+            Debug.Log($"[ESFA] Initialized {airVehicles.Length} vehicles");
 
             gameObject.SetActive(false);
         }
 
-
-        public void _SyncDefault()
-        {
-            if (randomWind && windChangers != null)
-            {
-                var windStrength = randomWindCurve.Evaluate(UnityEngine.Random.value) * randomWindStrength;
-                var wind = Quaternion.AngleAxis(UnityEngine.Random.Range(0, 360), Vector3.up) * Vector3.forward * windStrength;
-                var gustStrength = randomGustCurve.Evaluate(UnityEngine.Random.value) * randomGustStrength;
-                foreach (var changer in windChangers)
-                {
-                    if (!changer || (!Networking.IsOwner(changer.gameObject) && changer.SyncedWind)) continue;
-
-                    changer.transform.rotation = Quaternion.FromToRotation(Vector3.forward, wind.normalized);
-                    changer.WindStrength = windStrength;
-                    changer.WindGustStrength = gustStrength;
-                    changer.RequestSerialization();
-                }
-            }
-        }
 
         private void SetupExtentionReference(UdonBehaviour extention, string variableName, UdonSharpBehaviour value)
         {
@@ -116,14 +87,6 @@ namespace EsnyaAircraftAssets
             }
 
             entity.SetProgramVariable(nameof(entity.ExtensionUdonBehaviours), nextArray);
-        }
-
-        [Header("Logger")]
-        public UdonLogger logger;
-        private void Log(string level, string log)
-        {
-            if (logger == null) Debug.Log(log);
-            else logger.Log(level, gameObject.name, log);
         }
 
 #if !COMPILER_UDONSHARP && UNITY_EDITOR

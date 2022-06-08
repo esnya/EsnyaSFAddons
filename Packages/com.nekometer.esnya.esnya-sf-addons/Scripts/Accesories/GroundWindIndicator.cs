@@ -78,7 +78,7 @@ namespace EsnyaSFAddons
                         else
                         {
                             currentDirectionIndicator.gameObject.SetActive(true);
-                            currentDirectionIndicator.localRotation = Quaternion.AngleAxis(GetHeding(GetFinalWind()), Vector3.forward);
+                            currentDirectionIndicator.localRotation = Quaternion.AngleAxis(GetHeding(GetFinalWind()), Vector3.back);
                         }
                     }
                     break;
@@ -93,7 +93,7 @@ namespace EsnyaSFAddons
                     if (directionRangeImage)
                     {
                         var strength = wind.magnitude;
-                        var range = Vector3.Angle(Vector3.forward, (Vector3.forward * strength + Vector3.right * strength).normalized);
+                        var range = Vector3.Angle(Vector3.forward, (Vector3.forward * strength + Vector3.right * gust).normalized);
                         directionRangeImage.transform.localRotation = Quaternion.AngleAxis(range / 2, Vector3.forward);
                         directionRangeImage.fillAmount = range / 360.0f;
                     }

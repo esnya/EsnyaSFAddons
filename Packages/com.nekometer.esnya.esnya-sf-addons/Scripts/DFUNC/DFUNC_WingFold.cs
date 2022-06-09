@@ -10,7 +10,7 @@ namespace EsnyaSFAddons
     public class DFUNC_WingFold : UdonSharpBehaviour
     {
         public GameObject Dial_Funcon;
-        public float ExtraLiftMulti = 0.2f;
+        public float ExtraLiftMulti = 0.1f;
         public string animatorBool = "wingfold";
         public bool flapsOff = true;
 
@@ -22,7 +22,7 @@ namespace EsnyaSFAddons
         private float ExtraLift {
             set {
                 var diff = value - _extraLift;
-                if (diff > 0) airVehicle.ExtraLift += diff;
+                if (diff > 0) airVehicle.ExtraLift -= diff;
                 _extraLift = value;
             }
         }
@@ -37,11 +37,11 @@ namespace EsnyaSFAddons
                 if (Dial_Funcon) Dial_Funcon.SetActive(value);
                 if (value && flapsOff && flapsDFunc) flapsDFunc.SetFlapsOff();
                 _fold = value;
-                if (!value && hasPilot) gameObject.SetActive(false);
+                if (value && !hasPilot) gameObject.SetActive(false);
             }
         }
 
-        public void SFEXT_L_EntityStaert()
+        public void SFEXT_L_EntityStart()
         {
             entity = GetComponentInParent<SaccEntity>();
             airVehicle = (SaccAirVehicle)entity.GetExtention(GetUdonTypeName<SaccAirVehicle>());
@@ -49,8 +49,13 @@ namespace EsnyaSFAddons
             vehicleAnimator = airVehicle.VehicleAnimator;
 
             Fold = true;
+            gameObject.SetActive(entity.Piloting);
+        }
 
-            gameObject.SetActive(false);
+        public void SFEXT_G_Reappear()
+        {
+            Fold = true;
+            gameObject.SetActive(hasPilot);
         }
 
         public void SFEXT_G_PilotEnter()
@@ -61,7 +66,12 @@ namespace EsnyaSFAddons
         public void SFEXT_G_PilotExit()
         {
             hasPilot = false;
-            if (!Fold) gameObject.SetActive(false);
+            if (Fold) gameObject.SetActive(false);
+        }
+
+        public void SFEXT_O_FlapsOn()
+        {
+            if (Fold && flapsDFunc) flapsDFunc.ToggleFlaps();
         }
 
         public void KeyboardInput() => ToggleFold();

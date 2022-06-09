@@ -15,7 +15,7 @@ MonoBehaviour:
   udonVariables:
   - prefabInstance: {fileID: 4296079705154220477, guid: 9a04544fed858774db6f0e311df99d4f,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Prefabs/AuralWarnings.prefab
+    prefabPath: Prefabs/AuralWarnings.prefab
     udonVariables:
     - udonInstance: {fileID: 352079689331747108, guid: 9a04544fed858774db6f0e311df99d4f,
         type: 3}
@@ -49,7 +49,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 1673653885684524489, guid: 64f84f4ec835c9c428ded15663e7b717,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Prefabs/GPWS.prefab
+    prefabPath: Prefabs/GPWS.prefab
     udonVariables:
     - udonInstance: {fileID: 8133473159918299709, guid: 64f84f4ec835c9c428ded15663e7b717,
         type: 3}
@@ -142,7 +142,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 77562920699682275, guid: b7d2d7ffda13f3d4298822c5ce556531,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Prefabs/GroundRespawnPort.prefab
+    prefabPath: Prefabs/GroundRespawnPort.prefab
     udonVariables:
     - udonInstance: {fileID: 2397145880132575317, guid: b7d2d7ffda13f3d4298822c5ce556531,
         type: 3}
@@ -158,7 +158,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 4561020855622155021, guid: 6938d71ecbce17046a1b6dee1ece5271,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Prefabs/RandomWindControl.prefab
+    prefabPath: Prefabs/RandomWindControl.prefab
     udonVariables:
     - udonInstance: {fileID: 2025748674987423690, guid: 6938d71ecbce17046a1b6dee1ece5271,
         type: 3}
@@ -258,7 +258,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 4200176763166755100, guid: a3474a15f0c32c048a42b28cb6c28314,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Prefabs/SAV_KillTracker.prefab
+    prefabPath: Prefabs/SAV_KillTracker.prefab
     udonVariables:
     - udonInstance: {fileID: 4200176763166755102, guid: a3474a15f0c32c048a42b28cb6c28314,
         type: 3}
@@ -270,7 +270,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 7167399494955320689, guid: 1c1a05495c6a71f44a08a38e9fa48056,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Prefabs/SAV_UdonChips.prefab
+    prefabPath: Prefabs/SAV_UdonChips.prefab
     udonVariables:
     - udonInstance: {fileID: 7167399494955320695, guid: 1c1a05495c6a71f44a08a38e9fa48056,
         type: 3}
@@ -330,7 +330,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 1448655478291700666, guid: 358682d5bee36064fac5516ac2e351b4,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Prefabs/SFRuntimeSetup.prefab
+    prefabPath: Prefabs/SFRuntimeSetup.prefab
     udonVariables:
     - udonInstance: {fileID: 4228853703890921773, guid: 358682d5bee36064fac5516ac2e351b4,
         type: 3}
@@ -391,7 +391,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 3292609468833336960, guid: ea89ddfe79d44094ea78cd5bb474378d,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Prefabs/WakeTurbulence.prefab
+    prefabPath: Prefabs/WakeTurbulence.prefab
     udonVariables:
     - udonInstance: {fileID: 8751235563450980051, guid: ea89ddfe79d44094ea78cd5bb474378d,
         type: 3}
@@ -415,7 +415,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 6848626507122933225, guid: ea70c1db6157b404f89042fc1d6af63d,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Prefabs/WheelLock.prefab
+    prefabPath: Prefabs/WheelLock.prefab
     udonVariables:
     - udonInstance: {fileID: 7601702353275874513, guid: ea70c1db6157b404f89042fc1d6af63d,
         type: 3}
@@ -435,7 +435,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 1785411957616873188, guid: a5354ba0b013f2a459d7628b881587ec,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/SampleAssets/SamplePrefabs/Catapult_Controller_Sample.prefab
+    prefabPath: SampleAssets/SamplePrefabs/Catapult_Controller_Sample.prefab
     udonVariables:
     - udonInstance: {fileID: 4766544752908118477, guid: a5354ba0b013f2a459d7628b881587ec,
         type: 3}
@@ -799,7 +799,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 2619853947706612894, guid: c9a3c1c7d88df1444af37b60aae5b45a,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/SampleAssets/SamplePrefabs/HoldBackBar.prefab
+    prefabPath: SampleAssets/SamplePrefabs/HoldBackBar.prefab
     udonVariables:
     - udonInstance: {fileID: 3704979589593172750, guid: c9a3c1c7d88df1444af37b60aae5b45a,
         type: 3}
@@ -820,7 +820,7 @@ MonoBehaviour:
         - HB_SnapTarget
   - prefabInstance: {fileID: 3803616218004282140, guid: 583fd97adb6704942b4f8397ad6dea36,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_AdvancedCatapult.prefab
+    prefabPath: Templates/DFUNC/DFUNC_AdvancedCatapult.prefab
     udonVariables:
     - udonInstance: {fileID: 6423383410669109240, guid: 583fd97adb6704942b4f8397ad6dea36,
         type: 3}
@@ -866,7 +866,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 5727577825426832583, guid: 6650f9aa5525b5641b50e839377c185a,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_EX_AdvancedFlaps.prefab
+    prefabPath: Templates/DFUNC/DFUNC_EX_AdvancedFlaps.prefab
     udonVariables:
     - udonInstance: {fileID: 3984001719541567992, guid: 6650f9aa5525b5641b50e839377c185a,
         type: 3}
@@ -1006,7 +1006,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 7969372721903406974, guid: 6c537ff55c461bd4a866262d7a9c035a,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_EX_AdvancedSpeedBrake.prefab
+    prefabPath: Templates/DFUNC/DFUNC_EX_AdvancedSpeedBrake.prefab
     udonVariables:
     - udonInstance: {fileID: 5822506887532250372, guid: 6c537ff55c461bd4a866262d7a9c035a,
         type: 3}
@@ -1046,7 +1046,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 2267623481933454773, guid: f8c5f353df62d164880be43abd906196,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_EX_AdvancedThrustReverser.prefab
+    prefabPath: Templates/DFUNC/DFUNC_EX_AdvancedThrustReverser.prefab
     udonVariables:
     - udonInstance: {fileID: 3016178978047706468, guid: f8c5f353df62d164880be43abd906196,
         type: 3}
@@ -1058,7 +1058,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 8142151105321164743, guid: ba4249ca1b753eb45a13a9a34c1b4f00,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_EX_AutoStarter.prefab
+    prefabPath: Templates/DFUNC/DFUNC_EX_AutoStarter.prefab
     udonVariables:
     - udonInstance: {fileID: 946036509214849854, guid: ba4249ca1b753eb45a13a9a34c1b4f00,
         type: 3}
@@ -1133,7 +1133,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 3738273842312086037, guid: 5da2c23e7a4563345aba087fbfae6db4,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_EX_BuddyPod.prefab
+    prefabPath: Templates/DFUNC/DFUNC_EX_BuddyPod.prefab
     udonVariables:
     - udonInstance: {fileID: 6140970775523152584, guid: 5da2c23e7a4563345aba087fbfae6db4,
         type: 3}
@@ -1214,7 +1214,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 550316111611031452, guid: 067042b069aad4442be89f2c3ff101bb,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_EX_ElevatorTrim.prefab
+    prefabPath: Templates/DFUNC/DFUNC_EX_ElevatorTrim.prefab
     udonVariables:
     - udonInstance: {fileID: 1633664337073165412, guid: 067042b069aad4442be89f2c3ff101bb,
         type: 3}
@@ -1266,7 +1266,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 5056190570860630842, guid: 14311b220137b6f49a43baa4f0a8a337,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_EX_LandingLight.prefab
+    prefabPath: Templates/DFUNC/DFUNC_EX_LandingLight.prefab
     udonVariables:
     - udonInstance: {fileID: 1046274774635558616, guid: 14311b220137b6f49a43baa4f0a8a337,
         type: 3}
@@ -1283,7 +1283,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 3760395269177498342, guid: 08fe744f2119bbc4aba01c14c6d50d83,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_EX_ParkingBrake.prefab
+    prefabPath: Templates/DFUNC/DFUNC_EX_ParkingBrake.prefab
     udonVariables:
     - udonInstance: {fileID: 1613382300416740863, guid: 08fe744f2119bbc4aba01c14c6d50d83,
         type: 3}
@@ -1299,7 +1299,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 802144128273613762, guid: 3dd25c14fcb7467468544462b660b536,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_EX_Reverse.prefab
+    prefabPath: Templates/DFUNC/DFUNC_EX_Reverse.prefab
     udonVariables:
     - udonInstance: {fileID: 5777565062226670852, guid: 3dd25c14fcb7467468544462b660b536,
         type: 3}
@@ -1311,7 +1311,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 3785738319546384218, guid: 3d34efec88694f944bc6f66482f9fc96,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_EX_SeatAdjuster.prefab
+    prefabPath: Templates/DFUNC/DFUNC_EX_SeatAdjuster.prefab
     udonVariables:
     - udonInstance: {fileID: 3755313463066164164, guid: 3d34efec88694f944bc6f66482f9fc96,
         type: 3}
@@ -1347,7 +1347,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 812599278805672292, guid: 6521cd162220e7542a484c794c766437,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_EX_SendCustomEvent.prefab
+    prefabPath: Templates/DFUNC/DFUNC_EX_SendCustomEvent.prefab
     udonVariables:
     - udonInstance: {fileID: 8159656708099121208, guid: 6521cd162220e7542a484c794c766437,
         type: 3}
@@ -1387,7 +1387,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 2787165722511459572, guid: 2ebb7ac724227e54e90682bafaf49d32,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_EX_Slider.prefab
+    prefabPath: Templates/DFUNC/DFUNC_EX_Slider.prefab
     udonVariables:
     - udonInstance: {fileID: 4202857711251400712, guid: 2ebb7ac724227e54e90682bafaf49d32,
         type: 3}
@@ -1443,7 +1443,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 3607874184192454992, guid: ed05e53d4fda0534abf765ae5d6399c5,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_EX_ThrustReverser.prefab
+    prefabPath: Templates/DFUNC/DFUNC_EX_ThrustReverser.prefab
     udonVariables:
     - udonInstance: {fileID: 5171684213977161088, guid: ed05e53d4fda0534abf765ae5d6399c5,
         type: 3}
@@ -1467,7 +1467,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 3603277942381061410, guid: 42a0e736831189f46a1791d93c00c621,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_EX_ToggleBool.prefab
+    prefabPath: Templates/DFUNC/DFUNC_EX_ToggleBool.prefab
     udonVariables:
     - udonInstance: {fileID: 8531722871364114916, guid: 42a0e736831189f46a1791d93c00c621,
         type: 3}
@@ -1531,7 +1531,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 7184995822787755821, guid: 39a7b987c3b063a4f925bbb51fc76901,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_EX_ToggleEngine.prefab
+    prefabPath: Templates/DFUNC/DFUNC_EX_ToggleEngine.prefab
     udonVariables:
     - udonInstance: {fileID: 3422231097444757924, guid: 39a7b987c3b063a4f925bbb51fc76901,
         type: 3}
@@ -1567,7 +1567,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 1078239513469566278, guid: cad0c0f5c52d9c744a0cad01b65d4cd4,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_EX_WingFold.prefab
+    prefabPath: Templates/DFUNC/DFUNC_EX_WingFold.prefab
     udonVariables:
     - udonInstance: {fileID: 9117279695843466415, guid: cad0c0f5c52d9c744a0cad01b65d4cd4,
         type: 3}
@@ -1583,7 +1583,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 4935381083193862010, guid: 18826fcdcaf80d34c88a15e78bac1702,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_L2_Limits.prefab
+    prefabPath: Templates/DFUNC/DFUNC_L2_Limits.prefab
     udonVariables:
     - udonInstance: {fileID: 4935381083193862008, guid: 18826fcdcaf80d34c88a15e78bac1702,
         type: 3}
@@ -1608,7 +1608,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 2527132728959465974, guid: c2dde26d3e8fe364e8e9b01ca9a88a25,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_L3_Flares.prefab
+    prefabPath: Templates/DFUNC/DFUNC_L3_Flares.prefab
     udonVariables:
     - udonInstance: {fileID: 2527132728959465960, guid: c2dde26d3e8fe364e8e9b01ca9a88a25,
         type: 3}
@@ -1654,7 +1654,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 5720149092299893507, guid: 383082a9184dec94fbc6d88de355aaf5,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_L4_Catapult.prefab
+    prefabPath: Templates/DFUNC/DFUNC_L4_Catapult.prefab
     udonVariables:
     - udonInstance: {fileID: 5720149092299893505, guid: 383082a9184dec94fbc6d88de355aaf5,
         type: 3}
@@ -1675,7 +1675,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 7846000329922702561, guid: cf6549348fe2e8e4b944bb3cbd10393d,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_L5_Brake.prefab
+    prefabPath: Templates/DFUNC/DFUNC_L5_Brake.prefab
     udonVariables:
     - udonInstance: {fileID: 7846000329922702567, guid: cf6549348fe2e8e4b944bb3cbd10393d,
         type: 3}
@@ -1721,7 +1721,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 3245607287650650883, guid: aef8b3426e835844a8eaa1445c34dc1a,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_L6_AltHold.prefab
+    prefabPath: Templates/DFUNC/DFUNC_L6_AltHold.prefab
     udonVariables:
     - udonInstance: {fileID: 3245607287650650881, guid: aef8b3426e835844a8eaa1445c34dc1a,
         type: 3}
@@ -1742,7 +1742,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 6331072584405515513, guid: bd8e6322bac17a445a93fbeddcb3076a,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_L7_Canopy.prefab
+    prefabPath: Templates/DFUNC/DFUNC_L7_Canopy.prefab
     udonVariables:
     - udonInstance: {fileID: 6331072584405516039, guid: bd8e6322bac17a445a93fbeddcb3076a,
         type: 3}
@@ -1782,7 +1782,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 6220841865249920236, guid: a236a65461dc63944b102f97f0a01a26,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_L8_Cruise.prefab
+    prefabPath: Templates/DFUNC/DFUNC_L8_Cruise.prefab
     udonVariables:
     - udonInstance: {fileID: 6220841865249920238, guid: a236a65461dc63944b102f97f0a01a26,
         type: 3}
@@ -1799,7 +1799,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 3656647961289691633, guid: 1c7cd7e33e6b67843afaa22080ef380a,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_R1_Gun.prefab
+    prefabPath: Templates/DFUNC/DFUNC_R1_Gun.prefab
     udonVariables:
     - udonInstance: {fileID: 3656647961289691639, guid: 1c7cd7e33e6b67843afaa22080ef380a,
         type: 3}
@@ -1858,7 +1858,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 7866721075028959627, guid: 0984a56eb6fcff64ea6ec844de5a4367,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_R2_AAM.prefab
+    prefabPath: Templates/DFUNC/DFUNC_R2_AAM.prefab
     udonVariables:
     - udonInstance: {fileID: 4337084840933362394, guid: 0984a56eb6fcff64ea6ec844de5a4367,
         type: 3}
@@ -2092,7 +2092,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 7042644753301797328, guid: a10059ba67f0be540a26d2f5418c9df5,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_R3_AGM.prefab
+    prefabPath: Templates/DFUNC/DFUNC_R3_AGM.prefab
     udonVariables:
     - udonInstance: {fileID: 2399291772677173552, guid: a10059ba67f0be540a26d2f5418c9df5,
         type: 3}
@@ -2224,7 +2224,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 5320981820917538332, guid: b9d27c513c3759f4d9c6c6c338f7476e,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_R4_Bomb.prefab
+    prefabPath: Templates/DFUNC/DFUNC_R4_Bomb.prefab
     udonVariables:
     - udonInstance: {fileID: 6422572651215625021, guid: b9d27c513c3759f4d9c6c6c338f7476e,
         type: 3}
@@ -2342,7 +2342,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 7541677645997731399, guid: 90506e84271572a4c9fc2d1f5892efd0,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_R5_Gear.prefab
+    prefabPath: Templates/DFUNC/DFUNC_R5_Gear.prefab
     udonVariables:
     - udonInstance: {fileID: 7541677645997731398, guid: 90506e84271572a4c9fc2d1f5892efd0,
         type: 3}
@@ -2362,7 +2362,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 4137676604410028717, guid: a5696404210ac7043b9ea6a85a8ed5ca,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_R6_Flaps.prefab
+    prefabPath: Templates/DFUNC/DFUNC_R6_Flaps.prefab
     udonVariables:
     - udonInstance: {fileID: 4137676604410028715, guid: a5696404210ac7043b9ea6a85a8ed5ca,
         type: 3}
@@ -2402,7 +2402,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 8421581195871273341, guid: 35accae6319c43e42aa4d7176cc0f872,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_R7_Hook.prefab
+    prefabPath: Templates/DFUNC/DFUNC_R7_Hook.prefab
     udonVariables:
     - udonInstance: {fileID: 8421581195871273343, guid: 35accae6319c43e42aa4d7176cc0f872,
         type: 3}
@@ -2432,7 +2432,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 9085515952811586138, guid: 5a672a55442dd8d4e9c05aa096a8f5a4,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNC_R8_Smoke.prefab
+    prefabPath: Templates/DFUNC/DFUNC_R8_Smoke.prefab
     udonVariables:
     - udonInstance: {fileID: 9085515952811586136, guid: 5a672a55442dd8d4e9c05aa096a8f5a4,
         type: 3}
@@ -2454,7 +2454,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 1113314666245282524, guid: 852acd9e09d2a9140ad825aed93653b9,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/DFUNC/DFUNCP_IHaveControl.prefab
+    prefabPath: Templates/DFUNC/DFUNCP_IHaveControl.prefab
     udonVariables:
     - udonInstance: {fileID: 4265566636323367407, guid: 852acd9e09d2a9140ad825aed93653b9,
         type: 3}
@@ -2486,7 +2486,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 5571737103940536461, guid: e6ec1abbcac985d4181e24bfe9e80dbd,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/Extentions/AdvancedEngine.prefab
+    prefabPath: Templates/Extentions/AdvancedEngine.prefab
     udonVariables:
     - udonInstance: {fileID: 301182104358630931, guid: e6ec1abbcac985d4181e24bfe9e80dbd,
         type: 3}
@@ -2871,7 +2871,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 4469067493539146931, guid: 7f363d89853aa5c4abd225b46d7e0cc8,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/Extentions/AdvancedGear.prefab
+    prefabPath: Templates/Extentions/AdvancedGear.prefab
     udonVariables:
     - udonInstance: {fileID: 221982411065559030, guid: 7f363d89853aa5c4abd225b46d7e0cc8,
         type: 3}
@@ -2978,7 +2978,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 6823983850167834323, guid: 4b239471d302b0b4d92ab633dcaf7910,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/Extentions/AdvancedPropellerThrust.prefab
+    prefabPath: Templates/Extentions/AdvancedPropellerThrust.prefab
     udonVariables:
     - udonInstance: {fileID: 8422748759524904380, guid: 4b239471d302b0b4d92ab633dcaf7910,
         type: 3}
@@ -3050,7 +3050,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 223314864055379495, guid: 120457b2c2d29cd47865bf83f4730308,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/Extentions/APU.prefab
+    prefabPath: Templates/Extentions/APU.prefab
     udonVariables:
     - udonInstance: {fileID: 8076429713299883377, guid: 120457b2c2d29cd47865bf83f4730308,
         type: 3}
@@ -3095,7 +3095,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 4626522930957938039, guid: 70a048d2d7e16574fb0d391579976388,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/Extentions/DihedralEffect.prefab
+    prefabPath: Templates/Extentions/DihedralEffect.prefab
     udonVariables:
     - udonInstance: {fileID: 4362774052194730490, guid: 70a048d2d7e16574fb0d391579976388,
         type: 3}
@@ -3127,7 +3127,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 9064442510949789594, guid: 5c3cd0867bbb30e4ebd0a2a30819157f,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/Extentions/DummyHUD.prefab
+    prefabPath: Templates/Extentions/DummyHUD.prefab
     udonVariables:
     - udonInstance: {fileID: 2637390962827783789, guid: 5c3cd0867bbb30e4ebd0a2a30819157f,
         type: 3}
@@ -3167,7 +3167,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 2008650468370262116, guid: e5ca41e2db77b8845b5c7785af93fd08,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/Extentions/EffectsController.prefab
+    prefabPath: Templates/Extentions/EffectsController.prefab
     udonVariables:
     - udonInstance: {fileID: 2008650468370262117, guid: e5ca41e2db77b8845b5c7785af93fd08,
         type: 3}
@@ -3202,7 +3202,7 @@ MonoBehaviour:
         - WingTrailR (UnityEngine.TrailRenderer)
   - prefabInstance: {fileID: 8887638244546730382, guid: 6df820a374913e44f9997a6a2d2973bc,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/Extentions/FloatScript.prefab
+    prefabPath: Templates/Extentions/FloatScript.prefab
     udonVariables:
     - udonInstance: {fileID: 3234550905162333664, guid: 6df820a374913e44f9997a6a2d2973bc,
         type: 3}
@@ -3314,7 +3314,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 4417090854975358889, guid: 530d49ad39e28ed449d01b2e9e835eb3,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/Extentions/IHaveControl.prefab
+    prefabPath: Templates/Extentions/IHaveControl.prefab
     udonVariables:
     - udonInstance: {fileID: 8140760318307118851, guid: 530d49ad39e28ed449d01b2e9e835eb3,
         type: 3}
@@ -3498,7 +3498,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 854394467307425068, guid: 159085ad0f12a324e855b09b0c92e6a6,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/Extentions/OutsideOnly.prefab
+    prefabPath: Templates/Extentions/OutsideOnly.prefab
     udonVariables:
     - udonInstance: {fileID: 8482302438507593943, guid: 159085ad0f12a324e855b09b0c92e6a6,
         type: 3}
@@ -3511,7 +3511,7 @@ MonoBehaviour:
         - null
   - prefabInstance: {fileID: 679646025182154641, guid: 104bfb58cdbbfb94eb83a0b54653b288,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/Extentions/PassengerSeatAdjuster.prefab
+    prefabPath: Templates/Extentions/PassengerSeatAdjuster.prefab
     udonVariables:
     - udonInstance: {fileID: 3773744619555406841, guid: 104bfb58cdbbfb94eb83a0b54653b288,
         type: 3}
@@ -3672,7 +3672,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 8320331003589486179, guid: e03b960375fce1f43a5f2e1d7f2bd452,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/Extentions/RacingTrigger.prefab
+    prefabPath: Templates/Extentions/RacingTrigger.prefab
     udonVariables:
     - udonInstance: {fileID: 8320331003589486181, guid: e03b960375fce1f43a5f2e1d7f2bd452,
         type: 3}
@@ -3697,7 +3697,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 3578919072815048599, guid: a98010f0907f39e438ff76bf1785d1bc,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/Extentions/SaccAirVehicle.prefab
+    prefabPath: Templates/Extentions/SaccAirVehicle.prefab
     udonVariables:
     - udonInstance: {fileID: 3578919072815048598, guid: a98010f0907f39e438ff76bf1785d1bc,
         type: 3}
@@ -4181,7 +4181,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 3146752918488428444, guid: 9a009579863df3442a72025772f1ff57,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/Extentions/SoundController.prefab
+    prefabPath: Templates/Extentions/SoundController.prefab
     udonVariables:
     - udonInstance: {fileID: 3146752918488428447, guid: 9a009579863df3442a72025772f1ff57,
         type: 3}
@@ -4328,7 +4328,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 4754457074920514693, guid: 8291139d29e6bd149bd9d32830ef2630,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/Extentions/SyncScript.prefab
+    prefabPath: Templates/Extentions/SyncScript.prefab
     udonVariables:
     - udonInstance: {fileID: 4754457074920514691, guid: 8291139d29e6bd149bd9d32830ef2630,
         type: 3}
@@ -4372,7 +4372,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 3292609468833336960, guid: 2eb6c987d0dd3a5499073d4c7ac78ae4,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/Extentions/WakeTurbulence.prefab
+    prefabPath: Templates/Extentions/WakeTurbulence.prefab
     udonVariables:
     - udonInstance: {fileID: 2017274071240032448, guid: 2eb6c987d0dd3a5499073d4c7ac78ae4,
         type: 3}
@@ -4396,7 +4396,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 808467897345835904, guid: 234893cd2ae19d34b9d4d3878599f018,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/Extentions/WaterTrigger.prefab
+    prefabPath: Templates/Extentions/WaterTrigger.prefab
     udonVariables:
     - udonInstance: {fileID: 808467897345835933, guid: 234893cd2ae19d34b9d4d3878599f018,
         type: 3}
@@ -4416,7 +4416,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 9064442510949789594, guid: ec338f04339751d4abf06ae86a2d409b,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/Others/HUDController.prefab
+    prefabPath: Templates/Others/HUDController.prefab
     udonVariables:
     - udonInstance: {fileID: 2637390962827783789, guid: ec338f04339751d4abf06ae86a2d409b,
         type: 3}
@@ -4490,7 +4490,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 4972838678739118078, guid: 259bfefb19b853a4d9d7b53d72b44210,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/Others/HUDController_S.prefab
+    prefabPath: Templates/Others/HUDController_S.prefab
     udonVariables:
     - udonInstance: {fileID: 2040597945562244617, guid: 259bfefb19b853a4d9d7b53d72b44210,
         type: 3}
@@ -4572,7 +4572,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 748506133037952702, guid: 6f6623aa3be10b74091db68ef4f5d8f3,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/Others/KeyboardControls.prefab
+    prefabPath: Templates/Others/KeyboardControls.prefab
     udonVariables:
     - udonInstance: {fileID: 3157760307065968712, guid: 6f6623aa3be10b74091db68ef4f5d8f3,
         type: 3}
@@ -4648,7 +4648,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 372594964329855429, guid: 837db6318cc6a7248912e2a27401a245,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/Others/PassengerFunctions.prefab
+    prefabPath: Templates/Others/PassengerFunctions.prefab
     udonVariables:
     - udonInstance: {fileID: 372594964061249454, guid: 837db6318cc6a7248912e2a27401a245,
         type: 3}
@@ -4763,7 +4763,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 4936714867585736386, guid: 429a5f825b72122449e894cf64a47eba,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/Others/RemoteThrottle.prefab
+    prefabPath: Templates/Others/RemoteThrottle.prefab
     udonVariables:
     - udonInstance: {fileID: 2638428134078742135, guid: 429a5f825b72122449e894cf64a47eba,
         type: 3}
@@ -4775,7 +4775,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 1457678646022298930, guid: 8df29b3970d350849ad8f43502d4bf87,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/Others/ResupplyTrigger.prefab
+    prefabPath: Templates/Others/ResupplyTrigger.prefab
     udonVariables:
     - udonInstance: {fileID: 5057108904273729372, guid: 8df29b3970d350849ad8f43502d4bf87,
         type: 3}
@@ -4799,7 +4799,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 8725871286039692354, guid: 71460fca338dc4b499174326942c0155,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/SaccAirVehicle.prefab
+    prefabPath: Templates/SaccAirVehicle.prefab
     udonVariables:
     - udonInstance: {fileID: 5022096596411866157, guid: 71460fca338dc4b499174326942c0155,
         type: 3}
@@ -5730,7 +5730,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 3512272463040103154, guid: 1e861e8f359d6f94fa2d739701e2ec4f,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/Seats/PassengerSeat.prefab
+    prefabPath: Templates/Seats/PassengerSeat.prefab
     udonVariables:
     - udonInstance: {fileID: 3512272463040103152, guid: 1e861e8f359d6f94fa2d739701e2ec4f,
         type: 3}
@@ -5756,7 +5756,7 @@ MonoBehaviour:
         arrayItems: []
   - prefabInstance: {fileID: 4048371213227378615, guid: fc347f5b169504e4aa7c6c6aec421dea,
       type: 3}
-    prefabPath: Assets/EsnyaSFAddons/Packages/com.nekometer.esnya.esnya-sf-addons/Templates/Seats/PilotSeat.prefab
+    prefabPath: Templates/Seats/PilotSeat.prefab
     udonVariables:
     - udonInstance: {fileID: 2264083107768328837, guid: fc347f5b169504e4aa7c6c6aec421dea,
         type: 3}

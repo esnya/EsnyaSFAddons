@@ -65,7 +65,7 @@ namespace EsnyaSFAddons
                 case UPDATE_STEP_DIRECTION:
                     if (directionIndicator)
                     {
-                        directionIndicator.localRotation = Quaternion.AngleAxis(GetHeding(wind), Vector3.forward);
+                        directionIndicator.localRotation = Quaternion.AngleAxis(GetHeding(wind), Vector3.back);
                     }
                     break;
                 case UPDATE_STEP_CURRENT_DIRECTION:
@@ -94,8 +94,8 @@ namespace EsnyaSFAddons
                     {
                         var strength = wind.magnitude;
                         var range = Vector3.Angle(Vector3.forward, (Vector3.forward * strength + Vector3.right * gust).normalized);
-                        directionRangeImage.transform.localRotation = Quaternion.AngleAxis(range / 2, Vector3.forward);
-                        directionRangeImage.fillAmount = range / 360.0f;
+                        directionRangeImage.transform.localRotation = Quaternion.AngleAxis(range, Vector3.forward);
+                        directionRangeImage.fillAmount = range / 180.0f;
                     }
                     break;
                 case UPDATE_STEP_SPEED:

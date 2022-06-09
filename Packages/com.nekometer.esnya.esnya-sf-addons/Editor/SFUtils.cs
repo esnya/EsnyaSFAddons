@@ -105,16 +105,16 @@ namespace EsnyaSFAddons
             var display = FindByName(parent, $"StickDisplay{side.ToString()[0]}")?.transform;
             if (!display) return;
 
-            var functions = Enumerable
+            var mfds = Enumerable
                 .Range(0, display.childCount)
                 .Select(display.GetChild)
                 .Where(t => t.gameObject.name.StartsWith("MFD_"))
                 .Select((transform, index) => (transform, index))
                 .ToArray();
 
-            var count = functions.Length;
+            var count = mfds.Length;
             var dialFunctions = (side == VRC_Pickup.PickupHand.Left ? entity.GetProgramVariable(nameof(SaccEntity.Dial_Functions_L)) : entity.GetProgramVariable(nameof(SaccEntity.Dial_Functions_R))) as UdonSharpBehaviour[];
-            foreach (var (transform, index) in functions)
+            foreach (var (transform, index) in mfds)
             {
                 try
                 {
@@ -134,11 +134,18 @@ namespace EsnyaSFAddons
                         displayHighlighter.transform.position = transform.parent.position;
                         displayHighlighter.transform.localRotation = localRotation;
 
-                        if (displayHighlighter.Equals(dialFunction?.GetProgramVariable("Dial_Funcon")))
+                        if (!displayHighlighter.Equals(dialFunction?.GetProgramVariable("Dial_Funcon")))
                         {
                             var udon = UdonSharpEditorUtility.GetBackingUdonBehaviour(dialFunction);
                             Undo.RecordObject(udon, "Align MFD Function");
-                            dialFunction.SetProgramVariable("Dial_Funcon", displayHighlighter);
+                            if (udon.publicVariables.TryGetVariableType("Dial_Funcon", out var type) && type.IsSubclassOf(typeof(Array)))
+                            {
+                                dialFunction.SetProgramVariable("Dial_Funcon", new [] { displayHighlighter });
+                            }
+                            else
+                            {
+                                dialFunction.SetProgramVariable("Dial_Funcon", displayHighlighter);
+                            }
                             dialFunction.ApplyProxyModifications();
                             EditorUtility.SetDirty(udon);
                         }
@@ -175,7 +182,7 @@ namespace EsnyaSFAddons
             return ListByName(root, name).FirstOrDefault();
         }
 
-        public static (string, AnimatorControllerParameterType)[] AnimatorParameters => new []{
+        public static (string, AnimatorControllerParameterType)[] AnimatorParameters => new[]{
             // DFUNC_Brake
             ("brake", AnimatorControllerParameterType.Float),
 

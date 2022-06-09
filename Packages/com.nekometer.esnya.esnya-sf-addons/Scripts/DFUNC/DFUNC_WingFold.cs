@@ -29,9 +29,9 @@ namespace EsnyaSFAddons
         [UdonSynced][FieldChangeCallback(nameof(Fold))] private bool _fold;
         private bool hasPilot;
 
-        private bool Fold {
+        public bool Fold {
             get => _fold;
-            set {
+            private set {
                 ExtraLift = value ? Mathf.Clamp01(1.0f - ExtraLiftMulti) : 0.0f;
                 if (vehicleAnimator) vehicleAnimator.SetBool(animatorBool, value);
                 if (Dial_Funcon) Dial_Funcon.SetActive(value);

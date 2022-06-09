@@ -10,7 +10,7 @@ namespace EsnyaSFAddons
     public class DFUNC_WingFold : UdonSharpBehaviour
     {
         public GameObject Dial_Funcon;
-        public float ExtraLiftMulti = 0.1f;
+        public float ExtraLiftDrop = 0.9f;
         public string animatorBool = "wingfold";
         public bool flapsOff = true;
 
@@ -22,8 +22,11 @@ namespace EsnyaSFAddons
         private float ExtraLift {
             set {
                 var diff = value - _extraLift;
-                if (diff > 0) airVehicle.ExtraLift -= diff;
-                _extraLift = value;
+                if (!Mathf.Approximately(diff, 0)) {
+                    // Debug.Log($"[ESFA] Applying ExtraLift {value} ({airVehicle.ExtraLift} -> {airVehicle.ExtraLift + diff})");
+                    airVehicle.ExtraLift += diff;
+                    _extraLift = value;
+                }
             }
         }
         [UdonSynced][FieldChangeCallback(nameof(Fold))] private bool _fold;
@@ -32,7 +35,7 @@ namespace EsnyaSFAddons
         public bool Fold {
             get => _fold;
             private set {
-                ExtraLift = value ? Mathf.Clamp01(1.0f - ExtraLiftMulti) : 0.0f;
+                ExtraLift = value ? -ExtraLiftDrop : 0.0f;
                 if (vehicleAnimator) vehicleAnimator.SetBool(animatorBool, value);
                 if (Dial_Funcon) Dial_Funcon.SetActive(value);
                 if (value && flapsOff && flapsDFunc) flapsDFunc.SetFlapsOff();
@@ -52,7 +55,7 @@ namespace EsnyaSFAddons
             gameObject.SetActive(entity.Piloting);
         }
 
-        public void SFEXT_G_Reappear()
+        public void SFEXT_G_ReAppear()
         {
             Fold = true;
             gameObject.SetActive(hasPilot);

@@ -115,7 +115,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: ExtraLiftMulti
+      Data: ExtraLiftDrop
     - Name: $v
       Entry: 7
       Data: 6|UdonSharp.Compiler.FieldDefinition, UdonSharp.Editor
@@ -142,10 +142,10 @@ MonoBehaviour:
       Data: SystemSingle
     - Name: symbolOriginalName
       Entry: 1
-      Data: ExtraLiftMulti
+      Data: ExtraLiftDrop
     - Name: symbolUniqueName
       Entry: 1
-      Data: ExtraLiftMulti
+      Data: ExtraLiftDrop
     - Name: symbolDefaultValue
       Entry: 6
       Data: 

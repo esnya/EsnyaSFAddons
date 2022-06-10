@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4153122592792285823
+--- !u!1001 &2184721048317791942
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,9 +10,9 @@ PrefabInstance:
     - target: {fileID: 514012439002916261, guid: 00e4a689e1ff979409f4cbb7dd363f6c,
         type: 3}
       propertyPath: m_text
-      value: 'BOMB
+      value: 'Wing Sweep
 
-        [4]'
+        [F5]'
       objectReference: {fileID: 0}
     - target: {fileID: 833795338168736654, guid: 00e4a689e1ff979409f4cbb7dd363f6c,
         type: 3}
@@ -61,16 +61,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 833795338168736654, guid: 00e4a689e1ff979409f4cbb7dd363f6c,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 833795338168736654, guid: 00e4a689e1ff979409f4cbb7dd363f6c,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 833795338168736654, guid: 00e4a689e1ff979409f4cbb7dd363f6c,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -92,27 +82,27 @@ PrefabInstance:
     - target: {fileID: 833795338168736654, guid: 00e4a689e1ff979409f4cbb7dd363f6c,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 833795338168736654, guid: 00e4a689e1ff979409f4cbb7dd363f6c,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 833795338168736654, guid: 00e4a689e1ff979409f4cbb7dd363f6c,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 833795338168736654, guid: 00e4a689e1ff979409f4cbb7dd363f6c,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.10580495
+      value: -0.1273485
       objectReference: {fileID: 0}
     - target: {fileID: 833795338168736654, guid: 00e4a689e1ff979409f4cbb7dd363f6c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.09168049
+      value: 0.058158066
       objectReference: {fileID: 0}
     - target: {fileID: 833795338168736654, guid: 00e4a689e1ff979409f4cbb7dd363f6c,
         type: 3}
@@ -132,22 +122,27 @@ PrefabInstance:
     - target: {fileID: 2768023348344106889, guid: 00e4a689e1ff979409f4cbb7dd363f6c,
         type: 3}
       propertyPath: m_Name
-      value: MFD_TMP_BOMB
+      value: MFD_TMP_WingSweep
       objectReference: {fileID: 0}
     - target: {fileID: 3271240180328523836, guid: 00e4a689e1ff979409f4cbb7dd363f6c,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 0d1e4b8cb7160ca4ca1b7aee5c8f2522, type: 2}
+    - target: {fileID: 4693228764256051839, guid: 00e4a689e1ff979409f4cbb7dd363f6c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4693228764256484959, guid: 00e4a689e1ff979409f4cbb7dd363f6c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.10580495
+      value: 0.1273485
       objectReference: {fileID: 0}
     - target: {fileID: 4693228764256484959, guid: 00e4a689e1ff979409f4cbb7dd363f6c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.091681175
+      value: -0.05815738
       objectReference: {fileID: 0}
     - target: {fileID: 4693228764256484959, guid: 00e4a689e1ff979409f4cbb7dd363f6c,
         type: 3}
@@ -157,12 +152,12 @@ PrefabInstance:
     - target: {fileID: 4693228764256484959, guid: 00e4a689e1ff979409f4cbb7dd363f6c,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.41541505
+      value: -0.84125346
       objectReference: {fileID: 0}
     - target: {fileID: 4693228764256484959, guid: 00e4a689e1ff979409f4cbb7dd363f6c,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.90963197
+      value: -0.54064095
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00e4a689e1ff979409f4cbb7dd363f6c, type: 3}

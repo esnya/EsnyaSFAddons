@@ -489,11 +489,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2637390962827783789, guid: ec338f04339751d4abf06ae86a2d409b,
         type: 3}
-      propertyPath: publicVariablesUnityEngineObjects.Array.size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2637390962827783789, guid: ec338f04339751d4abf06ae86a2d409b,
-        type: 3}
       propertyPath: publicVariablesUnityEngineObjects.Array.data[10]
       value: 
       objectReference: {fileID: 0}

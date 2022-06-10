@@ -831,6 +831,10 @@ MonoBehaviour:
           type: 3}
         value: DFUNC_L4_Catapult (VRC.Udon.UdonBehaviour)
         arrayItems: []
+      - symbolName: Dial_Funcon
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
       - symbolName: launchHookParameterName
         objectReference: {fileID: 0}
         value: LaunchBarDown
@@ -2855,10 +2859,6 @@ MonoBehaviour:
         objectReference: {fileID: 0}
         value: 100
         arrayItems: []
-      - symbolName: thrustCurve
-        objectReference: {fileID: 0}
-        value: 2
-        arrayItems: []
       - symbolName: thrustEffect
         objectReference: {fileID: 511879331452884049, guid: e6ec1abbcac985d4181e24bfe9e80dbd,
           type: 3}
@@ -2868,10 +2868,6 @@ MonoBehaviour:
         objectReference: {fileID: 6550947128515817710, guid: e6ec1abbcac985d4181e24bfe9e80dbd,
           type: 3}
         value: Thrust (UnityEngine.AudioSource)
-        arrayItems: []
-      - symbolName: wheelWakeUpTorque
-        objectReference: {fileID: 0}
-        value: 1E-36
         arrayItems: []
   - prefabInstance: {fileID: 4469067493539146931, guid: 7f363d89853aa5c4abd225b46d7e0cc8,
       type: 3}

@@ -50,7 +50,7 @@ namespace EsnyaSFAddons
         [HideIf("@!hasTC")] public string turnRateFloatParameter = "turnrate";
         [HideIf("@!hasTC")] public string slipAngleFloatParameter = "slipangle";
         [HideIf("@!hasTC")] public float turnResponse = 1.0f;
-        [HideIf("@!hasTC")] public float slipResponse = 0.25f;
+        [HideIf("@!hasTC")] public float slipResponse = 1.0f;
 
         [Header("VSI")]
         public bool hasVSI = true;
@@ -61,6 +61,7 @@ namespace EsnyaSFAddons
         private SaccAirVehicle airVehicle;
         private Rigidbody vehicleRigidbody;
         private bool vacuum;
+        private bool initaialized;
         private float vacuumPower;
         private float batteryVoltage;
         private Vector3 prevPosition;
@@ -88,7 +89,8 @@ namespace EsnyaSFAddons
                 _inVehicle = value;
                 if (value)
                 {
-                    vacuumPower = airVehicle.EngineOn ? 1.0f : 0.0f;
+                    vacuum = airVehicle.EngineOn;
+                    vacuumPower = vacuum ? 1.0f : 0.0f;
                     batteryVoltage = Battery ? 1.0f : 0.0f;
                     gameObject.SetActive(true);
                 }
@@ -106,6 +108,8 @@ namespace EsnyaSFAddons
             if (navaidDatabaseObj) magneticDeclination = (float)((UdonBehaviour)navaidDatabaseObj.GetComponent(typeof(UdonBehaviour))).GetProgramVariable("magneticDeclination");
 
             vacuum = airVehicle.EngineOn;
+
+            initaialized = true;
         }
 
         public void SFEXT_G_EngineOn() => vacuum = true;
@@ -113,11 +117,13 @@ namespace EsnyaSFAddons
 
         public void SFEXT_O_PilotEnter() => InVehicle = true;
         public void SFEXT_O_PilotExit() => InVehicle = false;
-        public void SFEXT_L_PassengerEnter() => InVehicle = true;
-        public void SFEXT_L_PassengerExit() => InVehicle = false;
+        public void SFEXT_P_PassengerEnter() => InVehicle = true;
+        public void SFEXT_P_PassengerExit() => InVehicle = false;
 
         public override void PostLateUpdate()
         {
+            if (!initaialized) return;
+
             var forward = transform.forward;
 
             position = transform.position;

@@ -27,7 +27,6 @@ namespace EsnyaSFAddons
 
         private Animator vehicleAnimator;
         private SFEXT_AdvancedGear[] gears;
-        private string triggerAxis;
         private bool initialized;
         public void SFEXT_L_EntityStart()
         {
@@ -43,11 +42,6 @@ namespace EsnyaSFAddons
             State = false;
         }
 
-        private void OnEnable()
-        {
-            prevTriggered = isSelected = false;
-        }
-
         private void Toggle()
         {
             State = !State;
@@ -55,22 +49,12 @@ namespace EsnyaSFAddons
         }
 
         public void DFUNC_TriggerPress() => Toggle();
+        public void KeyboardInput() => Toggle();
 
-        private bool prevTriggered;
         private void Update()
         {
             if (isPilot && Input.GetKeyDown(desktopControl)) Toggle();
-            // {
-            //     var triggered = Input.GetAxis(triggerAxis) > 0.75f;
-            //     if (Input.GetKeyDown(desktopControl) || isSelected && triggered && !prevTriggered)
-            //     {
-            //         State = !State;
-            //         RequestSerialization();
-            //     }
-            //     prevTriggered = triggered;
-            // }
         }
-
 
         private void ResetStatus()
         {
@@ -80,24 +64,15 @@ namespace EsnyaSFAddons
 
 
         #region SF Utilities
-        private bool isOwner;
-        public void DFUNC_LeftDial() => triggerAxis = "Oculus_CrossPlatform_PrimaryIndexTrigger";
-        public void DFUNC_RightDial() => triggerAxis = "Oculus_CrossPlatform_SecondaryIndexTrigger";
-
-        public void SFEXT_O_TakeOwnership() => isOwner = true;
-        public void SFEXT_O_LoseOwnership() => isOwner = false;
         public void SFEXT_G_Explode() => ResetStatus();
         public void SFEXT_G_RespawnButton() => ResetStatus();
 
         public void SFEXT_G_PilotEnter() => gameObject.SetActive(true);
         public void SFEXT_G_PilotExit() => gameObject.SetActive(false);
 
-        private bool isSelected;
-        public void DFUNC_Selected() => isSelected = true;
-        public void DFUNC_Deselected() => isSelected = false;
 
         private bool isPilot;
-        public void SFEXT_O_PilotEnter() => isOwner = isPilot = true;
+        public void SFEXT_O_PilotEnter() => isPilot = true;
         public void SFEXT_O_PilotExit() => isPilot = false;
 
         public void Set()

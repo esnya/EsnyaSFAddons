@@ -3496,6 +3496,146 @@ MonoBehaviour:
         objectReference: {fileID: 0}
         value: None
         arrayItems: []
+  - prefabInstance: {fileID: 5645000163685679636, guid: b37c040247e9058448dce35e3cf700cb,
+      type: 3}
+    prefabPath: Templates/Extentions/InstrumentsAnimatorDriver.prefab
+    udonVariables:
+    - udonInstance: {fileID: 2171439226626782122, guid: b37c040247e9058448dce35e3cf700cb,
+        type: 3}
+      gameObjectName: InstrumentsAnimatorDriver
+      variables:
+      - symbolName: adiElectric
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: airspeedFloatParameter
+        objectReference: {fileID: 0}
+        value: airspeed
+        arrayItems: []
+      - symbolName: altimeterResponse
+        objectReference: {fileID: 0}
+        value: 0.25
+        arrayItems: []
+      - symbolName: altitudeFloatParameter
+        objectReference: {fileID: 0}
+        value: altitude
+        arrayItems: []
+      - symbolName: asiResponse
+        objectReference: {fileID: 0}
+        value: 0.25
+        arrayItems: []
+      - symbolName: batteryBus
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
+      - symbolName: batteryVoltageResponse
+        objectReference: {fileID: 0}
+        value: 1
+        arrayItems: []
+      - symbolName: hasADI
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+      - symbolName: hasAltimeter
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+      - symbolName: hasASI
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+      - symbolName: hasHI
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+      - symbolName: hasTC
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+      - symbolName: hasVSI
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+      - symbolName: headingFloatParameter
+        objectReference: {fileID: 0}
+        value: heading
+        arrayItems: []
+      - symbolName: hiElectric
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: instrumentsAnimator
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
+      - symbolName: magneticDeclination
+        objectReference: {fileID: 0}
+        value: 0
+        arrayItems: []
+      - symbolName: maxAirspeed
+        objectReference: {fileID: 0}
+        value: 180
+        arrayItems: []
+      - symbolName: maxAltitude
+        objectReference: {fileID: 0}
+        value: 20000
+        arrayItems: []
+      - symbolName: maxPitch
+        objectReference: {fileID: 0}
+        value: 30
+        arrayItems: []
+      - symbolName: maxSlip
+        objectReference: {fileID: 0}
+        value: 9
+        arrayItems: []
+      - symbolName: maxTurn
+        objectReference: {fileID: 0}
+        value: 12
+        arrayItems: []
+      - symbolName: maxVerticalSpeed
+        objectReference: {fileID: 0}
+        value: 2000
+        arrayItems: []
+      - symbolName: pithFloatParameter
+        objectReference: {fileID: 0}
+        value: pitch
+        arrayItems: []
+      - symbolName: rollFloatParameter
+        objectReference: {fileID: 0}
+        value: roll
+        arrayItems: []
+      - symbolName: slipAngleFloatParameter
+        objectReference: {fileID: 0}
+        value: slipangle
+        arrayItems: []
+      - symbolName: slipResponse
+        objectReference: {fileID: 0}
+        value: 0.25
+        arrayItems: []
+      - symbolName: tcElectric
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+      - symbolName: turnRateFloatParameter
+        objectReference: {fileID: 0}
+        value: turnrate
+        arrayItems: []
+      - symbolName: turnResponse
+        objectReference: {fileID: 0}
+        value: 1
+        arrayItems: []
+      - symbolName: vacuumPowerResponse
+        objectReference: {fileID: 0}
+        value: 1
+        arrayItems: []
+      - symbolName: verticalSpeedFloatParameter
+        objectReference: {fileID: 0}
+        value: vs
+        arrayItems: []
+      - symbolName: vsiResponse
+        objectReference: {fileID: 0}
+        value: 0.25
+        arrayItems: []
   - prefabInstance: {fileID: 854394467307425068, guid: 159085ad0f12a324e855b09b0c92e6a6,
       type: 3}
     prefabPath: Templates/Extentions/OutsideOnly.prefab

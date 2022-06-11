@@ -46,7 +46,7 @@ namespace EsnyaSFAddons
         public bool hasTC = true;
         [HideIf("@!hasTC")] public bool tcElectric = true;
         [HideIf("@!hasTC")] public float maxTurn = 360.0f / 60.0f * 2.0f;
-        [HideIf("@!hasTC")] public float maxSlip = 9.0f;
+        [HideIf("@!hasTC")] public float maxSlip = 12.0f;
         [HideIf("@!hasTC")] public string turnRateFloatParameter = "turnrate";
         [HideIf("@!hasTC")] public string slipAngleFloatParameter = "slipangle";
         [HideIf("@!hasTC")] public float turnResponse = 1.0f;

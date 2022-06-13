@@ -1103,10 +1103,6 @@ MonoBehaviour:
         objectReference: {fileID: 0}
         value: False
         arrayItems: []
-      - symbolName: Dial_Funcon
-        objectReference: {fileID: 0}
-        value: null
-        arrayItems: []
       - symbolName: engineStartInterval
         objectReference: {fileID: 0}
         value: 30
@@ -1121,7 +1117,7 @@ MonoBehaviour:
         arrayItems: []
       - symbolName: startKey
         objectReference: {fileID: 0}
-        value: LeftShift
+        value: F4
         arrayItems: []
       - symbolName: state
         objectReference: {fileID: 0}
@@ -1129,7 +1125,7 @@ MonoBehaviour:
         arrayItems: []
       - symbolName: stopKey
         objectReference: {fileID: 0}
-        value: RightControl
+        value: F4
         arrayItems: []
   - prefabInstance: {fileID: 3738273842312086037, guid: 5da2c23e7a4563345aba087fbfae6db4,
       type: 3}
@@ -2446,7 +2442,7 @@ MonoBehaviour:
         objectReference: {fileID: 0}
         value: UnityEngine.ParticleSystem[]
         arrayItems:
-        - DisplaySmoke (UnityEngine.ParticleSystem)
+        - null
       - symbolName: SmokeColorIndicatorMaterial
         objectReference: {fileID: 2100000, guid: 80242fa653591a446aec58ab8512bf04,
           type: 2}
@@ -3357,7 +3353,7 @@ MonoBehaviour:
         value: F8
         arrayItems: []
       - symbolName: Dial_Funcon
-        objectReference: {fileID: 709781299311754315, guid: 530d49ad39e28ed449d01b2e9e835eb3,
+        objectReference: {fileID: 7230174764149448926, guid: 530d49ad39e28ed449d01b2e9e835eb3,
           type: 3}
         value: MFD_display_funcon (UnityEngine.GameObject)
         arrayItems: []

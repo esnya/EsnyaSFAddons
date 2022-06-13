@@ -120,7 +120,7 @@ namespace EsnyaSFAddons
         }
         private void DisableAllPreview()
         {
-            foreach (var path in previewStatus.Keys)
+            foreach (var path in previewStatus.Keys.ToArray())
             {
                 SetPreview(serializedObject.FindProperty(path), false);
             }

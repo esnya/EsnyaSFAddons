@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4085109691703461889
+--- !u!1001 &5723930363494536097
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,14 +10,14 @@ PrefabInstance:
     - target: {fileID: 514012439002916261, guid: 00e4a689e1ff979409f4cbb7dd363f6c,
         type: 3}
       propertyPath: m_text
-      value: 'Trim
+      value: 'Flare
 
-        [T/Y]'
+        [X]'
       objectReference: {fileID: 0}
     - target: {fileID: 2768023348344106889, guid: 00e4a689e1ff979409f4cbb7dd363f6c,
         type: 3}
       propertyPath: m_Name
-      value: MFD_TMP_TRIM
+      value: MFD_TMP_Flare
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00e4a689e1ff979409f4cbb7dd363f6c, type: 3}

@@ -256,6 +256,38 @@ MonoBehaviour:
           type: 3}
         value: WindTurbulanceScaleSlider (UnityEngine.UI.Slider)
         arrayItems: []
+  - prefabInstance: {fileID: 7154515397185177843, guid: c9a1ea95688a58749af7b9a582f7b02b,
+      type: 3}
+    prefabPath: Prefabs/RVR_Controller.prefab
+    udonVariables:
+    - udonInstance: {fileID: 7154515396923082773, guid: c9a1ea95688a58749af7b9a582f7b02b,
+        type: 3}
+      gameObjectName: Handle
+      variables:
+      - symbolName: _value
+        objectReference: {fileID: 0}
+        value: 0
+        arrayItems: []
+      - symbolName: controlSkybox
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+      - symbolName: fogCurve
+        objectReference: {fileID: 0}
+        value: UnityEngine.AnimationCurve
+        arrayItems: []
+      - symbolName: handleDistance
+        objectReference: {fileID: 0}
+        value: 0.5
+        arrayItems: []
+      - symbolName: parameterCurve
+        objectReference: {fileID: 0}
+        value: UnityEngine.AnimationCurve
+        arrayItems: []
+      - symbolName: parameterName
+        objectReference: {fileID: 0}
+        value: _CloudsDensity
+        arrayItems: []
   - prefabInstance: {fileID: 4200176763166755100, guid: a3474a15f0c32c048a42b28cb6c28314,
       type: 3}
     prefabPath: Prefabs/SAV_KillTracker.prefab

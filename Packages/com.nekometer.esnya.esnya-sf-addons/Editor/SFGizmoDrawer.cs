@@ -6,8 +6,16 @@ using VRC.Udon;
 
 namespace EsnyaSFAddons
 {
-    public class VehicleSeat
+    /// <summary>
+    /// Draw Gizmos of SaccFlight components
+    ///
+    /// Now available for SaccEntity, SaccVehicleSeat, SaccAirVehicle and SAV_FloatScript
+    /// </summary>
+    public class SFGizmoDrawer
     {
+        /// <summary>
+        /// Gizmo color configuration
+        /// </summary>
         private class GizmoColors
         {
             public static Color eyePosition = Color.white;
@@ -84,7 +92,7 @@ namespace EsnyaSFAddons
         }
 
         [DrawGizmo(GizmoType.InSelectionHierarchy)]
-        public static void SVGizmoDrawer(UdonBehaviour udonBehaviour, GizmoType gizmoType)
+        public static void DrawGizmos(UdonBehaviour udonBehaviour, GizmoType gizmoType)
         {
             if (!UdonSharpEditorUtility.IsUdonSharpBehaviour(udonBehaviour)) return;
 

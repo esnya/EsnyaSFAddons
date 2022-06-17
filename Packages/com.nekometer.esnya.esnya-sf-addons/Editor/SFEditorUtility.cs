@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
 using UdonSharp;
@@ -11,8 +10,16 @@ using VRC.SDKBase;
 
 namespace EsnyaSFAddons
 {
-    public static class SFUtils
+    /// <summary>
+    /// Unityty set on Editor
+    /// </summary>
+    public static class SFEditorUtility
     {
+        /// <summary>
+        /// List all infomation of  serializable fields of the given type
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static IEnumerable<FieldInfo> ListPublicVariables(Type type)
         {
             return type
@@ -21,21 +28,41 @@ namespace EsnyaSFAddons
                 .Where(field => field.GetCustomAttribute<NonSerializedAttribute>() == null);
         }
 
+        /// <summary>
+        /// List all public method of the given type to find Udon custom events
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static MethodInfo[] ListCustomEvents(Type type)
         {
             return type.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
         }
 
+        /// <summary>
+        /// Check given type is SaccFlight Extention
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static bool IsExtention(Type type)
         {
             return ListCustomEvents(type).Any(m => m.Name.StartsWith("SFEXT_"));
         }
 
+        /// <summary>
+        /// Check given type is SaccFlight Dial Function
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static bool IsDFUNC(Type type)
         {
             return ListCustomEvents(type).Any(m => m.Name.StartsWith("DFUNC_"));
         }
 
+        /// <summary>
+        /// Find nearest SaccEntity of SAV_PassengerFunctionController
+        /// </summary>
+        /// <param name="o"></param>
+        /// <returns></returns>
         public static UdonSharpBehaviour GetNearestController(GameObject o)
         {
             var controller = o.GetUdonSharpComponentInParent(typeof(SAV_PassengerFunctionsController)) ?? o.GetUdonSharpComponentInParent(typeof(SaccEntity));
@@ -43,32 +70,60 @@ namespace EsnyaSFAddons
             return controller;
         }
 
+        /// <summary>
+        /// Is child of controller
+        /// </summary>
+        /// <param name="controller"></param>
+        /// <param name="extention"></param>
+        /// <returns></returns>
         public static bool IsChildExtention(UdonSharpBehaviour controller, UdonSharpBehaviour extention)
         {
             return GetNearestController(extention.transform.parent.gameObject) == controller;
         }
 
+        /// <summary>
+        /// Find all extentions under given controller
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns></returns>
         public static IEnumerable<UdonSharpBehaviour> FindExtentions(UdonSharpBehaviour root)
         {
             return root.GetUdonSharpComponentsInChildren<UdonSharpBehaviour>(true).Where(udon => udon.gameObject != root && IsExtention(udon.GetType()) && !IsDFUNC(udon.GetType()) && IsChildExtention(root, udon));
         }
 
+        /// <summary>
+        /// Find all dial functions under given controller
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns></returns>
         public static IEnumerable<UdonSharpBehaviour> FindDFUNCs(UdonSharpBehaviour root)
         {
             return root.GetUdonSharpComponentsInChildren<UdonSharpBehaviour>(true).Where(udon => udon.gameObject != root && IsDFUNC(udon.GetType()) && GetNearestController(udon.gameObject) == root);
         }
 
+        /// <summary>
+        /// Find all dial functions under given controller
+        /// </summary>
         public static IEnumerable<UdonSharpBehaviour> FindDFUNCs(UdonSharpBehaviour root, string name)
         {
             return FindDFUNCs(root).Where(f => IsChildOfNameRecursive(f.transform, name));
         }
 
+        /// <summary>
+        /// Returns true if name of the parent of child equals name
+        /// </summary>
         public static bool IsChildOfNameRecursive(Transform child, string name)
         {
             if (!child?.parent) return false;
             return child.parent.gameObject.name == name || IsChildOfNameRecursive(child.parent, name);
         }
 
+        /// <summary>
+        /// Assign array property
+        /// </summary>
+        /// <param name="property"></param>
+        /// <param name="enumerable"></param>
+        /// <typeparam name="T"></typeparam>
         public static void SetObjectArrayProperty<T>(SerializedProperty property, IEnumerable<T> enumerable) where T : UnityEngine.Object
         {
             var array = enumerable.ToArray();
@@ -80,6 +135,11 @@ namespace EsnyaSFAddons
             }
         }
 
+        /// <summary>
+        /// Shortcut for Undo.RecordObject
+        /// </summary>
+        /// <param name="udonSharpBehaviour"></param>
+        /// <param name="name"></param>
         public static void UndoRecordUdonSharpBehaviour(UdonSharpBehaviour udonSharpBehaviour, string name)
         {
             Undo.RecordObject(udonSharpBehaviour, name);
@@ -99,6 +159,13 @@ namespace EsnyaSFAddons
             return false;
         }
 
+        /// <summary>
+        /// Auto algin mfd functions
+        ///
+        /// Align positions, rotations and scales. Also sets Dial_Funcon for each DFUNCs.
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="side"></param>
         public static void AlignMFDFunctions(this UdonSharpBehaviour entity, VRC_Pickup.PickupHand side)
         {
             var parent = (entity as SaccEntity)?.InVehicleOnly?.transform ?? entity.transform;
@@ -172,16 +239,31 @@ namespace EsnyaSFAddons
             }
         }
 
+        /// <summary>
+        /// List object by name
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public static IEnumerable<GameObject> ListByName(this Transform root, string name)
         {
             return root.GetComponentsInChildren<Transform>(true).OrderBy(t => t.GetHierarchyPath().Count(c => c == '/')).Select(t => t.gameObject).Where(o => o.name == name);
         }
 
+        /// <summary>
+        /// Find object by name under root
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public static GameObject FindByName(this Transform root, string name)
         {
             return ListByName(root, name).FirstOrDefault();
         }
 
+        /// <summary>
+        /// Animator parameters
+        /// </summary>
         public static (string, AnimatorControllerParameterType)[] AnimatorParameters => new[]{
             // DFUNC_Brake
             ("brake", AnimatorControllerParameterType.Float),

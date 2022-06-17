@@ -8,13 +8,33 @@ using VRC.Udon.Common.Interfaces;
 
 namespace EsnyaSFAddons
 {
+    /// <summary>
+    /// Wheel Chock
+    ///
+    /// Synced transform and snapped on ground.
+    /// </summary>
     [RequireComponent(typeof(VRCPickup))]
     [UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
     public class PickupChock : UdonSharpBehaviour
     {
+        /// <summary>
+        /// Layers of grounds
+        /// </summary>
         public LayerMask groundLayerMask = 0x0801;
+
+        /// <summary>
+        /// Maximum distance to snap ground
+        /// </summary>
         public float raycastDistance = 3.0f;
+
+        /// <summary>
+        /// Offset to detect ground adove chock
+        /// </summary>
         public float raycastOffset = 1.0f;
+
+        /// <summary>
+        /// Delay to sleep after snapping on ground
+        /// </summary>
         public float sleepTimeout = 3.0f;
 
         private VRCPickup pickup;

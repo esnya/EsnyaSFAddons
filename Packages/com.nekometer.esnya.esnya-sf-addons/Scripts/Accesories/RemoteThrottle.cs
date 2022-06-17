@@ -6,6 +6,9 @@ using VRC.Udon;
 
 namespace EsnyaSFAddons
 {
+    /// <summary>
+    /// Control throttle by remote players such as C/O or PM
+    /// </summary>
     [UdonBehaviourSyncMode(BehaviourSyncMode.NoVariableSync)]
     public class RemoteThrottle : UdonSharpBehaviour
     {
@@ -19,6 +22,9 @@ namespace EsnyaSFAddons
             gameObject.SetActive(false);
         }
 
+        /// <summary>
+        /// Increase throttle
+        /// </summary>
         public void Increase()
         {
             if (airVehicle && airVehicle.IsOwner)
@@ -27,6 +33,9 @@ namespace EsnyaSFAddons
             }
         }
 
+        /// <summary>
+        /// Decrease throttle
+        /// </summary>
         public void Decrease()
         {
             if (airVehicle && airVehicle.IsOwner)

@@ -6,6 +6,9 @@ using VRC.Udon;
 
 namespace EsnyaSFAddons
 {
+    /// <summary>
+    /// Lock vehicle
+    /// </summary>
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     [RequireComponent(typeof(MeshRenderer))]
     [DefaultExecutionOrder(1000)] // After EngineController

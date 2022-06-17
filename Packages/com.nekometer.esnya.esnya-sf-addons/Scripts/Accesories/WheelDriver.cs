@@ -4,6 +4,9 @@ using VRC.SDKBase;
 
 namespace EsnyaSFAddons
 {
+    /// <summary>
+    /// Animate visual transform of wheels with wheel driver
+    /// </summary>
     [UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
     public class WheelDriver : UdonSharpBehaviour
     {

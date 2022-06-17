@@ -35,6 +35,11 @@ namespace EsnyaSFAddons.Editor
                 Gizmos.color = GizmoColors.centerOfMass;
                 Gizmos.DrawWireSphere(centerOfMass.position, 0.1f);
             }
+
+            foreach (var floatScript in entity.ExtensionUdonBehaviours.Where(udon => udon is SAV_FloatScript).Select(udon => udon as SAV_FloatScript))
+            {
+                DrawSAV_FloatScriptGizmos(floatScript);
+            }
         }
 
         private static void DrawSaccVehicleSeatGizmos(SaccVehicleSeat saccVehicleSeat)

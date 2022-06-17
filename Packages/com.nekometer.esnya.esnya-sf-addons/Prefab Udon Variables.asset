@@ -3246,15 +3246,15 @@ MonoBehaviour:
         arrayItems: []
       - symbolName: DeadFloatForce
         objectReference: {fileID: 0}
-        value: 2
+        value: 5
         arrayItems: []
       - symbolName: DeadMaxDepthForce
         objectReference: {fileID: 0}
-        value: 0.2
+        value: 0.4
         arrayItems: []
       - symbolName: DisableTaxiRotation
         objectReference: {fileID: 0}
-        value: False
+        value: True
         arrayItems: []
       - symbolName: DoOnLand
         objectReference: {fileID: 0}
@@ -3273,9 +3273,6 @@ MonoBehaviour:
         value: UnityEngine.Transform[]
         arrayItems:
         - FloatPoint (1) (UnityEngine.Transform)
-        - FloatPoint (2) (UnityEngine.Transform)
-        - FloatPoint (3) (UnityEngine.Transform)
-        - FloatPoint (4) (UnityEngine.Transform)
       - symbolName: FloatRadius
         objectReference: {fileID: 0}
         value: 0.6
@@ -3294,7 +3291,7 @@ MonoBehaviour:
         arrayItems: []
       - symbolName: MaxDepthForce
         objectReference: {fileID: 0}
-        value: 0.5
+        value: 25
         arrayItems: []
       - symbolName: MoveUpOnTakeOwnership
         objectReference: {fileID: 0}
@@ -3303,10 +3300,6 @@ MonoBehaviour:
       - symbolName: RayCastHeight
         objectReference: {fileID: 0}
         value: 2
-        arrayItems: []
-      - symbolName: SAVControl
-        objectReference: {fileID: 0}
-        value: null
         arrayItems: []
       - symbolName: VehicleRigidbody
         objectReference: {fileID: 0}
@@ -4570,17 +4563,21 @@ MonoBehaviour:
         type: 3}
       gameObjectName: WaterTrigger
       variables:
+      - symbolName: SAVControl
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
       - symbolName: WaterDamageSec
         objectReference: {fileID: 0}
-        value: 0.2
+        value: 3
         arrayItems: []
       - symbolName: WaterSlowDown
         objectReference: {fileID: 0}
-        value: 0.2
+        value: 3
         arrayItems: []
       - symbolName: WaterSlowDownRot
         objectReference: {fileID: 0}
-        value: 0.2
+        value: 3
         arrayItems: []
   - prefabInstance: {fileID: 9064442510949789594, guid: ec338f04339751d4abf06ae86a2d409b,
       type: 3}
@@ -5001,6 +4998,112 @@ MonoBehaviour:
         arrayItems:
         - WingTrailL (UnityEngine.TrailRenderer)
         - WingTrailR (UnityEngine.TrailRenderer)
+    - udonInstance: {fileID: 2901040143146522960, guid: 71460fca338dc4b499174326942c0155,
+        type: 3}
+      gameObjectName: FloatScript
+      variables:
+      - symbolName: BackThrustStrength
+        objectReference: {fileID: 0}
+        value: 15
+        arrayItems: []
+      - symbolName: Compressing
+        objectReference: {fileID: 0}
+        value: 25
+        arrayItems: []
+      - symbolName: DeadFloatForce
+        objectReference: {fileID: 0}
+        value: 5
+        arrayItems: []
+      - symbolName: DeadMaxDepthForce
+        objectReference: {fileID: 0}
+        value: 0.4
+        arrayItems: []
+      - symbolName: DisableTaxiRotation
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+      - symbolName: DoOnLand
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: FloatForce
+        objectReference: {fileID: 0}
+        value: 5
+        arrayItems: []
+      - symbolName: FloatLayers
+        objectReference: {fileID: 0}
+        value: UnityEngine.LayerMask
+        arrayItems: []
+      - symbolName: FloatPoints
+        objectReference: {fileID: 0}
+        value: UnityEngine.Transform[]
+        arrayItems:
+        - FloatPoint (1) (UnityEngine.Transform)
+      - symbolName: FloatRadius
+        objectReference: {fileID: 0}
+        value: 0.6
+        arrayItems: []
+      - symbolName: HoverBike
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: HoverBikeTurningStrength
+        objectReference: {fileID: 0}
+        value: 0.2
+        arrayItems: []
+      - symbolName: MaxCompressingForce
+        objectReference: {fileID: 0}
+        value: 25
+        arrayItems: []
+      - symbolName: MaxDepthForce
+        objectReference: {fileID: 0}
+        value: 25
+        arrayItems: []
+      - symbolName: MoveUpOnTakeOwnership
+        objectReference: {fileID: 0}
+        value: 2
+        arrayItems: []
+      - symbolName: RayCastHeight
+        objectReference: {fileID: 0}
+        value: 2
+        arrayItems: []
+      - symbolName: SAVControl
+        objectReference: {fileID: 3847308026480302866, guid: 71460fca338dc4b499174326942c0155,
+          type: 3}
+        value: SaccAirVehicle (VRC.Udon.UdonBehaviour)
+        arrayItems: []
+      - symbolName: VehicleRigidbody
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
+      - symbolName: WaterForwardDrag
+        objectReference: {fileID: 0}
+        value: 0.05
+        arrayItems: []
+      - symbolName: WaterRotDrag
+        objectReference: {fileID: 0}
+        value: 5
+        arrayItems: []
+      - symbolName: WaterSidewaysDrag
+        objectReference: {fileID: 0}
+        value: 1
+        arrayItems: []
+      - symbolName: WaterVelDrag
+        objectReference: {fileID: 0}
+        value: 0
+        arrayItems: []
+      - symbolName: WaveHeight
+        objectReference: {fileID: 0}
+        value: 0.6
+        arrayItems: []
+      - symbolName: WaveScale
+        objectReference: {fileID: 0}
+        value: 0.04
+        arrayItems: []
+      - symbolName: WaveSpeed
+        objectReference: {fileID: 0}
+        value: 12
+        arrayItems: []
     - udonInstance: {fileID: 7131174595386540385, guid: 71460fca338dc4b499174326942c0155,
         type: 3}
       gameObjectName: KeyboardControls
@@ -5195,6 +5298,10 @@ MonoBehaviour:
         objectReference: {fileID: 0}
         value: 0.5
         arrayItems: []
+      - symbolName: EnterVTOLEvent_Angle
+        objectReference: {fileID: 0}
+        value: 20
+        arrayItems: []
       - symbolName: Fuel
         objectReference: {fileID: 0}
         value: 900
@@ -5280,6 +5387,14 @@ MonoBehaviour:
       - symbolName: InvincibleAfterSpawn
         objectReference: {fileID: 0}
         value: 2.5
+        arrayItems: []
+      - symbolName: JoystickPushPullDistance
+        objectReference: {fileID: 0}
+        value: 0.2
+        arrayItems: []
+      - symbolName: JoystickPushPullPitch
+        objectReference: {fileID: 0}
+        value: False
         arrayItems: []
       - symbolName: Lift
         objectReference: {fileID: 0}
@@ -5850,6 +5965,10 @@ MonoBehaviour:
         objectReference: {fileID: 0}
         value: 0.4
         arrayItems: []
+      - symbolName: IdleMovementRange
+        objectReference: {fileID: 0}
+        value: 0.35
+        arrayItems: []
       - symbolName: IdleMoveMentRange
         objectReference: {fileID: 0}
         value: 0.35
@@ -5857,6 +5976,14 @@ MonoBehaviour:
       - symbolName: IdleRotationRange
         objectReference: {fileID: 0}
         value: 5
+        arrayItems: []
+      - symbolName: MaxPingExtrapolationInSeconds
+        objectReference: {fileID: 0}
+        value: 999
+        arrayItems: []
+      - symbolName: PassengerComfortMode
+        objectReference: {fileID: 0}
+        value: False
         arrayItems: []
       - symbolName: RotationSyncAgressiveness
         objectReference: {fileID: 0}
@@ -5880,21 +6007,20 @@ MonoBehaviour:
       gameObjectName: WaterTrigger
       variables:
       - symbolName: SAVControl
-        objectReference: {fileID: 3847308026480302866, guid: 71460fca338dc4b499174326942c0155,
-          type: 3}
-        value: SaccAirVehicle (VRC.Udon.UdonBehaviour)
+        objectReference: {fileID: 0}
+        value: null
         arrayItems: []
       - symbolName: WaterDamageSec
         objectReference: {fileID: 0}
-        value: 0.2
+        value: 3
         arrayItems: []
       - symbolName: WaterSlowDown
         objectReference: {fileID: 0}
-        value: 0.2
+        value: 3
         arrayItems: []
       - symbolName: WaterSlowDownRot
         objectReference: {fileID: 0}
-        value: 0.2
+        value: 3
         arrayItems: []
   - prefabInstance: {fileID: 3512272463040103154, guid: 1e861e8f359d6f94fa2d739701e2ec4f,
       type: 3}

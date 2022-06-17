@@ -2,7 +2,7 @@ using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.Accesory
 {
     /// <summary>
     /// Animate visual transform of wheels with wheel driver

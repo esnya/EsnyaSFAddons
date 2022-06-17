@@ -3,7 +3,7 @@ using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.DFUNC
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class DFUNC_AdvancedCatapult : UdonSharpBehaviour

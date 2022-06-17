@@ -4,7 +4,7 @@ using VRC.Udon;
 using VRC.Udon.Common.Interfaces;
 using UCS;
 
-namespace EsnyaAircraftAssets
+namespace EsnyaSFAddons.UCS
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.NoVariableSync)]
     public class SFUdonChipsTarget : UdonSharpBehaviour

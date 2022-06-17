@@ -2,7 +2,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.Editor
 {
     public class ESFAMenu
     {

@@ -395,7 +395,7 @@ MonoBehaviour:
       Data: 27|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: EsnyaSFAddons.SFEXT_AdvancedGear[], EsnyaSFAddons.Runtime
+      Data: EsnyaSFAddons.SFEXT.SFEXT_AdvancedGear[], EsnyaSFAddons.Runtime
     - Name: 
       Entry: 8
       Data: 

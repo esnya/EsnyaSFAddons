@@ -905,7 +905,7 @@ MonoBehaviour:
       Data: 52|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: EsnyaSFAddons.SFEXT_AdvancedEngine, EsnyaSFAddons.Runtime
+      Data: EsnyaSFAddons.SFEXT.SFEXT_AdvancedEngine, EsnyaSFAddons.Runtime
     - Name: 
       Entry: 8
       Data: 
@@ -1016,7 +1016,7 @@ MonoBehaviour:
       Data: 58|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: EsnyaSFAddons.SFEXT_AuxiliaryPowerUnit, EsnyaSFAddons.Runtime
+      Data: EsnyaSFAddons.SFEXT.SFEXT_AuxiliaryPowerUnit, EsnyaSFAddons.Runtime
     - Name: 
       Entry: 8
       Data: 

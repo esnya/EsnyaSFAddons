@@ -6,7 +6,7 @@ using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon.Common.Interfaces;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.Accesory
 {
     /// <summary>
     /// Provide realstic control for catapult such as tension, speed and trigger launch by crew

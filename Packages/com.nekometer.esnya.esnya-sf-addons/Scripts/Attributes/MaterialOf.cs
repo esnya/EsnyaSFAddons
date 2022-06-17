@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.Attribute
 {
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false)]
     public class MaterialOfAttribute : PropertyAttribute

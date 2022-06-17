@@ -1,9 +1,10 @@
+using EsnyaSFAddons.Accesory;
 using JetBrains.Annotations;
 using UdonSharp;
 using UnityEngine;
 using VRC.Udon.Common.Interfaces;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.DFUNC
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class DFUNC_BuddyPod : UdonSharpBehaviour

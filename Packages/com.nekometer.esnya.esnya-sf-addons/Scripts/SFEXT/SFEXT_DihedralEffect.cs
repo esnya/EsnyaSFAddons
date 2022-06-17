@@ -1,4 +1,4 @@
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.SFEXT
 {
     using UdonSharp;
     using UnityEngine;

@@ -3,7 +3,7 @@ using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.DFUNC
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
     public class DFUNC_AdvancedSpeedBrake : UdonSharpBehaviour

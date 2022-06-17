@@ -2,8 +2,10 @@ using UdonSharp;
 using UnityEngine;
 using InariUdon.UI;
 using UCS;
+using EsnyaSFAddons.Weather;
+using EsnyaSFAddons.Attribute;
 
-namespace EsnyaAircraftAssets
+namespace EsnyaSFAddons.UCS
 {
     [DefaultExecutionOrder(200)] // After SaccEntity/SaccAirVehicle/SFRuntimeSetup
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]

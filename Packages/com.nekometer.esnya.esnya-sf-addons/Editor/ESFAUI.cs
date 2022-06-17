@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.Editor
 {
     public static class ESFAUI
     {

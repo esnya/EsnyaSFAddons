@@ -5,7 +5,7 @@ using VRC.SDK3.Components;
 using VRC.SDKBase;
 using VRC.Udon;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.Weather
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class RandomWindChanger : UdonSharpBehaviour

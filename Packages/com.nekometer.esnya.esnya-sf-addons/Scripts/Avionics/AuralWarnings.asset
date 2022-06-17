@@ -633,7 +633,7 @@ MonoBehaviour:
       Data: 39|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: EsnyaSFAddons.DFUNC_AdvancedFlaps, EsnyaSFAddons.Runtime
+      Data: EsnyaSFAddons.DFUNC.DFUNC_AdvancedFlaps, EsnyaSFAddons.Runtime
     - Name: 
       Entry: 8
       Data: 

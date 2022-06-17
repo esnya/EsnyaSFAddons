@@ -2,16 +2,43 @@
 using TMPro;
 using UdonSharp;
 using UnityEngine;
+using VRC.Udon;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.Instruments
 {
+    /// <summary>
+    /// Indicates wind speed and direction.
+    ///
+    /// Not gust and turbulance are not synced.
+    /// </summary>
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class WindIndicator : UdonSharpBehaviour
     {
+        /// <summary>
+        /// Update interval in seconds.
+        /// </summary>
         public float updateInterval = 0.1f;
+
+        /// <summary>
+        /// Apply gust.
+        /// </summary>
         public bool showGust = true;
+
+        /// <summary>
+        /// Transform of direction indicator.
+        /// </summary>
         public Transform directionIndicator;
+
+        /// <summary>
+        /// Reference of text component of speed indicator.
+        /// </summary>
         public TextMeshProUGUI speedText;
+
+
+        /// <summary>
+        /// Magnetic variation to true north (Z axis).
+        /// </summary>
+        public float magneticVariation = 0.0f;
 
         private SaccAirVehicle airVehicle;
         private Transform vehicleTransform;
@@ -23,6 +50,9 @@ namespace EsnyaSFAddons
             var entity = GetComponentInParent<SaccEntity>();
             vehicleTransform = entity.transform;
             airVehicle = (SaccAirVehicle)entity.GetExtention(GetUdonTypeName<SaccAirVehicle>());
+
+            var navaidDatabaseObject = GameObject.Find("NavaidDatabase");
+            if (navaidDatabaseObject) magneticVariation = (float)((UdonBehaviour)navaidDatabaseObject.GetComponent(typeof(UdonBehaviour))).GetProgramVariable("magneticVariation");
         }
 
         private bool initialized;

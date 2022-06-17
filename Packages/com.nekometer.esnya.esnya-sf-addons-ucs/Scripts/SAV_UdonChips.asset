@@ -67,7 +67,7 @@ MonoBehaviour:
       Data: 4|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: EsnyaAircraftAssets.FogController, EsnyaSFAddons.Runtime
+      Data: EsnyaSFAddons.Weather.FogController, EsnyaSFAddons.Runtime
     - Name: 
       Entry: 8
       Data: 
@@ -172,7 +172,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 11|EsnyaAircraftAssets.UdonSharpComponentInjectAttribute, EsnyaSFAddons.Runtime
+      Data: 11|EsnyaSFAddons.Attribute.UdonSharpComponentInjectAttribute, EsnyaSFAddons.Runtime
     - Name: 
       Entry: 8
       Data: 

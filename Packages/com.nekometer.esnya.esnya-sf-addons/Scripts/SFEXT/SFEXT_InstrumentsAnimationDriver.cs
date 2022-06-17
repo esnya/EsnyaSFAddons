@@ -5,7 +5,7 @@ using VRC.SDKBase;
 using VRC.Udon;
 using UdonToolkit;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.SFEXT
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class SFEXT_InstrumentsAnimationDriver : UdonSharpBehaviour

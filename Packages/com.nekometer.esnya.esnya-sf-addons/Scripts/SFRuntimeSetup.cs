@@ -1,9 +1,11 @@
 using System;
+using EsnyaSFAddons.Accesory;
+using EsnyaSFAddons.Attribute;
 using UdonSharp;
 using UnityEngine;
 using VRC.Udon;
 
-namespace EsnyaAircraftAssets
+namespace EsnyaSFAddons
 {
     [DefaultExecutionOrder(order: 100)] // After SaccEntity/SaccAirVehicle/SAV_WindChanger
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]

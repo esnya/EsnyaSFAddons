@@ -2,7 +2,7 @@ using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.SFEXT
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
     public class SFEXT_AdvancedGear : UdonSharpBehaviour

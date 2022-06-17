@@ -4,7 +4,7 @@ using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.DFUNC
 {
 
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]

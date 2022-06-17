@@ -1,6 +1,6 @@
 using UdonSharp;
 using UnityEngine;
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.SFEXT
 {
 
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]

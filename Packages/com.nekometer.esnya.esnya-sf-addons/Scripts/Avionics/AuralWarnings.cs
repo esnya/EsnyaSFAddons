@@ -1,7 +1,8 @@
+using EsnyaSFAddons.DFUNC;
 using UdonSharp;
 using UnityEngine;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.Avionics
 {
 
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]

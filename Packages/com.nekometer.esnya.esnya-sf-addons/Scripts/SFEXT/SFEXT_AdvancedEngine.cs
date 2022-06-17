@@ -1,10 +1,11 @@
 using System;
+using EsnyaSFAddons.DFUNC;
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon.Common.Interfaces;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.SFEXT
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
     [DefaultExecutionOrder(1000)] // After SoundController

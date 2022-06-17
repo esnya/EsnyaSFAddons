@@ -6,7 +6,7 @@ using VRC.SDKBase;
 using VRC.Udon;
 using VRC.Udon.Common.Interfaces;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.SFEXT
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class SFEXT_BoardingCollider : UdonSharpBehaviour

@@ -1,8 +1,9 @@
 ﻿
+using EsnyaSFAddons.DFUNC;
 using UdonSharp;
 using UnityEngine;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.Avionics
 {
     [RequireComponent(typeof(AudioSource))]
     [UdonBehaviourSyncMode(BehaviourSyncMode.NoVariableSync)]

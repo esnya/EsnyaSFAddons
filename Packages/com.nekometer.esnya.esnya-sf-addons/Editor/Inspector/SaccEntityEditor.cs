@@ -7,18 +7,18 @@ using UnityEditor.Animations;
 using UnityEngine;
 using VRC.SDKBase;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.Editor.Inspector
 {
     [CustomEditor(typeof(SaccEntity))]
-    public class SaccEntityEditor : Editor
+    public class SaccEntityEditor : UnityEditor.Editor
     {
         private static void ValidationGUI(SaccEntity entity)
         {
             EditorGUILayout.LabelField("SaccEntity Validator");
             var fixAll = GUILayout.Button("Fix All");
 
-            var extentions = SFUtils.FindExtentions(entity);
-            var dfuncs = SFUtils.FindDFUNCs(entity);
+            var extentions = SFEditorUtility.FindExtentions(entity);
+            var dfuncs = SFEditorUtility.FindDFUNCs(entity);
             var seats = entity.GetUdonSharpComponentsInChildren<SaccVehicleSeat>(true);
             var animator = entity.GetComponent<Animator>();
             var airVehicle = extentions.FirstOrDefault(e => e is SaccAirVehicle) as SaccAirVehicle;
@@ -32,7 +32,7 @@ namespace EsnyaSFAddons
             {
                 var isDirty = false;
 
-                var fields = SFUtils.ListPublicVariables(extention.GetType());
+                var fields = SFEditorUtility.ListPublicVariables(extention.GetType());
                 foreach (var field in fields)
                 {
                     var value = extention.GetProgramVariable(field.Name);
@@ -42,20 +42,20 @@ namespace EsnyaSFAddons
                         {
                             if (field.FieldType == typeof(SaccEntity))
                             {
-                                isDirty = isDirty || SFUtils.ValidateReference(extention, field.Name, entity, MessageType.Warning, fixAll);
+                                isDirty = isDirty || SFEditorUtility.ValidateReference(extention, field.Name, entity, MessageType.Warning, fixAll);
                             }
                             else if (field.FieldType == typeof(Animator))
                             {
-                                isDirty = isDirty || SFUtils.ValidateReference(extention, field.Name, animator, MessageType.Info, fixAll);
+                                isDirty = isDirty || SFEditorUtility.ValidateReference(extention, field.Name, animator, MessageType.Info, fixAll);
                             }
                             else if (field.FieldType == typeof(UdonSharpBehaviour))
                             {
-                                if (field.Name == "SAVControl") isDirty = isDirty || SFUtils.ValidateReference(extention, field.Name, airVehicle, MessageType.Warning, fixAll);
-                                else if (field.Name == "SoundControl") isDirty = isDirty || SFUtils.ValidateReference(extention, field.Name, savSoundController, MessageType.Warning, fixAll);
+                                if (field.Name == "SAVControl") isDirty = isDirty || SFEditorUtility.ValidateReference(extention, field.Name, airVehicle, MessageType.Warning, fixAll);
+                                else if (field.Name == "SoundControl") isDirty = isDirty || SFEditorUtility.ValidateReference(extention, field.Name, savSoundController, MessageType.Warning, fixAll);
                             }
                             else if (extention is SaccAirVehicle && field.Name == "VehicleMesh" || extention is SAV_SyncScript && field.Name == "VehicleTransform")
                             {
-                                isDirty = isDirty || SFUtils.ValidateReference(extention, field.Name, entity.transform, MessageType.Warning, fixAll);
+                                isDirty = isDirty || SFEditorUtility.ValidateReference(extention, field.Name, entity.transform, MessageType.Warning, fixAll);
                             }
                         }
                     }
@@ -84,7 +84,7 @@ namespace EsnyaSFAddons
             if (animatorController)
             {
                 var existingParameters = animatorController.parameters;
-                foreach (var (name, type) in SFUtils.AnimatorParameters)
+                foreach (var (name, type) in SFEditorUtility.AnimatorParameters)
                 {
                     if (!existingParameters.Any(p => p.name == name))
                     {
@@ -146,18 +146,18 @@ namespace EsnyaSFAddons
                     EditorGUILayout.PropertyField(property, true);
                     if (property.name == nameof(SaccEntity.ExtensionUdonBehaviours))
                     {
-                        if (ESFAUI.MiniButton("Find")) SFUtils.SetObjectArrayProperty(property, SFUtils.FindExtentions(entity));
+                        if (ESFAUI.MiniButton("Find")) SFEditorUtility.SetObjectArrayProperty(property, SFEditorUtility.FindExtentions(entity));
                     }
                     else if (property.name == nameof(SaccEntity.Dial_Functions_L))
                     {
-                        if (ESFAUI.MiniButton("Find")) SFUtils.SetObjectArrayProperty(property, SFUtils.FindDFUNCs(entity, "DialFunctions_L").Where(dfunc => dfunc.transform.parent.gameObject.name.EndsWith("L")));
-                        if (ESFAUI.MiniButton("Align")) SFUtils.AlignMFDFunctions(entity, VRC_Pickup.PickupHand.Left);
+                        if (ESFAUI.MiniButton("Find")) SFEditorUtility.SetObjectArrayProperty(property, SFEditorUtility.FindDFUNCs(entity, "DialFunctions_L").Where(dfunc => dfunc.transform.parent.gameObject.name.EndsWith("L")));
+                        if (ESFAUI.MiniButton("Align")) SFEditorUtility.AlignMFDFunctions(entity, VRC_Pickup.PickupHand.Left);
                     }
                     else if (property.name == nameof(SaccEntity.Dial_Functions_R))
                     {
-                        if (ESFAUI.MiniButton("Find")) SFUtils.SetObjectArrayProperty(property, SFUtils.FindDFUNCs(entity, "DialFunctions_R").Where(dfunc => dfunc.transform.parent.gameObject.name.EndsWith("R")));
+                        if (ESFAUI.MiniButton("Find")) SFEditorUtility.SetObjectArrayProperty(property, SFEditorUtility.FindDFUNCs(entity, "DialFunctions_R").Where(dfunc => dfunc.transform.parent.gameObject.name.EndsWith("R")));
 
-                        if (ESFAUI.MiniButton("Align")) SFUtils.AlignMFDFunctions(entity, VRC_Pickup.PickupHand.Right);
+                        if (ESFAUI.MiniButton("Align")) SFEditorUtility.AlignMFDFunctions(entity, VRC_Pickup.PickupHand.Right);
                     }
                     else if (property.name == nameof(SaccEntity.InVehicleOnly) || property.name == nameof(SaccEntity.HoldingOnly))
                     {
@@ -174,7 +174,7 @@ namespace EsnyaSFAddons
                     }
                     else if (property.name == nameof(SaccEntity.DisableAfter10Seconds))
                     {
-                        if (ESFAUI.MiniButton("Find")) SFUtils.SetObjectArrayProperty(property, entity.transform.ListByName(property.name));
+                        if (ESFAUI.MiniButton("Find")) SFEditorUtility.SetObjectArrayProperty(property, entity.transform.ListByName(property.name));
                     }
                 }
             }

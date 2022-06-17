@@ -6,7 +6,7 @@ using VRC.SDKBase;
 using VRC.Udon;
 using VRC.Udon.Common.Interfaces;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.Accesory
 {
     /// <summary>
     /// Wheel Chock

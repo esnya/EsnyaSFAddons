@@ -372,7 +372,7 @@ MonoBehaviour:
       Data: 23|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: EsnyaSFAddons.DrogueHead, EsnyaSFAddons.Runtime
+      Data: EsnyaSFAddons.Accesory.DrogueHead, EsnyaSFAddons.Runtime
     - Name: 
       Entry: 8
       Data: 

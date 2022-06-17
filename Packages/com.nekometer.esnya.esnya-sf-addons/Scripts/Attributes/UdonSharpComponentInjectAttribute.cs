@@ -11,7 +11,7 @@ using UnityEditor;
 using UdonSharpEditor;
 #endif
 
-namespace EsnyaAircraftAssets
+namespace EsnyaSFAddons.Attribute
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
 #if UNITY_EDITOR

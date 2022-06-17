@@ -5,7 +5,7 @@ using UnityEngine;
 using VRC.SDK3.Components;
 using VRC.SDKBase;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.Weather
 {
     /// <summary>
     /// Controls scene fog and skybox parameters.

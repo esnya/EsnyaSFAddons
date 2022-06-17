@@ -3,7 +3,7 @@ using UdonSharp;
 using UnityEngine;
 using VRC.Udon.Common.Interfaces;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.SFEXT
 {
 
     [UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]

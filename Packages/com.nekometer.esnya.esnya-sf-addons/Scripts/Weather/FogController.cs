@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using VRC.SDKBase;
 
-namespace EsnyaAircraftAssets
+namespace EsnyaSFAddons.Weather
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
     public class FogController : UdonSharpBehaviour

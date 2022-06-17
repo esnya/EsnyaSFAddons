@@ -1,10 +1,10 @@
-﻿using EsnyaAircraftAssets;
+﻿using EsnyaSFAddons.Attribute;
 using TMPro;
 using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.Accesory
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class GroundWindIndicator : UdonSharpBehaviour

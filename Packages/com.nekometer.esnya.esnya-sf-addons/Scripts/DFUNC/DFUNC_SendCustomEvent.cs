@@ -3,7 +3,7 @@ using UdonSharp;
 using UdonToolkit;
 using VRC.Udon.Common.Interfaces;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.DFUNC
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class DFUNC_SendCustomEvent : UdonSharpBehaviour

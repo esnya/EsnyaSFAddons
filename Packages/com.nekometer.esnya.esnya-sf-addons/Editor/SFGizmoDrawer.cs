@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using VRC.Udon;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.Editor
 {
     /// <summary>
     /// Draw Gizmos of SaccFlight components

@@ -4,10 +4,10 @@ using UnityEditor;
 using UnityEngine;
 using VRC.SDKBase;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.Editor.Inspector
 {
     [CustomEditor(typeof(SAV_PassengerFunctionsController))]
-    public class SAV_PassengerFunctionsControllerEditor : Editor
+    public class SAV_PassengerFunctionsControllerEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
         {
@@ -27,17 +27,17 @@ namespace EsnyaSFAddons
                     EditorGUILayout.PropertyField(property, true);
                     if (property.name == nameof(SAV_PassengerFunctionsController.PassengerExtensions))
                     {
-                        if (ESFAUI.MiniButton("Find")) SFUtils.SetObjectArrayProperty(property, SFUtils.FindExtentions(controller));
+                        if (ESFAUI.MiniButton("Find")) SFEditorUtility.SetObjectArrayProperty(property, SFEditorUtility.FindExtentions(controller));
                     }
                     else if (property.name == nameof(SAV_PassengerFunctionsController.Dial_Functions_L))
                     {
-                        if (ESFAUI.MiniButton("Find")) SFUtils.SetObjectArrayProperty(property, SFUtils.FindDFUNCs(controller).Where(dfunc => dfunc.transform.parent.gameObject.name.EndsWith("L")));
-                        if (ESFAUI.MiniButton("Align")) SFUtils.AlignMFDFunctions(controller, VRC_Pickup.PickupHand.Left);
+                        if (ESFAUI.MiniButton("Find")) SFEditorUtility.SetObjectArrayProperty(property, SFEditorUtility.FindDFUNCs(controller).Where(dfunc => dfunc.transform.parent.gameObject.name.EndsWith("L")));
+                        if (ESFAUI.MiniButton("Align")) SFEditorUtility.AlignMFDFunctions(controller, VRC_Pickup.PickupHand.Left);
                     }
                     else if (property.name == nameof(SAV_PassengerFunctionsController.Dial_Functions_R))
                     {
-                        if (ESFAUI.MiniButton("Find")) SFUtils.SetObjectArrayProperty(property, SFUtils.FindDFUNCs(controller).Where(dfunc => dfunc.transform.parent.gameObject.name.EndsWith("R")));
-                        if (ESFAUI.MiniButton("Align")) SFUtils.AlignMFDFunctions(controller, VRC_Pickup.PickupHand.Right);
+                        if (ESFAUI.MiniButton("Find")) SFEditorUtility.SetObjectArrayProperty(property, SFEditorUtility.FindDFUNCs(controller).Where(dfunc => dfunc.transform.parent.gameObject.name.EndsWith("R")));
+                        if (ESFAUI.MiniButton("Align")) SFEditorUtility.AlignMFDFunctions(controller, VRC_Pickup.PickupHand.Right);
                     }
                     else if (property.name == nameof(SAV_PassengerFunctionsController.SwitchFunctionSound))
                     {

@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEngine;
 using VRC.SDKBase;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.Editor
 {
     /// <summary>
     /// Unityty set on Editor

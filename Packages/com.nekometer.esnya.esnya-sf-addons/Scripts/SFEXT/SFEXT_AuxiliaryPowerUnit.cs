@@ -3,7 +3,7 @@ using System.Threading;
 using UdonSharp;
 using UnityEngine;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.SFEXT
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class SFEXT_AuxiliaryPowerUnit : UdonSharpBehaviour

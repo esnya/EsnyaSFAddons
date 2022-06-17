@@ -1,7 +1,8 @@
+using EsnyaSFAddons.SFEXT;
 using UdonSharp;
 using UnityEngine;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.DFUNC
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class DFUNC_AdvancedParkingBrake : UdonSharpBehaviour

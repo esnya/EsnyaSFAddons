@@ -728,7 +728,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 40|EsnyaAircraftAssets.UdonSharpComponentInjectAttribute, EsnyaSFAddons.Runtime
+      Data: 40|EsnyaSFAddons.Attribute.UdonSharpComponentInjectAttribute, EsnyaSFAddons.Runtime
     - Name: 
       Entry: 8
       Data: 

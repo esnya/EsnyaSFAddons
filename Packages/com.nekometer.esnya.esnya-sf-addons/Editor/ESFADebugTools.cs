@@ -1,10 +1,12 @@
 using System.Linq;
+using EsnyaSFAddons.DFUNC;
+using EsnyaSFAddons.SFEXT;
 using UdonSharp;
 using UdonSharpEditor;
 using UnityEditor;
 using UnityEngine;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.Editor
 {
     public class ESFADebugTools : EditorWindow
     {

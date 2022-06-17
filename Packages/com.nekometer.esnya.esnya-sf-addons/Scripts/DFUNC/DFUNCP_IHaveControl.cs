@@ -158,7 +158,7 @@ deactivate
 @enduml
 */
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.DFUNC
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.NoVariableSync)]
     public class DFUNCP_IHaveControl : UdonSharpBehaviour

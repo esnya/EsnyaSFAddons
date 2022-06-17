@@ -4,7 +4,7 @@ using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.Accesory
 {
     /// <summary>
     /// Control throttle by remote players such as C/O or PM

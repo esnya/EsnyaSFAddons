@@ -4000,7 +4000,7 @@ MonoBehaviour:
       Data: 229|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: EsnyaSFAddons.DFUNC_AdvancedParkingBrake, EsnyaSFAddons.Runtime
+      Data: EsnyaSFAddons.DFUNC.DFUNC_AdvancedParkingBrake, EsnyaSFAddons.Runtime
     - Name: 
       Entry: 8
       Data: 
@@ -4064,7 +4064,7 @@ MonoBehaviour:
       Data: 233|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: EsnyaSFAddons.SFEXT_AuxiliaryPowerUnit, EsnyaSFAddons.Runtime
+      Data: EsnyaSFAddons.SFEXT.SFEXT_AuxiliaryPowerUnit, EsnyaSFAddons.Runtime
     - Name: 
       Entry: 8
       Data: 

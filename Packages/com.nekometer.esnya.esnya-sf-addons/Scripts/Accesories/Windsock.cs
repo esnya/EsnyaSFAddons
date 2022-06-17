@@ -2,7 +2,7 @@
 using UdonSharp;
 using UnityEngine;
 
-namespace EsnyaAircraftAssets
+namespace EsnyaSFAddons.Accesory
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     [RequireComponent(typeof(Animator))]

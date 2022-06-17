@@ -6,10 +6,10 @@ using UdonSharpEditor;
 using UnityEditor;
 using UnityEngine;
 
-namespace EsnyaSFAddons
+namespace EsnyaSFAddons.Editor.Inspector
 {
     [CustomEditor(typeof(SAV_KeyboardControls))]
-    public class SAV_KeyboardControlsEditor : Editor
+    public class SAV_KeyboardControlsEditor : UnityEditor.Editor
     {
         private static readonly Dictionary<Type, KeyCode> defaultKeyCodes = new Dictionary<Type, KeyCode>() {
         { typeof(DFUNC_Limits), KeyCode.F1 },

@@ -1,16 +1,19 @@
 ﻿
-using System;
 using UdonSharp;
 using UnityEngine;
-using VRC.SDKBase;
-using VRC.Udon;
-using VRC.Udon.Common.Interfaces;
 
 namespace EsnyaSFAddons.SFEXT
 {
+    /// <summary>
+    /// Attach collider to enables walk inside plane without getting blown away.
+    /// </summary>
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class SFEXT_BoardingCollider : UdonSharpBehaviour
     {
+        /// <summary>
+        /// Enables on water. If plane will be not floating, set false to better performance.
+        /// </summary>
+        public bool enableOnWater = true;
         private Quaternion localRotation;
         private Transform entityTransform;
         private Vector3 localPosition;
@@ -72,6 +75,10 @@ namespace EsnyaSFAddons.SFEXT
         public void SFEXT_G_TouchDown()
         {
             OnGround = true;
+        }
+        public void SFEXT_G_TouchDownWater()
+        {
+            OnGround = enableOnWater;
         }
 
         public override void PostLateUpdate()

@@ -16,6 +16,48 @@ namespace EsnyaSFAddons.Editor
     public static class SFEditorUtility
     {
         /// <summary>
+        /// Workaround of UdonSharp editor API
+        /// </summary>
+        /// <param name="o"></param>
+        /// <param name="includeInactive"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static IEnumerable<UdonSharpBehaviour> SafeGetUdonSharpComponentsInChildren<T>(this UnityEngine.Object o, bool includeInactive = false) where T : UdonSharpBehaviour
+        {
+            try
+            {
+                if (o is GameObject @gameObject) return @gameObject.GetUdonSharpComponentsInChildren<T>(includeInactive);
+                if (o is Component @component) return @component.GetUdonSharpComponentsInChildren<T>(includeInactive);
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e, o);
+            }
+            return Enumerable.Empty<UdonSharpBehaviour>();
+        }
+
+        /// <summary>
+        /// Workaround of UdonSharp editor API
+        /// </summary>
+        /// <param name="o"></param>
+        /// <param name="includeInactive"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static UdonSharpBehaviour SafeGetUdonSharpComponentInParent<T>(this UnityEngine.Object o) where T : UdonSharpBehaviour
+        {
+            try
+            {
+                if (o is GameObject @gameObject) return @gameObject.GetUdonSharpComponentInParent<T>();
+                if (o is Component @component) return @component.GetUdonSharpComponentInParent<T>();
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e, o);
+            }
+            return null;
+        }
+
+        /// <summary>
         /// List all infomation of  serializable fields of the given type
         /// </summary>
         /// <param name="type"></param>
@@ -65,8 +107,8 @@ namespace EsnyaSFAddons.Editor
         /// <returns></returns>
         public static UdonSharpBehaviour GetNearestController(GameObject o)
         {
-            var controller = o.GetUdonSharpComponentInParent(typeof(SAV_PassengerFunctionsController)) ?? o.GetUdonSharpComponentInParent(typeof(SaccEntity));
-            if (controller is SAV_PassengerFunctionsController && controller.gameObject == o) return o.GetUdonSharpComponentInParent(typeof(SaccEntity));
+            var controller = o.SafeGetUdonSharpComponentInParent<SAV_PassengerFunctionsController>() ?? o.SafeGetUdonSharpComponentInParent<SaccEntity>();
+            if (controller is SAV_PassengerFunctionsController && controller.gameObject == o) return o.SafeGetUdonSharpComponentInParent<SaccEntity>();
             return controller;
         }
 
@@ -88,7 +130,7 @@ namespace EsnyaSFAddons.Editor
         /// <returns></returns>
         public static IEnumerable<UdonSharpBehaviour> FindExtentions(UdonSharpBehaviour root)
         {
-            return root.GetUdonSharpComponentsInChildren<UdonSharpBehaviour>(true).Where(udon => udon.gameObject != root && IsExtention(udon.GetType()) && !IsDFUNC(udon.GetType()) && IsChildExtention(root, udon));
+            return root.SafeGetUdonSharpComponentsInChildren<UdonSharpBehaviour>(true).Where(udon => udon.gameObject != root && IsExtention(udon.GetType()) && !IsDFUNC(udon.GetType()) && IsChildExtention(root, udon));
         }
 
         /// <summary>
@@ -98,7 +140,15 @@ namespace EsnyaSFAddons.Editor
         /// <returns></returns>
         public static IEnumerable<UdonSharpBehaviour> FindDFUNCs(UdonSharpBehaviour root)
         {
-            return root.GetUdonSharpComponentsInChildren<UdonSharpBehaviour>(true).Where(udon => udon.gameObject != root && IsDFUNC(udon.GetType()) && GetNearestController(udon.gameObject) == root);
+            try
+            {
+                return root.SafeGetUdonSharpComponentsInChildren<UdonSharpBehaviour>(true).Where(udon => udon.gameObject != root && IsDFUNC(udon.GetType()) && GetNearestController(udon.gameObject) == root);
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+                return Enumerable.Empty<UdonSharpBehaviour>();
+            }
         }
 
         /// <summary>
@@ -106,7 +156,15 @@ namespace EsnyaSFAddons.Editor
         /// </summary>
         public static IEnumerable<UdonSharpBehaviour> FindDFUNCs(UdonSharpBehaviour root, string name)
         {
-            return FindDFUNCs(root).Where(f => IsChildOfNameRecursive(f.transform, name));
+            try
+            {
+                return FindDFUNCs(root).Where(f => IsChildOfNameRecursive(f.transform, name));
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+                return Enumerable.Empty<UdonSharpBehaviour>();
+            }
         }
 
         /// <summary>
@@ -207,7 +265,7 @@ namespace EsnyaSFAddons.Editor
                             Undo.RecordObject(udon, "Align MFD Function");
                             if (udon.publicVariables.TryGetVariableType("Dial_Funcon", out var type) && type.IsSubclassOf(typeof(Array)))
                             {
-                                dialFunction.SetProgramVariable("Dial_Funcon", new [] { displayHighlighter });
+                                dialFunction.SetProgramVariable("Dial_Funcon", new[] { displayHighlighter });
                             }
                             else
                             {

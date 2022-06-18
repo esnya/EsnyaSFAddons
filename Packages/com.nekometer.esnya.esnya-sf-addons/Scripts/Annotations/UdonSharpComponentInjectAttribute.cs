@@ -11,13 +11,13 @@ using UnityEditor;
 using UdonSharpEditor;
 #endif
 
-namespace EsnyaSFAddons.Attribute
+namespace EsnyaSFAddons.Annotations
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
 #if UNITY_EDITOR
     public class UdonSharpComponentInjectAttribute : UTPropertyAttribute
 #else
-    public class UdonSharpComponentInjectAttribute : Attribute
+    public class UdonSharpComponentInjectAttribute : System.Attribute
 #endif
     {
 #if UNITY_EDITOR

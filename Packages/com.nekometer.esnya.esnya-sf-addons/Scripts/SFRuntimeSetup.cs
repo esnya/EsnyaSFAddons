@@ -1,6 +1,6 @@
 using System;
 using EsnyaSFAddons.Accesory;
-using EsnyaSFAddons.Attribute;
+using EsnyaSFAddons.Annotations;
 using UdonSharp;
 using UnityEngine;
 using VRC.Udon;

@@ -1,4 +1,4 @@
-﻿using EsnyaSFAddons.Attribute;
+﻿using EsnyaSFAddons.Annotations;
 using TMPro;
 using UdonSharp;
 using UnityEngine;

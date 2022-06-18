@@ -3,7 +3,7 @@ using UnityEngine;
 using InariUdon.UI;
 using UCS;
 using EsnyaSFAddons.Weather;
-using EsnyaSFAddons.Attribute;
+using EsnyaSFAddons.Annotations;
 
 namespace EsnyaSFAddons.UCS
 {

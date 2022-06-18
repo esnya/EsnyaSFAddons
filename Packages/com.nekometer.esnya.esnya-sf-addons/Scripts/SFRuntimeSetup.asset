@@ -376,7 +376,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 25|EsnyaSFAddons.Attribute.UdonSharpComponentInjectAttribute, EsnyaSFAddons.Runtime
+      Data: 25|EsnyaSFAddons.Annotations.UdonSharpComponentInjectAttribute, EsnyaSFAddons.Runtime
     - Name: 
       Entry: 8
       Data: 
@@ -445,7 +445,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 30|EsnyaSFAddons.Attribute.UdonSharpComponentInjectAttribute, EsnyaSFAddons.Runtime
+      Data: 30|EsnyaSFAddons.Annotations.UdonSharpComponentInjectAttribute, EsnyaSFAddons.Runtime
     - Name: 
       Entry: 8
       Data: 
@@ -514,7 +514,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 35|EsnyaSFAddons.Attribute.UdonSharpComponentInjectAttribute, EsnyaSFAddons.Runtime
+      Data: 35|EsnyaSFAddons.Annotations.UdonSharpComponentInjectAttribute, EsnyaSFAddons.Runtime
     - Name: 
       Entry: 8
       Data: 

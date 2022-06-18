@@ -2512,2073 +2512,6 @@ MonoBehaviour:
         objectReference: {fileID: 0}
         value: 3
         arrayItems: []
-  - prefabInstance: {fileID: 5571737103940536461, guid: e6ec1abbcac985d4181e24bfe9e80dbd,
-      type: 3}
-    prefabPath: Templates/Extentions/AdvancedEngine.prefab
-    udonVariables:
-    - udonInstance: {fileID: 301182104358630931, guid: e6ec1abbcac985d4181e24bfe9e80dbd,
-        type: 3}
-      gameObjectName: AdvancedEngine
-      variables:
-      - symbolName: autoClose
-        objectReference: {fileID: 0}
-        value: True
-        arrayItems: []
-      - symbolName: autoFuel
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: autoRelease
-        objectReference: {fileID: 0}
-        value: True
-        arrayItems: []
-      - symbolName: brustIdleSpeed
-        objectReference: {fileID: 0}
-        value: 10
-        arrayItems: []
-      - symbolName: brustParticle
-        objectReference: {fileID: 6258364892900955554, guid: e6ec1abbcac985d4181e24bfe9e80dbd,
-          type: 3}
-        value: Brust (UnityEngine.ParticleSystem)
-        arrayItems: []
-      - symbolName: brustTakeOffSpeed
-        objectReference: {fileID: 0}
-        value: 1000
-        arrayItems: []
-      - symbolName: continuousECT
-        objectReference: {fileID: 0}
-        value: 274
-        arrayItems: []
-      - symbolName: continuousEGT
-        objectReference: {fileID: 0}
-        value: 1013
-        arrayItems: []
-      - symbolName: continuousN1
-        objectReference: {fileID: 0}
-        value: 4397
-        arrayItems: []
-      - symbolName: continuousN2
-        objectReference: {fileID: 0}
-        value: 17167
-        arrayItems: []
-      - symbolName: dished
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: ect
-        objectReference: {fileID: 0}
-        value: 0
-        arrayItems: []
-      - symbolName: ectOverheatResponse
-        objectReference: {fileID: 0}
-        value: 0.001
-        arrayItems: []
-      - symbolName: ectResponse
-        objectReference: {fileID: 0}
-        value: 0.1
-        arrayItems: []
-      - symbolName: egt
-        objectReference: {fileID: 0}
-        value: 0
-        arrayItems: []
-      - symbolName: egtResponse
-        objectReference: {fileID: 0}
-        value: 0.02
-        arrayItems: []
-      - symbolName: exhaustAreaAngle
-        objectReference: {fileID: 0}
-        value: 30
-        arrayItems: []
-      - symbolName: exhaustAreaExtent
-        objectReference: {fileID: 0}
-        value: 8
-        arrayItems: []
-      - symbolName: exhaustAreaIdleRange
-        objectReference: {fileID: 0}
-        value: 60
-        arrayItems: []
-      - symbolName: exhaustAreaTakeOffRange
-        objectReference: {fileID: 0}
-        value: 100
-        arrayItems: []
-      - symbolName: externalTempurature
-        objectReference: {fileID: 0}
-        value: 15
-        arrayItems: []
-      - symbolName: fanAxis
-        objectReference: {fileID: 0}
-        value: (0.0, 1.0, 0.0)
-        arrayItems: []
-      - symbolName: fire
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: fireECT
-        objectReference: {fileID: 0}
-        value: 850
-        arrayItems: []
-      - symbolName: fireEffect
-        objectReference: {fileID: 1787605412173307962, guid: e6ec1abbcac985d4181e24bfe9e80dbd,
-          type: 3}
-        value: FireEffect (UnityEngine.ParticleSystem)
-        arrayItems: []
-      - symbolName: fireEGT
-        objectReference: {fileID: 0}
-        value: 1812
-        arrayItems: []
-      - symbolName: fuel
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: idleECT
-        objectReference: {fileID: 0}
-        value: 196
-        arrayItems: []
-      - symbolName: idleEGT
-        objectReference: {fileID: 0}
-        value: 725
-        arrayItems: []
-      - symbolName: idleN1
-        objectReference: {fileID: 0}
-        value: 879.6
-        arrayItems: []
-      - symbolName: idleN2
-        objectReference: {fileID: 0}
-        value: 8583.5
-        arrayItems: []
-      - symbolName: idleOilPressure
-        objectReference: {fileID: 0}
-        value: 1200
-        arrayItems: []
-      - symbolName: idleOilTempurature
-        objectReference: {fileID: 0}
-        value: 31
-        arrayItems: []
-      - symbolName: idlePlayerAcceleration
-        objectReference: {fileID: 0}
-        value: 100
-        arrayItems: []
-      - symbolName: idleSound
-        objectReference: {fileID: 5845960735359478345, guid: e6ec1abbcac985d4181e24bfe9e80dbd,
-          type: 3}
-        value: EngineIdle (UnityEngine.AudioSource)
-        arrayItems: []
-      - symbolName: inletAreaAngle
-        objectReference: {fileID: 0}
-        value: 40
-        arrayItems: []
-      - symbolName: inletAreaIdleRange
-        objectReference: {fileID: 0}
-        value: 3.1
-        arrayItems: []
-      - symbolName: inletAreaTakeOffRange
-        objectReference: {fileID: 0}
-        value: 4.2
-        arrayItems: []
-      - symbolName: inletOffset
-        objectReference: {fileID: 0}
-        value: 2
-        arrayItems: []
-      - symbolName: insideSound
-        objectReference: {fileID: 594416617581715793, guid: e6ec1abbcac985d4181e24bfe9e80dbd,
-          type: 3}
-        value: Inside (UnityEngine.AudioSource)
-        arrayItems: []
-      - symbolName: intentAreaAngle
-        objectReference: {fileID: 0}
-        value: 45
-        arrayItems: []
-      - symbolName: intentAreaIdleRange
-        objectReference: {fileID: 0}
-        value: 4.1
-        arrayItems: []
-      - symbolName: intentAreaTakeOffRange
-        objectReference: {fileID: 0}
-        value: 5.2
-        arrayItems: []
-      - symbolName: maxOilPressure
-        objectReference: {fileID: 0}
-        value: 2000
-        arrayItems: []
-      - symbolName: maxOilTempurature
-        objectReference: {fileID: 0}
-        value: 140
-        arrayItems: []
-      - symbolName: maxThrust
-        objectReference: {fileID: 0}
-        value: 130408.5
-        arrayItems: []
-      - symbolName: minN2
-        objectReference: {fileID: 0}
-        value: 3433.4
-        arrayItems: []
-      - symbolName: mtbFireAtContinuous
-        objectReference: {fileID: 0}
-        value: 2592000
-        arrayItems: []
-      - symbolName: mtbFireAtFire
-        objectReference: {fileID: 0}
-        value: 1
-        arrayItems: []
-      - symbolName: mtbFireAtOverheat
-        objectReference: {fileID: 0}
-        value: 90
-        arrayItems: []
-      - symbolName: mtbMeltdownOnFire
-        objectReference: {fileID: 0}
-        value: 120
-        arrayItems: []
-      - symbolName: n1
-        objectReference: {fileID: 0}
-        value: 0
-        arrayItems: []
-      - symbolName: n1DecreaseResponse
-        objectReference: {fileID: 0}
-        value: 0.08
-        arrayItems: []
-      - symbolName: n1Response
-        objectReference: {fileID: 0}
-        value: 0.1
-        arrayItems: []
-      - symbolName: n1StartupResponse
-        objectReference: {fileID: 0}
-        value: 0.01
-        arrayItems: []
-      - symbolName: n2
-        objectReference: {fileID: 0}
-        value: 0
-        arrayItems: []
-      - symbolName: n2DecreaseResponse
-        objectReference: {fileID: 0}
-        value: 0.04
-        arrayItems: []
-      - symbolName: n2Responce
-        objectReference: {fileID: 0}
-        value: 0.05
-        arrayItems: []
-      - symbolName: n2StartupResponse
-        objectReference: {fileID: 0}
-        value: 0.005
-        arrayItems: []
-      - symbolName: normalizedThrust
-        objectReference: {fileID: 0}
-        value: 0
-        arrayItems: []
-      - symbolName: overheat
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: overheatECT
-        objectReference: {fileID: 0}
-        value: 343
-        arrayItems: []
-      - symbolName: playerStrike
-        objectReference: {fileID: 0}
-        value: True
-        arrayItems: []
-      - symbolName: randomRange
-        objectReference: {fileID: 0}
-        value: 0.2
-        arrayItems: []
-      - symbolName: referenceN1
-        objectReference: {fileID: 0}
-        value: 4397
-        arrayItems: []
-      - symbolName: referenceN2
-        objectReference: {fileID: 0}
-        value: 17167
-        arrayItems: []
-      - symbolName: reverser
-        objectReference: {fileID: 0}
-        value: 0
-        arrayItems: []
-      - symbolName: reverserBrustParticle
-        objectReference: {fileID: 1996470668224797306, guid: e6ec1abbcac985d4181e24bfe9e80dbd,
-          type: 3}
-        value: ReveseBrust (UnityEngine.ParticleSystem)
-        arrayItems: []
-      - symbolName: reverserExtractResponse
-        objectReference: {fileID: 0}
-        value: 0.5
-        arrayItems: []
-      - symbolName: reverserPosition
-        objectReference: {fileID: 0}
-        value: 0
-        arrayItems: []
-      - symbolName: reverserRatio
-        objectReference: {fileID: 0}
-        value: 0.5
-        arrayItems: []
-      - symbolName: reverserResponse
-        objectReference: {fileID: 0}
-        value: 1
-        arrayItems: []
-      - symbolName: reverserRetractResponse
-        objectReference: {fileID: 0}
-        value: 0.5
-        arrayItems: []
-      - symbolName: reversing
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: soundResponse
-        objectReference: {fileID: 0}
-        value: 1
-        arrayItems: []
-      - symbolName: stall
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: starter
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: strikeDistance
-        objectReference: {fileID: 0}
-        value: 2
-        arrayItems: []
-      - symbolName: strikeSound
-        objectReference: {fileID: 8300000, guid: a778a83e783a3d040990aa85ff3141b7,
-          type: 3}
-        value: GunShot (UnityEngine.AudioClip)
-        arrayItems: []
-      - symbolName: strikeSoundSource
-        objectReference: {fileID: 5584130105550258085, guid: e6ec1abbcac985d4181e24bfe9e80dbd,
-          type: 3}
-        value: SFX (UnityEngine.AudioSource)
-        arrayItems: []
-      - symbolName: takeOffEGT
-        objectReference: {fileID: 0}
-        value: 1038
-        arrayItems: []
-      - symbolName: takeOffN1
-        objectReference: {fileID: 0}
-        value: 4586
-        arrayItems: []
-      - symbolName: takeOffN2
-        objectReference: {fileID: 0}
-        value: 20171
-        arrayItems: []
-      - symbolName: takeOffOilTempurature
-        objectReference: {fileID: 0}
-        value: 155
-        arrayItems: []
-      - symbolName: takeOffPlayerAcceleration
-        objectReference: {fileID: 0}
-        value: 1000
-        arrayItems: []
-      - symbolName: takeOffSound
-        objectReference: {fileID: 0}
-        value: null
-        arrayItems: []
-      - symbolName: throttleInput
-        objectReference: {fileID: 0}
-        value: 0
-        arrayItems: []
-      - symbolName: thrustAreaExtent
-        objectReference: {fileID: 0}
-        value: 12
-        arrayItems: []
-      - symbolName: thrustAreaIdleRange
-        objectReference: {fileID: 0}
-        value: 60
-        arrayItems: []
-      - symbolName: thrustAreaTakeOffRange
-        objectReference: {fileID: 0}
-        value: 100
-        arrayItems: []
-      - symbolName: thrustEffect
-        objectReference: {fileID: 511879331452884049, guid: e6ec1abbcac985d4181e24bfe9e80dbd,
-          type: 3}
-        value: ExhaustEffect (UnityEngine.ParticleSystem)
-        arrayItems: []
-      - symbolName: thrustSound
-        objectReference: {fileID: 6550947128515817710, guid: e6ec1abbcac985d4181e24bfe9e80dbd,
-          type: 3}
-        value: Thrust (UnityEngine.AudioSource)
-        arrayItems: []
-  - prefabInstance: {fileID: 4469067493539146931, guid: 7f363d89853aa5c4abd225b46d7e0cc8,
-      type: 3}
-    prefabPath: Templates/Extentions/AdvancedGear.prefab
-    udonVariables:
-    - udonInstance: {fileID: 221982411065559030, guid: 7f363d89853aa5c4abd225b46d7e0cc8,
-        type: 3}
-      gameObjectName: AdvancedGear
-      variables:
-      - symbolName: autoLimitGroundSpeed
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: autoLimitGroundSpeedOnDesktop
-        objectReference: {fileID: 0}
-        value: True
-        arrayItems: []
-      - symbolName: brakeMaxGroundSpeed
-        objectReference: {fileID: 0}
-        value: 60
-        arrayItems: []
-      - symbolName: brakeResponse
-        objectReference: {fileID: 0}
-        value: 1
-        arrayItems: []
-      - symbolName: brakeTorque
-        objectReference: {fileID: 0}
-        value: 10000
-        arrayItems: []
-      - symbolName: breakSound
-        objectReference: {fileID: 0}
-        value: null
-        arrayItems: []
-      - symbolName: burstEffect
-        objectReference: {fileID: 735036148080431329, guid: 318659200b6992546ac683f4ca349572,
-          type: 3}
-        value: BurstSmoke (UnityEngine.GameObject)
-        arrayItems: []
-      - symbolName: burstSound
-        objectReference: {fileID: 8300000, guid: a778a83e783a3d040990aa85ff3141b7,
-          type: 3}
-        value: GunShot (UnityEngine.AudioClip)
-        arrayItems: []
-      - symbolName: gearPositionParameterName
-        objectReference: {fileID: 0}
-        value: gearpos
-        arrayItems: []
-      - symbolName: maxExtendedSpeed
-        objectReference: {fileID: 0}
-        value: 320
-        arrayItems: []
-      - symbolName: maxExtensionSpeed
-        objectReference: {fileID: 0}
-        value: 270
-        arrayItems: []
-      - symbolName: maxRetractionSpeed
-        objectReference: {fileID: 0}
-        value: 235
-        arrayItems: []
-      - symbolName: maxSteerAngle
-        objectReference: {fileID: 0}
-        value: 0
-        arrayItems: []
-      - symbolName: mtbBurstOnOverGroundSpeed
-        objectReference: {fileID: 0}
-        value: 10
-        arrayItems: []
-      - symbolName: mtbTransitionBraek
-        objectReference: {fileID: 0}
-        value: 7200
-        arrayItems: []
-      - symbolName: mtbTransitionBraekOnOverspeed
-        objectReference: {fileID: 0}
-        value: 60
-        arrayItems: []
-      - symbolName: mtbTransitionFail
-        objectReference: {fileID: 0}
-        value: 3600
-        arrayItems: []
-      - symbolName: mtbTransitionFailOnOverspeed
-        objectReference: {fileID: 0}
-        value: 10
-        arrayItems: []
-      - symbolName: steerResponse
-        objectReference: {fileID: 0}
-        value: 1
-        arrayItems: []
-      - symbolName: timeNosieScale
-        objectReference: {fileID: 0}
-        value: 0.1
-        arrayItems: []
-      - symbolName: transitionSound
-        objectReference: {fileID: 6565067139710021262, guid: 7f363d89853aa5c4abd225b46d7e0cc8,
-          type: 3}
-        value: AudioSource (UnityEngine.AudioSource)
-        arrayItems: []
-      - symbolName: wheelCollider
-        objectReference: {fileID: 0}
-        value: null
-        arrayItems: []
-      - symbolName: wheelRight
-        objectReference: {fileID: 0}
-        value: (1.0, 0.0, 0.0)
-        arrayItems: []
-      - symbolName: wheelUp
-        objectReference: {fileID: 0}
-        value: (0.0, 1.0, 0.0)
-        arrayItems: []
-  - prefabInstance: {fileID: 6823983850167834323, guid: 4b239471d302b0b4d92ab633dcaf7910,
-      type: 3}
-    prefabPath: Templates/Extentions/AdvancedPropellerThrust.prefab
-    udonVariables:
-    - udonInstance: {fileID: 8422748759524904380, guid: 4b239471d302b0b4d92ab633dcaf7910,
-        type: 3}
-      gameObjectName: AdvancedPropellerThrust
-      variables:
-      - symbolName: airDensity
-        objectReference: {fileID: 0}
-        value: 1.2249
-        arrayItems: []
-      - symbolName: animationMaxRPM
-        objectReference: {fileID: 0}
-        value: 3500
-        arrayItems: []
-      - symbolName: batteryBus
-        objectReference: {fileID: 0}
-        value: null
-        arrayItems: []
-      - symbolName: diameter
-        objectReference: {fileID: 0}
-        value: 1.9304
-        arrayItems: []
-      - symbolName: engineStall
-        objectReference: {fileID: 0}
-        value: True
-        arrayItems: []
-      - symbolName: maxRPM
-        objectReference: {fileID: 0}
-        value: 2700
-        arrayItems: []
-      - symbolName: minimumNegativeLoadFactor
-        objectReference: {fileID: 0}
-        value: -1.72
-        arrayItems: []
-      - symbolName: minRPM
-        objectReference: {fileID: 0}
-        value: 600
-        arrayItems: []
-      - symbolName: mixtureCurve
-        objectReference: {fileID: 0}
-        value: UnityEngine.AnimationCurve
-        arrayItems: []
-      - symbolName: mixtureCutOffDelay
-        objectReference: {fileID: 0}
-        value: 1
-        arrayItems: []
-      - symbolName: mtbEngineStallNegativeLoad
-        objectReference: {fileID: 0}
-        value: 10
-        arrayItems: []
-      - symbolName: mtbEngineStallOverNegativeLoad
-        objectReference: {fileID: 0}
-        value: 1
-        arrayItems: []
-      - symbolName: power
-        objectReference: {fileID: 0}
-        value: 160
-        arrayItems: []
-      - symbolName: rpmFloatParameter
-        objectReference: {fileID: 0}
-        value: rpm
-        arrayItems: []
-      - symbolName: rpmResponse
-        objectReference: {fileID: 0}
-        value: 1
-        arrayItems: []
-      - symbolName: throttleCurve
-        objectReference: {fileID: 0}
-        value: UnityEngine.AnimationCurve
-        arrayItems: []
-  - prefabInstance: {fileID: 223314864055379495, guid: 120457b2c2d29cd47865bf83f4730308,
-      type: 3}
-    prefabPath: Templates/Extentions/APU.prefab
-    udonVariables:
-    - udonInstance: {fileID: 8076429713299883377, guid: 120457b2c2d29cd47865bf83f4730308,
-        type: 3}
-      gameObjectName: APU
-      variables:
-      - symbolName: apuAudioSource
-        objectReference: {fileID: 2187605945229233841, guid: 120457b2c2d29cd47865bf83f4730308,
-          type: 3}
-        value: AudioSource (UnityEngine.AudioSource)
-        arrayItems: []
-      - symbolName: apuLoop
-        objectReference: {fileID: 8300000, guid: e825a56e24439574aabf34bb864575cd,
-          type: 3}
-        value: 738APU Loop (UnityEngine.AudioClip)
-        arrayItems: []
-      - symbolName: apuStart
-        objectReference: {fileID: 8300000, guid: 16d21c9540686b342ba7a5d0bd53d410,
-          type: 3}
-        value: 738APU Start (UnityEngine.AudioClip)
-        arrayItems: []
-      - symbolName: apuStop
-        objectReference: {fileID: 8300000, guid: 5e18429d45a22c8428caa1d3345d014e,
-          type: 3}
-        value: 738APU Stop (UnityEngine.AudioClip)
-        arrayItems: []
-      - symbolName: crossFadeDuration
-        objectReference: {fileID: 0}
-        value: 3
-        arrayItems: []
-      - symbolName: defaultApuStartDuration
-        objectReference: {fileID: 0}
-        value: 30
-        arrayItems: []
-      - symbolName: defaultApuStopDuration
-        objectReference: {fileID: 0}
-        value: 10
-        arrayItems: []
-      - symbolName: exhaustEffect
-        objectReference: {fileID: 8479987909087090825, guid: 120457b2c2d29cd47865bf83f4730308,
-          type: 3}
-        value: ExhaustEffect (UnityEngine.ParticleSystem)
-        arrayItems: []
-  - prefabInstance: {fileID: 4626522930957938039, guid: 70a048d2d7e16574fb0d391579976388,
-      type: 3}
-    prefabPath: Templates/Extentions/DihedralEffect.prefab
-    udonVariables:
-    - udonInstance: {fileID: 4362774052194730490, guid: 70a048d2d7e16574fb0d391579976388,
-        type: 3}
-      gameObjectName: DihedralEffect
-      variables:
-      - symbolName: calacteristicLength
-        objectReference: {fileID: 0}
-        value: 6
-        arrayItems: []
-      - symbolName: coefficient
-        objectReference: {fileID: 0}
-        value: 0.4
-        arrayItems: []
-      - symbolName: dynamicPressure
-        objectReference: {fileID: 0}
-        value: 10
-        arrayItems: []
-      - symbolName: extraDrag
-        objectReference: {fileID: 0}
-        value: 4
-        arrayItems: []
-      - symbolName: maxRollAoA
-        objectReference: {fileID: 0}
-        value: 1
-        arrayItems: []
-      - symbolName: referenceArea
-        objectReference: {fileID: 0}
-        value: 124.58
-        arrayItems: []
-  - prefabInstance: {fileID: 9064442510949789594, guid: 5c3cd0867bbb30e4ebd0a2a30819157f,
-      type: 3}
-    prefabPath: Templates/Extentions/DummyHUD.prefab
-    udonVariables:
-    - udonInstance: {fileID: 2637390962827783789, guid: 5c3cd0867bbb30e4ebd0a2a30819157f,
-        type: 3}
-      gameObjectName: DummyHUD
-      variables:
-      - symbolName: distance_from_head
-        objectReference: {fileID: 0}
-        value: 1.333
-        arrayItems: []
-      - symbolName: HUDAnimator
-        objectReference: {fileID: 0}
-        value: null
-        arrayItems: []
-      - symbolName: HUDText_altitude
-        objectReference: {fileID: 0}
-        value: null
-        arrayItems: []
-      - symbolName: HUDText_angleofattack
-        objectReference: {fileID: 0}
-        value: null
-        arrayItems: []
-      - symbolName: HUDText_G
-        objectReference: {fileID: 0}
-        value: null
-        arrayItems: []
-      - symbolName: HUDText_knots
-        objectReference: {fileID: 0}
-        value: null
-        arrayItems: []
-      - symbolName: HUDText_knotsairspeed
-        objectReference: {fileID: 0}
-        value: null
-        arrayItems: []
-      - symbolName: HUDText_mach
-        objectReference: {fileID: 0}
-        value: null
-        arrayItems: []
-  - prefabInstance: {fileID: 2008650468370262116, guid: e5ca41e2db77b8845b5c7785af93fd08,
-      type: 3}
-    prefabPath: Templates/Extentions/EffectsController.prefab
-    udonVariables:
-    - udonInstance: {fileID: 2008650468370262117, guid: e5ca41e2db77b8845b5c7785af93fd08,
-        type: 3}
-      gameObjectName: EffectsController
-      variables:
-      - symbolName: PlaySplashSpeed
-        objectReference: {fileID: 0}
-        value: 7
-        arrayItems: []
-      - symbolName: PrintAnimHashNamesOnStart
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: SAVControl
-        objectReference: {fileID: 0}
-        value: null
-        arrayItems: []
-      - symbolName: SplashParticle
-        objectReference: {fileID: 6841231234699023385, guid: e5ca41e2db77b8845b5c7785af93fd08,
-          type: 3}
-        value: Splash (UnityEngine.ParticleSystem)
-        arrayItems: []
-      - symbolName: TrailGs
-        objectReference: {fileID: 0}
-        value: 4
-        arrayItems: []
-      - symbolName: Trails
-        objectReference: {fileID: 0}
-        value: UnityEngine.TrailRenderer[]
-        arrayItems:
-        - WingTrailL (UnityEngine.TrailRenderer)
-        - WingTrailR (UnityEngine.TrailRenderer)
-  - prefabInstance: {fileID: 8887638244546730382, guid: 6df820a374913e44f9997a6a2d2973bc,
-      type: 3}
-    prefabPath: Templates/Extentions/FloatScript.prefab
-    udonVariables:
-    - udonInstance: {fileID: 3234550905162333664, guid: 6df820a374913e44f9997a6a2d2973bc,
-        type: 3}
-      gameObjectName: FloatScript
-      variables:
-      - symbolName: BackThrustStrength
-        objectReference: {fileID: 0}
-        value: 15
-        arrayItems: []
-      - symbolName: Compressing
-        objectReference: {fileID: 0}
-        value: 25
-        arrayItems: []
-      - symbolName: DeadFloatForce
-        objectReference: {fileID: 0}
-        value: 5
-        arrayItems: []
-      - symbolName: DeadMaxDepthForce
-        objectReference: {fileID: 0}
-        value: 0.4
-        arrayItems: []
-      - symbolName: DisableTaxiRotation
-        objectReference: {fileID: 0}
-        value: True
-        arrayItems: []
-      - symbolName: DoOnLand
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: FloatForce
-        objectReference: {fileID: 0}
-        value: 5
-        arrayItems: []
-      - symbolName: FloatLayers
-        objectReference: {fileID: 0}
-        value: UnityEngine.LayerMask
-        arrayItems: []
-      - symbolName: FloatPoints
-        objectReference: {fileID: 0}
-        value: UnityEngine.Transform[]
-        arrayItems:
-        - FloatPoint (1) (UnityEngine.Transform)
-      - symbolName: FloatRadius
-        objectReference: {fileID: 0}
-        value: 0.6
-        arrayItems: []
-      - symbolName: HoverBike
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: HoverBikeTurningStrength
-        objectReference: {fileID: 0}
-        value: 0.2
-        arrayItems: []
-      - symbolName: MaxCompressingForce
-        objectReference: {fileID: 0}
-        value: 25
-        arrayItems: []
-      - symbolName: MaxDepthForce
-        objectReference: {fileID: 0}
-        value: 25
-        arrayItems: []
-      - symbolName: MoveUpOnTakeOwnership
-        objectReference: {fileID: 0}
-        value: 2
-        arrayItems: []
-      - symbolName: RayCastHeight
-        objectReference: {fileID: 0}
-        value: 2
-        arrayItems: []
-      - symbolName: VehicleRigidbody
-        objectReference: {fileID: 0}
-        value: null
-        arrayItems: []
-      - symbolName: WaterForwardDrag
-        objectReference: {fileID: 0}
-        value: 0.05
-        arrayItems: []
-      - symbolName: WaterRotDrag
-        objectReference: {fileID: 0}
-        value: 5
-        arrayItems: []
-      - symbolName: WaterSidewaysDrag
-        objectReference: {fileID: 0}
-        value: 1
-        arrayItems: []
-      - symbolName: WaterVelDrag
-        objectReference: {fileID: 0}
-        value: 0
-        arrayItems: []
-      - symbolName: WaveHeight
-        objectReference: {fileID: 0}
-        value: 0.6
-        arrayItems: []
-      - symbolName: WaveScale
-        objectReference: {fileID: 0}
-        value: 0.04
-        arrayItems: []
-      - symbolName: WaveSpeed
-        objectReference: {fileID: 0}
-        value: 12
-        arrayItems: []
-  - prefabInstance: {fileID: 4417090854975358889, guid: 530d49ad39e28ed449d01b2e9e835eb3,
-      type: 3}
-    prefabPath: Templates/Extentions/IHaveControl.prefab
-    udonVariables:
-    - udonInstance: {fileID: 8140760318307118851, guid: 530d49ad39e28ed449d01b2e9e835eb3,
-        type: 3}
-      gameObjectName: DFUNC_EX_SeatAdjuster
-      variables:
-      - symbolName: adjustScale
-        objectReference: {fileID: 0}
-        value: 0.2
-        arrayItems: []
-      - symbolName: desktopBack
-        objectReference: {fileID: 0}
-        value: Delete
-        arrayItems: []
-      - symbolName: desktopDown
-        objectReference: {fileID: 0}
-        value: End
-        arrayItems: []
-      - symbolName: desktopForward
-        objectReference: {fileID: 0}
-        value: Insert
-        arrayItems: []
-      - symbolName: desktopStep
-        objectReference: {fileID: 0}
-        value: 0.05
-        arrayItems: []
-      - symbolName: desktopUp
-        objectReference: {fileID: 0}
-        value: Home
-        arrayItems: []
-      - symbolName: sliderMaxDistance
-        objectReference: {fileID: 0}
-        value: 0.1
-        arrayItems: []
-    - udonInstance: {fileID: 7582456754915627509, guid: 530d49ad39e28ed449d01b2e9e835eb3,
-        type: 3}
-      gameObjectName: DFUNCP_IHaveControl
-      variables:
-      - symbolName: desktopControl
-        objectReference: {fileID: 0}
-        value: F8
-        arrayItems: []
-      - symbolName: Dial_Funcon
-        objectReference: {fileID: 7230174764149448926, guid: 530d49ad39e28ed449d01b2e9e835eb3,
-          type: 3}
-        value: MFD_display_funcon (UnityEngine.GameObject)
-        arrayItems: []
-      - symbolName: hapticAmplitude
-        objectReference: {fileID: 0}
-        value: 0.5
-        arrayItems: []
-      - symbolName: hapticDuration
-        objectReference: {fileID: 0}
-        value: 0.2
-        arrayItems: []
-      - symbolName: hapticFrequency
-        objectReference: {fileID: 0}
-        value: 0.1
-        arrayItems: []
-      - symbolName: inverseSwitchHand
-        objectReference: {fileID: 0}
-        value: True
-        arrayItems: []
-      - symbolName: pressTime
-        objectReference: {fileID: 0}
-        value: 3
-        arrayItems: []
-    - udonInstance: {fileID: 4417090854975358895, guid: 530d49ad39e28ed449d01b2e9e835eb3,
-        type: 3}
-      gameObjectName: IHaveControl
-      variables:
-      - symbolName: Dial_Functions_L
-        objectReference: {fileID: 0}
-        value: UnityEngine.Component[]
-        arrayItems:
-        - DFUNC_EX_Empty (VRC.Udon.UdonBehaviour)
-        - DFUNC_EX_SeatAdjuster (VRC.Udon.UdonBehaviour)
-      - symbolName: Dial_Functions_R
-        objectReference: {fileID: 0}
-        value: UnityEngine.Component[]
-        arrayItems:
-        - DFUNC_EX_Empty (VRC.Udon.UdonBehaviour)
-        - DFUNCP_IHaveControl (VRC.Udon.UdonBehaviour)
-      - symbolName: LeftDialDivideStraightUp
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: LStickDisplayHighlighter
-        objectReference: {fileID: 6179794876614819040, guid: 530d49ad39e28ed449d01b2e9e835eb3,
-          type: 3}
-        value: LStickDisplayHighlighter (UnityEngine.Transform)
-        arrayItems: []
-      - symbolName: PassengerExtensions
-        objectReference: {fileID: 0}
-        value: UnityEngine.Component[]
-        arrayItems: []
-      - symbolName: RightDialDivideStraightUp
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: RStickDisplayHighlighter
-        objectReference: {fileID: 6179794877392878694, guid: 530d49ad39e28ed449d01b2e9e835eb3,
-          type: 3}
-        value: RStickDisplayHighlighter (UnityEngine.Transform)
-        arrayItems: []
-      - symbolName: SwitchFunctionSound
-        objectReference: {fileID: 4417090854075734981, guid: 530d49ad39e28ed449d01b2e9e835eb3,
-          type: 3}
-        value: MenuSelect (UnityEngine.AudioSource)
-        arrayItems: []
-    - udonInstance: {fileID: 4417090854706766274, guid: 530d49ad39e28ed449d01b2e9e835eb3,
-        type: 3}
-      gameObjectName: KeyboardControls
-      variables:
-      - symbolName: DoVTOL
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: Lfunc1key
-        objectReference: {fileID: 0}
-        value: Z
-        arrayItems: []
-      - symbolName: Lfunc2key
-        objectReference: {fileID: 0}
-        value: G
-        arrayItems: []
-      - symbolName: Lfunc3key
-        objectReference: {fileID: 0}
-        value: None
-        arrayItems: []
-      - symbolName: Lfunc4key
-        objectReference: {fileID: 0}
-        value: None
-        arrayItems: []
-      - symbolName: Lfunc5key
-        objectReference: {fileID: 0}
-        value: None
-        arrayItems: []
-      - symbolName: Lfunc6key
-        objectReference: {fileID: 0}
-        value: None
-        arrayItems: []
-      - symbolName: Lfunc7key
-        objectReference: {fileID: 0}
-        value: None
-        arrayItems: []
-      - symbolName: Lfunc8key
-        objectReference: {fileID: 0}
-        value: None
-        arrayItems: []
-      - symbolName: Rfunc1key
-        objectReference: {fileID: 0}
-        value: None
-        arrayItems: []
-      - symbolName: Rfunc2key
-        objectReference: {fileID: 0}
-        value: None
-        arrayItems: []
-      - symbolName: Rfunc3key
-        objectReference: {fileID: 0}
-        value: None
-        arrayItems: []
-      - symbolName: Rfunc4key
-        objectReference: {fileID: 0}
-        value: None
-        arrayItems: []
-      - symbolName: Rfunc5key
-        objectReference: {fileID: 0}
-        value: None
-        arrayItems: []
-      - symbolName: Rfunc6key
-        objectReference: {fileID: 0}
-        value: None
-        arrayItems: []
-      - symbolName: Rfunc7key
-        objectReference: {fileID: 0}
-        value: None
-        arrayItems: []
-      - symbolName: Rfunc8key
-        objectReference: {fileID: 0}
-        value: None
-        arrayItems: []
-  - prefabInstance: {fileID: 5645000163685679636, guid: b37c040247e9058448dce35e3cf700cb,
-      type: 3}
-    prefabPath: Templates/Extentions/InstrumentsAnimatorDriver.prefab
-    udonVariables:
-    - udonInstance: {fileID: 2171439226626782122, guid: b37c040247e9058448dce35e3cf700cb,
-        type: 3}
-      gameObjectName: InstrumentsAnimatorDriver
-      variables:
-      - symbolName: adiElectric
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: airspeedFloatParameter
-        objectReference: {fileID: 0}
-        value: airspeed
-        arrayItems: []
-      - symbolName: altimeterResponse
-        objectReference: {fileID: 0}
-        value: 0.25
-        arrayItems: []
-      - symbolName: altitudeFloatParameter
-        objectReference: {fileID: 0}
-        value: altitude
-        arrayItems: []
-      - symbolName: asiResponse
-        objectReference: {fileID: 0}
-        value: 0.25
-        arrayItems: []
-      - symbolName: batteryBus
-        objectReference: {fileID: 0}
-        value: null
-        arrayItems: []
-      - symbolName: batteryVoltageResponse
-        objectReference: {fileID: 0}
-        value: 1
-        arrayItems: []
-      - symbolName: hasADI
-        objectReference: {fileID: 0}
-        value: True
-        arrayItems: []
-      - symbolName: hasAltimeter
-        objectReference: {fileID: 0}
-        value: True
-        arrayItems: []
-      - symbolName: hasASI
-        objectReference: {fileID: 0}
-        value: True
-        arrayItems: []
-      - symbolName: hasHI
-        objectReference: {fileID: 0}
-        value: True
-        arrayItems: []
-      - symbolName: hasTC
-        objectReference: {fileID: 0}
-        value: True
-        arrayItems: []
-      - symbolName: hasVSI
-        objectReference: {fileID: 0}
-        value: True
-        arrayItems: []
-      - symbolName: headingFloatParameter
-        objectReference: {fileID: 0}
-        value: heading
-        arrayItems: []
-      - symbolName: hiElectric
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: instrumentsAnimator
-        objectReference: {fileID: 0}
-        value: null
-        arrayItems: []
-      - symbolName: magneticDeclination
-        objectReference: {fileID: 0}
-        value: 0
-        arrayItems: []
-      - symbolName: maxAirspeed
-        objectReference: {fileID: 0}
-        value: 180
-        arrayItems: []
-      - symbolName: maxAltitude
-        objectReference: {fileID: 0}
-        value: 20000
-        arrayItems: []
-      - symbolName: maxPitch
-        objectReference: {fileID: 0}
-        value: 30
-        arrayItems: []
-      - symbolName: maxSlip
-        objectReference: {fileID: 0}
-        value: 9
-        arrayItems: []
-      - symbolName: maxTurn
-        objectReference: {fileID: 0}
-        value: 12
-        arrayItems: []
-      - symbolName: maxVerticalSpeed
-        objectReference: {fileID: 0}
-        value: 2000
-        arrayItems: []
-      - symbolName: pithFloatParameter
-        objectReference: {fileID: 0}
-        value: pitch
-        arrayItems: []
-      - symbolName: rollFloatParameter
-        objectReference: {fileID: 0}
-        value: roll
-        arrayItems: []
-      - symbolName: slipAngleFloatParameter
-        objectReference: {fileID: 0}
-        value: slipangle
-        arrayItems: []
-      - symbolName: slipResponse
-        objectReference: {fileID: 0}
-        value: 0.25
-        arrayItems: []
-      - symbolName: tcElectric
-        objectReference: {fileID: 0}
-        value: True
-        arrayItems: []
-      - symbolName: turnRateFloatParameter
-        objectReference: {fileID: 0}
-        value: turnrate
-        arrayItems: []
-      - symbolName: turnResponse
-        objectReference: {fileID: 0}
-        value: 1
-        arrayItems: []
-      - symbolName: vacuumPowerResponse
-        objectReference: {fileID: 0}
-        value: 1
-        arrayItems: []
-      - symbolName: verticalSpeedFloatParameter
-        objectReference: {fileID: 0}
-        value: vs
-        arrayItems: []
-      - symbolName: vsiResponse
-        objectReference: {fileID: 0}
-        value: 0.25
-        arrayItems: []
-  - prefabInstance: {fileID: 854394467307425068, guid: 159085ad0f12a324e855b09b0c92e6a6,
-      type: 3}
-    prefabPath: Templates/Extentions/OutsideOnly.prefab
-    udonVariables:
-    - udonInstance: {fileID: 8482302438507593943, guid: 159085ad0f12a324e855b09b0c92e6a6,
-        type: 3}
-      gameObjectName: OutsideOnly
-      variables:
-      - symbolName: outsideOnly
-        objectReference: {fileID: 0}
-        value: UnityEngine.GameObject[]
-        arrayItems:
-        - null
-  - prefabInstance: {fileID: 679646025182154641, guid: 104bfb58cdbbfb94eb83a0b54653b288,
-      type: 3}
-    prefabPath: Templates/Extentions/PassengerSeatAdjuster.prefab
-    udonVariables:
-    - udonInstance: {fileID: 3773744619555406841, guid: 104bfb58cdbbfb94eb83a0b54653b288,
-        type: 3}
-      gameObjectName: DFUNC_EX_SeatAdjuster
-      variables:
-      - symbolName: adjustScale
-        objectReference: {fileID: 0}
-        value: 0.2
-        arrayItems: []
-      - symbolName: desktopBack
-        objectReference: {fileID: 0}
-        value: Delete
-        arrayItems: []
-      - symbolName: desktopDown
-        objectReference: {fileID: 0}
-        value: End
-        arrayItems: []
-      - symbolName: desktopForward
-        objectReference: {fileID: 0}
-        value: Insert
-        arrayItems: []
-      - symbolName: desktopStep
-        objectReference: {fileID: 0}
-        value: 0.05
-        arrayItems: []
-      - symbolName: desktopUp
-        objectReference: {fileID: 0}
-        value: Home
-        arrayItems: []
-      - symbolName: sliderMaxDistance
-        objectReference: {fileID: 0}
-        value: 0.1
-        arrayItems: []
-    - udonInstance: {fileID: 8784951012554345784, guid: 104bfb58cdbbfb94eb83a0b54653b288,
-        type: 3}
-      gameObjectName: KeyboardControls
-      variables:
-      - symbolName: DoVTOL
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: Lfunc1key
-        objectReference: {fileID: 0}
-        value: Z
-        arrayItems: []
-      - symbolName: Lfunc2key
-        objectReference: {fileID: 0}
-        value: G
-        arrayItems: []
-      - symbolName: Lfunc3key
-        objectReference: {fileID: 0}
-        value: None
-        arrayItems: []
-      - symbolName: Lfunc4key
-        objectReference: {fileID: 0}
-        value: None
-        arrayItems: []
-      - symbolName: Lfunc5key
-        objectReference: {fileID: 0}
-        value: None
-        arrayItems: []
-      - symbolName: Lfunc6key
-        objectReference: {fileID: 0}
-        value: None
-        arrayItems: []
-      - symbolName: Lfunc7key
-        objectReference: {fileID: 0}
-        value: None
-        arrayItems: []
-      - symbolName: Lfunc8key
-        objectReference: {fileID: 0}
-        value: None
-        arrayItems: []
-      - symbolName: Rfunc1key
-        objectReference: {fileID: 0}
-        value: None
-        arrayItems: []
-      - symbolName: Rfunc2key
-        objectReference: {fileID: 0}
-        value: None
-        arrayItems: []
-      - symbolName: Rfunc3key
-        objectReference: {fileID: 0}
-        value: None
-        arrayItems: []
-      - symbolName: Rfunc4key
-        objectReference: {fileID: 0}
-        value: None
-        arrayItems: []
-      - symbolName: Rfunc5key
-        objectReference: {fileID: 0}
-        value: None
-        arrayItems: []
-      - symbolName: Rfunc6key
-        objectReference: {fileID: 0}
-        value: None
-        arrayItems: []
-      - symbolName: Rfunc7key
-        objectReference: {fileID: 0}
-        value: None
-        arrayItems: []
-      - symbolName: Rfunc8key
-        objectReference: {fileID: 0}
-        value: None
-        arrayItems: []
-    - udonInstance: {fileID: 8784951012285754197, guid: 104bfb58cdbbfb94eb83a0b54653b288,
-        type: 3}
-      gameObjectName: PassengerFunctions
-      variables:
-      - symbolName: Dial_Functions_L
-        objectReference: {fileID: 0}
-        value: UnityEngine.Component[]
-        arrayItems:
-        - DFUNC_EX_Empty (VRC.Udon.UdonBehaviour)
-        - DFUNC_EX_SeatAdjuster (VRC.Udon.UdonBehaviour)
-      - symbolName: Dial_Functions_R
-        objectReference: {fileID: 0}
-        value: UnityEngine.Component[]
-        arrayItems: []
-      - symbolName: LeftDialDivideStraightUp
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: LStickDisplayHighlighter
-        objectReference: {fileID: 1253628449194070042, guid: 104bfb58cdbbfb94eb83a0b54653b288,
-          type: 3}
-        value: LStickDisplayHighlighter (UnityEngine.Transform)
-        arrayItems: []
-      - symbolName: PassengerExtensions
-        objectReference: {fileID: 0}
-        value: UnityEngine.Component[]
-        arrayItems: []
-      - symbolName: RightDialDivideStraightUp
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: RStickDisplayHighlighter
-        objectReference: {fileID: 1253628448416010396, guid: 104bfb58cdbbfb94eb83a0b54653b288,
-          type: 3}
-        value: RStickDisplayHighlighter (UnityEngine.Transform)
-        arrayItems: []
-      - symbolName: SwitchFunctionSound
-        objectReference: {fileID: 8784951013185517375, guid: 104bfb58cdbbfb94eb83a0b54653b288,
-          type: 3}
-        value: MenuSelect (UnityEngine.AudioSource)
-        arrayItems: []
-    - udonInstance: {fileID: 4197030075692967939, guid: 104bfb58cdbbfb94eb83a0b54653b288,
-        type: 3}
-      gameObjectName: PassengerSeatAdjuster
-      variables:
-      - symbolName: excludes
-        objectReference: {fileID: 0}
-        value: UnityEngine.Component[]
-        arrayItems: []
-      - symbolName: moveToSeat
-        objectReference: {fileID: 0}
-        value: True
-        arrayItems: []
-  - prefabInstance: {fileID: 8320331003589486179, guid: e03b960375fce1f43a5f2e1d7f2bd452,
-      type: 3}
-    prefabPath: Templates/Extentions/RacingTrigger.prefab
-    udonVariables:
-    - udonInstance: {fileID: 8320331003589486181, guid: e03b960375fce1f43a5f2e1d7f2bd452,
-        type: 3}
-      gameObjectName: RacingTrigger
-      variables:
-      - symbolName: DisabledRaces
-        objectReference: {fileID: 0}
-        value: UnityEngine.GameObject[]
-        arrayItems: []
-      - symbolName: InstanceRecordDisallowedRaces
-        objectReference: {fileID: 0}
-        value: UnityEngine.GameObject[]
-        arrayItems: []
-      - symbolName: PlaneName
-        objectReference: {fileID: 0}
-        value: SF-1
-        arrayItems: []
-      - symbolName: TimeText_Cockpit
-        objectReference: {fileID: 8320331003622124594, guid: e03b960375fce1f43a5f2e1d7f2bd452,
-          type: 3}
-        value: Text_racetimer (UnityEngine.UI.Text)
-        arrayItems: []
-  - prefabInstance: {fileID: 3578919072815048599, guid: a98010f0907f39e438ff76bf1785d1bc,
-      type: 3}
-    prefabPath: Templates/Extentions/SaccAirVehicle.prefab
-    udonVariables:
-    - udonInstance: {fileID: 3578919072815048598, guid: a98010f0907f39e438ff76bf1785d1bc,
-        type: 3}
-      gameObjectName: SaccAirVehicle
-      variables:
-      - symbolName: _DisableStickyWheelWorkarond
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: _DisableStickyWheelWorkaround
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: _EngineOn
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: AccelerationResponse
-        objectReference: {fileID: 0}
-        value: 4.5
-        arrayItems: []
-      - symbolName: AdverseRoll
-        objectReference: {fileID: 0}
-        value: 0
-        arrayItems: []
-      - symbolName: AdverseYaw
-        objectReference: {fileID: 0}
-        value: 0
-        arrayItems: []
-      - symbolName: AfterBurnerKey
-        objectReference: {fileID: 0}
-        value: T
-        arrayItems: []
-      - symbolName: AfterburnerThrustMulti
-        objectReference: {fileID: 0}
-        value: 1.5
-        arrayItems: []
-      - symbolName: AirFriction
-        objectReference: {fileID: 0}
-        value: 0.0004
-        arrayItems: []
-      - symbolName: AoaCurveStrength
-        objectReference: {fileID: 0}
-        value: 2
-        arrayItems: []
-      - symbolName: AtmosphereThinningEnd
-        objectReference: {fileID: 0}
-        value: 19812
-        arrayItems: []
-      - symbolName: AtmosphereThinningStart
-        objectReference: {fileID: 0}
-        value: 12192
-        arrayItems: []
-      - symbolName: AutoAdjustValuesToMass
-        objectReference: {fileID: 0}
-        value: True
-        arrayItems: []
-      - symbolName: BulletDamageTaken
-        objectReference: {fileID: 0}
-        value: 10
-        arrayItems: []
-      - symbolName: DisallowTaxiRotationWhileStill
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: DoStallForces
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: EngineOffOnExit
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: EngineOnOnEnter
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: EngineSpoolDownSpeedMulti
-        objectReference: {fileID: 0}
-        value: 0.5
-        arrayItems: []
-      - symbolName: Fuel
-        objectReference: {fileID: 0}
-        value: 900
-        arrayItems: []
-      - symbolName: FuelConsumption
-        objectReference: {fileID: 0}
-        value: 1
-        arrayItems: []
-      - symbolName: FuelConsumptionABMulti
-        objectReference: {fileID: 0}
-        value: 3
-        arrayItems: []
-      - symbolName: GDamage
-        objectReference: {fileID: 0}
-        value: 10
-        arrayItems: []
-      - symbolName: GripSensitivity
-        objectReference: {fileID: 0}
-        value: 0.75
-        arrayItems: []
-      - symbolName: GroundDetector
-        objectReference: {fileID: 4718839561727010320, guid: a98010f0907f39e438ff76bf1785d1bc,
-          type: 3}
-        value: GroundDetector (UnityEngine.Transform)
-        arrayItems: []
-      - symbolName: GroundDetectorLayers
-        objectReference: {fileID: 0}
-        value: UnityEngine.LayerMask
-        arrayItems: []
-      - symbolName: GroundDetectorRayDistance
-        objectReference: {fileID: 0}
-        value: 0.44
-        arrayItems: []
-      - symbolName: GroundEffectEmpty
-        objectReference: {fileID: 4718839560279923999, guid: a98010f0907f39e438ff76bf1785d1bc,
-          type: 3}
-        value: GroundEffectEmpty (UnityEngine.Transform)
-        arrayItems: []
-      - symbolName: GroundEffectLiftMax
-        objectReference: {fileID: 0}
-        value: 100
-        arrayItems: []
-      - symbolName: GroundEffectMaxDistance
-        objectReference: {fileID: 0}
-        value: 7
-        arrayItems: []
-      - symbolName: GroundEffectStrength
-        objectReference: {fileID: 0}
-        value: 4
-        arrayItems: []
-      - symbolName: HasAfterburner
-        objectReference: {fileID: 0}
-        value: True
-        arrayItems: []
-      - symbolName: Health
-        objectReference: {fileID: 0}
-        value: 23
-        arrayItems: []
-      - symbolName: HighPitchAoaMinControl
-        objectReference: {fileID: 0}
-        value: 0.2
-        arrayItems: []
-      - symbolName: HighPitchAoaMinLift
-        objectReference: {fileID: 0}
-        value: 0.2
-        arrayItems: []
-      - symbolName: HighYawAoaMinControl
-        objectReference: {fileID: 0}
-        value: 0.2
-        arrayItems: []
-      - symbolName: HighYawAoaMinLift
-        objectReference: {fileID: 0}
-        value: 0.2
-        arrayItems: []
-      - symbolName: InertiaTensorRotationMulti
-        objectReference: {fileID: 0}
-        value: 1
-        arrayItems: []
-      - symbolName: InvertITRYaw
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: InvincibleAfterSpawn
-        objectReference: {fileID: 0}
-        value: 2.5
-        arrayItems: []
-      - symbolName: Lift
-        objectReference: {fileID: 0}
-        value: 0.00015
-        arrayItems: []
-      - symbolName: LowFuel
-        objectReference: {fileID: 0}
-        value: 125
-        arrayItems: []
-      - symbolName: MaxAngleOfAttackPitch
-        objectReference: {fileID: 0}
-        value: 25
-        arrayItems: []
-      - symbolName: MaxAngleOfAttackYaw
-        objectReference: {fileID: 0}
-        value: 40
-        arrayItems: []
-      - symbolName: MaxGs
-        objectReference: {fileID: 0}
-        value: 40
-        arrayItems: []
-      - symbolName: MaxJoyAngles
-        objectReference: {fileID: 0}
-        value: (45.0, 45.0, 45.0)
-        arrayItems: []
-      - symbolName: MaxLift
-        objectReference: {fileID: 0}
-        value: 10
-        arrayItems: []
-      - symbolName: MinFuelConsumption
-        objectReference: {fileID: 0}
-        value: 0.25
-        arrayItems: []
-      - symbolName: MissileDamageTakenMultiplier
-        objectReference: {fileID: 0}
-        value: 1
-        arrayItems: []
-      - symbolName: MissilePushForce
-        objectReference: {fileID: 0}
-        value: 1
-        arrayItems: []
-      - symbolName: OnboardVehicleLayer
-        objectReference: {fileID: 0}
-        value: 31
-        arrayItems: []
-      - symbolName: OnlyChangeColliders
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: PitchAoaPitchForce
-        objectReference: {fileID: 0}
-        value: UnityEngine.AnimationCurve
-        arrayItems: []
-      - symbolName: PitchAoaPitchForceMulti
-        objectReference: {fileID: 0}
-        value: 8
-        arrayItems: []
-      - symbolName: PitchConstantFriction
-        objectReference: {fileID: 0}
-        value: 0
-        arrayItems: []
-      - symbolName: PitchDownLiftMulti
-        objectReference: {fileID: 0}
-        value: 0.8
-        arrayItems: []
-      - symbolName: PitchDownStrMulti
-        objectReference: {fileID: 0}
-        value: 0.8
-        arrayItems: []
-      - symbolName: PitchFriction
-        objectReference: {fileID: 0}
-        value: 24
-        arrayItems: []
-      - symbolName: PitchMoment
-        objectReference: {fileID: 4718839561428362698, guid: a98010f0907f39e438ff76bf1785d1bc,
-          type: 3}
-        value: PitchMoment (UnityEngine.Transform)
-        arrayItems: []
-      - symbolName: PitchResponse
-        objectReference: {fileID: 0}
-        value: 20
-        arrayItems: []
-      - symbolName: PitchStrength
-        objectReference: {fileID: 0}
-        value: 5
-        arrayItems: []
-      - symbolName: PitchThrustVecMulti
-        objectReference: {fileID: 0}
-        value: 0
-        arrayItems: []
-      - symbolName: PredictDamage
-        objectReference: {fileID: 0}
-        value: True
-        arrayItems: []
-      - symbolName: RefuelTime
-        objectReference: {fileID: 0}
-        value: 25
-        arrayItems: []
-      - symbolName: RepairTime
-        objectReference: {fileID: 0}
-        value: 30
-        arrayItems: []
-      - symbolName: RepeatingWorld
-        objectReference: {fileID: 0}
-        value: True
-        arrayItems: []
-      - symbolName: RepeatingWorldDistance
-        objectReference: {fileID: 0}
-        value: 20000
-        arrayItems: []
-      - symbolName: RespawnDelay
-        objectReference: {fileID: 0}
-        value: 10
-        arrayItems: []
-      - symbolName: ReversingPitchStrengthMulti
-        objectReference: {fileID: 0}
-        value: 2
-        arrayItems: []
-      - symbolName: ReversingRollStrengthMulti
-        objectReference: {fileID: 0}
-        value: 1.6
-        arrayItems: []
-      - symbolName: ReversingYawStrengthMulti
-        objectReference: {fileID: 0}
-        value: 2.4
-        arrayItems: []
-      - symbolName: RollConstantFriction
-        objectReference: {fileID: 0}
-        value: 0
-        arrayItems: []
-      - symbolName: RollFriction
-        objectReference: {fileID: 0}
-        value: 58.5
-        arrayItems: []
-      - symbolName: RollResponse
-        objectReference: {fileID: 0}
-        value: 20
-        arrayItems: []
-      - symbolName: RollStrength
-        objectReference: {fileID: 0}
-        value: 225
-        arrayItems: []
-      - symbolName: RollThrustVecMulti
-        objectReference: {fileID: 0}
-        value: 0
-        arrayItems: []
-      - symbolName: RotMultiMaxSpeed
-        objectReference: {fileID: 0}
-        value: 220
-        arrayItems: []
-      - symbolName: SeaLevel
-        objectReference: {fileID: 0}
-        value: -1080
-        arrayItems: []
-      - symbolName: SidewaysLift
-        objectReference: {fileID: 0}
-        value: 0.17
-        arrayItems: []
-      - symbolName: SoundBarrierStrength
-        objectReference: {fileID: 0}
-        value: 0.00015
-        arrayItems: []
-      - symbolName: SoundBarrierWidth
-        objectReference: {fileID: 0}
-        value: 20
-        arrayItems: []
-      - symbolName: SquareJoyInput
-        objectReference: {fileID: 0}
-        value: True
-        arrayItems: []
-      - symbolName: SwitchHandsJoyThrottle
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: TaxiFullTurningSpeed
-        objectReference: {fileID: 0}
-        value: 20
-        arrayItems: []
-      - symbolName: TaxiRotationResponse
-        objectReference: {fileID: 0}
-        value: 2.5
-        arrayItems: []
-      - symbolName: TaxiRotationSpeed
-        objectReference: {fileID: 0}
-        value: 35
-        arrayItems: []
-      - symbolName: ThrottleAfterburnerPoint
-        objectReference: {fileID: 0}
-        value: 0.8
-        arrayItems: []
-      - symbolName: ThrottleSensitivity
-        objectReference: {fileID: 0}
-        value: 6
-        arrayItems: []
-      - symbolName: ThrottleStrength
-        objectReference: {fileID: 0}
-        value: 20
-        arrayItems: []
-      - symbolName: VelLift
-        objectReference: {fileID: 0}
-        value: 1
-        arrayItems: []
-      - symbolName: VelLiftMax
-        objectReference: {fileID: 0}
-        value: 10
-        arrayItems: []
-      - symbolName: VelStraightenStrPitch
-        objectReference: {fileID: 0}
-        value: 0.035
-        arrayItems: []
-      - symbolName: VelStraightenStrYaw
-        objectReference: {fileID: 0}
-        value: 0.045
-        arrayItems: []
-      - symbolName: VerticalThrottle
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: VTOLAllowAfterburner
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: VTOLAngleTurnRate
-        objectReference: {fileID: 0}
-        value: 90
-        arrayItems: []
-      - symbolName: VTOLDefaultValue
-        objectReference: {fileID: 0}
-        value: 0
-        arrayItems: []
-      - symbolName: VTOLGroundEffectStrength
-        objectReference: {fileID: 0}
-        value: 0.14
-        arrayItems: []
-      - symbolName: VTOLLoseControlSpeed
-        objectReference: {fileID: 0}
-        value: 120
-        arrayItems: []
-      - symbolName: VTOLMaxAngle
-        objectReference: {fileID: 0}
-        value: 90
-        arrayItems: []
-      - symbolName: VTOLMinAngle
-        objectReference: {fileID: 0}
-        value: 0
-        arrayItems: []
-      - symbolName: VTOLOnly
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: VTOLPitchThrustVecMulti
-        objectReference: {fileID: 0}
-        value: 0.3
-        arrayItems: []
-      - symbolName: VTOLRollThrustVecMulti
-        objectReference: {fileID: 0}
-        value: 0.07
-        arrayItems: []
-      - symbolName: VTOLThrottleStrengthMulti
-        objectReference: {fileID: 0}
-        value: 0.7
-        arrayItems: []
-      - symbolName: VTOLYawThrustVecMulti
-        objectReference: {fileID: 0}
-        value: 0.3
-        arrayItems: []
-      - symbolName: Wind
-        objectReference: {fileID: 0}
-        value: (0.0, 0.0, 0.0)
-        arrayItems: []
-      - symbolName: WindGustiness
-        objectReference: {fileID: 0}
-        value: 0
-        arrayItems: []
-      - symbolName: WindGustStrength
-        objectReference: {fileID: 0}
-        value: 0
-        arrayItems: []
-      - symbolName: WindTurbulanceScale
-        objectReference: {fileID: 0}
-        value: 0
-        arrayItems: []
-      - symbolName: YawAoaRollForce
-        objectReference: {fileID: 0}
-        value: UnityEngine.AnimationCurve
-        arrayItems: []
-      - symbolName: YawAoaRollForceMulti
-        objectReference: {fileID: 0}
-        value: 30
-        arrayItems: []
-      - symbolName: YawConstantFriction
-        objectReference: {fileID: 0}
-        value: 0
-        arrayItems: []
-      - symbolName: YawFriction
-        objectReference: {fileID: 0}
-        value: 15
-        arrayItems: []
-      - symbolName: YawMoment
-        objectReference: {fileID: 4718839560030421659, guid: a98010f0907f39e438ff76bf1785d1bc,
-          type: 3}
-        value: YawMoment (UnityEngine.Transform)
-        arrayItems: []
-      - symbolName: YawResponse
-        objectReference: {fileID: 0}
-        value: 20
-        arrayItems: []
-      - symbolName: YawStrength
-        objectReference: {fileID: 0}
-        value: 3
-        arrayItems: []
-      - symbolName: YawThrustVecMulti
-        objectReference: {fileID: 0}
-        value: 0
-        arrayItems: []
-  - prefabInstance: {fileID: 3146752918488428444, guid: 9a009579863df3442a72025772f1ff57,
-      type: 3}
-    prefabPath: Templates/Extentions/SoundController.prefab
-    udonVariables:
-    - udonInstance: {fileID: 3146752918488428447, guid: 9a009579863df3442a72025772f1ff57,
-        type: 3}
-      gameObjectName: SoundController
-      variables:
-      - symbolName: ABOnInside
-        objectReference: {fileID: 3146752918098694565, guid: 9a009579863df3442a72025772f1ff57,
-          type: 3}
-        value: AfterburnerOnInside (UnityEngine.AudioSource)
-        arrayItems: []
-      - symbolName: ABOnOutside
-        objectReference: {fileID: 3146752917480105815, guid: 9a009579863df3442a72025772f1ff57,
-          type: 3}
-        value: AfterburnerOnOutside (UnityEngine.AudioSource)
-        arrayItems: []
-      - symbolName: AllDoorsClosed
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: BulletHit
-        objectReference: {fileID: 0}
-        value: UnityEngine.AudioSource[]
-        arrayItems:
-        - Hit (UnityEngine.AudioSource)
-      - symbolName: DopplerSounds
-        objectReference: {fileID: 0}
-        value: UnityEngine.AudioSource[]
-        arrayItems: []
-      - symbolName: EnterWater
-        objectReference: {fileID: 7979046350788393798, guid: 9a009579863df3442a72025772f1ff57,
-          type: 3}
-        value: EnterWater (UnityEngine.AudioSource)
-        arrayItems: []
-      - symbolName: EnterWaterOutside
-        objectReference: {fileID: 8910266001734361004, guid: 9a009579863df3442a72025772f1ff57,
-          type: 3}
-        value: EnterWaterOutside (UnityEngine.AudioSource)
-        arrayItems: []
-      - symbolName: Explosion
-        objectReference: {fileID: 0}
-        value: UnityEngine.AudioSource[]
-        arrayItems:
-        - PlaneExplosion (UnityEngine.AudioSource)
-      - symbolName: MissileHit
-        objectReference: {fileID: 0}
-        value: UnityEngine.AudioSource[]
-        arrayItems:
-        - MissileHit (UnityEngine.AudioSource)
-      - symbolName: PlaneDistant
-        objectReference: {fileID: 3146752918193211345, guid: 9a009579863df3442a72025772f1ff57,
-          type: 3}
-        value: EngineDistant (UnityEngine.AudioSource)
-        arrayItems: []
-      - symbolName: PlaneIdle
-        objectReference: {fileID: 0}
-        value: UnityEngine.AudioSource[]
-        arrayItems:
-        - EngineIdle (UnityEngine.AudioSource)
-      - symbolName: PlaneInside
-        objectReference: {fileID: 3146752917010570083, guid: 9a009579863df3442a72025772f1ff57,
-          type: 3}
-        value: Inside (UnityEngine.AudioSource)
-        arrayItems: []
-      - symbolName: PlaneWind
-        objectReference: {fileID: 3146752918288069119, guid: 9a009579863df3442a72025772f1ff57,
-          type: 3}
-        value: PlaneWind (UnityEngine.AudioSource)
-        arrayItems: []
-      - symbolName: PlaneWindMaxVolSpeed
-        objectReference: {fileID: 0}
-        value: 1000
-        arrayItems: []
-      - symbolName: PlaneWindMultiplier
-        objectReference: {fileID: 0}
-        value: 0.25
-        arrayItems: []
-      - symbolName: RadarLocked
-        objectReference: {fileID: 3167013833236617735, guid: 9a009579863df3442a72025772f1ff57,
-          type: 3}
-        value: RadarLocked (UnityEngine.AudioSource)
-        arrayItems: []
-      - symbolName: ReSupply
-        objectReference: {fileID: 4609529235141622847, guid: 9a009579863df3442a72025772f1ff57,
-          type: 3}
-        value: ReSupply (UnityEngine.AudioSource)
-        arrayItems: []
-      - symbolName: Rolling
-        objectReference: {fileID: 3146752918740010399, guid: 9a009579863df3442a72025772f1ff57,
-          type: 3}
-        value: Rolling (UnityEngine.AudioSource)
-        arrayItems: []
-      - symbolName: Rolling_Seaplane
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: Rolling_Water
-        objectReference: {fileID: 0}
-        value: null
-        arrayItems: []
-      - symbolName: RollingMaxVol
-        objectReference: {fileID: 0}
-        value: 1
-        arrayItems: []
-      - symbolName: RollingMaxVol_Water
-        objectReference: {fileID: 0}
-        value: 0.3
-        arrayItems: []
-      - symbolName: RollingVolCurve
-        objectReference: {fileID: 0}
-        value: 0.03
-        arrayItems: []
-      - symbolName: RollingVolCurve_Water
-        objectReference: {fileID: 0}
-        value: 0.004
-        arrayItems: []
-      - symbolName: SonicBoom
-        objectReference: {fileID: 0}
-        value: UnityEngine.AudioSource[]
-        arrayItems:
-        - SonicBoom (UnityEngine.AudioSource)
-      - symbolName: Thrust
-        objectReference: {fileID: 0}
-        value: UnityEngine.AudioSource[]
-        arrayItems:
-        - Thrust (UnityEngine.AudioSource)
-      - symbolName: TouchDown
-        objectReference: {fileID: 0}
-        value: UnityEngine.AudioSource[]
-        arrayItems:
-        - TouchDown (UnityEngine.AudioSource)
-      - symbolName: TouchDownSoundSpeed
-        objectReference: {fileID: 0}
-        value: 35
-        arrayItems: []
-      - symbolName: TouchDownWater
-        objectReference: {fileID: 0}
-        value: UnityEngine.AudioSource[]
-        arrayItems:
-        - null
-      - symbolName: UnderWater
-        objectReference: {fileID: 7979046352475885231, guid: 9a009579863df3442a72025772f1ff57,
-          type: 3}
-        value: UnderWater (UnityEngine.AudioSource)
-        arrayItems: []
-  - prefabInstance: {fileID: 4754457074920514693, guid: 8291139d29e6bd149bd9d32830ef2630,
-      type: 3}
-    prefabPath: Templates/Extentions/SyncScript.prefab
-    udonVariables:
-    - udonInstance: {fileID: 4754457074920514691, guid: 8291139d29e6bd149bd9d32830ef2630,
-        type: 3}
-      gameObjectName: SyncScript
-      variables:
-      - symbolName: FreezePositionOnDeath
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
-      - symbolName: IdleModeUpdateInterval
-        objectReference: {fileID: 0}
-        value: 3
-        arrayItems: []
-      - symbolName: IdleModeVelMultiplier
-        objectReference: {fileID: 0}
-        value: 0.4
-        arrayItems: []
-      - symbolName: IdleMoveMentRange
-        objectReference: {fileID: 0}
-        value: 0.35
-        arrayItems: []
-      - symbolName: IdleRotationRange
-        objectReference: {fileID: 0}
-        value: 5
-        arrayItems: []
-      - symbolName: RotationSyncAgressiveness
-        objectReference: {fileID: 0}
-        value: 10
-        arrayItems: []
-      - symbolName: SAVControl
-        objectReference: {fileID: 0}
-        value: null
-        arrayItems: []
-      - symbolName: updateInterval
-        objectReference: {fileID: 0}
-        value: 0.2
-        arrayItems: []
-      - symbolName: VehicleTransform
-        objectReference: {fileID: 0}
-        value: null
-        arrayItems: []
-  - prefabInstance: {fileID: 3292609468833336960, guid: 2eb6c987d0dd3a5499073d4c7ac78ae4,
-      type: 3}
-    prefabPath: Templates/Extentions/WakeTurbulence.prefab
-    udonVariables:
-    - udonInstance: {fileID: 2017274071240032448, guid: 2eb6c987d0dd3a5499073d4c7ac78ae4,
-        type: 3}
-      gameObjectName: WakeTurbulence
-      variables:
-      - symbolName: curve
-        objectReference: {fileID: 0}
-        value: 2
-        arrayItems: []
-      - symbolName: maxSpeed
-        objectReference: {fileID: 0}
-        value: 300
-        arrayItems: []
-      - symbolName: minSpeed
-        objectReference: {fileID: 0}
-        value: 60
-        arrayItems: []
-      - symbolName: peakSpeed
-        objectReference: {fileID: 0}
-        value: 120
-        arrayItems: []
-  - prefabInstance: {fileID: 808467897345835904, guid: 234893cd2ae19d34b9d4d3878599f018,
-      type: 3}
-    prefabPath: Templates/Extentions/WaterTrigger.prefab
-    udonVariables:
-    - udonInstance: {fileID: 808467897345835933, guid: 234893cd2ae19d34b9d4d3878599f018,
-        type: 3}
-      gameObjectName: WaterTrigger
-      variables:
-      - symbolName: SAVControl
-        objectReference: {fileID: 0}
-        value: null
-        arrayItems: []
-      - symbolName: WaterDamageSec
-        objectReference: {fileID: 0}
-        value: 3
-        arrayItems: []
-      - symbolName: WaterSlowDown
-        objectReference: {fileID: 0}
-        value: 3
-        arrayItems: []
-      - symbolName: WaterSlowDownRot
-        objectReference: {fileID: 0}
-        value: 3
-        arrayItems: []
   - prefabInstance: {fileID: 9064442510949789594, guid: ec338f04339751d4abf06ae86a2d409b,
       type: 3}
     prefabPath: Templates/Others/HUDController.prefab
@@ -5020,7 +2953,7 @@ MonoBehaviour:
         arrayItems: []
       - symbolName: DisableTaxiRotation
         objectReference: {fileID: 0}
-        value: True
+        value: False
         arrayItems: []
       - symbolName: DoOnLand
         objectReference: {fileID: 0}
@@ -5897,8 +3830,9 @@ MonoBehaviour:
         value: False
         arrayItems: []
       - symbolName: Rolling_Water
-        objectReference: {fileID: 0}
-        value: null
+        objectReference: {fileID: 7547106617230776100, guid: 71460fca338dc4b499174326942c0155,
+          type: 3}
+        value: Rolling_Water (UnityEngine.AudioSource)
         arrayItems: []
       - symbolName: RollingMaxVol
         objectReference: {fileID: 0}
@@ -5943,7 +3877,8 @@ MonoBehaviour:
       - symbolName: TouchDownWater
         objectReference: {fileID: 0}
         value: UnityEngine.AudioSource[]
-        arrayItems: []
+        arrayItems:
+        - null
       - symbolName: UnderWater
         objectReference: {fileID: 45833441589020924, guid: 71460fca338dc4b499174326942c0155,
           type: 3}
@@ -6165,4 +4100,2196 @@ MonoBehaviour:
       - symbolName: ResupplyLayer
         objectReference: {fileID: 0}
         value: 27
+        arrayItems: []
+  - prefabInstance: {fileID: 3186840511453853113, guid: 890ffcf824bb0254ca5e994cdd0aa632,
+      type: 3}
+    prefabPath: Templates/SFEXT/AdbancedWaterRudder.prefab
+    udonVariables:
+    - udonInstance: {fileID: 7738371227145641079, guid: 890ffcf824bb0254ca5e994cdd0aa632,
+        type: 3}
+      gameObjectName: AdbancedWaterRudder
+      variables:
+      - symbolName: dragCoefficientCurve
+        objectReference: {fileID: 0}
+        value: UnityEngine.AnimationCurve
+        arrayItems: []
+      - symbolName: liftCoefficientCurve
+        objectReference: {fileID: 0}
+        value: UnityEngine.AnimationCurve
+        arrayItems: []
+      - symbolName: maxRudderAngle
+        objectReference: {fileID: 0}
+        value: 30
+        arrayItems: []
+      - symbolName: referenceArea
+        objectReference: {fileID: 0}
+        value: 1
+        arrayItems: []
+      - symbolName: response
+        objectReference: {fileID: 0}
+        value: 0.5
+        arrayItems: []
+      - symbolName: waterDensity
+        objectReference: {fileID: 0}
+        value: 999.1026
+        arrayItems: []
+  - prefabInstance: {fileID: 5571737103940536461, guid: e6ec1abbcac985d4181e24bfe9e80dbd,
+      type: 3}
+    prefabPath: Templates/SFEXT/AdvancedEngine.prefab
+    udonVariables:
+    - udonInstance: {fileID: 301182104358630931, guid: e6ec1abbcac985d4181e24bfe9e80dbd,
+        type: 3}
+      gameObjectName: AdvancedEngine
+      variables:
+      - symbolName: autoClose
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+      - symbolName: autoFuel
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: autoRelease
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+      - symbolName: brustIdleSpeed
+        objectReference: {fileID: 0}
+        value: 10
+        arrayItems: []
+      - symbolName: brustParticle
+        objectReference: {fileID: 6258364892900955554, guid: e6ec1abbcac985d4181e24bfe9e80dbd,
+          type: 3}
+        value: Brust (UnityEngine.ParticleSystem)
+        arrayItems: []
+      - symbolName: brustTakeOffSpeed
+        objectReference: {fileID: 0}
+        value: 1000
+        arrayItems: []
+      - symbolName: continuousECT
+        objectReference: {fileID: 0}
+        value: 274
+        arrayItems: []
+      - symbolName: continuousEGT
+        objectReference: {fileID: 0}
+        value: 1013
+        arrayItems: []
+      - symbolName: continuousN1
+        objectReference: {fileID: 0}
+        value: 4397
+        arrayItems: []
+      - symbolName: continuousN2
+        objectReference: {fileID: 0}
+        value: 17167
+        arrayItems: []
+      - symbolName: dished
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: ect
+        objectReference: {fileID: 0}
+        value: 0
+        arrayItems: []
+      - symbolName: ectOverheatResponse
+        objectReference: {fileID: 0}
+        value: 0.001
+        arrayItems: []
+      - symbolName: ectResponse
+        objectReference: {fileID: 0}
+        value: 0.1
+        arrayItems: []
+      - symbolName: egt
+        objectReference: {fileID: 0}
+        value: 0
+        arrayItems: []
+      - symbolName: egtResponse
+        objectReference: {fileID: 0}
+        value: 0.02
+        arrayItems: []
+      - symbolName: exhaustAreaAngle
+        objectReference: {fileID: 0}
+        value: 30
+        arrayItems: []
+      - symbolName: exhaustAreaExtent
+        objectReference: {fileID: 0}
+        value: 8
+        arrayItems: []
+      - symbolName: exhaustAreaIdleRange
+        objectReference: {fileID: 0}
+        value: 60
+        arrayItems: []
+      - symbolName: exhaustAreaTakeOffRange
+        objectReference: {fileID: 0}
+        value: 100
+        arrayItems: []
+      - symbolName: externalTempurature
+        objectReference: {fileID: 0}
+        value: 15
+        arrayItems: []
+      - symbolName: fanAxis
+        objectReference: {fileID: 0}
+        value: (0.0, 1.0, 0.0)
+        arrayItems: []
+      - symbolName: fire
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: fireECT
+        objectReference: {fileID: 0}
+        value: 850
+        arrayItems: []
+      - symbolName: fireEffect
+        objectReference: {fileID: 1787605412173307962, guid: e6ec1abbcac985d4181e24bfe9e80dbd,
+          type: 3}
+        value: FireEffect (UnityEngine.ParticleSystem)
+        arrayItems: []
+      - symbolName: fireEGT
+        objectReference: {fileID: 0}
+        value: 1812
+        arrayItems: []
+      - symbolName: fuel
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: idleECT
+        objectReference: {fileID: 0}
+        value: 196
+        arrayItems: []
+      - symbolName: idleEGT
+        objectReference: {fileID: 0}
+        value: 725
+        arrayItems: []
+      - symbolName: idleN1
+        objectReference: {fileID: 0}
+        value: 879.6
+        arrayItems: []
+      - symbolName: idleN2
+        objectReference: {fileID: 0}
+        value: 8583.5
+        arrayItems: []
+      - symbolName: idleOilPressure
+        objectReference: {fileID: 0}
+        value: 1200
+        arrayItems: []
+      - symbolName: idleOilTempurature
+        objectReference: {fileID: 0}
+        value: 31
+        arrayItems: []
+      - symbolName: idlePlayerAcceleration
+        objectReference: {fileID: 0}
+        value: 100
+        arrayItems: []
+      - symbolName: idleSound
+        objectReference: {fileID: 5845960735359478345, guid: e6ec1abbcac985d4181e24bfe9e80dbd,
+          type: 3}
+        value: EngineIdle (UnityEngine.AudioSource)
+        arrayItems: []
+      - symbolName: inletAreaAngle
+        objectReference: {fileID: 0}
+        value: 40
+        arrayItems: []
+      - symbolName: inletAreaIdleRange
+        objectReference: {fileID: 0}
+        value: 3.1
+        arrayItems: []
+      - symbolName: inletAreaTakeOffRange
+        objectReference: {fileID: 0}
+        value: 4.2
+        arrayItems: []
+      - symbolName: inletOffset
+        objectReference: {fileID: 0}
+        value: 2
+        arrayItems: []
+      - symbolName: insideSound
+        objectReference: {fileID: 594416617581715793, guid: e6ec1abbcac985d4181e24bfe9e80dbd,
+          type: 3}
+        value: Inside (UnityEngine.AudioSource)
+        arrayItems: []
+      - symbolName: intentAreaAngle
+        objectReference: {fileID: 0}
+        value: 45
+        arrayItems: []
+      - symbolName: intentAreaIdleRange
+        objectReference: {fileID: 0}
+        value: 4.1
+        arrayItems: []
+      - symbolName: intentAreaTakeOffRange
+        objectReference: {fileID: 0}
+        value: 5.2
+        arrayItems: []
+      - symbolName: maxOilPressure
+        objectReference: {fileID: 0}
+        value: 2000
+        arrayItems: []
+      - symbolName: maxOilTempurature
+        objectReference: {fileID: 0}
+        value: 140
+        arrayItems: []
+      - symbolName: maxThrust
+        objectReference: {fileID: 0}
+        value: 130408.5
+        arrayItems: []
+      - symbolName: minN2
+        objectReference: {fileID: 0}
+        value: 3433.4
+        arrayItems: []
+      - symbolName: mtbFireAtContinuous
+        objectReference: {fileID: 0}
+        value: 2592000
+        arrayItems: []
+      - symbolName: mtbFireAtFire
+        objectReference: {fileID: 0}
+        value: 1
+        arrayItems: []
+      - symbolName: mtbFireAtOverheat
+        objectReference: {fileID: 0}
+        value: 90
+        arrayItems: []
+      - symbolName: mtbMeltdownOnFire
+        objectReference: {fileID: 0}
+        value: 120
+        arrayItems: []
+      - symbolName: n1
+        objectReference: {fileID: 0}
+        value: 0
+        arrayItems: []
+      - symbolName: n1DecreaseResponse
+        objectReference: {fileID: 0}
+        value: 0.08
+        arrayItems: []
+      - symbolName: n1Response
+        objectReference: {fileID: 0}
+        value: 0.1
+        arrayItems: []
+      - symbolName: n1StartupResponse
+        objectReference: {fileID: 0}
+        value: 0.01
+        arrayItems: []
+      - symbolName: n2
+        objectReference: {fileID: 0}
+        value: 0
+        arrayItems: []
+      - symbolName: n2DecreaseResponse
+        objectReference: {fileID: 0}
+        value: 0.04
+        arrayItems: []
+      - symbolName: n2Responce
+        objectReference: {fileID: 0}
+        value: 0.05
+        arrayItems: []
+      - symbolName: n2StartupResponse
+        objectReference: {fileID: 0}
+        value: 0.005
+        arrayItems: []
+      - symbolName: normalizedThrust
+        objectReference: {fileID: 0}
+        value: 0
+        arrayItems: []
+      - symbolName: overheat
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: overheatECT
+        objectReference: {fileID: 0}
+        value: 343
+        arrayItems: []
+      - symbolName: playerStrike
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+      - symbolName: randomRange
+        objectReference: {fileID: 0}
+        value: 0.2
+        arrayItems: []
+      - symbolName: referenceN1
+        objectReference: {fileID: 0}
+        value: 4397
+        arrayItems: []
+      - symbolName: referenceN2
+        objectReference: {fileID: 0}
+        value: 17167
+        arrayItems: []
+      - symbolName: reverser
+        objectReference: {fileID: 0}
+        value: 0
+        arrayItems: []
+      - symbolName: reverserBrustParticle
+        objectReference: {fileID: 1996470668224797306, guid: e6ec1abbcac985d4181e24bfe9e80dbd,
+          type: 3}
+        value: ReveseBrust (UnityEngine.ParticleSystem)
+        arrayItems: []
+      - symbolName: reverserExtractResponse
+        objectReference: {fileID: 0}
+        value: 0.5
+        arrayItems: []
+      - symbolName: reverserPosition
+        objectReference: {fileID: 0}
+        value: 0
+        arrayItems: []
+      - symbolName: reverserRatio
+        objectReference: {fileID: 0}
+        value: 0.5
+        arrayItems: []
+      - symbolName: reverserResponse
+        objectReference: {fileID: 0}
+        value: 1
+        arrayItems: []
+      - symbolName: reverserRetractResponse
+        objectReference: {fileID: 0}
+        value: 0.5
+        arrayItems: []
+      - symbolName: reversing
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: soundResponse
+        objectReference: {fileID: 0}
+        value: 1
+        arrayItems: []
+      - symbolName: stall
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: starter
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: strikeDistance
+        objectReference: {fileID: 0}
+        value: 2
+        arrayItems: []
+      - symbolName: strikeSound
+        objectReference: {fileID: 8300000, guid: a778a83e783a3d040990aa85ff3141b7,
+          type: 3}
+        value: GunShot (UnityEngine.AudioClip)
+        arrayItems: []
+      - symbolName: strikeSoundSource
+        objectReference: {fileID: 5584130105550258085, guid: e6ec1abbcac985d4181e24bfe9e80dbd,
+          type: 3}
+        value: SFX (UnityEngine.AudioSource)
+        arrayItems: []
+      - symbolName: takeOffEGT
+        objectReference: {fileID: 0}
+        value: 1038
+        arrayItems: []
+      - symbolName: takeOffN1
+        objectReference: {fileID: 0}
+        value: 4586
+        arrayItems: []
+      - symbolName: takeOffN2
+        objectReference: {fileID: 0}
+        value: 20171
+        arrayItems: []
+      - symbolName: takeOffOilTempurature
+        objectReference: {fileID: 0}
+        value: 155
+        arrayItems: []
+      - symbolName: takeOffPlayerAcceleration
+        objectReference: {fileID: 0}
+        value: 1000
+        arrayItems: []
+      - symbolName: takeOffSound
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
+      - symbolName: throttleInput
+        objectReference: {fileID: 0}
+        value: 0
+        arrayItems: []
+      - symbolName: thrustAreaExtent
+        objectReference: {fileID: 0}
+        value: 12
+        arrayItems: []
+      - symbolName: thrustAreaIdleRange
+        objectReference: {fileID: 0}
+        value: 60
+        arrayItems: []
+      - symbolName: thrustAreaTakeOffRange
+        objectReference: {fileID: 0}
+        value: 100
+        arrayItems: []
+      - symbolName: thrustEffect
+        objectReference: {fileID: 511879331452884049, guid: e6ec1abbcac985d4181e24bfe9e80dbd,
+          type: 3}
+        value: ExhaustEffect (UnityEngine.ParticleSystem)
+        arrayItems: []
+      - symbolName: thrustSound
+        objectReference: {fileID: 6550947128515817710, guid: e6ec1abbcac985d4181e24bfe9e80dbd,
+          type: 3}
+        value: Thrust (UnityEngine.AudioSource)
+        arrayItems: []
+  - prefabInstance: {fileID: 4469067493539146931, guid: 7f363d89853aa5c4abd225b46d7e0cc8,
+      type: 3}
+    prefabPath: Templates/SFEXT/AdvancedGear.prefab
+    udonVariables:
+    - udonInstance: {fileID: 221982411065559030, guid: 7f363d89853aa5c4abd225b46d7e0cc8,
+        type: 3}
+      gameObjectName: AdvancedGear
+      variables:
+      - symbolName: autoLimitGroundSpeed
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: autoLimitGroundSpeedOnDesktop
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+      - symbolName: brakeMaxGroundSpeed
+        objectReference: {fileID: 0}
+        value: 60
+        arrayItems: []
+      - symbolName: brakeResponse
+        objectReference: {fileID: 0}
+        value: 1
+        arrayItems: []
+      - symbolName: brakeTorque
+        objectReference: {fileID: 0}
+        value: 10000
+        arrayItems: []
+      - symbolName: breakSound
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
+      - symbolName: burstEffect
+        objectReference: {fileID: 735036148080431329, guid: 318659200b6992546ac683f4ca349572,
+          type: 3}
+        value: BurstSmoke (UnityEngine.GameObject)
+        arrayItems: []
+      - symbolName: burstSound
+        objectReference: {fileID: 8300000, guid: a778a83e783a3d040990aa85ff3141b7,
+          type: 3}
+        value: GunShot (UnityEngine.AudioClip)
+        arrayItems: []
+      - symbolName: gearPositionParameterName
+        objectReference: {fileID: 0}
+        value: gearpos
+        arrayItems: []
+      - symbolName: maxExtendedSpeed
+        objectReference: {fileID: 0}
+        value: 320
+        arrayItems: []
+      - symbolName: maxExtensionSpeed
+        objectReference: {fileID: 0}
+        value: 270
+        arrayItems: []
+      - symbolName: maxRetractionSpeed
+        objectReference: {fileID: 0}
+        value: 235
+        arrayItems: []
+      - symbolName: maxSteerAngle
+        objectReference: {fileID: 0}
+        value: 0
+        arrayItems: []
+      - symbolName: mtbBurstOnOverGroundSpeed
+        objectReference: {fileID: 0}
+        value: 10
+        arrayItems: []
+      - symbolName: mtbTransitionBraek
+        objectReference: {fileID: 0}
+        value: 7200
+        arrayItems: []
+      - symbolName: mtbTransitionBraekOnOverspeed
+        objectReference: {fileID: 0}
+        value: 60
+        arrayItems: []
+      - symbolName: mtbTransitionFail
+        objectReference: {fileID: 0}
+        value: 3600
+        arrayItems: []
+      - symbolName: mtbTransitionFailOnOverspeed
+        objectReference: {fileID: 0}
+        value: 10
+        arrayItems: []
+      - symbolName: steerResponse
+        objectReference: {fileID: 0}
+        value: 1
+        arrayItems: []
+      - symbolName: timeNosieScale
+        objectReference: {fileID: 0}
+        value: 0.1
+        arrayItems: []
+      - symbolName: transitionSound
+        objectReference: {fileID: 6565067139710021262, guid: 7f363d89853aa5c4abd225b46d7e0cc8,
+          type: 3}
+        value: AudioSource (UnityEngine.AudioSource)
+        arrayItems: []
+      - symbolName: wheelCollider
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
+      - symbolName: wheelRight
+        objectReference: {fileID: 0}
+        value: (1.0, 0.0, 0.0)
+        arrayItems: []
+      - symbolName: wheelUp
+        objectReference: {fileID: 0}
+        value: (0.0, 1.0, 0.0)
+        arrayItems: []
+  - prefabInstance: {fileID: 6823983850167834323, guid: 4b239471d302b0b4d92ab633dcaf7910,
+      type: 3}
+    prefabPath: Templates/SFEXT/AdvancedPropellerThrust.prefab
+    udonVariables:
+    - udonInstance: {fileID: 8422748759524904380, guid: 4b239471d302b0b4d92ab633dcaf7910,
+        type: 3}
+      gameObjectName: AdvancedPropellerThrust
+      variables:
+      - symbolName: airDensity
+        objectReference: {fileID: 0}
+        value: 1.2249
+        arrayItems: []
+      - symbolName: animationMaxRPM
+        objectReference: {fileID: 0}
+        value: 3500
+        arrayItems: []
+      - symbolName: batteryBus
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
+      - symbolName: diameter
+        objectReference: {fileID: 0}
+        value: 1.9304
+        arrayItems: []
+      - symbolName: engineStall
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+      - symbolName: maxRPM
+        objectReference: {fileID: 0}
+        value: 2700
+        arrayItems: []
+      - symbolName: minimumNegativeLoadFactor
+        objectReference: {fileID: 0}
+        value: -1.72
+        arrayItems: []
+      - symbolName: minRPM
+        objectReference: {fileID: 0}
+        value: 600
+        arrayItems: []
+      - symbolName: mixtureCurve
+        objectReference: {fileID: 0}
+        value: UnityEngine.AnimationCurve
+        arrayItems: []
+      - symbolName: mixtureCutOffDelay
+        objectReference: {fileID: 0}
+        value: 1
+        arrayItems: []
+      - symbolName: mtbEngineStallNegativeLoad
+        objectReference: {fileID: 0}
+        value: 10
+        arrayItems: []
+      - symbolName: mtbEngineStallOverNegativeLoad
+        objectReference: {fileID: 0}
+        value: 1
+        arrayItems: []
+      - symbolName: power
+        objectReference: {fileID: 0}
+        value: 160
+        arrayItems: []
+      - symbolName: rpmFloatParameter
+        objectReference: {fileID: 0}
+        value: rpm
+        arrayItems: []
+      - symbolName: rpmResponse
+        objectReference: {fileID: 0}
+        value: 1
+        arrayItems: []
+      - symbolName: throttleCurve
+        objectReference: {fileID: 0}
+        value: UnityEngine.AnimationCurve
+        arrayItems: []
+  - prefabInstance: {fileID: 223314864055379495, guid: 120457b2c2d29cd47865bf83f4730308,
+      type: 3}
+    prefabPath: Templates/SFEXT/APU.prefab
+    udonVariables:
+    - udonInstance: {fileID: 8076429713299883377, guid: 120457b2c2d29cd47865bf83f4730308,
+        type: 3}
+      gameObjectName: APU
+      variables:
+      - symbolName: apuAudioSource
+        objectReference: {fileID: 2187605945229233841, guid: 120457b2c2d29cd47865bf83f4730308,
+          type: 3}
+        value: AudioSource (UnityEngine.AudioSource)
+        arrayItems: []
+      - symbolName: apuLoop
+        objectReference: {fileID: 8300000, guid: e825a56e24439574aabf34bb864575cd,
+          type: 3}
+        value: 738APU Loop (UnityEngine.AudioClip)
+        arrayItems: []
+      - symbolName: apuStart
+        objectReference: {fileID: 8300000, guid: 16d21c9540686b342ba7a5d0bd53d410,
+          type: 3}
+        value: 738APU Start (UnityEngine.AudioClip)
+        arrayItems: []
+      - symbolName: apuStop
+        objectReference: {fileID: 8300000, guid: 5e18429d45a22c8428caa1d3345d014e,
+          type: 3}
+        value: 738APU Stop (UnityEngine.AudioClip)
+        arrayItems: []
+      - symbolName: crossFadeDuration
+        objectReference: {fileID: 0}
+        value: 3
+        arrayItems: []
+      - symbolName: defaultApuStartDuration
+        objectReference: {fileID: 0}
+        value: 30
+        arrayItems: []
+      - symbolName: defaultApuStopDuration
+        objectReference: {fileID: 0}
+        value: 10
+        arrayItems: []
+      - symbolName: exhaustEffect
+        objectReference: {fileID: 8479987909087090825, guid: 120457b2c2d29cd47865bf83f4730308,
+          type: 3}
+        value: ExhaustEffect (UnityEngine.ParticleSystem)
+        arrayItems: []
+  - prefabInstance: {fileID: 4626522930957938039, guid: 70a048d2d7e16574fb0d391579976388,
+      type: 3}
+    prefabPath: Templates/SFEXT/DihedralEffect.prefab
+    udonVariables:
+    - udonInstance: {fileID: 4362774052194730490, guid: 70a048d2d7e16574fb0d391579976388,
+        type: 3}
+      gameObjectName: DihedralEffect
+      variables:
+      - symbolName: calacteristicLength
+        objectReference: {fileID: 0}
+        value: 6
+        arrayItems: []
+      - symbolName: coefficient
+        objectReference: {fileID: 0}
+        value: 0.4
+        arrayItems: []
+      - symbolName: dynamicPressure
+        objectReference: {fileID: 0}
+        value: 10
+        arrayItems: []
+      - symbolName: extraDrag
+        objectReference: {fileID: 0}
+        value: 4
+        arrayItems: []
+      - symbolName: maxRollAoA
+        objectReference: {fileID: 0}
+        value: 1
+        arrayItems: []
+      - symbolName: referenceArea
+        objectReference: {fileID: 0}
+        value: 124.58
+        arrayItems: []
+  - prefabInstance: {fileID: 9064442510949789594, guid: 5c3cd0867bbb30e4ebd0a2a30819157f,
+      type: 3}
+    prefabPath: Templates/SFEXT/DummyHUD.prefab
+    udonVariables:
+    - udonInstance: {fileID: 2637390962827783789, guid: 5c3cd0867bbb30e4ebd0a2a30819157f,
+        type: 3}
+      gameObjectName: DummyHUD
+      variables:
+      - symbolName: distance_from_head
+        objectReference: {fileID: 0}
+        value: 1.333
+        arrayItems: []
+      - symbolName: HUDAnimator
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
+      - symbolName: HUDText_altitude
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
+      - symbolName: HUDText_angleofattack
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
+      - symbolName: HUDText_G
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
+      - symbolName: HUDText_knots
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
+      - symbolName: HUDText_knotsairspeed
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
+      - symbolName: HUDText_mach
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
+  - prefabInstance: {fileID: 2008650468370262116, guid: e5ca41e2db77b8845b5c7785af93fd08,
+      type: 3}
+    prefabPath: Templates/SFEXT/EffectsController.prefab
+    udonVariables:
+    - udonInstance: {fileID: 2008650468370262117, guid: e5ca41e2db77b8845b5c7785af93fd08,
+        type: 3}
+      gameObjectName: EffectsController
+      variables:
+      - symbolName: PlaySplashSpeed
+        objectReference: {fileID: 0}
+        value: 7
+        arrayItems: []
+      - symbolName: PrintAnimHashNamesOnStart
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: SAVControl
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
+      - symbolName: SplashParticle
+        objectReference: {fileID: 6841231234699023385, guid: e5ca41e2db77b8845b5c7785af93fd08,
+          type: 3}
+        value: Splash (UnityEngine.ParticleSystem)
+        arrayItems: []
+      - symbolName: TrailGs
+        objectReference: {fileID: 0}
+        value: 4
+        arrayItems: []
+      - symbolName: Trails
+        objectReference: {fileID: 0}
+        value: UnityEngine.TrailRenderer[]
+        arrayItems:
+        - WingTrailL (UnityEngine.TrailRenderer)
+        - WingTrailR (UnityEngine.TrailRenderer)
+  - prefabInstance: {fileID: 8887638244546730382, guid: 6df820a374913e44f9997a6a2d2973bc,
+      type: 3}
+    prefabPath: Templates/SFEXT/FloatScript.prefab
+    udonVariables:
+    - udonInstance: {fileID: 3234550905162333664, guid: 6df820a374913e44f9997a6a2d2973bc,
+        type: 3}
+      gameObjectName: FloatScript
+      variables:
+      - symbolName: BackThrustStrength
+        objectReference: {fileID: 0}
+        value: 15
+        arrayItems: []
+      - symbolName: Compressing
+        objectReference: {fileID: 0}
+        value: 25
+        arrayItems: []
+      - symbolName: DeadFloatForce
+        objectReference: {fileID: 0}
+        value: 5
+        arrayItems: []
+      - symbolName: DeadMaxDepthForce
+        objectReference: {fileID: 0}
+        value: 0.4
+        arrayItems: []
+      - symbolName: DisableTaxiRotation
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: DoOnLand
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: FloatForce
+        objectReference: {fileID: 0}
+        value: 5
+        arrayItems: []
+      - symbolName: FloatLayers
+        objectReference: {fileID: 0}
+        value: UnityEngine.LayerMask
+        arrayItems: []
+      - symbolName: FloatPoints
+        objectReference: {fileID: 0}
+        value: UnityEngine.Transform[]
+        arrayItems:
+        - FloatPoint (1) (UnityEngine.Transform)
+      - symbolName: FloatRadius
+        objectReference: {fileID: 0}
+        value: 0.6
+        arrayItems: []
+      - symbolName: HoverBike
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: HoverBikeTurningStrength
+        objectReference: {fileID: 0}
+        value: 0.2
+        arrayItems: []
+      - symbolName: MaxCompressingForce
+        objectReference: {fileID: 0}
+        value: 25
+        arrayItems: []
+      - symbolName: MaxDepthForce
+        objectReference: {fileID: 0}
+        value: 25
+        arrayItems: []
+      - symbolName: MoveUpOnTakeOwnership
+        objectReference: {fileID: 0}
+        value: 2
+        arrayItems: []
+      - symbolName: RayCastHeight
+        objectReference: {fileID: 0}
+        value: 2
+        arrayItems: []
+      - symbolName: VehicleRigidbody
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
+      - symbolName: WaterForwardDrag
+        objectReference: {fileID: 0}
+        value: 0.05
+        arrayItems: []
+      - symbolName: WaterRotDrag
+        objectReference: {fileID: 0}
+        value: 5
+        arrayItems: []
+      - symbolName: WaterSidewaysDrag
+        objectReference: {fileID: 0}
+        value: 1
+        arrayItems: []
+      - symbolName: WaterVelDrag
+        objectReference: {fileID: 0}
+        value: 0
+        arrayItems: []
+      - symbolName: WaveHeight
+        objectReference: {fileID: 0}
+        value: 0.6
+        arrayItems: []
+      - symbolName: WaveScale
+        objectReference: {fileID: 0}
+        value: 0.04
+        arrayItems: []
+      - symbolName: WaveSpeed
+        objectReference: {fileID: 0}
+        value: 12
+        arrayItems: []
+  - prefabInstance: {fileID: 4417090854975358889, guid: 530d49ad39e28ed449d01b2e9e835eb3,
+      type: 3}
+    prefabPath: Templates/SFEXT/IHaveControl.prefab
+    udonVariables:
+    - udonInstance: {fileID: 8140760318307118851, guid: 530d49ad39e28ed449d01b2e9e835eb3,
+        type: 3}
+      gameObjectName: DFUNC_EX_SeatAdjuster
+      variables:
+      - symbolName: adjustScale
+        objectReference: {fileID: 0}
+        value: 0.2
+        arrayItems: []
+      - symbolName: desktopBack
+        objectReference: {fileID: 0}
+        value: Delete
+        arrayItems: []
+      - symbolName: desktopDown
+        objectReference: {fileID: 0}
+        value: End
+        arrayItems: []
+      - symbolName: desktopForward
+        objectReference: {fileID: 0}
+        value: Insert
+        arrayItems: []
+      - symbolName: desktopStep
+        objectReference: {fileID: 0}
+        value: 0.05
+        arrayItems: []
+      - symbolName: desktopUp
+        objectReference: {fileID: 0}
+        value: Home
+        arrayItems: []
+      - symbolName: sliderMaxDistance
+        objectReference: {fileID: 0}
+        value: 0.1
+        arrayItems: []
+    - udonInstance: {fileID: 7582456754915627509, guid: 530d49ad39e28ed449d01b2e9e835eb3,
+        type: 3}
+      gameObjectName: DFUNCP_IHaveControl
+      variables:
+      - symbolName: desktopControl
+        objectReference: {fileID: 0}
+        value: F8
+        arrayItems: []
+      - symbolName: Dial_Funcon
+        objectReference: {fileID: 7230174764149448926, guid: 530d49ad39e28ed449d01b2e9e835eb3,
+          type: 3}
+        value: MFD_display_funcon (UnityEngine.GameObject)
+        arrayItems: []
+      - symbolName: hapticAmplitude
+        objectReference: {fileID: 0}
+        value: 0.5
+        arrayItems: []
+      - symbolName: hapticDuration
+        objectReference: {fileID: 0}
+        value: 0.2
+        arrayItems: []
+      - symbolName: hapticFrequency
+        objectReference: {fileID: 0}
+        value: 0.1
+        arrayItems: []
+      - symbolName: inverseSwitchHand
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+      - symbolName: pressTime
+        objectReference: {fileID: 0}
+        value: 3
+        arrayItems: []
+    - udonInstance: {fileID: 4417090854975358895, guid: 530d49ad39e28ed449d01b2e9e835eb3,
+        type: 3}
+      gameObjectName: IHaveControl
+      variables:
+      - symbolName: Dial_Functions_L
+        objectReference: {fileID: 0}
+        value: UnityEngine.Component[]
+        arrayItems:
+        - DFUNC_EX_Empty (VRC.Udon.UdonBehaviour)
+        - DFUNC_EX_SeatAdjuster (VRC.Udon.UdonBehaviour)
+      - symbolName: Dial_Functions_R
+        objectReference: {fileID: 0}
+        value: UnityEngine.Component[]
+        arrayItems:
+        - DFUNC_EX_Empty (VRC.Udon.UdonBehaviour)
+        - DFUNCP_IHaveControl (VRC.Udon.UdonBehaviour)
+      - symbolName: LeftDialDivideStraightUp
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: LStickDisplayHighlighter
+        objectReference: {fileID: 6179794876614819040, guid: 530d49ad39e28ed449d01b2e9e835eb3,
+          type: 3}
+        value: LStickDisplayHighlighter (UnityEngine.Transform)
+        arrayItems: []
+      - symbolName: PassengerExtensions
+        objectReference: {fileID: 0}
+        value: UnityEngine.Component[]
+        arrayItems: []
+      - symbolName: RightDialDivideStraightUp
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: RStickDisplayHighlighter
+        objectReference: {fileID: 6179794877392878694, guid: 530d49ad39e28ed449d01b2e9e835eb3,
+          type: 3}
+        value: RStickDisplayHighlighter (UnityEngine.Transform)
+        arrayItems: []
+      - symbolName: SwitchFunctionSound
+        objectReference: {fileID: 4417090854075734981, guid: 530d49ad39e28ed449d01b2e9e835eb3,
+          type: 3}
+        value: MenuSelect (UnityEngine.AudioSource)
+        arrayItems: []
+    - udonInstance: {fileID: 4417090854706766274, guid: 530d49ad39e28ed449d01b2e9e835eb3,
+        type: 3}
+      gameObjectName: KeyboardControls
+      variables:
+      - symbolName: DoVTOL
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: Lfunc1key
+        objectReference: {fileID: 0}
+        value: Z
+        arrayItems: []
+      - symbolName: Lfunc2key
+        objectReference: {fileID: 0}
+        value: G
+        arrayItems: []
+      - symbolName: Lfunc3key
+        objectReference: {fileID: 0}
+        value: None
+        arrayItems: []
+      - symbolName: Lfunc4key
+        objectReference: {fileID: 0}
+        value: None
+        arrayItems: []
+      - symbolName: Lfunc5key
+        objectReference: {fileID: 0}
+        value: None
+        arrayItems: []
+      - symbolName: Lfunc6key
+        objectReference: {fileID: 0}
+        value: None
+        arrayItems: []
+      - symbolName: Lfunc7key
+        objectReference: {fileID: 0}
+        value: None
+        arrayItems: []
+      - symbolName: Lfunc8key
+        objectReference: {fileID: 0}
+        value: None
+        arrayItems: []
+      - symbolName: Rfunc1key
+        objectReference: {fileID: 0}
+        value: None
+        arrayItems: []
+      - symbolName: Rfunc2key
+        objectReference: {fileID: 0}
+        value: None
+        arrayItems: []
+      - symbolName: Rfunc3key
+        objectReference: {fileID: 0}
+        value: None
+        arrayItems: []
+      - symbolName: Rfunc4key
+        objectReference: {fileID: 0}
+        value: None
+        arrayItems: []
+      - symbolName: Rfunc5key
+        objectReference: {fileID: 0}
+        value: None
+        arrayItems: []
+      - symbolName: Rfunc6key
+        objectReference: {fileID: 0}
+        value: None
+        arrayItems: []
+      - symbolName: Rfunc7key
+        objectReference: {fileID: 0}
+        value: None
+        arrayItems: []
+      - symbolName: Rfunc8key
+        objectReference: {fileID: 0}
+        value: None
+        arrayItems: []
+  - prefabInstance: {fileID: 5645000163685679636, guid: b37c040247e9058448dce35e3cf700cb,
+      type: 3}
+    prefabPath: Templates/SFEXT/InstrumentsAnimatorDriver.prefab
+    udonVariables:
+    - udonInstance: {fileID: 2171439226626782122, guid: b37c040247e9058448dce35e3cf700cb,
+        type: 3}
+      gameObjectName: InstrumentsAnimatorDriver
+      variables:
+      - symbolName: adiElectric
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: airspeedFloatParameter
+        objectReference: {fileID: 0}
+        value: airspeed
+        arrayItems: []
+      - symbolName: altimeterResponse
+        objectReference: {fileID: 0}
+        value: 0.25
+        arrayItems: []
+      - symbolName: altitudeFloatParameter
+        objectReference: {fileID: 0}
+        value: altitude
+        arrayItems: []
+      - symbolName: asiResponse
+        objectReference: {fileID: 0}
+        value: 0.25
+        arrayItems: []
+      - symbolName: batteryBus
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
+      - symbolName: batteryVoltageResponse
+        objectReference: {fileID: 0}
+        value: 1
+        arrayItems: []
+      - symbolName: hasADI
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+      - symbolName: hasAltimeter
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+      - symbolName: hasASI
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+      - symbolName: hasHI
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+      - symbolName: hasTC
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+      - symbolName: hasVSI
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+      - symbolName: headingFloatParameter
+        objectReference: {fileID: 0}
+        value: heading
+        arrayItems: []
+      - symbolName: hiElectric
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: instrumentsAnimator
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
+      - symbolName: magneticDeclination
+        objectReference: {fileID: 0}
+        value: 0
+        arrayItems: []
+      - symbolName: maxAirspeed
+        objectReference: {fileID: 0}
+        value: 180
+        arrayItems: []
+      - symbolName: maxAltitude
+        objectReference: {fileID: 0}
+        value: 20000
+        arrayItems: []
+      - symbolName: maxPitch
+        objectReference: {fileID: 0}
+        value: 30
+        arrayItems: []
+      - symbolName: maxSlip
+        objectReference: {fileID: 0}
+        value: 9
+        arrayItems: []
+      - symbolName: maxTurn
+        objectReference: {fileID: 0}
+        value: 12
+        arrayItems: []
+      - symbolName: maxVerticalSpeed
+        objectReference: {fileID: 0}
+        value: 2000
+        arrayItems: []
+      - symbolName: pithFloatParameter
+        objectReference: {fileID: 0}
+        value: pitch
+        arrayItems: []
+      - symbolName: rollFloatParameter
+        objectReference: {fileID: 0}
+        value: roll
+        arrayItems: []
+      - symbolName: slipAngleFloatParameter
+        objectReference: {fileID: 0}
+        value: slipangle
+        arrayItems: []
+      - symbolName: slipResponse
+        objectReference: {fileID: 0}
+        value: 0.25
+        arrayItems: []
+      - symbolName: tcElectric
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+      - symbolName: turnRateFloatParameter
+        objectReference: {fileID: 0}
+        value: turnrate
+        arrayItems: []
+      - symbolName: turnResponse
+        objectReference: {fileID: 0}
+        value: 1
+        arrayItems: []
+      - symbolName: vacuumPowerResponse
+        objectReference: {fileID: 0}
+        value: 1
+        arrayItems: []
+      - symbolName: verticalSpeedFloatParameter
+        objectReference: {fileID: 0}
+        value: vs
+        arrayItems: []
+      - symbolName: vsiResponse
+        objectReference: {fileID: 0}
+        value: 0.25
+        arrayItems: []
+  - prefabInstance: {fileID: 854394467307425068, guid: 159085ad0f12a324e855b09b0c92e6a6,
+      type: 3}
+    prefabPath: Templates/SFEXT/OutsideOnly.prefab
+    udonVariables:
+    - udonInstance: {fileID: 8482302438507593943, guid: 159085ad0f12a324e855b09b0c92e6a6,
+        type: 3}
+      gameObjectName: OutsideOnly
+      variables:
+      - symbolName: outsideOnly
+        objectReference: {fileID: 0}
+        value: UnityEngine.GameObject[]
+        arrayItems:
+        - null
+  - prefabInstance: {fileID: 679646025182154641, guid: 104bfb58cdbbfb94eb83a0b54653b288,
+      type: 3}
+    prefabPath: Templates/SFEXT/PassengerSeatAdjuster.prefab
+    udonVariables:
+    - udonInstance: {fileID: 3773744619555406841, guid: 104bfb58cdbbfb94eb83a0b54653b288,
+        type: 3}
+      gameObjectName: DFUNC_EX_SeatAdjuster
+      variables:
+      - symbolName: adjustScale
+        objectReference: {fileID: 0}
+        value: 0.2
+        arrayItems: []
+      - symbolName: desktopBack
+        objectReference: {fileID: 0}
+        value: Delete
+        arrayItems: []
+      - symbolName: desktopDown
+        objectReference: {fileID: 0}
+        value: End
+        arrayItems: []
+      - symbolName: desktopForward
+        objectReference: {fileID: 0}
+        value: Insert
+        arrayItems: []
+      - symbolName: desktopStep
+        objectReference: {fileID: 0}
+        value: 0.05
+        arrayItems: []
+      - symbolName: desktopUp
+        objectReference: {fileID: 0}
+        value: Home
+        arrayItems: []
+      - symbolName: sliderMaxDistance
+        objectReference: {fileID: 0}
+        value: 0.1
+        arrayItems: []
+    - udonInstance: {fileID: 8784951012554345784, guid: 104bfb58cdbbfb94eb83a0b54653b288,
+        type: 3}
+      gameObjectName: KeyboardControls
+      variables:
+      - symbolName: DoVTOL
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: Lfunc1key
+        objectReference: {fileID: 0}
+        value: Z
+        arrayItems: []
+      - symbolName: Lfunc2key
+        objectReference: {fileID: 0}
+        value: G
+        arrayItems: []
+      - symbolName: Lfunc3key
+        objectReference: {fileID: 0}
+        value: None
+        arrayItems: []
+      - symbolName: Lfunc4key
+        objectReference: {fileID: 0}
+        value: None
+        arrayItems: []
+      - symbolName: Lfunc5key
+        objectReference: {fileID: 0}
+        value: None
+        arrayItems: []
+      - symbolName: Lfunc6key
+        objectReference: {fileID: 0}
+        value: None
+        arrayItems: []
+      - symbolName: Lfunc7key
+        objectReference: {fileID: 0}
+        value: None
+        arrayItems: []
+      - symbolName: Lfunc8key
+        objectReference: {fileID: 0}
+        value: None
+        arrayItems: []
+      - symbolName: Rfunc1key
+        objectReference: {fileID: 0}
+        value: None
+        arrayItems: []
+      - symbolName: Rfunc2key
+        objectReference: {fileID: 0}
+        value: None
+        arrayItems: []
+      - symbolName: Rfunc3key
+        objectReference: {fileID: 0}
+        value: None
+        arrayItems: []
+      - symbolName: Rfunc4key
+        objectReference: {fileID: 0}
+        value: None
+        arrayItems: []
+      - symbolName: Rfunc5key
+        objectReference: {fileID: 0}
+        value: None
+        arrayItems: []
+      - symbolName: Rfunc6key
+        objectReference: {fileID: 0}
+        value: None
+        arrayItems: []
+      - symbolName: Rfunc7key
+        objectReference: {fileID: 0}
+        value: None
+        arrayItems: []
+      - symbolName: Rfunc8key
+        objectReference: {fileID: 0}
+        value: None
+        arrayItems: []
+    - udonInstance: {fileID: 8784951012285754197, guid: 104bfb58cdbbfb94eb83a0b54653b288,
+        type: 3}
+      gameObjectName: PassengerFunctions
+      variables:
+      - symbolName: Dial_Functions_L
+        objectReference: {fileID: 0}
+        value: UnityEngine.Component[]
+        arrayItems:
+        - DFUNC_EX_Empty (VRC.Udon.UdonBehaviour)
+        - DFUNC_EX_SeatAdjuster (VRC.Udon.UdonBehaviour)
+      - symbolName: Dial_Functions_R
+        objectReference: {fileID: 0}
+        value: UnityEngine.Component[]
+        arrayItems: []
+      - symbolName: LeftDialDivideStraightUp
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: LStickDisplayHighlighter
+        objectReference: {fileID: 1253628449194070042, guid: 104bfb58cdbbfb94eb83a0b54653b288,
+          type: 3}
+        value: LStickDisplayHighlighter (UnityEngine.Transform)
+        arrayItems: []
+      - symbolName: PassengerExtensions
+        objectReference: {fileID: 0}
+        value: UnityEngine.Component[]
+        arrayItems: []
+      - symbolName: RightDialDivideStraightUp
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: RStickDisplayHighlighter
+        objectReference: {fileID: 1253628448416010396, guid: 104bfb58cdbbfb94eb83a0b54653b288,
+          type: 3}
+        value: RStickDisplayHighlighter (UnityEngine.Transform)
+        arrayItems: []
+      - symbolName: SwitchFunctionSound
+        objectReference: {fileID: 8784951013185517375, guid: 104bfb58cdbbfb94eb83a0b54653b288,
+          type: 3}
+        value: MenuSelect (UnityEngine.AudioSource)
+        arrayItems: []
+    - udonInstance: {fileID: 4197030075692967939, guid: 104bfb58cdbbfb94eb83a0b54653b288,
+        type: 3}
+      gameObjectName: PassengerSeatAdjuster
+      variables:
+      - symbolName: excludes
+        objectReference: {fileID: 0}
+        value: UnityEngine.Component[]
+        arrayItems: []
+      - symbolName: moveToSeat
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+  - prefabInstance: {fileID: 8320331003589486179, guid: e03b960375fce1f43a5f2e1d7f2bd452,
+      type: 3}
+    prefabPath: Templates/SFEXT/RacingTrigger.prefab
+    udonVariables:
+    - udonInstance: {fileID: 8320331003589486181, guid: e03b960375fce1f43a5f2e1d7f2bd452,
+        type: 3}
+      gameObjectName: RacingTrigger
+      variables:
+      - symbolName: DisabledRaces
+        objectReference: {fileID: 0}
+        value: UnityEngine.GameObject[]
+        arrayItems: []
+      - symbolName: InstanceRecordDisallowedRaces
+        objectReference: {fileID: 0}
+        value: UnityEngine.GameObject[]
+        arrayItems: []
+      - symbolName: PlaneName
+        objectReference: {fileID: 0}
+        value: SF-1
+        arrayItems: []
+      - symbolName: TimeText_Cockpit
+        objectReference: {fileID: 8320331003622124594, guid: e03b960375fce1f43a5f2e1d7f2bd452,
+          type: 3}
+        value: Text_racetimer (UnityEngine.UI.Text)
+        arrayItems: []
+  - prefabInstance: {fileID: 3578919072815048599, guid: a98010f0907f39e438ff76bf1785d1bc,
+      type: 3}
+    prefabPath: Templates/SFEXT/SaccAirVehicle.prefab
+    udonVariables:
+    - udonInstance: {fileID: 3578919072815048598, guid: a98010f0907f39e438ff76bf1785d1bc,
+        type: 3}
+      gameObjectName: SaccAirVehicle
+      variables:
+      - symbolName: _DisableStickyWheelWorkarond
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: _DisableStickyWheelWorkaround
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: _EngineOn
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: AccelerationResponse
+        objectReference: {fileID: 0}
+        value: 4.5
+        arrayItems: []
+      - symbolName: AdverseRoll
+        objectReference: {fileID: 0}
+        value: 0
+        arrayItems: []
+      - symbolName: AdverseYaw
+        objectReference: {fileID: 0}
+        value: 0
+        arrayItems: []
+      - symbolName: AfterBurnerKey
+        objectReference: {fileID: 0}
+        value: T
+        arrayItems: []
+      - symbolName: AfterburnerThrustMulti
+        objectReference: {fileID: 0}
+        value: 1.5
+        arrayItems: []
+      - symbolName: AirFriction
+        objectReference: {fileID: 0}
+        value: 0.0004
+        arrayItems: []
+      - symbolName: AoaCurveStrength
+        objectReference: {fileID: 0}
+        value: 2
+        arrayItems: []
+      - symbolName: AtmosphereThinningEnd
+        objectReference: {fileID: 0}
+        value: 19812
+        arrayItems: []
+      - symbolName: AtmosphereThinningStart
+        objectReference: {fileID: 0}
+        value: 12192
+        arrayItems: []
+      - symbolName: AutoAdjustValuesToMass
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+      - symbolName: BulletDamageTaken
+        objectReference: {fileID: 0}
+        value: 10
+        arrayItems: []
+      - symbolName: DisallowTaxiRotationWhileStill
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: DoStallForces
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: EngineOffOnExit
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: EngineOnOnEnter
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: EngineSpoolDownSpeedMulti
+        objectReference: {fileID: 0}
+        value: 0.5
+        arrayItems: []
+      - symbolName: Fuel
+        objectReference: {fileID: 0}
+        value: 900
+        arrayItems: []
+      - symbolName: FuelConsumption
+        objectReference: {fileID: 0}
+        value: 1
+        arrayItems: []
+      - symbolName: FuelConsumptionABMulti
+        objectReference: {fileID: 0}
+        value: 3
+        arrayItems: []
+      - symbolName: GDamage
+        objectReference: {fileID: 0}
+        value: 10
+        arrayItems: []
+      - symbolName: GripSensitivity
+        objectReference: {fileID: 0}
+        value: 0.75
+        arrayItems: []
+      - symbolName: GroundDetector
+        objectReference: {fileID: 4718839561727010320, guid: a98010f0907f39e438ff76bf1785d1bc,
+          type: 3}
+        value: GroundDetector (UnityEngine.Transform)
+        arrayItems: []
+      - symbolName: GroundDetectorLayers
+        objectReference: {fileID: 0}
+        value: UnityEngine.LayerMask
+        arrayItems: []
+      - symbolName: GroundDetectorRayDistance
+        objectReference: {fileID: 0}
+        value: 0.44
+        arrayItems: []
+      - symbolName: GroundEffectEmpty
+        objectReference: {fileID: 4718839560279923999, guid: a98010f0907f39e438ff76bf1785d1bc,
+          type: 3}
+        value: GroundEffectEmpty (UnityEngine.Transform)
+        arrayItems: []
+      - symbolName: GroundEffectLiftMax
+        objectReference: {fileID: 0}
+        value: 100
+        arrayItems: []
+      - symbolName: GroundEffectMaxDistance
+        objectReference: {fileID: 0}
+        value: 7
+        arrayItems: []
+      - symbolName: GroundEffectStrength
+        objectReference: {fileID: 0}
+        value: 4
+        arrayItems: []
+      - symbolName: HasAfterburner
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+      - symbolName: Health
+        objectReference: {fileID: 0}
+        value: 23
+        arrayItems: []
+      - symbolName: HighPitchAoaMinControl
+        objectReference: {fileID: 0}
+        value: 0.2
+        arrayItems: []
+      - symbolName: HighPitchAoaMinLift
+        objectReference: {fileID: 0}
+        value: 0.2
+        arrayItems: []
+      - symbolName: HighYawAoaMinControl
+        objectReference: {fileID: 0}
+        value: 0.2
+        arrayItems: []
+      - symbolName: HighYawAoaMinLift
+        objectReference: {fileID: 0}
+        value: 0.2
+        arrayItems: []
+      - symbolName: InertiaTensorRotationMulti
+        objectReference: {fileID: 0}
+        value: 1
+        arrayItems: []
+      - symbolName: InvertITRYaw
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: InvincibleAfterSpawn
+        objectReference: {fileID: 0}
+        value: 2.5
+        arrayItems: []
+      - symbolName: Lift
+        objectReference: {fileID: 0}
+        value: 0.00015
+        arrayItems: []
+      - symbolName: LowFuel
+        objectReference: {fileID: 0}
+        value: 125
+        arrayItems: []
+      - symbolName: MaxAngleOfAttackPitch
+        objectReference: {fileID: 0}
+        value: 25
+        arrayItems: []
+      - symbolName: MaxAngleOfAttackYaw
+        objectReference: {fileID: 0}
+        value: 40
+        arrayItems: []
+      - symbolName: MaxGs
+        objectReference: {fileID: 0}
+        value: 40
+        arrayItems: []
+      - symbolName: MaxJoyAngles
+        objectReference: {fileID: 0}
+        value: (45.0, 45.0, 45.0)
+        arrayItems: []
+      - symbolName: MaxLift
+        objectReference: {fileID: 0}
+        value: 10
+        arrayItems: []
+      - symbolName: MinFuelConsumption
+        objectReference: {fileID: 0}
+        value: 0.25
+        arrayItems: []
+      - symbolName: MissileDamageTakenMultiplier
+        objectReference: {fileID: 0}
+        value: 1
+        arrayItems: []
+      - symbolName: MissilePushForce
+        objectReference: {fileID: 0}
+        value: 1
+        arrayItems: []
+      - symbolName: OnboardVehicleLayer
+        objectReference: {fileID: 0}
+        value: 31
+        arrayItems: []
+      - symbolName: OnlyChangeColliders
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: PitchAoaPitchForce
+        objectReference: {fileID: 0}
+        value: UnityEngine.AnimationCurve
+        arrayItems: []
+      - symbolName: PitchAoaPitchForceMulti
+        objectReference: {fileID: 0}
+        value: 8
+        arrayItems: []
+      - symbolName: PitchConstantFriction
+        objectReference: {fileID: 0}
+        value: 0
+        arrayItems: []
+      - symbolName: PitchDownLiftMulti
+        objectReference: {fileID: 0}
+        value: 0.8
+        arrayItems: []
+      - symbolName: PitchDownStrMulti
+        objectReference: {fileID: 0}
+        value: 0.8
+        arrayItems: []
+      - symbolName: PitchFriction
+        objectReference: {fileID: 0}
+        value: 24
+        arrayItems: []
+      - symbolName: PitchMoment
+        objectReference: {fileID: 4718839561428362698, guid: a98010f0907f39e438ff76bf1785d1bc,
+          type: 3}
+        value: PitchMoment (UnityEngine.Transform)
+        arrayItems: []
+      - symbolName: PitchResponse
+        objectReference: {fileID: 0}
+        value: 20
+        arrayItems: []
+      - symbolName: PitchStrength
+        objectReference: {fileID: 0}
+        value: 5
+        arrayItems: []
+      - symbolName: PitchThrustVecMulti
+        objectReference: {fileID: 0}
+        value: 0
+        arrayItems: []
+      - symbolName: PredictDamage
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+      - symbolName: RefuelTime
+        objectReference: {fileID: 0}
+        value: 25
+        arrayItems: []
+      - symbolName: RepairTime
+        objectReference: {fileID: 0}
+        value: 30
+        arrayItems: []
+      - symbolName: RepeatingWorld
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+      - symbolName: RepeatingWorldDistance
+        objectReference: {fileID: 0}
+        value: 20000
+        arrayItems: []
+      - symbolName: RespawnDelay
+        objectReference: {fileID: 0}
+        value: 10
+        arrayItems: []
+      - symbolName: ReversingPitchStrengthMulti
+        objectReference: {fileID: 0}
+        value: 2
+        arrayItems: []
+      - symbolName: ReversingRollStrengthMulti
+        objectReference: {fileID: 0}
+        value: 1.6
+        arrayItems: []
+      - symbolName: ReversingYawStrengthMulti
+        objectReference: {fileID: 0}
+        value: 2.4
+        arrayItems: []
+      - symbolName: RollConstantFriction
+        objectReference: {fileID: 0}
+        value: 0
+        arrayItems: []
+      - symbolName: RollFriction
+        objectReference: {fileID: 0}
+        value: 58.5
+        arrayItems: []
+      - symbolName: RollResponse
+        objectReference: {fileID: 0}
+        value: 20
+        arrayItems: []
+      - symbolName: RollStrength
+        objectReference: {fileID: 0}
+        value: 225
+        arrayItems: []
+      - symbolName: RollThrustVecMulti
+        objectReference: {fileID: 0}
+        value: 0
+        arrayItems: []
+      - symbolName: RotMultiMaxSpeed
+        objectReference: {fileID: 0}
+        value: 220
+        arrayItems: []
+      - symbolName: SeaLevel
+        objectReference: {fileID: 0}
+        value: -1080
+        arrayItems: []
+      - symbolName: SidewaysLift
+        objectReference: {fileID: 0}
+        value: 0.17
+        arrayItems: []
+      - symbolName: SoundBarrierStrength
+        objectReference: {fileID: 0}
+        value: 0.00015
+        arrayItems: []
+      - symbolName: SoundBarrierWidth
+        objectReference: {fileID: 0}
+        value: 20
+        arrayItems: []
+      - symbolName: SquareJoyInput
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+      - symbolName: SwitchHandsJoyThrottle
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: TaxiFullTurningSpeed
+        objectReference: {fileID: 0}
+        value: 20
+        arrayItems: []
+      - symbolName: TaxiRotationResponse
+        objectReference: {fileID: 0}
+        value: 2.5
+        arrayItems: []
+      - symbolName: TaxiRotationSpeed
+        objectReference: {fileID: 0}
+        value: 35
+        arrayItems: []
+      - symbolName: ThrottleAfterburnerPoint
+        objectReference: {fileID: 0}
+        value: 0.8
+        arrayItems: []
+      - symbolName: ThrottleSensitivity
+        objectReference: {fileID: 0}
+        value: 6
+        arrayItems: []
+      - symbolName: ThrottleStrength
+        objectReference: {fileID: 0}
+        value: 20
+        arrayItems: []
+      - symbolName: VelLift
+        objectReference: {fileID: 0}
+        value: 1
+        arrayItems: []
+      - symbolName: VelLiftMax
+        objectReference: {fileID: 0}
+        value: 10
+        arrayItems: []
+      - symbolName: VelStraightenStrPitch
+        objectReference: {fileID: 0}
+        value: 0.035
+        arrayItems: []
+      - symbolName: VelStraightenStrYaw
+        objectReference: {fileID: 0}
+        value: 0.045
+        arrayItems: []
+      - symbolName: VerticalThrottle
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: VTOLAllowAfterburner
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: VTOLAngleTurnRate
+        objectReference: {fileID: 0}
+        value: 90
+        arrayItems: []
+      - symbolName: VTOLDefaultValue
+        objectReference: {fileID: 0}
+        value: 0
+        arrayItems: []
+      - symbolName: VTOLGroundEffectStrength
+        objectReference: {fileID: 0}
+        value: 0.14
+        arrayItems: []
+      - symbolName: VTOLLoseControlSpeed
+        objectReference: {fileID: 0}
+        value: 120
+        arrayItems: []
+      - symbolName: VTOLMaxAngle
+        objectReference: {fileID: 0}
+        value: 90
+        arrayItems: []
+      - symbolName: VTOLMinAngle
+        objectReference: {fileID: 0}
+        value: 0
+        arrayItems: []
+      - symbolName: VTOLOnly
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: VTOLPitchThrustVecMulti
+        objectReference: {fileID: 0}
+        value: 0.3
+        arrayItems: []
+      - symbolName: VTOLRollThrustVecMulti
+        objectReference: {fileID: 0}
+        value: 0.07
+        arrayItems: []
+      - symbolName: VTOLThrottleStrengthMulti
+        objectReference: {fileID: 0}
+        value: 0.7
+        arrayItems: []
+      - symbolName: VTOLYawThrustVecMulti
+        objectReference: {fileID: 0}
+        value: 0.3
+        arrayItems: []
+      - symbolName: Wind
+        objectReference: {fileID: 0}
+        value: (0.0, 0.0, 0.0)
+        arrayItems: []
+      - symbolName: WindGustiness
+        objectReference: {fileID: 0}
+        value: 0
+        arrayItems: []
+      - symbolName: WindGustStrength
+        objectReference: {fileID: 0}
+        value: 0
+        arrayItems: []
+      - symbolName: WindTurbulanceScale
+        objectReference: {fileID: 0}
+        value: 0
+        arrayItems: []
+      - symbolName: YawAoaRollForce
+        objectReference: {fileID: 0}
+        value: UnityEngine.AnimationCurve
+        arrayItems: []
+      - symbolName: YawAoaRollForceMulti
+        objectReference: {fileID: 0}
+        value: 30
+        arrayItems: []
+      - symbolName: YawConstantFriction
+        objectReference: {fileID: 0}
+        value: 0
+        arrayItems: []
+      - symbolName: YawFriction
+        objectReference: {fileID: 0}
+        value: 15
+        arrayItems: []
+      - symbolName: YawMoment
+        objectReference: {fileID: 4718839560030421659, guid: a98010f0907f39e438ff76bf1785d1bc,
+          type: 3}
+        value: YawMoment (UnityEngine.Transform)
+        arrayItems: []
+      - symbolName: YawResponse
+        objectReference: {fileID: 0}
+        value: 20
+        arrayItems: []
+      - symbolName: YawStrength
+        objectReference: {fileID: 0}
+        value: 3
+        arrayItems: []
+      - symbolName: YawThrustVecMulti
+        objectReference: {fileID: 0}
+        value: 0
+        arrayItems: []
+  - prefabInstance: {fileID: 3146752918488428444, guid: 9a009579863df3442a72025772f1ff57,
+      type: 3}
+    prefabPath: Templates/SFEXT/SoundController.prefab
+    udonVariables:
+    - udonInstance: {fileID: 3146752918488428447, guid: 9a009579863df3442a72025772f1ff57,
+        type: 3}
+      gameObjectName: SoundController
+      variables:
+      - symbolName: ABOnInside
+        objectReference: {fileID: 3146752918098694565, guid: 9a009579863df3442a72025772f1ff57,
+          type: 3}
+        value: AfterburnerOnInside (UnityEngine.AudioSource)
+        arrayItems: []
+      - symbolName: ABOnOutside
+        objectReference: {fileID: 3146752917480105815, guid: 9a009579863df3442a72025772f1ff57,
+          type: 3}
+        value: AfterburnerOnOutside (UnityEngine.AudioSource)
+        arrayItems: []
+      - symbolName: AllDoorsClosed
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: BulletHit
+        objectReference: {fileID: 0}
+        value: UnityEngine.AudioSource[]
+        arrayItems:
+        - Hit (UnityEngine.AudioSource)
+      - symbolName: DoEngineLerpSpeedMultiplierChanges
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
+      - symbolName: DopplerSounds
+        objectReference: {fileID: 0}
+        value: UnityEngine.AudioSource[]
+        arrayItems: []
+      - symbolName: EngineOffLerpSpeedMulti
+        objectReference: {fileID: 0}
+        value: 1
+        arrayItems: []
+      - symbolName: EngineStartingLerpSpeedMulti
+        objectReference: {fileID: 0}
+        value: 0.3
+        arrayItems: []
+      - symbolName: EngineStartup
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
+      - symbolName: EngineStartupCancel
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
+      - symbolName: EngineStartupCancelInside
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
+      - symbolName: EngineStartupInside
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
+      - symbolName: EngineTurnOff
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
+      - symbolName: EngineTurnOffInside
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
+      - symbolName: EnterWater
+        objectReference: {fileID: 7979046350788393798, guid: 9a009579863df3442a72025772f1ff57,
+          type: 3}
+        value: EnterWater (UnityEngine.AudioSource)
+        arrayItems: []
+      - symbolName: EnterWaterOutside
+        objectReference: {fileID: 8910266001734361004, guid: 9a009579863df3442a72025772f1ff57,
+          type: 3}
+        value: EnterWaterOutside (UnityEngine.AudioSource)
+        arrayItems: []
+      - symbolName: Explosion
+        objectReference: {fileID: 0}
+        value: UnityEngine.AudioSource[]
+        arrayItems:
+        - PlaneExplosion (UnityEngine.AudioSource)
+      - symbolName: InVehicleThrustVolumeFactor
+        objectReference: {fileID: 0}
+        value: 0.09
+        arrayItems: []
+      - symbolName: IsHelicopter
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: MissileHit
+        objectReference: {fileID: 0}
+        value: UnityEngine.AudioSource[]
+        arrayItems:
+        - MissileHit (UnityEngine.AudioSource)
+      - symbolName: PlaneDistant
+        objectReference: {fileID: 3146752918193211345, guid: 9a009579863df3442a72025772f1ff57,
+          type: 3}
+        value: EngineDistant (UnityEngine.AudioSource)
+        arrayItems: []
+      - symbolName: PlaneDistantVolLerpValueOff
+        objectReference: {fileID: 0}
+        value: 0.72
+        arrayItems: []
+      - symbolName: PlaneDistantVolLerpValueOn
+        objectReference: {fileID: 0}
+        value: 0.72
+        arrayItems: []
+      - symbolName: PlaneIdle
+        objectReference: {fileID: 0}
+        value: UnityEngine.AudioSource[]
+        arrayItems:
+        - EngineIdle (UnityEngine.AudioSource)
+      - symbolName: PlaneIdlePitchLerpValueOff
+        objectReference: {fileID: 0}
+        value: 0.09
+        arrayItems: []
+      - symbolName: PlaneIdlePitchLerpValueOn
+        objectReference: {fileID: 0}
+        value: 0.54
+        arrayItems: []
+      - symbolName: PlaneIdleVolLerpValueOff
+        objectReference: {fileID: 0}
+        value: 0.09
+        arrayItems: []
+      - symbolName: PlaneIdleVolLerpValueOn
+        objectReference: {fileID: 0}
+        value: 0.72
+        arrayItems: []
+      - symbolName: PlaneInside
+        objectReference: {fileID: 3146752917010570083, guid: 9a009579863df3442a72025772f1ff57,
+          type: 3}
+        value: Inside (UnityEngine.AudioSource)
+        arrayItems: []
+      - symbolName: PlaneInsidePitchLerpValueOff
+        objectReference: {fileID: 0}
+        value: 0.108
+        arrayItems: []
+      - symbolName: PlaneInsidePitchLerpValueOn
+        objectReference: {fileID: 0}
+        value: 2.25
+        arrayItems: []
+      - symbolName: PlaneInsideVolLerpValueOff
+        objectReference: {fileID: 0}
+        value: 0.72
+        arrayItems: []
+      - symbolName: PlaneInsideVolLerpValueOn
+        objectReference: {fileID: 0}
+        value: 0.72
+        arrayItems: []
+      - symbolName: PlaneThrustVolLerpValueOff
+        objectReference: {fileID: 0}
+        value: 1.08
+        arrayItems: []
+      - symbolName: PlaneThrustVolLerpValueOn
+        objectReference: {fileID: 0}
+        value: 1.08
+        arrayItems: []
+      - symbolName: PlaneWind
+        objectReference: {fileID: 3146752918288069119, guid: 9a009579863df3442a72025772f1ff57,
+          type: 3}
+        value: PlaneWind (UnityEngine.AudioSource)
+        arrayItems: []
+      - symbolName: PlaneWindMaxVolSpeed
+        objectReference: {fileID: 0}
+        value: 1000
+        arrayItems: []
+      - symbolName: PlaneWindMultiplier
+        objectReference: {fileID: 0}
+        value: 0.25
+        arrayItems: []
+      - symbolName: RadarLocked
+        objectReference: {fileID: 3167013833236617735, guid: 9a009579863df3442a72025772f1ff57,
+          type: 3}
+        value: RadarLocked (UnityEngine.AudioSource)
+        arrayItems: []
+      - symbolName: ReSupply
+        objectReference: {fileID: 4609529235141622847, guid: 9a009579863df3442a72025772f1ff57,
+          type: 3}
+        value: ReSupply (UnityEngine.AudioSource)
+        arrayItems: []
+      - symbolName: Rolling
+        objectReference: {fileID: 3146752918740010399, guid: 9a009579863df3442a72025772f1ff57,
+          type: 3}
+        value: Rolling (UnityEngine.AudioSource)
+        arrayItems: []
+      - symbolName: Rolling_Seaplane
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: Rolling_Water
+        objectReference: {fileID: 478828926412951927, guid: 9a009579863df3442a72025772f1ff57,
+          type: 3}
+        value: Rolling_Water (UnityEngine.AudioSource)
+        arrayItems: []
+      - symbolName: RollingMaxVol
+        objectReference: {fileID: 0}
+        value: 1
+        arrayItems: []
+      - symbolName: RollingMaxVol_Water
+        objectReference: {fileID: 0}
+        value: 0.3
+        arrayItems: []
+      - symbolName: RollingVolCurve
+        objectReference: {fileID: 0}
+        value: 0.03
+        arrayItems: []
+      - symbolName: RollingVolCurve_Water
+        objectReference: {fileID: 0}
+        value: 0.004
+        arrayItems: []
+      - symbolName: SonicBoom
+        objectReference: {fileID: 0}
+        value: UnityEngine.AudioSource[]
+        arrayItems:
+        - SonicBoom (UnityEngine.AudioSource)
+      - symbolName: Thrust
+        objectReference: {fileID: 0}
+        value: UnityEngine.AudioSource[]
+        arrayItems:
+        - Thrust (UnityEngine.AudioSource)
+      - symbolName: TouchDown
+        objectReference: {fileID: 0}
+        value: UnityEngine.AudioSource[]
+        arrayItems:
+        - TouchDown (UnityEngine.AudioSource)
+      - symbolName: TouchDownSoundSpeed
+        objectReference: {fileID: 0}
+        value: 35
+        arrayItems: []
+      - symbolName: TouchDownWater
+        objectReference: {fileID: 0}
+        value: UnityEngine.AudioSource[]
+        arrayItems:
+        - null
+      - symbolName: UnderWater
+        objectReference: {fileID: 7979046352475885231, guid: 9a009579863df3442a72025772f1ff57,
+          type: 3}
+        value: UnderWater (UnityEngine.AudioSource)
+        arrayItems: []
+  - prefabInstance: {fileID: 4754457074920514693, guid: 8291139d29e6bd149bd9d32830ef2630,
+      type: 3}
+    prefabPath: Templates/SFEXT/SyncScript.prefab
+    udonVariables:
+    - udonInstance: {fileID: 4754457074920514691, guid: 8291139d29e6bd149bd9d32830ef2630,
+        type: 3}
+      gameObjectName: SyncScript
+      variables:
+      - symbolName: FreezePositionOnDeath
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: IdleModeUpdateInterval
+        objectReference: {fileID: 0}
+        value: 3
+        arrayItems: []
+      - symbolName: IdleModeVelMultiplier
+        objectReference: {fileID: 0}
+        value: 0.4
+        arrayItems: []
+      - symbolName: IdleMoveMentRange
+        objectReference: {fileID: 0}
+        value: 0.35
+        arrayItems: []
+      - symbolName: IdleRotationRange
+        objectReference: {fileID: 0}
+        value: 5
+        arrayItems: []
+      - symbolName: RotationSyncAgressiveness
+        objectReference: {fileID: 0}
+        value: 10
+        arrayItems: []
+      - symbolName: SAVControl
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
+      - symbolName: updateInterval
+        objectReference: {fileID: 0}
+        value: 0.2
+        arrayItems: []
+      - symbolName: VehicleTransform
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
+  - prefabInstance: {fileID: 3292609468833336960, guid: 2eb6c987d0dd3a5499073d4c7ac78ae4,
+      type: 3}
+    prefabPath: Templates/SFEXT/WakeTurbulence.prefab
+    udonVariables:
+    - udonInstance: {fileID: 2017274071240032448, guid: 2eb6c987d0dd3a5499073d4c7ac78ae4,
+        type: 3}
+      gameObjectName: WakeTurbulence
+      variables:
+      - symbolName: curve
+        objectReference: {fileID: 0}
+        value: 2
+        arrayItems: []
+      - symbolName: maxSpeed
+        objectReference: {fileID: 0}
+        value: 300
+        arrayItems: []
+      - symbolName: minSpeed
+        objectReference: {fileID: 0}
+        value: 60
+        arrayItems: []
+      - symbolName: peakSpeed
+        objectReference: {fileID: 0}
+        value: 120
+        arrayItems: []
+  - prefabInstance: {fileID: 808467897345835904, guid: 234893cd2ae19d34b9d4d3878599f018,
+      type: 3}
+    prefabPath: Templates/SFEXT/WaterTrigger.prefab
+    udonVariables:
+    - udonInstance: {fileID: 808467897345835933, guid: 234893cd2ae19d34b9d4d3878599f018,
+        type: 3}
+      gameObjectName: WaterTrigger
+      variables:
+      - symbolName: SAVControl
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
+      - symbolName: WaterDamageSec
+        objectReference: {fileID: 0}
+        value: 3
+        arrayItems: []
+      - symbolName: WaterSlowDown
+        objectReference: {fileID: 0}
+        value: 3
+        arrayItems: []
+      - symbolName: WaterSlowDownRot
+        objectReference: {fileID: 0}
+        value: 3
         arrayItems: []

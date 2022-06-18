@@ -1,7 +1,9 @@
 ﻿
 using UdonSharp;
-using UdonSharpEditor;
 using UnityEngine;
+#if !COMPILER_UDONSHARP && UNITY_EDITOR
+using UdonSharpEditor;
+#endif
 
 namespace EsnyaSFAddons.SFEXT
 {

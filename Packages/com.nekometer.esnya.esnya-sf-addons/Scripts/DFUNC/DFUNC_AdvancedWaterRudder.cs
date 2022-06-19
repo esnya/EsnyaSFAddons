@@ -1,6 +1,7 @@
 ﻿
 using UdonSharp;
 using UnityEngine;
+using VRC.SDKBase;
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
 using UdonSharpEditor;
 #endif
@@ -70,9 +71,11 @@ namespace EsnyaSFAddons.DFUNC
         public void SFEXT_G_TakeOff() => UpdateActive();
         public void SFEXT_G_TouchDownWater() => UpdateActive();
 
+        public void SFEXT_G_RespawnButton() => SFEXT_G_Reappear();
         public void SFEXT_G_Reappear()
         {
             Extracted = defaultExtracted;
+            if (Networking.IsOwner(gameObject)) RequestSerialization();
         }
 
         private void FixedUpdate()

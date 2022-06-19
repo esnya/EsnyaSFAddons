@@ -5,16 +5,18 @@ using UnityEngine;
 using UdonSharpEditor;
 #endif
 
-namespace EsnyaSFAddons.SFEXT
+namespace EsnyaSFAddons.DFUNC
 {
     /// <summary>
     /// Adavnced Rudder for seaplane.
     ///
     /// Place in center of rudders.
     /// </summary>
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    public class SFEXT_AdvancedWaterRudder : UdonSharpBehaviour
+    [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
+    public class DFUNC_AdvancedWaterRudder : UdonSharpBehaviour
     {
+        public GameObject Dial_Funcon;
+        public bool defaultExtracted = false;
         public AnimationCurve liftCoefficientCurve = AnimationCurve.Linear(0, 0, 30, 0.1f);
         public AnimationCurve dragCoefficientCurve = AnimationCurve.Linear(0, 0, 30, 0.01f);
         public float referenceArea = 1.0f;
@@ -22,12 +24,30 @@ namespace EsnyaSFAddons.SFEXT
         public float maxRudderAngle = 30.0f;
         public float response = 0.5f;
 
+        private Animator vehicleAnimator;
         private Rigidbody vehicleRigidbody;
         private SaccEntity entity;
         private SaccAirVehicle airVehicle;
         private float rudderAngle;
         private Vector3 localForce;
         private float forceMultiplier;
+
+        [UdonSynced][FieldChangeCallback(nameof(Extracted))] private bool _extracted;
+        public bool Extracted
+        {
+            set {
+                if (Dial_Funcon) {
+                    Dial_Funcon.SetActive(value);
+                }
+
+                if (vehicleAnimator) {
+                    vehicleAnimator.SetBool("waterrudder", value);
+                }
+
+                _extracted = value;
+            }
+            get => _extracted;
+        }
 
         private void Start()
         {
@@ -39,8 +59,10 @@ namespace EsnyaSFAddons.SFEXT
             vehicleRigidbody = GetComponentInParent<Rigidbody>();
             entity = vehicleRigidbody.GetComponent<SaccEntity>();
             airVehicle = (SaccAirVehicle)entity.GetExtention(GetUdonTypeName<SaccAirVehicle>());
+            vehicleAnimator = airVehicle.VehicleAnimator;
 
             UpdateActive();
+            SFEXT_G_Reappear();
         }
 
         public void SFEXT_O_PilotEnter() => UpdateActive();
@@ -48,15 +70,20 @@ namespace EsnyaSFAddons.SFEXT
         public void SFEXT_G_TakeOff() => UpdateActive();
         public void SFEXT_G_TouchDownWater() => UpdateActive();
 
+        public void SFEXT_G_Reappear()
+        {
+            Extracted = defaultExtracted;
+        }
+
         private void FixedUpdate()
         {
-            if (!vehicleRigidbody) return;
+            if (!(Extracted && vehicleRigidbody)) return;
             vehicleRigidbody.AddForceAtPosition(transform.TransformVector(localForce), transform.position);
         }
 
         private void Update()
         {
-            if (!vehicleRigidbody) return;
+            if (!(Extracted && vehicleRigidbody)) return;
 
             var velocity = vehicleRigidbody.velocity;
             var speed = velocity.magnitude;
@@ -91,12 +118,42 @@ namespace EsnyaSFAddons.SFEXT
             return Mathf.Approximately(rotatedVelocity.sqrMagnitude, 0.0f) ? 0.0f : -Mathf.Atan(Vector3.Dot(rotatedVelocity, transform.right) / Vector3.Dot(rotatedVelocity, transform.forward)) * Mathf.Rad2Deg;
         }
 
+        public void KeyboardInput() => Toggle();
+        public void DFUNC_TriggerPress() => Toggle();
+
+        /// <summary>
+        /// Extract water rudder
+        /// </summary>
+        public void Extract()
+        {
+            Extracted = true;
+            RequestSerialization();
+        }
+
+        /// <summary>
+        /// Retract water rudder
+        /// </summary>
+        public void Retract()
+        {
+            Extracted = false;
+            RequestSerialization();
+        }
+
+        /// <summary>
+        /// Toggle water rudder
+        /// </summary>
+        public void Toggle()
+        {
+            Extracted = !Extracted;
+            RequestSerialization();
+        }
+
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
             this.UpdateProxy();
 
-            if (!vehicleRigidbody) return;
+            if (!(Extracted && vehicleRigidbody)) return;
 
             var position = transform.position;
             var forceScale = 1.0f / vehicleRigidbody.mass;
@@ -113,7 +170,7 @@ namespace EsnyaSFAddons.SFEXT
             Gizmos.color = Color.white;
             Gizmos.DrawWireSphere(position, 1);
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(position, GetRudderAoA(rudderAngle, vehicleRigidbody.velocity) / 90);
+            Gizmos.DrawWireSphere(position, Mathf.Abs(GetRudderAoA(rudderAngle, vehicleRigidbody.velocity)) / maxRudderAngle);
         }
 #endif
     }

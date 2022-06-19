@@ -896,6 +896,42 @@ MonoBehaviour:
         objectReference: {fileID: 0}
         value: null
         arrayItems: []
+  - prefabInstance: {fileID: 3186840511453853113, guid: 890ffcf824bb0254ca5e994cdd0aa632,
+      type: 3}
+    prefabPath: Templates/DFUNC/DFUNC_EX_AdbancedWaterRudder.prefab
+    udonVariables:
+    - udonInstance: {fileID: 7738371227145641079, guid: 890ffcf824bb0254ca5e994cdd0aa632,
+        type: 3}
+      gameObjectName: DFUNC_EX_AdbancedWaterRudder
+      variables:
+      - symbolName: defaultExtracted
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
+      - symbolName: dragCoefficientCurve
+        objectReference: {fileID: 0}
+        value: UnityEngine.AnimationCurve
+        arrayItems: []
+      - symbolName: liftCoefficientCurve
+        objectReference: {fileID: 0}
+        value: UnityEngine.AnimationCurve
+        arrayItems: []
+      - symbolName: maxRudderAngle
+        objectReference: {fileID: 0}
+        value: 30
+        arrayItems: []
+      - symbolName: referenceArea
+        objectReference: {fileID: 0}
+        value: 5
+        arrayItems: []
+      - symbolName: response
+        objectReference: {fileID: 0}
+        value: 0.5
+        arrayItems: []
+      - symbolName: waterDensity
+        objectReference: {fileID: 0}
+        value: 999.1026
+        arrayItems: []
   - prefabInstance: {fileID: 5727577825426832583, guid: 6650f9aa5525b5641b50e839377c185a,
       type: 3}
     prefabPath: Templates/DFUNC/DFUNC_EX_AdvancedFlaps.prefab
@@ -4101,38 +4137,6 @@ MonoBehaviour:
         objectReference: {fileID: 0}
         value: 27
         arrayItems: []
-  - prefabInstance: {fileID: 3186840511453853113, guid: 890ffcf824bb0254ca5e994cdd0aa632,
-      type: 3}
-    prefabPath: Templates/SFEXT/AdbancedWaterRudder.prefab
-    udonVariables:
-    - udonInstance: {fileID: 7738371227145641079, guid: 890ffcf824bb0254ca5e994cdd0aa632,
-        type: 3}
-      gameObjectName: AdbancedWaterRudder
-      variables:
-      - symbolName: dragCoefficientCurve
-        objectReference: {fileID: 0}
-        value: UnityEngine.AnimationCurve
-        arrayItems: []
-      - symbolName: liftCoefficientCurve
-        objectReference: {fileID: 0}
-        value: UnityEngine.AnimationCurve
-        arrayItems: []
-      - symbolName: maxRudderAngle
-        objectReference: {fileID: 0}
-        value: 30
-        arrayItems: []
-      - symbolName: referenceArea
-        objectReference: {fileID: 0}
-        value: 1
-        arrayItems: []
-      - symbolName: response
-        objectReference: {fileID: 0}
-        value: 0.5
-        arrayItems: []
-      - symbolName: waterDensity
-        objectReference: {fileID: 0}
-        value: 999.1026
-        arrayItems: []
   - prefabInstance: {fileID: 5571737103940536461, guid: e6ec1abbcac985d4181e24bfe9e80dbd,
       type: 3}
     prefabPath: Templates/SFEXT/AdvancedEngine.prefab
@@ -4822,6 +4826,14 @@ MonoBehaviour:
         type: 3}
       gameObjectName: EffectsController
       variables:
+      - symbolName: GearTransitionTime
+        objectReference: {fileID: 0}
+        value: 5
+        arrayItems: []
+      - symbolName: NoGearFunction
+        objectReference: {fileID: 0}
+        value: False
+        arrayItems: []
       - symbolName: PlaySplashSpeed
         objectReference: {fileID: 0}
         value: 7
@@ -4829,10 +4841,6 @@ MonoBehaviour:
       - symbolName: PrintAnimHashNamesOnStart
         objectReference: {fileID: 0}
         value: False
-        arrayItems: []
-      - symbolName: SAVControl
-        objectReference: {fileID: 0}
-        value: null
         arrayItems: []
       - symbolName: SplashParticle
         objectReference: {fileID: 6841231234699023385, guid: e5ca41e2db77b8845b5c7785af93fd08,
@@ -4849,6 +4857,14 @@ MonoBehaviour:
         arrayItems:
         - WingTrailL (UnityEngine.TrailRenderer)
         - WingTrailR (UnityEngine.TrailRenderer)
+      - symbolName: WheelColliders
+        objectReference: {fileID: 0}
+        value: UnityEngine.WheelCollider[]
+        arrayItems: []
+      - symbolName: WheelVisuals
+        objectReference: {fileID: 0}
+        value: UnityEngine.Transform[]
+        arrayItems: []
   - prefabInstance: {fileID: 8887638244546730382, guid: 6df820a374913e44f9997a6a2d2973bc,
       type: 3}
     prefabPath: Templates/SFEXT/FloatScript.prefab
@@ -5561,6 +5577,10 @@ MonoBehaviour:
         objectReference: {fileID: 0}
         value: 0.5
         arrayItems: []
+      - symbolName: EnterVTOLEvent_Angle
+        objectReference: {fileID: 0}
+        value: 20
+        arrayItems: []
       - symbolName: Fuel
         objectReference: {fileID: 0}
         value: 900
@@ -5646,6 +5666,14 @@ MonoBehaviour:
       - symbolName: InvincibleAfterSpawn
         objectReference: {fileID: 0}
         value: 2.5
+        arrayItems: []
+      - symbolName: JoystickPushPullDistance
+        objectReference: {fileID: 0}
+        value: 0.2
+        arrayItems: []
+      - symbolName: JoystickPushPullPitch
+        objectReference: {fileID: 0}
+        value: False
         arrayItems: []
       - symbolName: Lift
         objectReference: {fileID: 0}
@@ -6277,10 +6305,6 @@ MonoBehaviour:
         type: 3}
       gameObjectName: WaterTrigger
       variables:
-      - symbolName: SAVControl
-        objectReference: {fileID: 0}
-        value: null
-        arrayItems: []
       - symbolName: WaterDamageSec
         objectReference: {fileID: 0}
         value: 3

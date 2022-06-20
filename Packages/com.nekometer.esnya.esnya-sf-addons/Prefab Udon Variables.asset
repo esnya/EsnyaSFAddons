@@ -4826,14 +4826,6 @@ MonoBehaviour:
         type: 3}
       gameObjectName: EffectsController
       variables:
-      - symbolName: GearTransitionTime
-        objectReference: {fileID: 0}
-        value: 5
-        arrayItems: []
-      - symbolName: NoGearFunction
-        objectReference: {fileID: 0}
-        value: False
-        arrayItems: []
       - symbolName: PlaySplashSpeed
         objectReference: {fileID: 0}
         value: 7
@@ -4841,6 +4833,10 @@ MonoBehaviour:
       - symbolName: PrintAnimHashNamesOnStart
         objectReference: {fileID: 0}
         value: False
+        arrayItems: []
+      - symbolName: SAVControl
+        objectReference: {fileID: 0}
+        value: null
         arrayItems: []
       - symbolName: SplashParticle
         objectReference: {fileID: 6841231234699023385, guid: e5ca41e2db77b8845b5c7785af93fd08,
@@ -4857,14 +4853,6 @@ MonoBehaviour:
         arrayItems:
         - WingTrailL (UnityEngine.TrailRenderer)
         - WingTrailR (UnityEngine.TrailRenderer)
-      - symbolName: WheelColliders
-        objectReference: {fileID: 0}
-        value: UnityEngine.WheelCollider[]
-        arrayItems: []
-      - symbolName: WheelVisuals
-        objectReference: {fileID: 0}
-        value: UnityEngine.Transform[]
-        arrayItems: []
   - prefabInstance: {fileID: 8887638244546730382, guid: 6df820a374913e44f9997a6a2d2973bc,
       type: 3}
     prefabPath: Templates/SFEXT/FloatScript.prefab
@@ -5577,10 +5565,6 @@ MonoBehaviour:
         objectReference: {fileID: 0}
         value: 0.5
         arrayItems: []
-      - symbolName: EnterVTOLEvent_Angle
-        objectReference: {fileID: 0}
-        value: 20
-        arrayItems: []
       - symbolName: Fuel
         objectReference: {fileID: 0}
         value: 900
@@ -5666,14 +5650,6 @@ MonoBehaviour:
       - symbolName: InvincibleAfterSpawn
         objectReference: {fileID: 0}
         value: 2.5
-        arrayItems: []
-      - symbolName: JoystickPushPullDistance
-        objectReference: {fileID: 0}
-        value: 0.2
-        arrayItems: []
-      - symbolName: JoystickPushPullPitch
-        objectReference: {fileID: 0}
-        value: False
         arrayItems: []
       - symbolName: Lift
         objectReference: {fileID: 0}
@@ -6305,6 +6281,10 @@ MonoBehaviour:
         type: 3}
       gameObjectName: WaterTrigger
       variables:
+      - symbolName: SAVControl
+        objectReference: {fileID: 0}
+        value: null
+        arrayItems: []
       - symbolName: WaterDamageSec
         objectReference: {fileID: 0}
         value: 3

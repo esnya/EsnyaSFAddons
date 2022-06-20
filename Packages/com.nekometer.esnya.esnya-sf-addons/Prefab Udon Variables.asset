@@ -5194,6 +5194,10 @@ MonoBehaviour:
         objectReference: {fileID: 0}
         value: True
         arrayItems: []
+      - symbolName: hasSI
+        objectReference: {fileID: 0}
+        value: True
+        arrayItems: []
       - symbolName: hasTC
         objectReference: {fileID: 0}
         value: True
@@ -5232,7 +5236,7 @@ MonoBehaviour:
         arrayItems: []
       - symbolName: maxSlip
         objectReference: {fileID: 0}
-        value: 9
+        value: 12
         arrayItems: []
       - symbolName: maxTurn
         objectReference: {fileID: 0}
@@ -5255,6 +5259,10 @@ MonoBehaviour:
         value: slipangle
         arrayItems: []
       - symbolName: slipResponse
+        objectReference: {fileID: 0}
+        value: 0.2
+        arrayItems: []
+      - symbolName: smoothedVelocityResponse
         objectReference: {fileID: 0}
         value: 0.25
         arrayItems: []

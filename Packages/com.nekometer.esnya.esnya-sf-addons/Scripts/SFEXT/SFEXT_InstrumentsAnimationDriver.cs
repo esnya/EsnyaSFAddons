@@ -398,7 +398,7 @@ namespace EsnyaSFAddons.SFEXT
 
         private void MC_Update()
         {
-            compassHeading = Mathf.Lerp(compassHeading, heading, deltaTime * compassResponse);
+            compassHeading = Mathf.LerpAngle(compassHeading, heading, deltaTime * compassResponse);
             instrumentsAnimator.SetFloat(magneticCompassFloatParameter, compassHeading / 360.0f);
         }
 

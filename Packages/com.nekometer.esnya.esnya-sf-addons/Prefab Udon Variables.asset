@@ -4641,13 +4641,21 @@ MonoBehaviour:
         objectReference: {fileID: 0}
         value: 1.2249
         arrayItems: []
+      - symbolName: altitudeThrustCurve
+        objectReference: {fileID: 0}
+        value: UnityEngine.AnimationCurve
+        arrayItems: []
       - symbolName: animationMaxRPM
         objectReference: {fileID: 0}
-        value: 3500
+        value: 3200
         arrayItems: []
       - symbolName: batteryBus
         objectReference: {fileID: 0}
         value: null
+        arrayItems: []
+      - symbolName: bestMixtureControlCurve
+        objectReference: {fileID: 0}
+        value: UnityEngine.AnimationCurve
         arrayItems: []
       - symbolName: diameter
         objectReference: {fileID: 0}
@@ -4657,9 +4665,9 @@ MonoBehaviour:
         objectReference: {fileID: 0}
         value: True
         arrayItems: []
-      - symbolName: maxRPM
+      - symbolName: maxRPMCurve
         objectReference: {fileID: 0}
-        value: 2700
+        value: UnityEngine.AnimationCurve
         arrayItems: []
       - symbolName: minimumNegativeLoadFactor
         objectReference: {fileID: 0}
@@ -4669,13 +4677,13 @@ MonoBehaviour:
         objectReference: {fileID: 0}
         value: 600
         arrayItems: []
-      - symbolName: mixtureCurve
-        objectReference: {fileID: 0}
-        value: UnityEngine.AnimationCurve
-        arrayItems: []
       - symbolName: mixtureCutOffDelay
         objectReference: {fileID: 0}
         value: 1
+        arrayItems: []
+      - symbolName: mixtureErrorCoefficient
+        objectReference: {fileID: 0}
+        value: 0.3
         arrayItems: []
       - symbolName: mtbEngineStallNegativeLoad
         objectReference: {fileID: 0}

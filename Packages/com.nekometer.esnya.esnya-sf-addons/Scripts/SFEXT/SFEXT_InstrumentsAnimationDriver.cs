@@ -217,6 +217,24 @@ namespace EsnyaSFAddons.SFEXT
         /// </summary>
         [NotNull][HideIf("@!hasVSI")] public string verticalSpeedFloatParameter = "vs";
 
+        [Header("Magnetic Compass")]
+        /// <summary>
+        /// Set true to enable standby magnetic compass.
+        /// </summary>
+        public bool hasMagneticCompass = true;
+
+        /// <summary>
+        /// Response of magnetic compass
+        /// </summary>
+        [HideIf("@hasMagneticCompass")] public float compassResponse = 0.5f;
+
+        /// <summary>
+        /// Name of parameter inanimator
+        ///
+        /// 0 to 360 degrees will be remapped to 0.0 to 1.0.
+        /// </summary>
+        [NotNull][HideIf("@!hasMagneticCompass")] public string magneticCompassFloatParameter = "compass";
+
         private SaccAirVehicle airVehicle;
         private Rigidbody vehicleRigidbody;
         private bool vacuum;
@@ -245,6 +263,8 @@ namespace EsnyaSFAddons.SFEXT
         }
 
         private bool _inVehicle;
+        private float compassHeading;
+
         private bool InVehicle
         {
             get => _inVehicle;
@@ -314,6 +334,7 @@ namespace EsnyaSFAddons.SFEXT
             if (hasTC) TC_Update(tcElectric ? batteryVoltage : vacuumPower);
             if (hasSI) SI_Update();
             if (hasVSI) VSI_Update();
+            if (hasMagneticCompass) MC_Update();
 
             prevPosition = position;
             prevRoll = roll;
@@ -373,6 +394,12 @@ namespace EsnyaSFAddons.SFEXT
         {
             var verticalSpeed = smoothedVelocity.y * 3.28084f * 60;
             instrumentsAnimator.SetFloat(verticalSpeedFloatParameter, Remap01(verticalSpeed, -maxVerticalSpeed, maxVerticalSpeed));
+        }
+
+        private void MC_Update()
+        {
+            compassHeading = Mathf.Lerp(compassHeading, heading, deltaTime * compassResponse);
+            instrumentsAnimator.SetFloat(magneticCompassFloatParameter, compassHeading / 360.0f);
         }
 
         private float Remap01(float value, float oldMin, float oldMax)

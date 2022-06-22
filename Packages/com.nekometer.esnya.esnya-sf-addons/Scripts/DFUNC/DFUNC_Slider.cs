@@ -126,16 +126,18 @@ namespace EsnyaSFAddons.DFUNC
 
         private float Loop01(float value)
         {
+            if (Mathf.Approximately(value, 1.0f)) return 1.0f;
+            if (Mathf.Approximately(value, 0.0f)) return 0.0f;
             return value > 1.0f ? 0.0f : value < 0.0f ? 1.0f : value;
         }
 
         public void IncreaseLooped()
         {
-            Value = Loop01(Value + desktopStep);
+            Value = Value >= 1.0f ? 0.0f : Value + desktopStep;
         }
         public void DecreaseLooped()
         {
-            Value = Loop01(Value - desktopStep);
+            Value = Value <= 0.0f ? 1.0f : Value - desktopStep;
         }
 
         private void Update()

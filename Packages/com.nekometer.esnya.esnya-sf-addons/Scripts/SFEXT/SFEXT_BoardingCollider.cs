@@ -1,26 +1,39 @@
 ﻿
 using UdonSharp;
 using UnityEngine;
+using VRC.SDKBase;
+
+#if !COMPILER_UDONSHARP && UNITY_EDITOR
+using UdonSharpEditor;
+#endif
 
 namespace EsnyaSFAddons.SFEXT
 {
     /// <summary>
     /// Attach collider to enables walk inside plane without getting blown away.
     /// </summary>
-    [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
+    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class SFEXT_BoardingCollider : UdonSharpBehaviour
     {
         /// <summary>
         /// Enables on water. If plane will be not floating, set false to better performance.
         /// </summary>
         public bool enableOnWater = true;
+
         private Quaternion localRotation;
+        private SaccEntity entity;
         private Transform entityTransform;
         private Vector3 localPosition;
 
         private bool _onBoarding;
-        private bool OnBoarding {
-            set {
+        private bool OnBoarding
+        {
+            set
+            {
+                if (value)
+                {
+                    PlayerEnterCount = 0;
+                }
                 _onBoarding = value;
                 CheckState();
             }
@@ -28,8 +41,32 @@ namespace EsnyaSFAddons.SFEXT
         }
 
         private bool _onGround;
-        private bool OnGround {
-            set {
+        private Vector3 prevPosition;
+        private Quaternion prevRotation;
+        private int _playerEnterCount;
+        private Vector3 prevPlayerPosition;
+
+        private int PlayerEnterCount
+        {
+            get => _playerEnterCount;
+            set
+            {
+                var prevStay = _playerEnterCount > 0;
+                var nextStay = value > 0;
+
+                if (prevStay != nextStay)
+                {
+                    entity.SendEventToExtensions(nextStay ? "SFEXT_L_BoardingEnter" : "SFEXT_L_BoardingExit");
+                }
+
+                _playerEnterCount = Mathf.Max(value, 0);
+            }
+        }
+
+        private bool OnGround
+        {
+            set
+            {
                 _onGround = value;
                 CheckState();
             }
@@ -38,16 +75,21 @@ namespace EsnyaSFAddons.SFEXT
 
         public void SFEXT_L_EntityStart()
         {
-            entityTransform = GetComponentInParent<SaccEntity>().transform;
+            entity = GetComponentInParent<SaccEntity>();
+            entityTransform = entity.transform;
             localPosition = entityTransform.InverseTransformPoint(transform.position);
             localRotation = Quaternion.Inverse(entityTransform.rotation) * transform.rotation;
 
-            transform.SetParent(entityTransform.parent, true);
-
-            gameObject.name = $"{entityTransform.gameObject.name}_{gameObject.name}";
-
             OnBoarding = false;
             OnGround = true;
+
+            SendCustomEventDelayedSeconds(nameof(_LateStart), 1.0f);
+        }
+
+        public void _LateStart()
+        {
+            gameObject.name = $"{entityTransform.gameObject.name}_{gameObject.name}";
+            transform.SetParent(entityTransform.parent, true);
         }
 
         public void SFEXT_O_PilotEnter()
@@ -84,8 +126,35 @@ namespace EsnyaSFAddons.SFEXT
         public override void PostLateUpdate()
         {
             if (!entityTransform) return;
-            transform.position = entityTransform.TransformPoint(localPosition);
-            transform.rotation = entityTransform.rotation * localRotation;
+
+            var position = entityTransform.TransformPoint(localPosition);
+            var rotation = entityTransform.rotation * localRotation;
+            transform.position = position;
+            transform.rotation = rotation;
+
+            var playerStay = PlayerEnterCount > 0;
+
+            if (playerStay)
+            {
+                var localPlayer = Networking.LocalPlayer;
+                var playerPosition = localPlayer.GetPosition();
+                var playerRotation = localPlayer.GetRotation();
+
+                var positionDiff = position - prevPosition;
+                var rotationDiff = Quaternion.Inverse(prevRotation) * rotation;
+
+                var nextPlayerPosition = rotationDiff * (playerPosition - position) + position + positionDiff;
+                if (!Mathf.Approximately(Vector3.Distance(nextPlayerPosition, playerPosition), 0.0f))
+                {
+                    // localPlayer.SetVelocity((nextPlayerPosition - prevPlayerPosition) / Time.deltaTime);
+                    localPlayer.TeleportTo(nextPlayerPosition, rotationDiff * playerRotation);
+                }
+
+                prevPlayerPosition = playerPosition;
+            }
+
+            prevPosition = position;
+            prevRotation = rotation;
         }
 
         private void CheckState()
@@ -93,5 +162,43 @@ namespace EsnyaSFAddons.SFEXT
             var active = !OnBoarding && OnGround;
             if (active != gameObject.activeSelf) gameObject.SetActive(active);
         }
+
+        public override void OnPlayerTriggerEnter(VRCPlayerApi player)
+        {
+            if (player.isLocal) _PlayerEnter();
+        }
+        public override void OnPlayerTriggerExit(VRCPlayerApi player)
+        {
+            if (player.isLocal) _PlayerExit();
+        }
+
+        public void _PlayerEnter()
+        {
+            Debug.Log("[ESFA][OnBoardingCollider] Enter");
+            PlayerEnterCount++;
+        }
+
+        public void _PlayerExit()
+        {
+            Debug.Log("[ESFA][OnBoardingCollider] Exit");
+            PlayerEnterCount--;
+        }
+
+#if !COMPILER_UDONSHARP && UNITY_EDITOR
+        private void OnDrawGizmosSelected()
+        {
+            this.UpdateProxy();
+
+            if (PlayerEnterCount > 0)
+            {
+                Gizmos.color = Color.red;
+                foreach (var floorCollider in GetComponentsInChildren<Collider>())
+                {
+                    var bounds = floorCollider.bounds;
+                    Gizmos.DrawWireCube(bounds.center, bounds.size);
+                }
+            }
+        }
+#endif
     }
 }

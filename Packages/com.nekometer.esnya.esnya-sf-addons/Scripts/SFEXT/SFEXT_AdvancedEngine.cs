@@ -53,6 +53,9 @@ namespace EsnyaSFAddons.SFEXT
         public void SFEXT_G_Explode() => ResetStatus();
         public void SFEXT_G_RespawnButton() => ResetStatus();
 
+        public void SFEXT_L_BoardingEnter() => onBoarding = true;
+        public void SFEXT_L_BoardingEnxit() => onBoarding = false;
+
         public void SFEXT_G_TouchDownWater()
         {
             if (isOwner)
@@ -458,7 +461,7 @@ namespace EsnyaSFAddons.SFEXT
             //     return;
             // }
 
-            if (!Utilities.IsValid(localPlayer) || !playerStrike || isPilot || isPassenger || Mathf.Approximately(n1, 0)) return;
+            if (!Utilities.IsValid(localPlayer) || !playerStrike || isPilot || isPassenger || onBoarding || Mathf.Approximately(n1, 0)) return;
 
             var playerPosition = localPlayer.GetPosition();
 
@@ -520,6 +523,7 @@ namespace EsnyaSFAddons.SFEXT
         public ParticleSystem reverserBrustParticle;
         public float brustIdleSpeed = 10;
         public float brustTakeOffSpeed = 1000;
+        private bool onBoarding;
 
         private void JetBrust_Start()
         {

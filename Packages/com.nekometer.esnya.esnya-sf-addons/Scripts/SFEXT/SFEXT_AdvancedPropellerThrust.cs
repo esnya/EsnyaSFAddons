@@ -46,9 +46,9 @@ namespace EsnyaSFAddons.SFEXT
         [NotNull][Tooltip("Throttle vs RPM")] public AnimationCurve throttleCurve = AnimationCurve.EaseInOut(0.0f, 0.0f, 1.0f, 1.0f);
 
         /// <summary>
-        /// Thrust reduced by this curve.
+        /// Thrust redused 50% at the altitude
         /// </summary>
-        [NotNull] public AnimationCurve altitudeThrustCurve = AnimationCurve.Linear(0.0f, 1.0f, 20000.0f, 0.45f);
+        public float halfPowerAltitude = 21000.0f;
 
         /// <summary>
         /// Best mixture control position vs altitude in feet.
@@ -271,7 +271,7 @@ namespace EsnyaSFAddons.SFEXT
 
             UpdatePropeller(smoothedTargetRPM, Vector3.Dot(airVehicle.AirVel, transform.forward));
 
-            thrust = seaLevelThrust * altitudeThrustCurve.Evaluate(altitude);
+            thrust = seaLevelThrust * Mathf.SmoothStep(1.0f, 0.0f, altitude / (halfPowerAltitude * 2.0f));
 
             var engineOutput = Mathf.Clamp01(RPM / maxRPM);
             airVehicle.EngineOutput = engineOutput;

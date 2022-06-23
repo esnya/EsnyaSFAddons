@@ -20,6 +20,8 @@ namespace EsnyaSFAddons.SFEXT
         /// </summary>
         public bool enableOnWater = true;
 
+        // public float fakeFriction = 0.1f;
+
         private Quaternion localRotation;
         private SaccEntity entity;
         private Transform entityTransform;
@@ -44,7 +46,6 @@ namespace EsnyaSFAddons.SFEXT
         private Vector3 prevPosition;
         private Quaternion prevRotation;
         private int _playerEnterCount;
-        private Vector3 prevPlayerPosition;
 
         private int PlayerEnterCount
         {
@@ -54,12 +55,13 @@ namespace EsnyaSFAddons.SFEXT
                 var prevStay = _playerEnterCount > 0;
                 var nextStay = value > 0;
 
+                _playerEnterCount = Mathf.Max(value, 0);
                 if (prevStay != nextStay)
                 {
                     entity.SendEventToExtensions(nextStay ? "SFEXT_L_BoardingEnter" : "SFEXT_L_BoardingExit");
+                    CheckState();
                 }
 
-                _playerEnterCount = Mathf.Max(value, 0);
             }
         }
 
@@ -123,6 +125,11 @@ namespace EsnyaSFAddons.SFEXT
             OnGround = enableOnWater;
         }
 
+        public void SFEXT_G_ReAppear()
+        {
+            PlayerEnterCount = 0;
+        }
+
         public override void PostLateUpdate()
         {
             if (!entityTransform) return;
@@ -146,11 +153,8 @@ namespace EsnyaSFAddons.SFEXT
                 var nextPlayerPosition = rotationDiff * (playerPosition - position) + position + positionDiff;
                 if (!Mathf.Approximately(Vector3.Distance(nextPlayerPosition, playerPosition), 0.0f))
                 {
-                    // localPlayer.SetVelocity((nextPlayerPosition - prevPlayerPosition) / Time.deltaTime);
-                    localPlayer.TeleportTo(nextPlayerPosition, rotationDiff * playerRotation);
+                    localPlayer.TeleportTo(nextPlayerPosition, playerRotation * rotationDiff);
                 }
-
-                prevPlayerPosition = playerPosition;
             }
 
             prevPosition = position;
@@ -159,8 +163,12 @@ namespace EsnyaSFAddons.SFEXT
 
         private void CheckState()
         {
-            var active = !OnBoarding && OnGround;
-            if (active != gameObject.activeSelf) gameObject.SetActive(active);
+            var active = !OnBoarding && OnGround || PlayerEnterCount > 0;
+            if (active != gameObject.activeSelf)
+            {
+                gameObject.SetActive(active);
+                if (!active) PlayerEnterCount = 0;
+            }
         }
 
         public override void OnPlayerTriggerEnter(VRCPlayerApi player)
@@ -174,13 +182,11 @@ namespace EsnyaSFAddons.SFEXT
 
         public void _PlayerEnter()
         {
-            Debug.Log("[ESFA][OnBoardingCollider] Enter");
             PlayerEnterCount++;
         }
 
         public void _PlayerExit()
         {
-            Debug.Log("[ESFA][OnBoardingCollider] Exit");
             PlayerEnterCount--;
         }
 

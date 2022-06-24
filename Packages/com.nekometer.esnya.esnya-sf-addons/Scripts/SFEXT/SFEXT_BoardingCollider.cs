@@ -153,7 +153,7 @@ namespace EsnyaSFAddons.SFEXT
                 var nextPlayerPosition = rotationDiff * (playerPosition - position) + position + positionDiff;
                 if (!Mathf.Approximately(Vector3.Distance(nextPlayerPosition, playerPosition), 0.0f))
                 {
-                    localPlayer.TeleportTo(nextPlayerPosition, playerRotation * rotationDiff);
+                    localPlayer.TeleportTo(nextPlayerPosition, playerRotation * Quaternion.Slerp(rotationDiff, Quaternion.identity, 0.5f));
                 }
             }
 

@@ -4,6 +4,7 @@ using EsnyaSFAddons.Annotations;
 using UdonSharp;
 using UnityEngine;
 using VRC.Udon;
+using SaccFlightAndVehicles;
 
 namespace EsnyaSFAddons
 {

@@ -1,7 +1,9 @@
+using SaccFlightAndVehicles;
+using UdonSharp;
+using UnityEngine;
+
 namespace EsnyaSFAddons.SFEXT
 {
-    using UdonSharp;
-    using UnityEngine;
 
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class SFEXT_DihedralEffect : UdonSharpBehaviour

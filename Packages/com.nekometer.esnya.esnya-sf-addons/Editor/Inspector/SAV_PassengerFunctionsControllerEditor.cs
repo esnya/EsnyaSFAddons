@@ -3,6 +3,7 @@ using UdonSharpEditor;
 using UnityEditor;
 using UnityEngine;
 using VRC.SDKBase;
+using SaccFlightAndVehicles;
 
 namespace EsnyaSFAddons.Editor.Inspector
 {

@@ -5,6 +5,7 @@ using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon.Common.Interfaces;
+using SaccFlightAndVehicles;
 
 namespace EsnyaSFAddons.Accesory
 {

@@ -1,8 +1,7 @@
 ﻿
+using SaccFlightAndVehicles;
 using UdonSharp;
 using UnityEngine;
-using VRC.SDKBase;
-using VRC.Udon;
 
 namespace EsnyaSFAddons.DFUNC
 {
@@ -19,10 +18,13 @@ namespace EsnyaSFAddons.DFUNC
         private SaccAirVehicle airVehicle;
         private DFUNC_Flaps flapsDFunc;
         private float _extraLift = 0.0f;
-        private float ExtraLift {
-            set {
+        private float ExtraLift
+        {
+            set
+            {
                 var diff = value - _extraLift;
-                if (!Mathf.Approximately(diff, 0)) {
+                if (!Mathf.Approximately(diff, 0))
+                {
                     // Debug.Log($"[ESFA] Applying ExtraLift {value} ({airVehicle.ExtraLift} -> {airVehicle.ExtraLift + diff})");
                     airVehicle.ExtraLift += diff;
                     _extraLift = value;
@@ -32,9 +34,11 @@ namespace EsnyaSFAddons.DFUNC
         [UdonSynced][FieldChangeCallback(nameof(Fold))] private bool _fold;
         private bool hasPilot;
 
-        public bool Fold {
+        public bool Fold
+        {
             get => _fold;
-            private set {
+            private set
+            {
                 ExtraLift = value ? -ExtraLiftDrop : 0.0f;
                 if (vehicleAnimator) vehicleAnimator.SetBool(animatorBool, value);
                 if (Dial_Funcon) Dial_Funcon.SetActive(value);

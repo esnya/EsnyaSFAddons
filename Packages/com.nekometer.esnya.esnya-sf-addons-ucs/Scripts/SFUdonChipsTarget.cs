@@ -3,6 +3,7 @@ using UnityEngine;
 using VRC.Udon;
 using VRC.Udon.Common.Interfaces;
 using UCS;
+using SaccFlightAndVehicles;
 
 namespace EsnyaSFAddons.UCS
 {

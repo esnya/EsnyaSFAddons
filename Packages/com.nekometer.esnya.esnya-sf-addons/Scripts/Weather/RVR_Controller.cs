@@ -4,6 +4,7 @@ using UdonToolkit;
 using UnityEngine;
 using VRC.SDK3.Components;
 using VRC.SDKBase;
+using SaccFlightAndVehicles;
 
 namespace EsnyaSFAddons.Weather
 {

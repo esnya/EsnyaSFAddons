@@ -5,6 +5,7 @@ using UdonSharp;
 using UdonSharpEditor;
 using UnityEditor;
 using UnityEngine;
+using SaccFlightAndVehicles;
 
 namespace EsnyaSFAddons.Editor
 {

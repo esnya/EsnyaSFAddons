@@ -62,7 +62,7 @@ MonoBehaviour:
       Data: 4|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: DFUNC_Catapult, SaccFlightAndVehicles.Runtime
+      Data: SaccFlightAndVehicles.DFUNC_Catapult, SaccFlightAndVehicles.Runtime
     - Name: 
       Entry: 8
       Data: 

@@ -2,6 +2,7 @@
 using EsnyaSFAddons.DFUNC;
 using UdonSharp;
 using UnityEngine;
+using SaccFlightAndVehicles;
 
 namespace EsnyaSFAddons.Avionics
 {

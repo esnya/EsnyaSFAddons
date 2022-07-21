@@ -1,8 +1,7 @@
-using System;
+using SaccFlightAndVehicles;
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
-using VRC.Udon;
 using VRC.Udon.Common.Interfaces;
 
 namespace EsnyaSFAddons.DFUNC
@@ -28,7 +27,8 @@ namespace EsnyaSFAddons.DFUNC
         }
 
         public void SFEXT_O_OnPlayerJoined() => SendCustomNetworkEvent(NetworkEventTarget.All, state ? nameof(TurnOn) : nameof(TurnOff));
-        public void SFEXT_O_PilotExit() {
+        public void SFEXT_O_PilotExit()
+        {
             gameObject.SetActive(false);
             SendCustomNetworkEvent(NetworkEventTarget.All, nameof(TurnOff));
         }

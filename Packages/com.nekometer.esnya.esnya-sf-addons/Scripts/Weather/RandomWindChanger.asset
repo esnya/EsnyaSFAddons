@@ -377,7 +377,7 @@ MonoBehaviour:
       Data: 24|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: SAV_WindChanger, SaccFlightAndVehicles.Runtime
+      Data: SaccFlightAndVehicles.SAV_WindChanger, SaccFlightAndVehicles.Runtime
     - Name: 
       Entry: 8
       Data: 

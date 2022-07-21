@@ -2382,7 +2382,7 @@ MonoBehaviour:
       Data: 142|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: SaccAirVehicle, SaccFlightAndVehicles.Runtime
+      Data: SaccFlightAndVehicles.SaccAirVehicle, SaccFlightAndVehicles.Runtime
     - Name: 
       Entry: 8
       Data: 
@@ -2574,7 +2574,7 @@ MonoBehaviour:
       Data: 154|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: DFUNC_Brake, SaccFlightAndVehicles.Runtime
+      Data: SaccFlightAndVehicles.DFUNC_Brake, SaccFlightAndVehicles.Runtime
     - Name: 
       Entry: 8
       Data: 

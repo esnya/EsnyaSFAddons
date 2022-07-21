@@ -4,6 +4,7 @@ using InariUdon.UI;
 using UCS;
 using EsnyaSFAddons.Weather;
 using EsnyaSFAddons.Annotations;
+using SaccFlightAndVehicles;
 
 namespace EsnyaSFAddons.UCS
 {

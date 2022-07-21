@@ -1,9 +1,8 @@
 
 using System;
+using SaccFlightAndVehicles;
 using UdonSharp;
 using UnityEngine;
-using VRC.SDKBase;
-using VRC.Udon;
 
 namespace EsnyaSFAddons.DFUNC
 {
@@ -22,7 +21,7 @@ namespace EsnyaSFAddons.DFUNC
         private float ThrottleStrength, ReversingThrottleStrength, AccelerationResponse, EngineSpoolDownSpeedMulti;
         private bool UseLeftTrigger, Selected, isPilot, lowFuel;
         private bool HasWheelColliders;
-        [UdonSynced] [FieldChangeCallback(nameof(Reversing))] private bool _reversing;
+        [UdonSynced][FieldChangeCallback(nameof(Reversing))] private bool _reversing;
         public bool Reversing
         {
             private set

@@ -1,8 +1,9 @@
 using UdonSharp;
 using UnityEngine;
+using SaccFlightAndVehicles;
+
 namespace EsnyaSFAddons.SFEXT
 {
-
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class SFEXT_SeatsOnly : UdonSharpBehaviour
     {

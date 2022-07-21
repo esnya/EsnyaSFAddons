@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using UdonSharp;
 using UnityEngine;
 using VRC.Udon.Common.Interfaces;
+using SaccFlightAndVehicles;
 
 namespace EsnyaSFAddons.DFUNC
 {

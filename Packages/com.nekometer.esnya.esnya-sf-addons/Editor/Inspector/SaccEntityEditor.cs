@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
 using VRC.SDKBase;
+using SaccFlightAndVehicles;
 
 namespace EsnyaSFAddons.Editor.Inspector
 {
@@ -171,10 +172,6 @@ namespace EsnyaSFAddons.Editor.Inspector
                     else if (property.name == nameof(SaccEntity.SwitchFunctionSound))
                     {
                         if (ESFAUI.MiniButton("Find")) property.objectReferenceValue = entity.transform.ListByName(property.name).Select(o => o.GetComponent<AudioSource>()).FirstOrDefault();
-                    }
-                    else if (property.name == nameof(SaccEntity.DisableAfter10Seconds))
-                    {
-                        if (ESFAUI.MiniButton("Find")) SFEditorUtility.SetObjectArrayProperty(property, entity.transform.ListByName(property.name));
                     }
                 }
             }

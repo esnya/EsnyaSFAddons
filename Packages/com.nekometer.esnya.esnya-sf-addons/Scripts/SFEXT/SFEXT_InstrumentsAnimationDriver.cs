@@ -1,11 +1,9 @@
-﻿
+﻿using JetBrains.Annotations;
+using SaccFlightAndVehicles;
 using UdonSharp;
-using UnityEngine;
-using VRC.SDKBase;
-using VRC.Udon;
 using UdonToolkit;
-using JetBrains.Annotations;
-using System.Runtime.CompilerServices;
+using UnityEngine;
+using VRC.Udon;
 
 namespace EsnyaSFAddons.SFEXT
 {
@@ -268,7 +266,8 @@ namespace EsnyaSFAddons.SFEXT
         private bool InVehicle
         {
             get => _inVehicle;
-            set {
+            set
+            {
                 _inVehicle = value;
                 if (value)
                 {
@@ -366,7 +365,7 @@ namespace EsnyaSFAddons.SFEXT
             var TimeGustiness = Time.time * airVehicle.WindGustiness;
             var gustx = TimeGustiness + (position.x * airVehicle.WindTurbulanceScale);
             var gustz = TimeGustiness + (position.z * airVehicle.WindTurbulanceScale);
-            var finalWind = (airVehicle.Wind + Vector3.Normalize(new Vector3(Mathf.PerlinNoise(gustx + 9000, gustz) - .5f, /* (Mathf.PerlinNoise(gustx - 9000, gustz - 9000) - .5f) */0, Mathf.PerlinNoise(gustx, gustz + 9999) - .5f)) * airVehicle.WindGustStrength) * airVehicle.Atmosphere;;
+            var finalWind = (airVehicle.Wind + Vector3.Normalize(new Vector3(Mathf.PerlinNoise(gustx + 9000, gustz) - .5f, /* (Mathf.PerlinNoise(gustx - 9000, gustz - 9000) - .5f) */0, Mathf.PerlinNoise(gustx, gustz + 9999) - .5f)) * airVehicle.WindGustStrength) * airVehicle.Atmosphere; ;
 
             var airspeed = Mathf.Max(Vector3.Dot(smoothedVelocity - finalWind, forward), 0);
             instrumentsAnimator.SetFloat(airspeedFloatParameter, airspeed * 1.9438445f / maxAirspeed);

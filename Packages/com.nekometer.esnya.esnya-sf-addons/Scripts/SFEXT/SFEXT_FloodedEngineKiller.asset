@@ -63,7 +63,7 @@ MonoBehaviour:
       Data: 4|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: SaccAirVehicle, SaccFlightAndVehicles.Runtime
+      Data: SaccFlightAndVehicles.SaccAirVehicle, SaccFlightAndVehicles.Runtime
     - Name: 
       Entry: 8
       Data: 
@@ -126,7 +126,7 @@ MonoBehaviour:
       Data: 8|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: DFUNC_ToggleEngine, SaccFlightAndVehicles.Runtime
+      Data: SaccFlightAndVehicles.DFUNC_ToggleEngine, SaccFlightAndVehicles.Runtime
     - Name: 
       Entry: 8
       Data: 

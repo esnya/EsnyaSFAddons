@@ -88,6 +88,16 @@ namespace EsnyaSFAddons.SFEXT
         /// </summary>
         public float animationMaxRPM = 3500;
 
+        /// <summary>
+        /// Animator parameter name.
+        /// </summary>
+        public string oilTempFloatParameter = "oiltemp";
+
+        /// <summary>
+        /// Response of oil temperature.
+        /// </summary>
+        public float oilTempResponse = 0.1f;
+
         [Header("Failure")]
         /// <summary>
         /// Enable engine stall simulation.
@@ -117,8 +127,10 @@ namespace EsnyaSFAddons.SFEXT
 
         [NonSerialized] public float mixture = 1.0f;
         [UdonSynced(UdonSyncMode.Smooth)][FieldChangeCallback(nameof(RPM))] private float _rpm;
-        public float RPM {
-            private set {
+        public float RPM
+        {
+            private set
+            {
                 _rpm = value;
                 if (animator) animator.SetFloat(rpmFloatParameter, value / animationMaxRPM);
             }
@@ -136,11 +148,12 @@ namespace EsnyaSFAddons.SFEXT
         private float mixtureCutOffTimer;
         private float slip, seaLevelThrustScale, smoothedTargetRPM;
         private float thrust;
+        private float oilTemp;
 
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
         private void Reset()
         {
-            throttleCurve = new AnimationCurve(new [] {
+            throttleCurve = new AnimationCurve(new[] {
                 new Keyframe(0.0f, 0.0f, 1.0f, 1.0f),
                 new Keyframe(1.0f, 1.0f, 0.0f, 0.0f),
             });
@@ -149,7 +162,7 @@ namespace EsnyaSFAddons.SFEXT
             //     new Keyframe(0.6f, 1.0f, 0.0f, 0.0f),
             //     new Keyframe(1.0f, 0.9f, 1.0f, 1.0f),
             // });
-            bestMixtureControlCurve = new AnimationCurve(new [] {
+            bestMixtureControlCurve = new AnimationCurve(new[] {
                 new Keyframe(0.0f, 0.8f, 0.0f, 0.0f),
                 new Keyframe(2000.0f, 0.8f, 0.0f, 0.0f),
                 new Keyframe(20000.0f, 0.1f),
@@ -157,7 +170,8 @@ namespace EsnyaSFAddons.SFEXT
         }
 #endif
 
-        private void UpdatePropeller(float smoothedTargetRPM, float v) {
+        private void UpdatePropeller(float smoothedTargetRPM, float v)
+        {
             RPM = smoothedTargetRPM * (1 - 0.1f * slip);
             slip = 1 - 31.5f * v / Mathf.Max(RPM, minRPM);
             seaLevelThrust = 1 / 120.0f * slip * Mathf.Pow(RPM, 2) * seaLevelThrustScale;
@@ -222,6 +236,7 @@ namespace EsnyaSFAddons.SFEXT
             smoothedTargetRPM = 0;
             slip = 0;
             RPM = 0;
+            oilTemp = 0.0f;
             gameObject.SetActive(false);
         }
 
@@ -238,6 +253,16 @@ namespace EsnyaSFAddons.SFEXT
             {
                 gameObject.SetActive(false);
                 return;
+            }
+
+            if (!string.IsNullOrEmpty(oilTempFloatParameter))
+            {
+                var oilTempTarget = engineOn ? Mathf.Lerp(0.2f, 1.0f, airVehicle.ThrottleInput) : 0.0f;
+                if (!Mathf.Approximately(oilTemp, oilTempTarget))
+                {
+                    oilTemp = Mathf.MoveTowards(oilTemp, oilTempTarget, Time.deltaTime * oilTempResponse);
+                    animator.SetFloat(oilTempFloatParameter, oilTemp);
+                }
             }
         }
 
@@ -288,7 +313,7 @@ namespace EsnyaSFAddons.SFEXT
                 var loadFactor = Vector3.Dot(acceleration - Physics.gravity, vehicleTransform.up) / gravity.magnitude;
                 if (
                     loadFactor < minimumNegativeLoadFactor && UnityEngine.Random.value < Mathf.Abs((loadFactor - minimumNegativeLoadFactor) * deltaTime / mtbEngineStallOverNegativeLoad)
-                    || loadFactor < 0 && UnityEngine.Random.value <  Mathf.Clamp01(-loadFactor) * deltaTime / mtbEngineStallNegativeLoad
+                    || loadFactor < 0 && UnityEngine.Random.value < Mathf.Clamp01(-loadFactor) * deltaTime / mtbEngineStallNegativeLoad
                 )
                 {
                     EngineOff();

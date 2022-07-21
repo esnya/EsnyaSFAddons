@@ -84,8 +84,7 @@ namespace EsnyaSFAddons.Editor
 
         private static void DrawSAV_FloatScriptGizmos(SAV_FloatScript floatScript)
         {
-            var floatPoints = floatScript.GetProgramVariable("FloatPoints") as object[];
-            if (floatPoints != null)
+            if (floatScript.GetProgramVariable("FloatPoints") is object[] floatPoints)
             {
                 var radius = (float)floatScript.GetProgramVariable("FloatRadius");
                 Gizmos.color = GizmoColors.floatPoint;
@@ -101,12 +100,19 @@ namespace EsnyaSFAddons.Editor
         {
             if (!UdonSharpEditorUtility.IsUdonSharpBehaviour(udonBehaviour)) return;
 
-            var udonSharpBehaviour = UdonSharpEditorUtility.GetProxyBehaviour(udonBehaviour);
+            try
+            {
+                var udonSharpBehaviour = UdonSharpEditorUtility.GetProxyBehaviour(udonBehaviour);
 
-            if (udonSharpBehaviour is SaccEntity) DrawSaccEntityGizmos(udonSharpBehaviour as SaccEntity);
-            if (udonSharpBehaviour is SaccVehicleSeat) DrawSaccVehicleSeatGizmos(udonSharpBehaviour as SaccVehicleSeat);
-            if (udonSharpBehaviour is SaccAirVehicle) DrawSaccAirVehicleGizmos(udonSharpBehaviour as SaccAirVehicle);
-            if (udonSharpBehaviour is SAV_FloatScript) DrawSAV_FloatScriptGizmos(udonSharpBehaviour as SAV_FloatScript);
+                if (udonSharpBehaviour is SaccEntity @entity) DrawSaccEntityGizmos(@entity);
+                if (udonSharpBehaviour is SaccVehicleSeat @seat) DrawSaccVehicleSeatGizmos(@seat);
+                if (udonSharpBehaviour is SaccAirVehicle @airVehicle) DrawSaccAirVehicleGizmos(@airVehicle);
+                if (udonSharpBehaviour is SAV_FloatScript @floatScript) DrawSAV_FloatScriptGizmos(@floatScript);
+            }
+            finally
+            {
+
+            }
         }
     }
 }

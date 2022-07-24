@@ -65,7 +65,7 @@ namespace EsnyaSFAddons.Editor.Inspector
                 if (isDirty)
                 {
                     extention.ApplyProxyModifications();
-                    EditorUtility.SetDirty(UdonSharpEditorUtility.GetBackingUdonBehaviour(extention));
+                    EditorUtility.SetDirty(extention);
                 }
             }
 

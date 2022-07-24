@@ -432,6 +432,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8725871284330548857}
     m_Modifications:
+    - target: {fileID: -1465198223280002506, guid: 6df820a374913e44f9997a6a2d2973bc,
+        type: 3}
+      propertyPath: SAVControl
+      value: 
+      objectReference: {fileID: 8620436127341410616}
+    - target: {fileID: -1465198223280002506, guid: 6df820a374913e44f9997a6a2d2973bc,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: -1465198223280002506, guid: 6df820a374913e44f9997a6a2d2973bc,
+        type: 3}
     - target: {fileID: 3234550905162333664, guid: 6df820a374913e44f9997a6a2d2973bc,
         type: 3}
       propertyPath: serializedPublicVariablesBytesString
@@ -587,6 +598,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8317952074847094204, guid: a98010f0907f39e438ff76bf1785d1bc,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 8317952074847094204, guid: a98010f0907f39e438ff76bf1785d1bc,
+        type: 3}
     m_RemovedComponents:
     - {fileID: 4517522974797657575, guid: a98010f0907f39e438ff76bf1785d1bc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a98010f0907f39e438ff76bf1785d1bc, type: 3}
@@ -596,6 +613,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 346422765317586052}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8620436127341410616 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8317952074847094204, guid: a98010f0907f39e438ff76bf1785d1bc,
+    type: 3}
+  m_PrefabInstance: {fileID: 346422765317586052}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a81ed12406633174aa22632458cce3f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3847308026480302866 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3578919072815048598, guid: a98010f0907f39e438ff76bf1785d1bc,
@@ -767,6 +796,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8725871284330548857}
     m_Modifications:
+    - target: {fileID: -7008472885681823442, guid: 8291139d29e6bd149bd9d32830ef2630,
+        type: 3}
+      propertyPath: SAVControl
+      value: 
+      objectReference: {fileID: 8620436127341410616}
+    - target: {fileID: -7008472885681823442, guid: 8291139d29e6bd149bd9d32830ef2630,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: -7008472885681823442, guid: 8291139d29e6bd149bd9d32830ef2630,
+        type: 3}
     - target: {fileID: 4754457074920514691, guid: 8291139d29e6bd149bd9d32830ef2630,
         type: 3}
       propertyPath: serializedPublicVariablesBytesString
@@ -922,6 +962,12 @@ PrefabInstance:
       propertyPath: publicVariablesUnityEngineObjects.Array.data[0]
       value: 
       objectReference: {fileID: 3847308026480302866}
+    - target: {fileID: 8733446681210979277, guid: 234893cd2ae19d34b9d4d3878599f018,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 8733446681210979277, guid: 234893cd2ae19d34b9d4d3878599f018,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 234893cd2ae19d34b9d4d3878599f018, type: 3}
 --- !u!4 &5022096598045029772 stripped
@@ -937,6 +983,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8725871284330548857}
     m_Modifications:
+    - target: {fileID: 1387822472073312156, guid: e5ca41e2db77b8845b5c7785af93fd08,
+        type: 3}
+      propertyPath: SAVControl
+      value: 
+      objectReference: {fileID: 8620436127341410616}
+    - target: {fileID: 1387822472073312156, guid: e5ca41e2db77b8845b5c7785af93fd08,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 1387822472073312156, guid: e5ca41e2db77b8845b5c7785af93fd08,
+        type: 3}
     - target: {fileID: 2008650468370262116, guid: e5ca41e2db77b8845b5c7785af93fd08,
         type: 3}
       propertyPath: m_Name
@@ -1182,6 +1239,17 @@ PrefabInstance:
       propertyPath: publicVariablesUnityEngineObjects.Array.data[19]
       value: 
       objectReference: {fileID: 3847308026480302866}
+    - target: {fileID: 4790600381987228164, guid: 9a009579863df3442a72025772f1ff57,
+        type: 3}
+      propertyPath: SAVControl
+      value: 
+      objectReference: {fileID: 8620436127341410616}
+    - target: {fileID: 4790600381987228164, guid: 9a009579863df3442a72025772f1ff57,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4790600381987228164, guid: 9a009579863df3442a72025772f1ff57,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a009579863df3442a72025772f1ff57, type: 3}
 --- !u!4 &5022096596924492237 stripped
@@ -1197,11 +1265,23 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8725871285087343248}
     m_Modifications:
+    - target: {fileID: 805691652656542146, guid: fc347f5b169504e4aa7c6c6aec421dea,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 805691652656542146, guid: fc347f5b169504e4aa7c6c6aec421dea,
+        type: 3}
     - target: {fileID: 2264083107768328837, guid: fc347f5b169504e4aa7c6c6aec421dea,
         type: 3}
       propertyPath: serializedProgramAsset
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2941868415061619849, guid: fc347f5b169504e4aa7c6c6aec421dea,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 2941868415061619849, guid: fc347f5b169504e4aa7c6c6aec421dea,
+        type: 3}
     - target: {fileID: 4048371213227378612, guid: fc347f5b169504e4aa7c6c6aec421dea,
         type: 3}
       propertyPath: m_RootOrder
@@ -1282,6 +1362,12 @@ PrefabInstance:
       propertyPath: publicVariablesUnityEngineObjects.Array.data[0]
       value: 
       objectReference: {fileID: 3847308026480302866}
+    - target: {fileID: 7241859505556496067, guid: fc347f5b169504e4aa7c6c6aec421dea,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 7241859505556496067, guid: fc347f5b169504e4aa7c6c6aec421dea,
+        type: 3}
     - target: {fileID: 8884746859266504466, guid: fc347f5b169504e4aa7c6c6aec421dea,
         type: 3}
       propertyPath: serializedProgramAsset

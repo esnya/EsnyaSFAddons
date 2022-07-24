@@ -270,6 +270,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7194098811302649448, guid: ec338f04339751d4abf06ae86a2d409b,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: -7194098811302649448, guid: ec338f04339751d4abf06ae86a2d409b,
+        type: 3}
     - target: {fileID: 120576077967606071, guid: ec338f04339751d4abf06ae86a2d409b,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -480,7 +486,7 @@ PrefabInstance:
         type: 3}
       propertyPath: serializedProgramAsset
       value: 
-      objectReference: {fileID: 11400000, guid: d2ccb36bd87424b47a2e477d54ef42ef,
+      objectReference: {fileID: 11400000, guid: d351c50b6fa9f4347afc5c9714d8a78b,
         type: 2}
     - target: {fileID: 2637390962827783789, guid: ec338f04339751d4abf06ae86a2d409b,
         type: 3}

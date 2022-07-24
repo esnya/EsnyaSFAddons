@@ -72,7 +72,7 @@ namespace EsnyaSFAddons.Annotations
                 }
 
                 component.ApplyProxyModifications();
-                EditorUtility.SetDirty(UdonSharpEditorUtility.GetBackingUdonBehaviour(component));
+                EditorUtility.SetDirty(component);
             }
         }
 

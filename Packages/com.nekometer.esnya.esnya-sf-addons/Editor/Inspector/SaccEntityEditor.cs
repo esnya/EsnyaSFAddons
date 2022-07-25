@@ -150,12 +150,12 @@ namespace EsnyaSFAddons.Editor.Inspector
                     }
                     else if (property.name == nameof(SaccEntity.Dial_Functions_L))
                     {
-                        if (ESFAUI.MiniButton("Find")) SFEditorUtility.SetObjectArrayProperty(property, SFEditorUtility.FindDFUNCs(entity, "DialFunctions_L").Where(dfunc => dfunc.transform.parent.gameObject.name.EndsWith("L")));
+                        if (ESFAUI.MiniButton("Find")) SFEditorUtility.SetObjectArrayProperty(property, SFEditorUtility.FindDFUNCs(entity, "DialFunctions_L").Concat(SFEditorUtility.FindDFUNCs(entity, "L")));
                         if (ESFAUI.MiniButton("Align")) SFEditorUtility.AlignMFDFunctions(entity, VRC_Pickup.PickupHand.Left);
                     }
                     else if (property.name == nameof(SaccEntity.Dial_Functions_R))
                     {
-                        if (ESFAUI.MiniButton("Find")) SFEditorUtility.SetObjectArrayProperty(property, SFEditorUtility.FindDFUNCs(entity, "DialFunctions_R").Where(dfunc => dfunc.transform.parent.gameObject.name.EndsWith("R")));
+                        if (ESFAUI.MiniButton("Find")) SFEditorUtility.SetObjectArrayProperty(property, SFEditorUtility.FindDFUNCs(entity, "DialFunctions_R").Concat(SFEditorUtility.FindDFUNCs(entity, "L")));
 
                         if (ESFAUI.MiniButton("Align")) SFEditorUtility.AlignMFDFunctions(entity, VRC_Pickup.PickupHand.Right);
                     }

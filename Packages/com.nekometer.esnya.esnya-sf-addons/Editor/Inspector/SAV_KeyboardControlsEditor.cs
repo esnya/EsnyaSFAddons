@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using SaccFlightAndVehicles;
 using UdonSharp;
 using UdonSharpEditor;
 using UnityEditor;
 using UnityEngine;
-using SaccFlightAndVehicles;
 
 namespace EsnyaSFAddons.Editor.Inspector
 {
@@ -13,22 +13,23 @@ namespace EsnyaSFAddons.Editor.Inspector
     public class SAV_KeyboardControlsEditor : UnityEditor.Editor
     {
         private static readonly Dictionary<Type, KeyCode> defaultKeyCodes = new Dictionary<Type, KeyCode>() {
-        { typeof(DFUNC_Limits), KeyCode.F1 },
-        { typeof(DFUNC_Flares), KeyCode.X },
-        { typeof(DFUNC_Catapult), KeyCode.C },
-        { typeof(DFUNC_Brake), KeyCode.B },
-        { typeof(DFUNC_AltHold), KeyCode.F3 },
-        { typeof(DFUNC_Canopy), KeyCode.Z },
-        { typeof(DFUNC_Cruise), KeyCode.F2 },
-        { typeof(DFUNC_Gun), KeyCode.Alpha1 },
-        { typeof(DFUNC_AAM), KeyCode.Alpha2 },
-        { typeof(DFUNC_AGM), KeyCode.Alpha3 },
-        { typeof(DFUNC_Bomb), KeyCode.Alpha4 },
-        { typeof(DFUNC_Gear), KeyCode.G },
-        { typeof(DFUNC_Flaps), KeyCode.F },
-        { typeof(DFUNC_Hook), KeyCode.H },
-        { typeof(DFUNC_Smoke), KeyCode.Alpha5 },
-    };
+            { typeof(DFUNC_Limits), KeyCode.F1 },
+            { typeof(DFUNC_Flares), KeyCode.X },
+            { typeof(DFUNC_Catapult), KeyCode.C },
+            { typeof(DFUNC_Brake), KeyCode.B },
+            { typeof(DFUNC_AltHold), KeyCode.F3 },
+            { typeof(DFUNC_Canopy), KeyCode.Z },
+            { typeof(DFUNC_Cruise), KeyCode.F2 },
+            { typeof(DFUNC_Gun), KeyCode.Alpha1 },
+            { typeof(DFUNC_AAM), KeyCode.Alpha2 },
+            { typeof(DFUNC_AGM), KeyCode.Alpha3 },
+            { typeof(DFUNC_Bomb), KeyCode.Alpha4 },
+            { typeof(DFUNC_Gear), KeyCode.G },
+            { typeof(DFUNC_Flaps), KeyCode.F },
+            { typeof(DFUNC_Hook), KeyCode.H },
+            { typeof(DFUNC_Smoke), KeyCode.Alpha5 },
+            { typeof(DFUNC_ToggleEngine), KeyCode.Backspace },
+        };
 
         private static void FindDFUNC<T>(UdonSharpBehaviour target, string variableName, IEnumerable<UdonSharpBehaviour> dialFunctions) where T : UdonSharpBehaviour
         {

@@ -234,7 +234,7 @@ namespace EsnyaSFAddons.Editor
             var mfds = Enumerable
                 .Range(0, display.childCount)
                 .Select(display.GetChild)
-                .Where(t => t.gameObject.name.StartsWith("MFD_"))
+                .Where(t => t.gameObject.name.StartsWith("MFD_") && !t.gameObject.name.EndsWith("_funcon"))
                 .Select((transform, index) => (transform, index))
                 .ToArray();
 
@@ -253,26 +253,25 @@ namespace EsnyaSFAddons.Editor
 
                     var dialFunction = dialFunctions != null && index < dialFunctions.Length ? dialFunctions[index] : null;
 
-                    var displayHighlighter = transform.Find("MFD_display_funcon")?.gameObject;
-                    if (displayHighlighter)
+                    var dialFuncOn = transform.Find("MFD_display_funcon")?.gameObject ?? transform.parent.Find($"{transform.gameObject.name}_funcon")?.gameObject;
+                    if (dialFuncOn)
                     {
-                        Undo.RecordObject(displayHighlighter.transform, "Align MFD Function");
-                        displayHighlighter.transform.position = transform.parent.position;
-                        displayHighlighter.transform.localRotation = localRotation;
+                        Undo.RecordObject(dialFuncOn.transform, "Align MFD Function");
+                        dialFuncOn.transform.position = transform.parent.position;
+                        dialFuncOn.transform.localRotation = localRotation;
 
-                        if (!displayHighlighter.Equals(dialFunction?.GetProgramVariable("Dial_Funcon")))
+                        if (!dialFuncOn.Equals(dialFunction?.GetProgramVariable("Dial_Funcon")))
                         {
-                            var udon = UdonSharpEditorUtility.GetBackingUdonBehaviour(dialFunction);
-                            Undo.RecordObject(udon, "Align MFD Function");
-                            if (udon.publicVariables.TryGetVariableType("Dial_Funcon", out var type) && type.IsSubclassOf(typeof(Array)))
+                            Undo.RecordObject(dialFunction, "Align MFD Function");
+                            if (dialFunction.GetType().GetField("Dial_Funcon")?.FieldType?.IsArray ?? false)
                             {
-                                dialFunction.SetProgramVariable("Dial_Funcon", new[] { displayHighlighter });
+                                dialFunction.SetProgramVariable("Dial_Funcon", new[] { dialFuncOn });
                             }
                             else
                             {
-                                dialFunction.SetProgramVariable("Dial_Funcon", displayHighlighter);
+                                dialFunction.SetProgramVariable("Dial_Funcon", dialFuncOn);
                             }
-                            EditorUtility.SetDirty(udon);
+                            EditorUtility.SetDirty(dialFunction);
                         }
                     }
                 }

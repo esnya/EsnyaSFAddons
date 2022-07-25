@@ -49,7 +49,6 @@ namespace EsnyaSFAddons.Editor.Inspector
             if (UdonSharpGUI.DrawDefaultUdonSharpBehaviourHeader(this.target)) return;
 
             var target = this.target as SAV_KeyboardControls;
-            var udon = UdonSharpEditorUtility.GetBackingUdonBehaviour(target);
 
             serializedObject.Update();
 
@@ -77,7 +76,7 @@ namespace EsnyaSFAddons.Editor.Inspector
 
             if (GUILayout.Button("Find Default DFUNCs"))
             {
-                Undo.RecordObject(udon, "Find Default DFUNCs");
+                Undo.RecordObject(target, "Find Default DFUNCs");
                 var entity = target.gameObject.GetComponentInParent<SaccEntity>();
 
                 FindDFUNC<DFUNC_Limits>(target, "Lfunc2", entity.Dial_Functions_L);
@@ -96,12 +95,12 @@ namespace EsnyaSFAddons.Editor.Inspector
                 FindDFUNC<DFUNC_Flaps>(target, "Rfunc6", entity.Dial_Functions_R);
                 FindDFUNC<DFUNC_Hook>(target, "Rfunc7", entity.Dial_Functions_R);
                 FindDFUNC<DFUNC_Smoke>(target, "Rfunc8", entity.Dial_Functions_R);
-                EditorUtility.SetDirty(udon);
+                EditorUtility.SetDirty(target);
             }
 
             if (GUILayout.Button("Set Default Key Bindings"))
             {
-                Undo.RecordObject(udon, "Set Default Key Bindings");
+                Undo.RecordObject(target, "Set Default Key Bindings");
                 SetDefaultKey(target, "Lfunc1key", "Lfunc1");
                 SetDefaultKey(target, "Lfunc2key", "Lfunc2");
                 SetDefaultKey(target, "Lfunc3key", "Lfunc3");
@@ -118,7 +117,7 @@ namespace EsnyaSFAddons.Editor.Inspector
                 SetDefaultKey(target, "Rfunc6key", "Rfunc6");
                 SetDefaultKey(target, "Rfunc7key", "Rfunc7");
                 SetDefaultKey(target, "Rfunc8key", "Rfunc8");
-                EditorUtility.SetDirty(udon);
+                EditorUtility.SetDirty(target);
             }
 
             serializedObject.ApplyModifiedProperties();

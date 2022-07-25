@@ -71,7 +71,6 @@ namespace EsnyaSFAddons.Annotations
                     else field.SetValue(component, rootGameObjects.SelectMany(o => o.GetComponentsInChildren(valueType)).FirstOrDefault());
                 }
 
-                component.ApplyProxyModifications();
                 EditorUtility.SetDirty(component);
             }
         }

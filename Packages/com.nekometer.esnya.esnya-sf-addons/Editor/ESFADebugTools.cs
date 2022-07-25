@@ -22,14 +22,14 @@ namespace EsnyaSFAddons.Editor
 
         private void FrameCamera(SaccEntity entity, bool lockCamera)
         {
-            var vehicleMesh = entity.GetUdonSharpComponentInChildren<SaccAirVehicle>().VehicleMesh;
+            var vehicleMesh = entity.GetComponentInChildren<SaccAirVehicle>().VehicleMesh;
             Selection.activeGameObject = vehicleMesh.GetComponentsInChildren<SkinnedMeshRenderer>().Select(c => c as Component).Concat(vehicleMesh.GetComponentsInChildren<MeshRenderer>()).Select(r => r.gameObject).FirstOrDefault();
             SceneView.lastActiveSceneView.FrameSelected(lockCamera);
         }
 
         private void OnGUI()
         {
-            var entity = (Selection.activeGameObject?.GetComponentInParent<Rigidbody>() ?? Selection.activeGameObject?.GetComponentInChildren<Rigidbody>())?.GetUdonSharpComponent<SaccEntity>();
+            var entity = (Selection.activeGameObject?.GetComponentInParent<Rigidbody>() ?? Selection.activeGameObject?.GetComponentInChildren<Rigidbody>())?.GetComponent<SaccEntity>();
 
             if (!entity)
             {
@@ -51,14 +51,14 @@ namespace EsnyaSFAddons.Editor
             {
                 if (GUILayout.Button("Pilot"))
                 {
-                    var seat = entity.GetUdonSharpComponentInChildren<SaccVehicleSeat>();
+                    var seat = entity.GetComponentInChildren<SaccVehicleSeat>();
                     if (seat) UdonSharpEditorUtility.GetBackingUdonBehaviour(seat).SendCustomEvent("_interact");
                 }
 
                 if (GUILayout.Button("Quick Start"))
                 {
-                    foreach (var canopyFunc in entity.GetUdonSharpComponentsInChildren<DFUNC_Canopy>(true)) UdonSharpEditorUtility.GetBackingUdonBehaviour(canopyFunc).SendCustomEvent(nameof(canopyFunc.CanopyClosing));
-                    foreach (var engine in entity.GetUdonSharpComponentsInChildren<SFEXT_AdvancedEngine>(true)) UdonSharpEditorUtility.GetBackingUdonBehaviour(engine).SendCustomEvent(nameof(engine._InstantStart));
+                    foreach (var canopyFunc in entity.GetComponentsInChildren<DFUNC_Canopy>(true)) UdonSharpEditorUtility.GetBackingUdonBehaviour(canopyFunc).SendCustomEvent(nameof(canopyFunc.CanopyClosing));
+                    foreach (var engine in entity.GetComponentsInChildren<SFEXT_AdvancedEngine>(true)) UdonSharpEditorUtility.GetBackingUdonBehaviour(engine).SendCustomEvent(nameof(engine._InstantStart));
 
                     var airVehicle = entity.GetExtention(UdonSharpBehaviour.GetUdonTypeName<SaccAirVehicle>());
                     var engineToggle = entity.GetExtention(UdonSharpBehaviour.GetUdonTypeName<DFUNC_ToggleEngine>());
@@ -70,12 +70,12 @@ namespace EsnyaSFAddons.Editor
 
                 if (GUILayout.Button("Explode"))
                 {
-                    foreach (var airVehicle in entity.GetUdonSharpComponentsInChildren<SaccAirVehicle>(true)) UdonSharpEditorUtility.GetBackingUdonBehaviour(airVehicle).SendCustomEvent(nameof(SaccAirVehicle.Explode));
+                    foreach (var airVehicle in entity.GetComponentsInChildren<SaccAirVehicle>(true)) UdonSharpEditorUtility.GetBackingUdonBehaviour(airVehicle).SendCustomEvent(nameof(SaccAirVehicle.Explode));
                 }
 
                 if (GUILayout.Button("Respawn"))
                 {
-                    foreach (var airVehicle in entity.GetUdonSharpComponentsInChildren<SaccAirVehicle>(true)) UdonSharpEditorUtility.GetBackingUdonBehaviour(airVehicle).SendCustomEvent(nameof(SaccAirVehicle.SFEXT_O_RespawnButton));
+                    foreach (var airVehicle in entity.GetComponentsInChildren<SaccAirVehicle>(true)) UdonSharpEditorUtility.GetBackingUdonBehaviour(airVehicle).SendCustomEvent(nameof(SaccAirVehicle.SFEXT_O_RespawnButton));
                 }
             }
 
@@ -127,28 +127,28 @@ namespace EsnyaSFAddons.Editor
             UdonSelector("Select Extension", entity.ExtensionUdonBehaviours);
             UdonSelector("Select Left DialFunction", entity.Dial_Functions_L);
             UdonSelector("Select Right DialFunction", entity.Dial_Functions_R);
-            UdonSelector("Select Seat", entity.GetUdonSharpComponentsInChildren<SaccVehicleSeat>(true));
+            UdonSelector("Select Seat", entity.GetComponentsInChildren<SaccVehicleSeat>(true));
         }
 
         private static void SetPower(SaccEntity entity, float power)
         {
-            foreach (var airVehicle in entity.GetUdonSharpComponentsInChildren<SaccAirVehicle>(true)) UdonSharpEditorUtility.GetBackingUdonBehaviour(airVehicle).SetProgramVariable(nameof(SaccAirVehicle.PlayerThrottle), power);
+            foreach (var airVehicle in entity.GetComponentsInChildren<SaccAirVehicle>(true)) UdonSharpEditorUtility.GetBackingUdonBehaviour(airVehicle).SetProgramVariable(nameof(SaccAirVehicle.PlayerThrottle), power);
         }
 
         private static void SetFlaps(SaccEntity entity, float angle)
         {
-            foreach (var flapsFunc in entity.GetUdonSharpComponentsInChildren<DFUNC_Flaps>(true)) UdonSharpEditorUtility.GetBackingUdonBehaviour(flapsFunc).SendCustomEvent(angle > 0 ? nameof(DFUNC_Flaps.SetFlapsOn) : nameof(flapsFunc.SetFlapsOff));
-            foreach (var flapsFunc in entity.GetUdonSharpComponentsInChildren<DFUNC_AdvancedFlaps>(true)) UdonSharpEditorUtility.GetBackingUdonBehaviour(flapsFunc).SetProgramVariable(nameof(DFUNC_AdvancedFlaps.targetAngle), flapsFunc.detents[Mathf.Min(Mathf.FloorToInt(flapsFunc.detents.Length * angle), flapsFunc.detents.Length - 1)]);
+            foreach (var flapsFunc in entity.GetComponentsInChildren<DFUNC_Flaps>(true)) UdonSharpEditorUtility.GetBackingUdonBehaviour(flapsFunc).SendCustomEvent(angle > 0 ? nameof(DFUNC_Flaps.SetFlapsOn) : nameof(flapsFunc.SetFlapsOff));
+            foreach (var flapsFunc in entity.GetComponentsInChildren<DFUNC_AdvancedFlaps>(true)) UdonSharpEditorUtility.GetBackingUdonBehaviour(flapsFunc).SetProgramVariable(nameof(DFUNC_AdvancedFlaps.targetAngle), flapsFunc.detents[Mathf.Min(Mathf.FloorToInt(flapsFunc.detents.Length * angle), flapsFunc.detents.Length - 1)]);
         }
 
         private static void SetGearDown(SaccEntity entity, bool gearDown)
         {
-            foreach (var gearFunc in entity.GetUdonSharpComponentsInChildren<DFUNC_Gear>(true)) UdonSharpEditorUtility.GetBackingUdonBehaviour(gearFunc).SendCustomEvent(gearDown ? nameof(DFUNC_Gear.SetGearDown) : nameof(DFUNC_Gear.SetGearUp));
+            foreach (var gearFunc in entity.GetComponentsInChildren<DFUNC_Gear>(true)) UdonSharpEditorUtility.GetBackingUdonBehaviour(gearFunc).SendCustomEvent(gearDown ? nameof(DFUNC_Gear.SetGearDown) : nameof(DFUNC_Gear.SetGearUp));
         }
 
         private static void SetTrim(SaccEntity entity, float trim)
         {
-            foreach (var trimFunc in entity.GetUdonSharpComponentsInChildren<DFUNC_ElevatorTrim>(true)) UdonSharpEditorUtility.GetBackingUdonBehaviour(trimFunc).SetProgramVariable(nameof(DFUNC_ElevatorTrim.trim), trim);
+            foreach (var trimFunc in entity.GetComponentsInChildren<DFUNC_ElevatorTrim>(true)) UdonSharpEditorUtility.GetBackingUdonBehaviour(trimFunc).SetProgramVariable(nameof(DFUNC_ElevatorTrim.trim), trim);
         }
 
         private static void UdonSelector(string label, UdonSharpBehaviour[] udons)

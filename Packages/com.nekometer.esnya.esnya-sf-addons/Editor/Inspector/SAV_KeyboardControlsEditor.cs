@@ -77,7 +77,7 @@ namespace EsnyaSFAddons.Editor.Inspector
             if (GUILayout.Button("Find Default DFUNCs"))
             {
                 Undo.RecordObject(udon, "Find Default DFUNCs");
-                var entity = target.gameObject.GetUdonSharpComponentInParent<SaccEntity>();
+                var entity = target.gameObject.GetComponentInParent<SaccEntity>();
 
                 FindDFUNC<DFUNC_Limits>(target, "Lfunc2", entity.Dial_Functions_L);
                 FindDFUNC<DFUNC_Flares>(target, "Lfunc3", entity.Dial_Functions_L);
@@ -95,7 +95,6 @@ namespace EsnyaSFAddons.Editor.Inspector
                 FindDFUNC<DFUNC_Flaps>(target, "Rfunc6", entity.Dial_Functions_R);
                 FindDFUNC<DFUNC_Hook>(target, "Rfunc7", entity.Dial_Functions_R);
                 FindDFUNC<DFUNC_Smoke>(target, "Rfunc8", entity.Dial_Functions_R);
-                target.ApplyProxyModifications();
                 EditorUtility.SetDirty(udon);
             }
 
@@ -118,7 +117,6 @@ namespace EsnyaSFAddons.Editor.Inspector
                 SetDefaultKey(target, "Rfunc6key", "Rfunc6");
                 SetDefaultKey(target, "Rfunc7key", "Rfunc7");
                 SetDefaultKey(target, "Rfunc8key", "Rfunc8");
-                target.ApplyProxyModifications();
                 EditorUtility.SetDirty(udon);
             }
 

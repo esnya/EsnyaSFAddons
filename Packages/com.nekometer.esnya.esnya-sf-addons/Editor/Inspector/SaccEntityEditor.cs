@@ -20,14 +20,14 @@ namespace EsnyaSFAddons.Editor.Inspector
 
             var extentions = SFEditorUtility.FindExtentions(entity);
             var dfuncs = SFEditorUtility.FindDFUNCs(entity);
-            var seats = entity.GetUdonSharpComponentsInChildren<SaccVehicleSeat>(true);
+            var seats = entity.GetComponentsInChildren<SaccVehicleSeat>(true);
             var animator = entity.GetComponent<Animator>();
             var airVehicle = extentions.FirstOrDefault(e => e is SaccAirVehicle) as SaccAirVehicle;
             var savSoundController = extentions.FirstOrDefault(e => e is SAV_SoundController);
 
-            var others = entity.GetUdonSharpComponentsInChildren<SaccResupplyTrigger>(true).Select(t => t as UdonSharpBehaviour)
-                .Concat(entity.GetUdonSharpComponentsInChildren<SAV_AAMController>(true))
-                .Concat(entity.GetUdonSharpComponentsInChildren<SAV_AGMController>(true));
+            var others = entity.GetComponentsInChildren<SaccResupplyTrigger>(true).Select(t => t as UdonSharpBehaviour)
+                .Concat(entity.GetComponentsInChildren<SAV_AAMController>(true))
+                .Concat(entity.GetComponentsInChildren<SAV_AGMController>(true));
 
             foreach (var extention in extentions.Concat(dfuncs).Concat(seats).Concat(others))
             {
@@ -64,7 +64,6 @@ namespace EsnyaSFAddons.Editor.Inspector
 
                 if (isDirty)
                 {
-                    extention.ApplyProxyModifications();
                     EditorUtility.SetDirty(extention);
                 }
             }
@@ -104,7 +103,7 @@ namespace EsnyaSFAddons.Editor.Inspector
             DisableAllPreview();
         }
 
-        private Dictionary<string, bool> previewStatus = new Dictionary<string, bool>();
+        private readonly Dictionary<string, bool> previewStatus = new Dictionary<string, bool>();
         private void SetPreview(SerializedProperty property, bool value)
         {
             var gameObject = property.objectReferenceValue as GameObject;

@@ -23,12 +23,12 @@ namespace EsnyaSFAddons.Editor
         /// <param name="includeInactive"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static IEnumerable<UdonSharpBehaviour> SafeGetUdonSharpComponentsInChildren<T>(this UnityEngine.Object o, bool includeInactive = false) where T : UdonSharpBehaviour
+        public static IEnumerable<UdonSharpBehaviour> SafeGetComponentsInChildren<T>(this UnityEngine.Object o, bool includeInactive = false) where T : UdonSharpBehaviour
         {
             try
             {
-                if (o is GameObject @gameObject) return @gameObject.GetUdonSharpComponentsInChildren<T>(includeInactive);
-                if (o is Component @component) return @component.GetUdonSharpComponentsInChildren<T>(includeInactive);
+                if (o is GameObject @gameObject) return @gameObject.GetComponentsInChildren<T>(includeInactive);
+                if (o is Component @component) return @component.GetComponentsInChildren<T>(includeInactive);
             }
             catch (Exception e)
             {
@@ -44,12 +44,12 @@ namespace EsnyaSFAddons.Editor
         /// <param name="includeInactive"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static UdonSharpBehaviour SafeGetUdonSharpComponentInParent<T>(this UnityEngine.Object o) where T : UdonSharpBehaviour
+        public static UdonSharpBehaviour SafeGetComponentInParent<T>(this UnityEngine.Object o) where T : UdonSharpBehaviour
         {
             try
             {
-                if (o is GameObject @gameObject) return @gameObject.GetUdonSharpComponentInParent<T>();
-                if (o is Component @component) return @component.GetUdonSharpComponentInParent<T>();
+                if (o is GameObject @gameObject) return @gameObject.GetComponentInParent<T>();
+                if (o is Component @component) return @component.GetComponentInParent<T>();
             }
             catch (Exception e)
             {
@@ -108,8 +108,8 @@ namespace EsnyaSFAddons.Editor
         /// <returns></returns>
         public static UdonSharpBehaviour GetNearestController(GameObject o)
         {
-            var controller = o.SafeGetUdonSharpComponentInParent<SAV_PassengerFunctionsController>() ?? o.SafeGetUdonSharpComponentInParent<SaccEntity>();
-            if (controller is SAV_PassengerFunctionsController && controller.gameObject == o) return o.SafeGetUdonSharpComponentInParent<SaccEntity>();
+            var controller = o.SafeGetComponentInParent<SAV_PassengerFunctionsController>() ?? o.SafeGetComponentInParent<SaccEntity>();
+            if (controller is SAV_PassengerFunctionsController && controller.gameObject == o) return o.SafeGetComponentInParent<SaccEntity>();
             return controller;
         }
 
@@ -131,7 +131,7 @@ namespace EsnyaSFAddons.Editor
         /// <returns></returns>
         public static IEnumerable<UdonSharpBehaviour> FindExtentions(UdonSharpBehaviour root)
         {
-            return root.SafeGetUdonSharpComponentsInChildren<UdonSharpBehaviour>(true).Where(udon => udon.gameObject != root && IsExtention(udon.GetType()) && !IsDFUNC(udon.GetType()) && IsChildExtention(root, udon));
+            return root.SafeGetComponentsInChildren<UdonSharpBehaviour>(true).Where(udon => udon.gameObject != root && IsExtention(udon.GetType()) && !IsDFUNC(udon.GetType()) && IsChildExtention(root, udon));
         }
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace EsnyaSFAddons.Editor
         {
             try
             {
-                return root.SafeGetUdonSharpComponentsInChildren<UdonSharpBehaviour>(true).Where(udon => udon.gameObject != root && IsDFUNC(udon.GetType()) && GetNearestController(udon.gameObject) == root);
+                return root.SafeGetComponentsInChildren<UdonSharpBehaviour>(true).Where(udon => udon.gameObject != root && IsDFUNC(udon.GetType()) && GetNearestController(udon.gameObject) == root);
             }
             catch (Exception e)
             {
@@ -272,7 +272,6 @@ namespace EsnyaSFAddons.Editor
                             {
                                 dialFunction.SetProgramVariable("Dial_Funcon", displayHighlighter);
                             }
-                            dialFunction.ApplyProxyModifications();
                             EditorUtility.SetDirty(udon);
                         }
                     }

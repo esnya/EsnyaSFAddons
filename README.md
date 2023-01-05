@@ -2,6 +2,10 @@
 
 Addons and utilities for [SaccFlightAndVehicles](https://github.com/Sacchan-VRC/SaccFlightAndVehicles).
 
+## Requirements
+- UdonSharp 1.x via VRChat Creator Companion
+- SaccFlightAndVehicles 1.61
+
 ## Features
 ### Custom Inspectors / Gizmos
 #### SaccEntityEditor

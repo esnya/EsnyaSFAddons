@@ -135,8 +135,8 @@ namespace EsnyaSFAddons.DFUNC
             }
             passengerSeat = GetComponentInParent<SaccVehicleSeat>();
 
-            pilotSeatAdjust = pilotSeat.AdjustSeat;
-            passengerSeatAdjust = passengerSeat.AdjustSeat;
+            pilotSeatAdjust = pilotSeat.AdjustSeatPosition;
+            passengerSeatAdjust = passengerSeat.AdjustSeatPosition;
 
             captainSeatPosition = entity.transform.InverseTransformPoint(pilotSeat.transform.position);
             firstOfficerSeatPosition = entity.transform.InverseTransformPoint(passengerSeat.transform.position);
@@ -245,8 +245,8 @@ namespace EsnyaSFAddons.DFUNC
         private void SaveAdjustedPos(SaccVehicleSeat seat)
         {
             seatAdjustedPos = seat.AdjustedPos;
-            pilotSeat.AdjustSeat = false;
-            passengerSeat.AdjustSeat = false;
+            pilotSeat.AdjustSeatPosition = false;
+            passengerSeat.AdjustSeatPosition = false;
 
             airVehicle.EngineOffOnExit = false;
         }
@@ -256,8 +256,8 @@ namespace EsnyaSFAddons.DFUNC
             seat.AdjustedPos = seatAdjustedPos;
             seat.RequestSerialization();
 
-            pilotSeat.AdjustSeat = pilotSeatAdjust;
-            passengerSeat.AdjustSeat = passengerSeatAdjust;
+            pilotSeat.AdjustSeatPosition = pilotSeatAdjust;
+            passengerSeat.AdjustSeatPosition = passengerSeatAdjust;
 
             airVehicle.EngineOffOnExit = engineOffOnExit;
         }

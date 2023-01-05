@@ -163,11 +163,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: KeyboardControls
       objectReference: {fileID: 0}
-    - target: {fileID: 3157760307065968712, guid: 6f6623aa3be10b74091db68ef4f5d8f3,
-        type: 3}
-      propertyPath: serializedProgramAsset
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5780789080320877582, guid: 6f6623aa3be10b74091db68ef4f5d8f3,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -194,11 +189,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1563063858981754055, guid: 8df29b3970d350849ad8f43502d4bf87,
         type: 3}
-    - target: {fileID: 5057108904273729372, guid: 8df29b3970d350849ad8f43502d4bf87,
-        type: 3}
-      propertyPath: serializedProgramAsset
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7493230582876823572, guid: 8df29b3970d350849ad8f43502d4bf87,
         type: 3}
       propertyPath: m_RootOrder

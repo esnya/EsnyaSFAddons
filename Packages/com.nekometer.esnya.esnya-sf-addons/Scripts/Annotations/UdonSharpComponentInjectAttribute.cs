@@ -5,10 +5,10 @@ using UnityEngine;
 using System.Reflection;
 using UdonToolkit;
 using UdonSharp;
+
 #if UNITY_EDITOR
-using UnityEditor.SceneManagement;
 using UnityEditor;
-using UdonSharpEditor;
+using VRC.SDKBase.Editor.BuildPipeline;
 #endif
 
 namespace EsnyaSFAddons.Annotations
@@ -20,7 +20,7 @@ namespace EsnyaSFAddons.Annotations
     public class UdonSharpComponentInjectAttribute : System.Attribute
 #endif
     {
-#if UNITY_EDITOR
+#if !COMPILER_UDONSHARP && UNITY_EDITOR
         public override void BeforeGUI(SerializedProperty property)
         {
             if (!property.isArray) EditorGUILayout.BeginHorizontal();
@@ -35,7 +35,7 @@ namespace EsnyaSFAddons.Annotations
             EditorGUILayout.HelpBox("Auto injected by script.", MessageType.Info);
         }
 
-        private static void AutoSetup(Scene scene)
+        public static void AutoSetup(Scene scene)
         {
             var rootGameObjects = scene.GetRootGameObjects();
             var usharpComponents = rootGameObjects
@@ -78,8 +78,21 @@ namespace EsnyaSFAddons.Annotations
         [InitializeOnLoadMethod]
         public static void InitializeOnLoad()
         {
-            EditorSceneManager.sceneSaving += (scene, _) => AutoSetup(scene);
-            SceneManager.activeSceneChanged += (_, next) => AutoSetup(next);
+            EditorApplication.playModeStateChanged += (PlayModeStateChange e) =>
+            {
+                if (e == PlayModeStateChange.EnteredPlayMode) AutoSetup(SceneManager.GetActiveScene());
+            };
+        }
+
+        public class BuildCallback : IVRCSDKBuildRequestedCallback
+        {
+            public int callbackOrder => 10;
+
+            public bool OnBuildRequested(VRCSDKRequestedBuildType requestedBuildType)
+            {
+                AutoSetup(SceneManager.GetActiveScene());
+                return true;
+            }
         }
 #endif
     }

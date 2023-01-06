@@ -45,7 +45,7 @@ namespace EsnyaSFAddons.Editor
         private static void DrawSaccVehicleSeatGizmos(SaccVehicleSeat saccVehicleSeat)
         {
             var targetEyePosition = saccVehicleSeat.GetProgramVariable("TargetEyePosition") as Transform;
-            if (!(bool)saccVehicleSeat.GetProgramVariable("AdjustSeat") || targetEyePosition == null) return;
+            if (!(bool)saccVehicleSeat.GetProgramVariable("AdjustSeatPosition") || targetEyePosition == null) return;
 
             Gizmos.color = GizmoColors.eyePosition;
             Gizmos.DrawWireSphere(targetEyePosition.position, 0.1f);

@@ -156,7 +156,7 @@ MonoBehaviour:
   SynchronizePosition: 0
   AllowCollisionOwnershipTransfer: 0
   Reliable: 0
-  _syncMethod: 2
+  _syncMethod: 1
   serializedProgramAsset: {fileID: 11400000, guid: 8d149cf9b69130f43ba277516987ca92,
     type: 2}
   programSource: {fileID: 11400000, guid: cdf32c931a030cf4c83a5ffb61fe1355, type: 2}

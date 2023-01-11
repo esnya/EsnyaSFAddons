@@ -3,12 +3,7 @@ guid: 5efd52cae714c4942a0c2b7766273688
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Runway
-    second: {fileID: 2100000, guid: b3e2c544657c9a441a4f9062e515aeed, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 1
     materialName: 0

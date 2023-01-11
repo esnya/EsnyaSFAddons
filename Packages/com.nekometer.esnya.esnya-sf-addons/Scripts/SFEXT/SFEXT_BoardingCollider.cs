@@ -194,8 +194,6 @@ namespace EsnyaSFAddons.SFEXT
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
-            this.UpdateProxy();
-
             if (PlayerEnterCount > 0)
             {
                 Gizmos.color = Color.red;

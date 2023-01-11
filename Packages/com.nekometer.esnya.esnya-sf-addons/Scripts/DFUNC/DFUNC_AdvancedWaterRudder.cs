@@ -155,8 +155,6 @@ namespace EsnyaSFAddons.DFUNC
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
-            this.UpdateProxy();
-
             if (!(Extracted && vehicleRigidbody)) return;
 
             var position = transform.position;

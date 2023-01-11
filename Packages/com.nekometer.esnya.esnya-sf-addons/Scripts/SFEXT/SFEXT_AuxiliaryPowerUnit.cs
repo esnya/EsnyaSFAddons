@@ -28,7 +28,7 @@ namespace EsnyaSFAddons.SFEXT
                 apuAudioSource.loop = true;
                 apuAudioSource.clip = apuLoop;
 
-                apuOneshotAudioSource = VRCInstantiate(apuAudioSource.gameObject).GetComponent<AudioSource>();
+                apuOneshotAudioSource = Instantiate(apuAudioSource.gameObject).GetComponent<AudioSource>();
                 apuOneshotAudioSource.transform.SetParent(apuAudioSource.transform);
                 apuOneshotAudioSource.transform.position = apuAudioSource.transform.position;
             }

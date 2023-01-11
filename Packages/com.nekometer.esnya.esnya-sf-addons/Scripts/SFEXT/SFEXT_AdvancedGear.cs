@@ -80,7 +80,7 @@ namespace EsnyaSFAddons.SFEXT
                 {
                     if (value && !burstEffectInstance)
                     {
-                        burstEffectInstance = VRCInstantiate(burstEffect);
+                        burstEffectInstance = Instantiate(burstEffect);
                         burstEffectInstance.transform.SetParent(wheelCollider.transform, false);
                     }
                     else if (!value && burstEffectInstance)

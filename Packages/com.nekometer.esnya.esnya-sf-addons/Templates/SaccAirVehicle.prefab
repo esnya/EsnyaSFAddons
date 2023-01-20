@@ -593,18 +593,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a81ed12406633174aa22632458cce3f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3847308026480302866 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3578919072815048598, guid: a98010f0907f39e438ff76bf1785d1bc,
-    type: 3}
-  m_PrefabInstance: {fileID: 346422765317586052}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45115577ef41a5b4ca741ed302693907, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1247674726268835207
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -904,6 +892,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8733446681210979277, guid: 234893cd2ae19d34b9d4d3878599f018,
+        type: 3}
+      propertyPath: SAVControl
+      value: 
+      objectReference: {fileID: 8620436127341410616}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 234893cd2ae19d34b9d4d3878599f018, type: 3}
 --- !u!4 &5022096598045029772 stripped

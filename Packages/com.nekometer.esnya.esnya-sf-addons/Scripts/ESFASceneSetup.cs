@@ -7,11 +7,13 @@ using SaccFlightAndVehicles;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using UnityEditor;
+using UdonSharpEditor;
 using VRC.SDKBase.Editor.BuildPipeline;
 #endif
 
 namespace EsnyaSFAddons
 {
+    [DefaultExecutionOrder(-20)]
     public class ESFASceneSetup : MonoBehaviour
     {
         [Header("World Configuration")]
@@ -23,6 +25,11 @@ namespace EsnyaSFAddons
         public UdonSharpBehaviour[] injectExtentions = { };
 
 #if UNITY_EDITOR
+        private void Awake()
+        {
+            Setup();
+        }
+
         private void Reset()
         {
             sea = GameObject.Find("SF_SEA")?.transform;
@@ -45,16 +52,19 @@ namespace EsnyaSFAddons
                 var airVehicle = entity.ExtensionUdonBehaviours.FirstOrDefault(e => e is SaccAirVehicle);
                 var extensions = injectExtentions.Select(template =>
                 {
-                    var extension = Instantiate(template, entity.transform);
-                    extension.name = template.name;
+                    var obj = Instantiate(template.gameObject, entity.transform);
+                    var extension = obj.GetComponent(template.GetType()) as UdonSharpBehaviour;
+                    obj.name = template.gameObject.name;
 
                     extension.SetProgramVariable("EntityControl", entity);
                     extension.SetProgramVariable("AirVehicle", airVehicle);
 
+                    UdonSharpEditorUtility.CopyProxyToUdon(extension);
+
                     return extension;
                 });
 
-                entity.ExtensionUdonBehaviours = entity.ExtensionUdonBehaviours.Concat(extensions).ToArray();
+                // entity.ExtensionUdonBehaviours = entity.ExtensionUdonBehaviours.Concat(extensions).ToArray();
             }
 
             foreach (var airVehicle in rootObjects.SelectMany(o => o.GetComponentsInChildren<SaccAirVehicle>(true)))
@@ -66,23 +76,18 @@ namespace EsnyaSFAddons
 
                 airVehicle.RepeatingWorld = repeatingWorld;
                 airVehicle.RepeatingWorldDistance = repeatingWorldDistance;
+
+                UdonSharpEditorUtility.CopyProxyToUdon(airVehicle);
             }
 
             var windchanger = rootObjects.Select(o => o.GetComponentInChildren<SAV_WindChanger>()).Where(c => c).FirstOrDefault();
             foreach (var windsock in rootObjects.SelectMany(o => o.GetComponentsInChildren<Windsock>(true)))
             {
                 windsock.windChanger = windchanger;
+                UdonSharpEditorUtility.CopyProxyToUdon(windsock);
             }
 
             Destroy(this);
-        }
-
-        [InitializeOnLoadMethod]
-        public static void InitializeOnLoad()
-        {
-            EditorApplication.playModeStateChanged += (PlayModeStateChange e) => {
-                if (e == PlayModeStateChange.EnteredPlayMode) SetupAll();
-            };
         }
 
         public class BuildCallback : IVRCSDKBuildRequestedCallback

@@ -12,7 +12,7 @@ PrefabInstance:
       propertyPath: m_text
       value: 'Auto Start
 
-    [F4]'
+        [F4]'
       objectReference: {fileID: 0}
     - target: {fileID: 2768023348344106889, guid: 00e4a689e1ff979409f4cbb7dd363f6c,
         type: 3}

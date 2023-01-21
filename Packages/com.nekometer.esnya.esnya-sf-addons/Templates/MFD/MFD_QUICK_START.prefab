@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1919838052250496556}
   - component: {fileID: 4244506455061330269}
   m_Layer: 0
-  m_Name: MFD_AUTO_START
+  m_Name: MFD_QUICK_START
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

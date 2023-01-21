@@ -31,7 +31,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -15.000001, y: 0, z: 0}
 --- !u!198 &4889433969675045145
 ParticleSystem:
   m_ObjectHideFlags: 0

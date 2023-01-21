@@ -21,9 +21,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00e4a689e1ff979409f4cbb7dd363f6c, type: 3}
---- !u!23 &7323771148332047718 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 3271240180328523836, guid: 00e4a689e1ff979409f4cbb7dd363f6c,
-    type: 3}
-  m_PrefabInstance: {fileID: 5244024582140163418}
-  m_PrefabAsset: {fileID: 0}

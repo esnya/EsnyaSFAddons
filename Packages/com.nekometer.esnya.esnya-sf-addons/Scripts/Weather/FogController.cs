@@ -29,6 +29,7 @@ namespace EsnyaSFAddons.Weather
 
         public float MinStrength => slider.minValue;
         public float MaxStrength => slider.maxValue;
+        public float NormalizedStrength => (FogStrength - MinStrength) / (MaxStrength - MinStrength);
 
         private MaterialPropertyBlock properties;
         void Start()

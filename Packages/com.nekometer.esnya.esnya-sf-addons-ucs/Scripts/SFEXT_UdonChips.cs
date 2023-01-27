@@ -60,7 +60,7 @@ namespace EsnyaSFAddons.UCS
             maxAltitude = vehicleRigidbody.position.y;
         }
 
-        public void SFEXT_G_Dead()
+        public void SFEXT_O_Explode()
         {
             if (airVehicle && airVehicle.Piloting) AddMoney(onDead, "Dead");
         }

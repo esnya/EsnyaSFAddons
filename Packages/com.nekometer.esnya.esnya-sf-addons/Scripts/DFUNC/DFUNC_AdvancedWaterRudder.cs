@@ -15,7 +15,7 @@ namespace EsnyaSFAddons.DFUNC
     /// Place in center of rudders.
     /// </summary>
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-    public class DFUNC_AdvancedWaterRudder : UdonSharpBehaviour
+    public class DFUNC_AdvancedWaterRudder : DFUNC_Base
     {
         public GameObject Dial_Funcon;
         public bool defaultExtracted = false;
@@ -33,6 +33,7 @@ namespace EsnyaSFAddons.DFUNC
         private float rudderAngle;
         private Vector3 localForce;
         private float forceMultiplier;
+        protected override bool ActivateOnSelected => false;
 
         [UdonSynced][FieldChangeCallback(nameof(Extracted))] private bool _extracted;
         public bool Extracted
@@ -56,7 +57,7 @@ namespace EsnyaSFAddons.DFUNC
             gameObject.SetActive(false);
         }
 
-        public void SFEXT_L_EntityStart()
+        public override void SFEXT_L_EntityStart()
         {
             vehicleRigidbody = GetComponentInParent<Rigidbody>();
             entity = vehicleRigidbody.GetComponent<SaccEntity>();
@@ -67,8 +68,16 @@ namespace EsnyaSFAddons.DFUNC
             SFEXT_G_Reappear();
         }
 
-        public void SFEXT_O_PilotEnter() => UpdateActive();
-        public void SFEXT_O_PilotExit() => UpdateActive();
+        public override void SFEXT_O_PilotEnter()
+        {
+            DFUNC_Deselected();
+            UpdateActive();
+        }
+        public override void SFEXT_O_PilotExit()
+        {
+            DFUNC_Deselected();
+            UpdateActive();
+        }
         public void SFEXT_G_TakeOff() => UpdateActive();
         public void SFEXT_G_TouchDownWater() => UpdateActive();
 
@@ -85,7 +94,7 @@ namespace EsnyaSFAddons.DFUNC
             vehicleRigidbody.AddForceAtPosition(transform.TransformVector(localForce), transform.position);
         }
 
-        private void Update()
+        protected override void DFUNC_Update()
         {
             if (!(Extracted && vehicleRigidbody)) return;
 
@@ -123,7 +132,7 @@ namespace EsnyaSFAddons.DFUNC
         }
 
         public void KeyboardInput() => Toggle();
-        public void DFUNC_TriggerPress() => Toggle();
+        public override void DFUNC_TriggerPressed() => Toggle();
 
         /// <summary>
         /// Extract water rudder

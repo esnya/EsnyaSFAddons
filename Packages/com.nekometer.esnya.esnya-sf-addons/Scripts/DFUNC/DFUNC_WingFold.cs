@@ -6,12 +6,13 @@ using UnityEngine;
 namespace EsnyaSFAddons.DFUNC
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-    public class DFUNC_WingFold : UdonSharpBehaviour
+    public class DFUNC_WingFold : DFUNC_Base
     {
         public GameObject Dial_Funcon;
         public float ExtraLiftDrop = 0.9f;
         public string animatorBool = "wingfold";
         public bool flapsOff = true;
+        protected override bool ActivateOnSelected => false;
 
         private Animator vehicleAnimator;
         private SaccEntity entity;
@@ -48,7 +49,7 @@ namespace EsnyaSFAddons.DFUNC
             }
         }
 
-        public void SFEXT_L_EntityStart()
+        public override void SFEXT_L_EntityStart()
         {
             entity = GetComponentInParent<SaccEntity>();
             airVehicle = (SaccAirVehicle)entity.GetExtention(GetUdonTypeName<SaccAirVehicle>());
@@ -57,6 +58,8 @@ namespace EsnyaSFAddons.DFUNC
 
             Fold = true;
             gameObject.SetActive(entity.Piloting);
+
+            DFUNC_Deselected();
         }
 
         public void SFEXT_G_ReAppear()
@@ -82,7 +85,7 @@ namespace EsnyaSFAddons.DFUNC
         }
 
         public void KeyboardInput() => ToggleFold();
-        public void DFUNC_TriggerPress() => ToggleFold();
+        public override void DFUNC_TriggerPressed() => ToggleFold();
 
         public void ToggleFold()
         {

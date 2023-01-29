@@ -1,18 +1,20 @@
 using EsnyaSFAddons.SFEXT;
+using SaccFlightAndVehicles;
 using UdonSharp;
 using UnityEngine;
-using SaccFlightAndVehicles;
 
 namespace EsnyaSFAddons.DFUNC
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-    public class DFUNC_AdvancedParkingBrake : UdonSharpBehaviour
+    public class DFUNC_AdvancedParkingBrake : DFUNC_Base
     {
         public KeyCode desktopControl = KeyCode.N;
         public string parameterName = "parkingbrake";
         public GameObject Dial_Funcon;
 
-        [System.NonSerialized] [UdonSynced] [FieldChangeCallback(nameof(State))] private bool _state = false;
+        protected override bool ActivateOnSelected => false;
+
+        [System.NonSerialized][UdonSynced][FieldChangeCallback(nameof(State))] private bool _state = false;
         public bool State
         {
             private set
@@ -30,7 +32,7 @@ namespace EsnyaSFAddons.DFUNC
         private Animator vehicleAnimator;
         private SFEXT_AdvancedGear[] gears;
         private bool initialized;
-        public void SFEXT_L_EntityStart()
+        public override void SFEXT_L_EntityStart()
         {
             var entity = GetComponentInParent<SaccEntity>();
             var airVehicle = (SaccAirVehicle)entity.GetExtention(GetUdonTypeName<SaccAirVehicle>());
@@ -50,10 +52,10 @@ namespace EsnyaSFAddons.DFUNC
             RequestSerialization();
         }
 
-        public void DFUNC_TriggerPress() => Toggle();
+        public override void DFUNC_TriggerPressed() => Toggle();
         public void KeyboardInput() => Toggle();
 
-        private void Update()
+        protected override void DFUNC_Update()
         {
             if (isPilot && Input.GetKeyDown(desktopControl)) Toggle();
         }
@@ -74,8 +76,16 @@ namespace EsnyaSFAddons.DFUNC
 
 
         private bool isPilot;
-        public void SFEXT_O_PilotEnter() => isPilot = true;
-        public void SFEXT_O_PilotExit() => isPilot = false;
+        public override void SFEXT_O_PilotEnter()
+        {
+            DFUNC_Deselected();
+            isPilot = true;
+        }
+        public override void SFEXT_O_PilotExit()
+        {
+            DFUNC_Deselected();
+            isPilot = false;
+        }
 
         public void Set()
         {

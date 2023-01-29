@@ -6,7 +6,7 @@ using VRC.Udon.Common.Interfaces;
 namespace EsnyaSFAddons.DFUNC
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    public class DFUNC_SendCustomEvent : UdonSharpBehaviour
+    public class DFUNC_SendCustomEvent : DFUNC_Base
     {
         public UdonSharpBehaviour target;
         public bool networked;
@@ -18,19 +18,11 @@ namespace EsnyaSFAddons.DFUNC
         public bool sendOnKeyboardInput;
         [HideIf("@!sendOnKeyboardInput")][Popup("behaviour", "@target")] public string onKeyboardInput;
 
-        public void DFUNC_Selected()
-        {
-            gameObject.SetActive(true);
-        }
-        public void DFUNC_Deselected()
-        {
-            gameObject.SetActive(false);
-        }
-        public void DFUNC_TriggerPress()
+        public override void DFUNC_TriggerPressed()
         {
             if (sendOnTriggerPress) _SendEvent(onTriggerPress);
         }
-        public void DFUNC_TriggerRelease()
+        public override void DFUNC_TriggerReleased()
         {
             if (sendOnTriggerRelease) _SendEvent(onTriggerRelease);
         }
@@ -39,13 +31,6 @@ namespace EsnyaSFAddons.DFUNC
             if (sendOnKeyboardInput) _SendEvent(onKeyboardInput);
         }
 
-
-        public void SFEXT_L_EntityStart()
-        {
-            gameObject.SetActive(false);
-        }
-
-        public void SFEXT_O_PilotExit() => gameObject.SetActive(false);
         public void _SendEvent(string eventName)
         {
             if (!target) return;

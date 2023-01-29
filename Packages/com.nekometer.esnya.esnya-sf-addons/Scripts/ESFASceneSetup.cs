@@ -20,6 +20,7 @@ namespace EsnyaSFAddons
         public Transform sea;
         public bool repeatingWorld = true;
         public float repeatingWorldDistance = 20000;
+        public SaccScoreboard_Kills killsBoard;
 
         [Header("Inject Extentions")]
         public UdonSharpBehaviour[] injectExtentions = { };
@@ -64,7 +65,16 @@ namespace EsnyaSFAddons
                     return extension;
                 });
 
-                // entity.ExtensionUdonBehaviours = entity.ExtensionUdonBehaviours.Concat(extensions).ToArray();
+
+                var killTracker = entity.GetExtention(UdonSharpBehaviour.GetUdonTypeName<SAV_KillTracker>()) as SAV_KillTracker;
+                if (killsBoard && killTracker)
+                {
+                    killTracker.KillsBoard = killsBoard;
+                    UdonSharpEditorUtility.CopyProxyToUdon(killTracker);
+                }
+
+                if (injectExtentions.Length > 0) entity.ExtensionUdonBehaviours = entity.ExtensionUdonBehaviours.Concat(extensions).ToArray();
+                UdonSharpEditorUtility.CopyProxyToUdon(entity);
             }
 
             foreach (var airVehicle in rootObjects.SelectMany(o => o.GetComponentsInChildren<SaccAirVehicle>(true)))

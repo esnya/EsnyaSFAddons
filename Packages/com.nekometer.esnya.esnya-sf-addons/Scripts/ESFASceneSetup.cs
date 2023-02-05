@@ -65,12 +65,21 @@ namespace EsnyaSFAddons
                     return extension;
                 });
 
-
-                var killTracker = entity.GetExtention(UdonSharpBehaviour.GetUdonTypeName<SAV_KillTracker>()) as SAV_KillTracker;
-                if (killsBoard && killTracker)
+                if (killsBoard)
                 {
-                    killTracker.KillsBoard = killsBoard;
-                    UdonSharpEditorUtility.CopyProxyToUdon(killTracker);
+                    var killTracker = entity.GetExtention(UdonSharpBehaviour.GetUdonTypeName<SAV_KillTracker>()) as SAV_KillTracker;
+                    if (killTracker)
+                    {
+                        killTracker.KillsBoard = killsBoard;
+                        UdonSharpEditorUtility.CopyProxyToUdon(killTracker);
+                    }
+
+                    var killPenalty = entity.GetExtention(UdonSharpBehaviour.GetUdonTypeName<SFEXT_KillPenalty>()) as SFEXT_KillPenalty;
+                    if (killPenalty)
+                    {
+                        killPenalty.KillsBoard = killsBoard;
+                        UdonSharpEditorUtility.CopyProxyToUdon(killPenalty);
+                    }
                 }
 
                 if (injectExtentions.Length > 0) entity.ExtensionUdonBehaviours = entity.ExtensionUdonBehaviours.Concat(extensions).ToArray();

@@ -154,7 +154,7 @@ namespace EsnyaSFAddons.Editor
         private static void UdonSelector(string label, UdonSharpBehaviour[] udons)
         {
             if (udons == null) return;
-            var selectionIndex = EditorGUILayout.Popup(0, udons.Select(u => u.GetUdonTypeName()).Prepend($"-- {label} --").ToArray());
+            var selectionIndex = EditorGUILayout.Popup(0, udons.Where(u => u != null).Select(u => u.GetUdonTypeName()).Prepend($"-- {label} --").ToArray());
             if (selectionIndex > 0) Selection.activeGameObject = udons[selectionIndex - 1].gameObject;
         }
     }

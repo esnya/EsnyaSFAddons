@@ -1,7 +1,8 @@
 using System.Linq;
+using System.Reflection.Emit;
+using SaccFlightAndVehicles;
 using UnityEditor;
 using UnityEngine;
-using SaccFlightAndVehicles;
 
 namespace EsnyaSFAddons.Editor
 {
@@ -29,15 +30,35 @@ namespace EsnyaSFAddons.Editor
             }
         }
 
+        private static SerializedObject GetTagManager()
+        {
+            return new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset")[0]);
+        }
+
         private static void SetLayerName(int layer, string name)
         {
-            var tagManager = new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset"));
+            var tagManager = GetTagManager();
             tagManager.Update();
 
             var layersProperty = tagManager.FindProperty("layers");
             layersProperty.arraySize = Mathf.Max(layersProperty.arraySize, layer);
             layersProperty.GetArrayElementAtIndex(layer).stringValue = name;
 
+            tagManager.ApplyModifiedProperties();
+        }
+
+        private static bool IsTagExisits(string tag)
+        {
+            var tagsProperty = GetTagManager().FindProperty("tags");
+            return Enumerable.Range(0, tagsProperty.arraySize).Select(i => tagsProperty.GetArrayElementAtIndex(i).stringValue).Contains(tag);
+        }
+
+        private static void AddTag(string tag)
+        {
+            var tagManager = GetTagManager();
+            var tagsProperty = tagManager.FindProperty("tags");
+            tagsProperty.arraySize++;
+            tagsProperty.GetArrayElementAtIndex(tagsProperty.arraySize - 1).stringValue = tag;
             tagManager.ApplyModifiedProperties();
         }
 
@@ -51,7 +72,23 @@ namespace EsnyaSFAddons.Editor
             0b0101_1111_1111_1101_1010_1111_1101_1111,
         };
 
-        [MenuItem("SaccFlight/EsnyaSFAddons/Setup Addon Layers")]
+        public static readonly string[] addonTags = {
+            "SFEXT",
+            "SFEXTP",
+            "DFUNC",
+            "DFUNCP",
+            "MFD",
+            "LStickDisplay",
+            "RStickDisplay",
+            "DialFuncOn",
+            nameof(SaccEntity.EnableInVehicle),
+            nameof(SaccEntity.SwitchFunctionSound),
+            nameof(SaccEntity.CenterOfMass),
+            nameof(SaccEntity.LStickDisplayHighlighter),
+            nameof(SaccEntity.RStickDisplayHighlighter),
+        };
+
+        [MenuItem("SaccFlight/EsnyaSFAddons/Setup Layers and Tags")]
         public static void SetupAddonLayers()
         {
             var zippedAddonLayers = addonLayers
@@ -65,20 +102,12 @@ namespace EsnyaSFAddons.Editor
                     Physics.IgnoreLayerCollision(layer, i, ((1 << i) & collision) == 0);
                 }
             }
-        }
 
-#if !ESFA_UCS
-        [MenuItem("SaccFlight/EsnyaSFAddons/Install UdonChips")]
-        public static void EnableUCS()
-        {
-            AddDefinition("ESFA_UCS");
+            foreach (var tag in addonTags)
+            {
+                if (IsTagExisits(tag)) continue;
+                AddTag(tag);
+            }
         }
-#else
-        [MenuItem("SaccFlight/EsnyaSFAddons/Uninstall UdonChips")]
-        public static void EnableUCS()
-        {
-            RemoveDefinition("ESFA_UCS");
-        }
-#endif
     }
 }

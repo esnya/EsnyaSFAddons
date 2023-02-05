@@ -318,6 +318,16 @@ namespace EsnyaSFAddons.Editor
             return ListByName(root, name).FirstOrDefault();
         }
 
+        public static IEnumerable<GameObject> ListByTag(this Transform root, string tag)
+        {
+            return root.GetComponentsInChildren<Transform>(true).OrderBy(t => t.GetHierarchyPath().Count(c => c == '/')).Select(t => t.gameObject).Where(o => o.CompareTag(tag));
+        }
+
+        public static GameObject FindByTag(this Transform root, string tag)
+        {
+            return ListByTag(root, tag).FirstOrDefault();
+        }
+
         /// <summary>
         /// Animator parameters
         /// </summary>

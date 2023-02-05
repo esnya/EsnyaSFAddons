@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3578919072815048598}
   m_Layer: 17
   m_Name: SaccAirVehicle
-  m_TagString: Untagged
+  m_TagString: SFEXT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5720149092299893504}
   m_Layer: 24
   m_Name: DFUNC_L4_Catapult
-  m_TagString: Untagged
+  m_TagString: DFUNC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

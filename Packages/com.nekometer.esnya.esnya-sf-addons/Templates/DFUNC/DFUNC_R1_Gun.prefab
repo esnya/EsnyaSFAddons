@@ -14337,7 +14337,7 @@ GameObject:
   - component: {fileID: 3656647961289691639}
   m_Layer: 17
   m_Name: DFUNC_R1_Gun
-  m_TagString: Untagged
+  m_TagString: DFUNC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

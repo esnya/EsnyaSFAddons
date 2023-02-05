@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4853540884781532338}
   m_Layer: 29
   m_Name: BoardingCollider
-  m_TagString: Untagged
+  m_TagString: SFEXT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

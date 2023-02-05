@@ -733,7 +733,7 @@ PrefabInstance:
     - target: {fileID: 9017151260058926047, guid: e66c3c0ce6d3d2d4f815ecf4b18521aa,
         type: 3}
       propertyPath: m_Name
-      value: InVehicleOnly
+      value: EnableInVehicle
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3769411188451317777, guid: e66c3c0ce6d3d2d4f815ecf4b18521aa, type: 3}

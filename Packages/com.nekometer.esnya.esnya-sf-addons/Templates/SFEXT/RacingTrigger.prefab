@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 8320331003589486181}
   m_Layer: 28
   m_Name: RacingTrigger
-  m_TagString: Untagged
+  m_TagString: SFEXT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

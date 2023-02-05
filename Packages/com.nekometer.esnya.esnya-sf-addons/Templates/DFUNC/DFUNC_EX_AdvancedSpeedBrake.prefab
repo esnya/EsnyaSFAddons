@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5822506887532250372}
   m_Layer: 17
   m_Name: DFUNC_EX_AdvancedSpeedBrake
-  m_TagString: Untagged
+  m_TagString: DFUNC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

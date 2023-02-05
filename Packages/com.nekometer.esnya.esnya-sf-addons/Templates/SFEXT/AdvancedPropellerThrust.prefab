@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8422748759524904380}
   m_Layer: 17
   m_Name: AdvancedPropellerThrust
-  m_TagString: Untagged
+  m_TagString: SFEXT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

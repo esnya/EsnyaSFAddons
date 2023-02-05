@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5399405623302500662}
   m_Layer: 0
   m_Name: MFD_display_funcon
-  m_TagString: Untagged
+  m_TagString: DialFuncOn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

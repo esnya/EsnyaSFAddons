@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9017151260058926046}
   m_Layer: 17
-  m_Name: InVehicleOnly
-  m_TagString: InVehicleOnly
+  m_Name: EnableInVehicle
+  m_TagString: EnableInVehicle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40,6 +40,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9017151260058926046}
     m_Modifications:
+    - target: {fileID: 7534418857017821732, guid: bf5ab56fd6dc6fc4081b1e9e6e216550,
+        type: 3}
+      propertyPath: m_TagString
+      value: RStickDisplayHighlighter
+      objectReference: {fileID: 0}
     - target: {fileID: 7534418857797710366, guid: bf5ab56fd6dc6fc4081b1e9e6e216550,
         type: 3}
       propertyPath: m_Name
@@ -124,6 +129,11 @@ PrefabInstance:
     - target: {fileID: 7534418857017821732, guid: bf5ab56fd6dc6fc4081b1e9e6e216550,
         type: 3}
       propertyPath: m_Name
+      value: LStickDisplayHighlighter
+      objectReference: {fileID: 0}
+    - target: {fileID: 7534418857017821732, guid: bf5ab56fd6dc6fc4081b1e9e6e216550,
+        type: 3}
+      propertyPath: m_TagString
       value: LStickDisplayHighlighter
       objectReference: {fileID: 0}
     - target: {fileID: 7534418857797710366, guid: bf5ab56fd6dc6fc4081b1e9e6e216550,

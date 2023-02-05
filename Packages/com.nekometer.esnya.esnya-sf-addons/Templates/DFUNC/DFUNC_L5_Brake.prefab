@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 7846000329922702567}
   m_Layer: 17
   m_Name: DFUNC_L5_Brake
-  m_TagString: Untagged
+  m_TagString: DFUNC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

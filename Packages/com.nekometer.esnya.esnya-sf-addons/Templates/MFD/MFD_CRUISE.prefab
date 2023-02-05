@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 771530841817106308}
   m_Layer: 0
   m_Name: MFD_CRUISE
-  m_TagString: Untagged
+  m_TagString: MFD
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 8076429713299883377}
   m_Layer: 17
   m_Name: APU
-  m_TagString: Untagged
+  m_TagString: SFEXT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

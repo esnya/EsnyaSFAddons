@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 478828926412951927}
   m_Layer: 17
   m_Name: Rolling_Water
-  m_TagString: Untagged
+  m_TagString: SFEXT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

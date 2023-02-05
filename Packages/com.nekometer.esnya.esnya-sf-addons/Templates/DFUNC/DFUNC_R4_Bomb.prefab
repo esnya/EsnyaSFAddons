@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 5320981820917538334}
   m_Layer: 17
   m_Name: DFUNC_R4_Bomb
-  m_TagString: Untagged
+  m_TagString: DFUNC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8482302438507593943}
   m_Layer: 17
   m_Name: OutsideOnly
-  m_TagString: Untagged
+  m_TagString: SFEXT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

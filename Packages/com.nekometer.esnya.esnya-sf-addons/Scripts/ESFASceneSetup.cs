@@ -20,7 +20,6 @@ namespace EsnyaSFAddons
         public Transform sea;
         public bool repeatingWorld = true;
         public float repeatingWorldDistance = 20000;
-        public SaccScoreboard_Kills killsBoard;
 
         [Header("Inject Extentions")]
         public UdonSharpBehaviour[] injectExtentions = { };
@@ -47,6 +46,8 @@ namespace EsnyaSFAddons
         public void Setup()
         {
             var rootObjects = gameObject.scene.GetRootGameObjects();
+
+            var killsBoard = rootObjects.SelectMany(o => o.GetComponentsInChildren<SaccScoreboard_Kills>(true)).FirstOrDefault();
 
             foreach (var entity in rootObjects.SelectMany(o => o.GetComponentsInChildren<SaccEntity>(true)))
             {

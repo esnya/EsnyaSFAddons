@@ -59,6 +59,23 @@ MonoBehaviour:
   Dial_Funcon: {fileID: 0}
   GLimiter: 12
   AoALimiter: 99
+  AltHoldPitchProportional: 1
+  AltHoldPitchIntegral: 1
+  AltHoldPitchDerivative: 0.1
+  AltHoldRollProportional: 0.01
+  AltHoldRollDerivative: 0.1
+  AltHoldYawProportional: 15
+  AltHoldYawDerivative: 0.1
+  HelicopterMode: 0
+  CruiseProportional: 0.1
+  CruiseIntegral: 0.1
+  CruiseDerivative: 0.6
+  AutoHoverStrengthPitch: 5
+  AutoHoverMaxPitch: 10
+  AutoHoverStrengthRoll: 5
+  AutoHoverMaxRoll: 10
+  AutoHoverMaxAngleSpeedPitch: 20
+  AutoHoverMaxAngleSpeedRoll: 20
 --- !u!114 &3245607287650650881
 MonoBehaviour:
   m_ObjectHideFlags: 0

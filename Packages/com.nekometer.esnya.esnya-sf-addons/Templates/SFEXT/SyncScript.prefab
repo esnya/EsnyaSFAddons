@@ -67,8 +67,9 @@ MonoBehaviour:
   RotationSpeedLerpTime: 10
   AntiWarp: 1
   NonOwnerEnablePhysics: 0
-  TestTransform: {fileID: 0}
-  TestTransform_Raw: {fileID: 0}
+  SyncRigid: {fileID: 0}
+  SyncTransform: {fileID: 0}
+  SyncTransform_Raw: {fileID: 0}
   LagSimDelay: 0
   DBGPING: 0
 --- !u!114 &4754457074920514691

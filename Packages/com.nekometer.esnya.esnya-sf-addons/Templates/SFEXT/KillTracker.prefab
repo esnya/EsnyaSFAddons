@@ -55,7 +55,6 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 4200176763166755102}
   SAVControl: {fileID: 0}
   KillsBoard: {fileID: 0}
-  KillPenalty: 0
 --- !u!114 &4200176763166755102
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1745,6 +1745,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 3146752918488428447}
   SAVControl: {fileID: 0}
+  VehicleAnimator: {fileID: 0}
   PlaneIdle:
   - {fileID: 3146752918144012577}
   PlaneInside: {fileID: 3146752917010570083}

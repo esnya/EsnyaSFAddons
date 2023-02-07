@@ -6,7 +6,6 @@ using SaccFlightAndVehicles;
 #if UNITY_EDITOR
 using UnityEngine.SceneManagement;
 using System.Linq;
-using UnityEditor;
 using UdonSharpEditor;
 using VRC.SDKBase.Editor.BuildPipeline;
 #endif
@@ -17,7 +16,7 @@ namespace EsnyaSFAddons
     public class ESFASceneSetup : MonoBehaviour
     {
         [Header("World Configuration")]
-        public Transform sea;
+        public float seaLevel = -10;
         public bool repeatingWorld = true;
         public float repeatingWorldDistance = 20000;
 
@@ -28,11 +27,6 @@ namespace EsnyaSFAddons
         private void Awake()
         {
             Setup();
-        }
-
-        private void Reset()
-        {
-            sea = GameObject.Find("SF_SEA")?.transform;
         }
 
         public static void SetupAll()
@@ -89,10 +83,7 @@ namespace EsnyaSFAddons
 
             foreach (var airVehicle in rootObjects.SelectMany(o => o.GetComponentsInChildren<SaccAirVehicle>(true)))
             {
-                if (sea)
-                {
-                    airVehicle.SeaLevel = sea.position.y;
-                }
+                airVehicle.SeaLevel = seaLevel;
 
                 airVehicle.RepeatingWorld = repeatingWorld;
                 airVehicle.RepeatingWorldDistance = repeatingWorldDistance;

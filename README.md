@@ -4,7 +4,21 @@ Addons and utilities for [SaccFlightAndVehicles](https://github.com/Sacchan-VRC/
 
 ## Requirements
 - UdonSharp 1.x via VRChat Creator Companion
-- SaccFlightAndVehicles 1.61
+- SaccFlightAndVehicles 1.62
+
+## Installation
+1. Install all requirements.
+2. Open PackageManager window.
+
+![image](https://user-images.githubusercontent.com/2088693/217635380-a175d873-bf18-412e-bc74-2c7df1fe9b17.png)
+
+3. Click `add package from git url`.
+
+![image](https://user-images.githubusercontent.com/2088693/217635570-44827dc0-cb20-4e4d-a4d3-7ef1e1041d6f.png)
+
+4. Input `https://github.com/esnya/EsnyaSFAddons.git?path=Packages/com.nekometer.esnya.esnya-sf-addons` and click `Add`.
+
+![image](https://user-images.githubusercontent.com/2088693/217635892-7a612e44-f09f-452c-9741-d981542fc412.png)
 
 ## Features
 ### Custom Inspectors / Gizmos
@@ -44,21 +58,20 @@ Add gizmos for TargetEyeHeight in SaccVehicleSeat and FloatPoints in FloatScript
 
 Applies the parameters specified in the world to all vehicles when world loaded without prefab overrides.
 
-#### SAV_UdonChips (Optional)
-![image](https://user-images.githubusercontent.com/2088693/142752173-58ba708d-1f6f-4f80-9457-b394f02baa47.png)
+## SFUdonChips
 
 Integrate UdonChips with SaccFlight.
 
-## Requirements (Use latest version!!)
-- [UdonSharp](https://github.com/MerlinVR/UdonSharp)
-- [SaccFlightAndVehicles](https://github.com/Sacchan-VRC/SaccFlightAndVehicles): 1.51 or later
-- [InariUdon](https://github.com/esnya/InariUdon): Using UdonLogger
+#### SAV_UdonChips
+![image](https://user-images.githubusercontent.com/2088693/142752173-58ba708d-1f6f-4f80-9457-b394f02baa47.png)
+
 
 ### Requirements of SFUdonChips
-- UdonChips
+- [UdonChips-fork](https://github.com/esnya/UdonChips-fork)
 
-## Install
-1. Import all requirements.
-2. Download the unitpackage from [Lates Release](https://github.com/esnya/EsnyaSFAddons/releases/latest).
-3. Import them all by drag & drop into Unity project window.
-4. Click "EsnyaSFAddons/Features/Install" on the MenuBar *if you want it.*
+### Installation
+1. Install all requirements.
+2. Open PackageManager window.
+3. Click `add package from git url`.
+4. Input `https://github.com/esnya/EsnyaSFAddons.git?path=Packages/com.nekometer.esnya.esnya-sf-addons-ucs` and click `Add`.
+

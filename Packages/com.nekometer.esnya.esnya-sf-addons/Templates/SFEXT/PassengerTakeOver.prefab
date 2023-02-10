@@ -327,6 +327,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7335347452888650931, guid: 837db6318cc6a7248912e2a27401a245,
+        type: 3}
+      propertyPath: Lfunc1
+      value: 
+      objectReference: {fileID: 7475490749994380186}
+    - target: {fileID: -7335347452888650931, guid: 837db6318cc6a7248912e2a27401a245,
+        type: 3}
+      propertyPath: Lfunc1key
+      value: 289
+      objectReference: {fileID: 0}
     - target: {fileID: -6783304495510393452, guid: 837db6318cc6a7248912e2a27401a245,
         type: 3}
       propertyPath: Dial_Functions_L.Array.size
@@ -356,7 +366,7 @@ PrefabInstance:
         type: 3}
       propertyPath: Dial_Functions_R.Array.data[1]
       value: 
-      objectReference: {fileID: 8069541822225901401}
+      objectReference: {fileID: 7475490749994380186}
     - target: {fileID: 372594964329855428, guid: 837db6318cc6a7248912e2a27401a245,
         type: 3}
       propertyPath: m_RootOrder
@@ -415,7 +425,7 @@ PrefabInstance:
     - target: {fileID: 372594964329855429, guid: 837db6318cc6a7248912e2a27401a245,
         type: 3}
       propertyPath: m_Name
-      value: IHaveControl
+      value: PassengerTakeOver
       objectReference: {fileID: 0}
     - target: {fileID: 2903222713662083140, guid: 837db6318cc6a7248912e2a27401a245,
         type: 3}
@@ -586,7 +596,7 @@ PrefabInstance:
     - target: {fileID: 1113314666245282524, guid: 852acd9e09d2a9140ad825aed93653b9,
         type: 3}
       propertyPath: m_Name
-      value: DFUNCP_IHaveControl
+      value: DFUNCP_TakeControl
       objectReference: {fileID: 0}
     - target: {fileID: 5102998869816305455, guid: 852acd9e09d2a9140ad825aed93653b9,
         type: 3}
@@ -645,16 +655,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 852acd9e09d2a9140ad825aed93653b9, type: 3}
---- !u!114 &8069541822225901401 stripped
+--- !u!114 &7475490749994380186 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -4758932651193082045, guid: 852acd9e09d2a9140ad825aed93653b9,
+  m_CorrespondingSourceObject: {fileID: 3870383481534813056, guid: 852acd9e09d2a9140ad825aed93653b9,
     type: 3}
   m_PrefabInstance: {fileID: 5911003646946850842}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08c244009a9626b46b8965099652f350, type: 3}
+  m_Script: {fileID: 11500000, guid: 4b2c45d9be8ef184796fbd1815518c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &7354272837897097747

@@ -12,8 +12,6 @@ PrefabInstance:
       propertyPath: m_text
       value: 'Take Over
 
-        (HOLD)
-
         [F8]'
       objectReference: {fileID: 0}
     - target: {fileID: 2768023348344106889, guid: 00e4a689e1ff979409f4cbb7dd363f6c,

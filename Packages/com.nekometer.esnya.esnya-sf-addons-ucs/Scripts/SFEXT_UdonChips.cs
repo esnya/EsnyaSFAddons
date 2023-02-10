@@ -67,12 +67,13 @@ namespace EsnyaSFAddons.UCS
 
         public void SFEXT_G_Explode()
         {
-            if (IsKilled())
+            if (!EntityControl.LastAttacker || !EntityControl.LastAttacker.Using || Time.time - airVehicle.LastHitTime >= 5) return;
+
+            if (onKilled <= 0 || !airVehicle.Taxiing && (airVehicle.Occupied || Time.time - EntityControl.PilotExitTime < 5))
             {
                 AddMoney(onKilled, $"Kill");
             }
         }
-
 
         public void SFEXT_O_PilotEnter()
         {
@@ -109,7 +110,6 @@ namespace EsnyaSFAddons.UCS
             return Mathf.Pow(Mathf.Clamp01(value / max), curve);
         }
 
-
         public void SFEXT_G_TouchDown()
         {
             if (!airVehicle.Piloting || maxAltitude - airVehicle.SeaLevel < altitudeThreshold) return;
@@ -132,16 +132,14 @@ namespace EsnyaSFAddons.UCS
 
         public void SFEXT_O_ReSupply()
         {
-            AddMoney(onResupply, "Resupply");
+            if (airVehicle.Fuel < airVehicle.FullFuel || airVehicle.Health < airVehicle.FullHealth)
+            {
+                AddMoney(onResupply, "Resupply");
+            }
         }
 
 
-        private bool IsKilled()
-        {
-            return EntityControl.LastAttacker && EntityControl.LastAttacker.Using && !airVehicle.Taxiing && (airVehicle.Occupied || Time.time - Mathf.Min(airVehicle.LastHitTime, EntityControl.PilotExitTime) < 5);
-        }
-
-        public void AddMoney(float value, string reason)
+        private void AddMoney(float value, string reason)
         {
             if (ucs)
             {
@@ -151,7 +149,7 @@ namespace EsnyaSFAddons.UCS
             Log("Info", $"{value:#.##} ({reason})");
         }
 
-        public void Log(string level, string log)
+        private void Log(string level, string log)
         {
 
             if (logger) logger.Log(level, EntityControl.gameObject.name, log);

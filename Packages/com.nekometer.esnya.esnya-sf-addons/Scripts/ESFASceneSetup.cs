@@ -2,6 +2,7 @@ using EsnyaSFAddons.Accesory;
 using UdonSharp;
 using UnityEngine;
 using SaccFlightAndVehicles;
+using UnityEditor;
 
 #if UNITY_EDITOR
 using UnityEngine.SceneManagement;
@@ -55,7 +56,7 @@ namespace EsnyaSFAddons
                     extension.SetProgramVariable("EntityControl", entity);
                     extension.SetProgramVariable("AirVehicle", airVehicle);
 
-                    UdonSharpEditorUtility.CopyProxyToUdon(extension);
+                    EditorUtility.SetDirty(extension);
 
                     return extension;
                 });
@@ -66,19 +67,19 @@ namespace EsnyaSFAddons
                     if (killTracker)
                     {
                         killTracker.KillsBoard = killsBoard;
-                        UdonSharpEditorUtility.CopyProxyToUdon(killTracker);
+                        EditorUtility.SetDirty(killTracker);
                     }
 
                     var killPenalty = entity.GetExtention(UdonSharpBehaviour.GetUdonTypeName<SFEXT_KillPenalty>()) as SFEXT_KillPenalty;
                     if (killPenalty)
                     {
                         killPenalty.KillsBoard = killsBoard;
-                        UdonSharpEditorUtility.CopyProxyToUdon(killPenalty);
+                        EditorUtility.SetDirty(killPenalty);
                     }
                 }
 
                 if (injectExtentions.Length > 0) entity.ExtensionUdonBehaviours = entity.ExtensionUdonBehaviours.Concat(extensions).ToArray();
-                UdonSharpEditorUtility.CopyProxyToUdon(entity);
+                EditorUtility.SetDirty(entity);
             }
 
             foreach (var airVehicle in rootObjects.SelectMany(o => o.GetComponentsInChildren<SaccAirVehicle>(true)))
@@ -88,14 +89,14 @@ namespace EsnyaSFAddons
                 airVehicle.RepeatingWorld = repeatingWorld;
                 airVehicle.RepeatingWorldDistance = repeatingWorldDistance;
 
-                UdonSharpEditorUtility.CopyProxyToUdon(airVehicle);
+                EditorUtility.SetDirty(airVehicle);
             }
 
             var windchanger = rootObjects.Select(o => o.GetComponentInChildren<SAV_WindChanger>()).Where(c => c).FirstOrDefault();
             foreach (var windsock in rootObjects.SelectMany(o => o.GetComponentsInChildren<Windsock>(true)))
             {
                 windsock.windChanger = windchanger;
-                UdonSharpEditorUtility.CopyProxyToUdon(windsock);
+                EditorUtility.SetDirty(windsock);
             }
 
             Destroy(this);

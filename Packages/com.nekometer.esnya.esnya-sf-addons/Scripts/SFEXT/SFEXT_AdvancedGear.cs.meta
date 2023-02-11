@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 0854f34c43acf3040971a77a73de6d2f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - wheelCollider: {instanceID: 0}
+  - suspensionTransform: {instanceID: 0}
+  - steerTransform: {instanceID: 0}
+  - wheelTransform: {instanceID: 0}
+  - transitionIndicator: {instanceID: 0}
+  - downIndicator: {instanceID: 0}
+  - transitionSound: {instanceID: 0}
+  - burstSound: {fileID: 8300000, guid: a778a83e783a3d040990aa85ff3141b7, type: 3}
+  - breakSound: {instanceID: 0}
+  - burstEffect: {fileID: 735036148080431329, guid: 318659200b6992546ac683f4ca349572,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

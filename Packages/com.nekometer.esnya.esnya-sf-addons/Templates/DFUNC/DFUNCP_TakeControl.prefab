@@ -57,7 +57,7 @@ MonoBehaviour:
   ThisSVSeat: {fileID: 0}
   MoveTransforms: []
   MoveTransforms_CoPosition: []
-  TakeControlKey: 289
+  TakeControlKey: 32
 --- !u!114 &597053122503309755
 MonoBehaviour:
   m_ObjectHideFlags: 0

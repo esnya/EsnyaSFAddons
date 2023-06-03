@@ -42,7 +42,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: SaccAirVehicle/InVehicleOnly/HUDController/bigstuff/hud_geardown
+    path: SaccAirVehicle/EnableInVehicle/HUDController/bigstuff/hud_geardown
     classID: 1
     script: {fileID: 0}
   m_PPtrCurves:
@@ -52,7 +52,7 @@ AnimationClip:
     - time: 1
       value: {fileID: 2100000, guid: a18cdf3a6a3017543af0d876d0755d80, type: 2}
     attribute: m_Materials.Array.data[0]
-    path: SaccAirVehicle/InVehicleOnly/HUDController/bigstuff/hud_geardown
+    path: SaccAirVehicle/EnableInVehicle/HUDController/bigstuff/hud_geardown
     classID: 23
     script: {fileID: 0}
   m_SampleRate: 60
@@ -125,7 +125,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: SaccAirVehicle/InVehicleOnly/HUDController/bigstuff/hud_geardown
+    path: SaccAirVehicle/EnableInVehicle/HUDController/bigstuff/hud_geardown
     classID: 1
     script: {fileID: 0}
   m_EulerEditorCurves: []

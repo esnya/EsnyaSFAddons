@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using System;
+using JetBrains.Annotations;
 using SaccFlightAndVehicles;
 using UdonSharp;
 using UdonToolkit;
@@ -227,11 +228,30 @@ namespace EsnyaSFAddons.SFEXT
         [HideIf("@hasMagneticCompass")] public float compassResponse = 0.5f;
 
         /// <summary>
-        /// Name of parameter inanimator
+        /// Name of parameter in animator
         ///
         /// 0 to 360 degrees will be remapped to 0.0 to 1.0.
         /// </summary>
         [NotNull][HideIf("@!hasMagneticCompass")] public string magneticCompassFloatParameter = "compass";
+
+
+        [Header("Clock")]
+        /// <summary>
+        /// Set true to enable Clock
+        /// </summary>
+        public bool hasClock = true;
+
+        /// <summary>
+        /// Set true to show local time.
+        /// </summary>
+        [HideIf("@!hasClock")] public bool localTime;
+
+        /// <summary>
+        /// Name of parameter for animator.
+        ///
+        /// 00:00:00 to 24:00:00 will be remapped to 0.0 to 1.0.
+        /// </summary>
+        [NotNull][HideIf("@!hasClock")] public string clockTimeParameter = "clocktime";
 
         private SaccAirVehicle airVehicle;
         private Rigidbody vehicleRigidbody;
@@ -334,6 +354,7 @@ namespace EsnyaSFAddons.SFEXT
             if (hasSI) SI_Update();
             if (hasVSI) VSI_Update();
             if (hasMagneticCompass) MC_Update();
+            if (hasClock) Clock_Update();
 
             prevPosition = position;
             prevRoll = roll;
@@ -399,6 +420,13 @@ namespace EsnyaSFAddons.SFEXT
         {
             compassHeading = (Mathf.LerpAngle(compassHeading, heading + magneticDeclination, deltaTime * compassResponse) + 360.0f) % 360.0f;
             instrumentsAnimator.SetFloat(magneticCompassFloatParameter, compassHeading / 360.0f);
+        }
+
+        private const int SecondsOfDay = 60 * 60 * 24;
+        private void Clock_Update()
+        {
+            var time = (float)Math.Floor((localTime ? DateTime.Now : DateTime.UtcNow).TimeOfDay.TotalSeconds) / SecondsOfDay;
+            instrumentsAnimator.SetFloat(clockTimeParameter, time);
         }
 
         private float Remap01(float value, float oldMin, float oldMax)

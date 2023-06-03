@@ -91,6 +91,9 @@ MonoBehaviour:
   hasMagneticCompass: 1
   compassResponse: 0.5
   magneticCompassFloatParameter: compass
+  hasClock: 1
+  localTime: 0
+  clockTimeParameter: clocktime
 --- !u!114 &2171439226626782122
 MonoBehaviour:
   m_ObjectHideFlags: 0

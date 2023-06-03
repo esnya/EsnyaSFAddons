@@ -60,7 +60,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: SaccAirVehicle/InVehicleOnly/HUDController/bigstuff/hud_stall
+    path: SaccAirVehicle/EnableInVehicle/HUDController/bigstuff/hud_stall
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -506,7 +506,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: SaccAirVehicle/InVehicleOnly/HUDController/bigstuff/hud_stall
+    path: SaccAirVehicle/EnableInVehicle/HUDController/bigstuff/hud_stall
     classID: 1
     script: {fileID: 0}
   - curve:

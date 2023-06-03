@@ -179,7 +179,7 @@ namespace EsnyaSFAddons.Editor.Inspector
                         if (ESFAUI.MiniButton("Find")) SFEditorUtility.SetObjectArrayProperty(property, SFEditorUtility.FindDFUNCs(entity, "DialFunctions_R").Concat(SFEditorUtility.FindDFUNCs(entity, "L")));
                         if (ESFAUI.MiniButton("Align")) SFEditorUtility.AlignMFDFunctions(entity, VRC_Pickup.PickupHand.Right);
                     }
-                    else if (property.name == nameof(SaccEntity.InVehicleOnly) || property.name == nameof(SaccEntity.HoldingOnly))
+                    else if (property.name == nameof(SaccEntity.InVehicleOnly))
                     {
                         if (ESFAUI.MiniButton("Preview")) SetPreview(property, true);
                         if (ESFAUI.MiniButton("Find by Name")) property.objectReferenceValue = entity.transform.FindByName(property.name);
@@ -194,7 +194,7 @@ namespace EsnyaSFAddons.Editor.Inspector
                     {
                         if (ESFAUI.MiniButton("Find")) property.objectReferenceValue = entity.transform.ListByName(property.name).Select(o => o.GetComponent<AudioSource>()).FirstOrDefault();
                     }
-                    else if (property.name == nameof(SaccEntity.EnableInVehicle))
+                    else if (property.name == nameof(SaccEntity.EnableInVehicle) || property.name == nameof(SaccEntity.EnableWhenHolding))
                     {
                         if (ESFAUI.MiniButton("Preview")) ArraySetPreview(property, true);
                         if (ESFAUI.MiniButton("Find by Name")) {

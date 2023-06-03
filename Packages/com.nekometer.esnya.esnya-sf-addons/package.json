@@ -1,19 +1,25 @@
 {
   "name": "com.nekometer.esnya.esnya-sf-addons",
-  "version": "5.0.0-beta.49",
   "displayName": "Esnya SF Addons",
-  "unity": "2019.4",
+  "version": "5.0.0-beta.49",
+  "private": true,
   "description": "Addon collection for SaccFlightAndVehicles",
-  "keywords": [
-    "VRChat",
-    "Unity"
-  ],
+  "license": "MIT",
   "author": {
     "name": "esnya"
   },
-  "license": "MIT",
-  "private": true,
+  "type": "library",
+  "dependencies": {
+    "com.nekometer.esnya.inari-udon": "9.1.0",
+    "com.unity.textmeshpro": "2.1.6",
+    "sh.orels.udontoolkit": "1.1.2"
+  },
   "legacyFolders": {
     "Assets\\EsnyaSFAddons": ""
+  },
+  "unity": "2019.4",
+  "vpmDependencies": {
+    "com.vrchat.worlds": "3.1.1",
+    "com.vrchat.udonsharp": "1.1.7"
   }
 }

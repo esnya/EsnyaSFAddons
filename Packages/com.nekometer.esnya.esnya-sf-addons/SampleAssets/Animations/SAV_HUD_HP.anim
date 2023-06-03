@@ -40,7 +40,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: SaccAirVehicle/InVehicleOnly/HUDController/bigstuff/hud_healthbar
+    path: SaccAirVehicle/EnableInVehicle/HUDController/bigstuff/hud_healthbar
   m_FloatCurves: []
   m_PPtrCurves: []
   m_SampleRate: 60
@@ -104,7 +104,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: SaccAirVehicle/InVehicleOnly/HUDController/bigstuff/hud_healthbar
+    path: SaccAirVehicle/EnableInVehicle/HUDController/bigstuff/hud_healthbar
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -132,7 +132,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: SaccAirVehicle/InVehicleOnly/HUDController/bigstuff/hud_healthbar
+    path: SaccAirVehicle/EnableInVehicle/HUDController/bigstuff/hud_healthbar
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -160,7 +160,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: SaccAirVehicle/InVehicleOnly/HUDController/bigstuff/hud_healthbar
+    path: SaccAirVehicle/EnableInVehicle/HUDController/bigstuff/hud_healthbar
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves: []

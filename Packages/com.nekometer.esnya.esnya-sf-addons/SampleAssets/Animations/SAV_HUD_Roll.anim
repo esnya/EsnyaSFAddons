@@ -48,7 +48,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: SaccAirVehicle/InVehicleOnly/HUDController/bigstuff/InputsDisplay/pitchanimator/hud_pitchroll
+    path: SaccAirVehicle/EnableInVehicle/HUDController/bigstuff/InputsDisplay/pitchanimator/hud_pitchroll
   m_ScaleCurves: []
   m_FloatCurves: []
   m_PPtrCurves: []
@@ -122,7 +122,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: SaccAirVehicle/InVehicleOnly/HUDController/bigstuff/InputsDisplay/pitchanimator/hud_pitchroll
+    path: SaccAirVehicle/EnableInVehicle/HUDController/bigstuff/InputsDisplay/pitchanimator/hud_pitchroll
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -159,7 +159,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: SaccAirVehicle/InVehicleOnly/HUDController/bigstuff/InputsDisplay/pitchanimator/hud_pitchroll
+    path: SaccAirVehicle/EnableInVehicle/HUDController/bigstuff/InputsDisplay/pitchanimator/hud_pitchroll
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -196,7 +196,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: SaccAirVehicle/InVehicleOnly/HUDController/bigstuff/InputsDisplay/pitchanimator/hud_pitchroll
+    path: SaccAirVehicle/EnableInVehicle/HUDController/bigstuff/InputsDisplay/pitchanimator/hud_pitchroll
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves: []

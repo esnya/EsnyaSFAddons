@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5102998869816305455
 Transform:
   m_ObjectHideFlags: 0
@@ -55,9 +55,10 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 597053122503309755}
   EntityControl: {fileID: 0}
   ThisSVSeat: {fileID: 0}
+  HoldToTake: 1
   MoveTransforms: []
   MoveTransforms_CoPosition: []
-  TakeControlKey: 289
+  TakeControlKey: 32
 --- !u!114 &597053122503309755
 MonoBehaviour:
   m_ObjectHideFlags: 0

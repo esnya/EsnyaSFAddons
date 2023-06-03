@@ -4,7 +4,9 @@ Addons and utilities for [SaccFlightAndVehicles](https://github.com/Sacchan-VRC/
 
 ## Requirements
 - UdonSharp 1.x via VRChat Creator Companion
-- SaccFlightAndVehicles 1.62
+- SaccFlightAndVehicles 1.63
+- [UdonToolkit](https://github.com/orels1/UdonToolkit/)
+- [InariUdon](https://github.com/esnya/InariUdon/)
 
 ## Installation
 1. Install all requirements.

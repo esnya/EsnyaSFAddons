@@ -55,6 +55,7 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 597053122503309755}
   EntityControl: {fileID: 0}
   ThisSVSeat: {fileID: 0}
+  HoldToTake: 1
   MoveTransforms: []
   MoveTransforms_CoPosition: []
   TakeControlKey: 32

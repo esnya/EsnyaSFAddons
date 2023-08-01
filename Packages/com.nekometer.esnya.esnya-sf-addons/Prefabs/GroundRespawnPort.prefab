@@ -35,8 +35,10 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 2397145880132575317}
   EntityControl: {fileID: 0}
-  EventName: SFEXT_O_RespawnButton
-  Global: 0
+  EntityEvent_Name: SFEXT_O_RespawnButton
+  EntityEventGlobal: 0
+  Event_Name: 
+  EventGlobal: 0
 --- !u!114 &2397145880132575317
 MonoBehaviour:
   m_ObjectHideFlags: 0

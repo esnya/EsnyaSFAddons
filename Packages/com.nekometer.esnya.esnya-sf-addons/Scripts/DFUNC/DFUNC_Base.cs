@@ -26,7 +26,7 @@ namespace EsnyaSFAddons
 
         public virtual void SFEXT_L_EntityStart() => DFUNC_Deselected();
         public virtual void SFEXT_O_PilotEnter() => DFUNC_Deselected();
-        public virtual void SFEXT_O_PilotExit() => DFUNC_Selected();
+        public virtual void SFEXT_O_PilotExit() => DFUNC_Deselected();
 
         public virtual void DFUNC_Selected()
         {

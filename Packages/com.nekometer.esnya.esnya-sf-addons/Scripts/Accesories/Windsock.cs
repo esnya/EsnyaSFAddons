@@ -78,7 +78,7 @@ namespace EsnyaSFAddons.Accesory
 
         private void _Update()
         {
-            if (!windChanger) return;
+            if (!windChanger || windChanger.SaccAirVehicles == null) return;
 
             if ((Time.frameCount + updateOffset) % updateInterval == 0)
             {

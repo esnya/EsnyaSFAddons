@@ -32,11 +32,7 @@ namespace EsnyaSFAddons.Weather
 
         public void _RandomWind()
         {
-            Networking.SetOwner(Networking.LocalPlayer, windChanger.gameObject);
-
             if (windChanger.SyncedWind) windChanger.SyncedWind = true;
-
-            windChanger.UpdateValues();
 
             var windStrength = randomWindCurve.Evaluate(Random.value) * randomWindStrength;
             var gustStrength = randomGustCurve.Evaluate(Random.value) * randomGustStrength;
@@ -44,10 +40,13 @@ namespace EsnyaSFAddons.Weather
             var wind = Quaternion.AngleAxis(windDirection, Vector3.up) * Vector3.forward * windStrength;
 
             Debug.Log($"[ESFA] Random wind: {windDirection:000} at {windStrength * 1.9444f} knots, gust at {gustStrength * 1.9444f} knots");
+
             windChanger.transform.rotation = Quaternion.FromToRotation(Vector3.forward, wind.normalized);
-            windChanger.WindStrength = windStrength;
-            windChanger.WindGustStrength = gustStrength;
-            windChanger.RequestSerialization();
+            windChanger.WindStrengthSlider.value = windStrength;
+            windChanger.WindGustStrengthSlider.value = gustStrength;
+
+            windChanger.UpdateValues();
+            windChanger.SendCustomEvent("_onPickupUseDown");
         }
 
 #if !COMPILER_UDONSHARP && UNITY_EDITOR

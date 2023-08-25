@@ -452,15 +452,6 @@ namespace EsnyaSFAddons.SFEXT
         private void PlayerStrike_Update()
         {
             var localPlayer = Networking.LocalPlayer;
-            // if (isPilot)
-            // {
-            //     var vehicleVelocity = vehicleRigidbody.velocity;
-            //     if (Vector3.Distance(localPlayer.GetVelocity(), vehicleVelocity) > 1)
-            //     {
-            //         localPlayer.SetVelocity(vehicleVelocity);
-            //     }
-            //     return;
-            // }
 
             if (!Utilities.IsValid(localPlayer) || !playerStrike || isPilot || isPassenger || onBoarding || Mathf.Approximately(n1, 0)) return;
 

@@ -171,7 +171,7 @@ namespace EsnyaSFAddons.SFEXT
             get => _rpm;
         }
 
-        private SaccEntity EntityControl;
+        private SaccEntity saccEntity;
         private SaccAirVehicle airVehicle;
         private DFUNC_ToggleEngine toggleEngine;
         private Rigidbody vehicleRigidbody;
@@ -221,7 +221,7 @@ namespace EsnyaSFAddons.SFEXT
             vehicleRigidbody = GetComponentInParent<Rigidbody>();
             vehicleTransform = vehicleRigidbody.transform;
             animator = vehicleRigidbody.GetComponent<Animator>();
-            var saccEntity = vehicleRigidbody.GetComponent<SaccEntity>();
+            saccEntity = vehicleRigidbody.GetComponent<SaccEntity>();
             airVehicle = (SaccAirVehicle)saccEntity.GetExtention(GetUdonTypeName<SaccAirVehicle>());
             airVehicle.ThrottleStrength = 0;
             toggleEngine = (DFUNC_ToggleEngine)saccEntity.GetExtention(GetUdonTypeName<DFUNC_ToggleEngine>());
@@ -370,7 +370,7 @@ namespace EsnyaSFAddons.SFEXT
         {
             var localPlayer = Networking.LocalPlayer;
 
-            if (!Utilities.IsValid(localPlayer) || !hazardEnabled || EntityControl.InVehicle || Mathf.Approximately(RPM, 0)) return;
+            if (!Utilities.IsValid(localPlayer) || !hazardEnabled || !saccEntity || saccEntity.InVehicle || Mathf.Approximately(RPM, 0)) return;
 
             var playerPosition = localPlayer.GetPosition();
 

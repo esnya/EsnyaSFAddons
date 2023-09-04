@@ -277,7 +277,7 @@ namespace EsnyaSFAddons.SFEXT
             if (Mathf.Approximately(position, 0.0f) || parkingBrake) return 1.0f;
             if (!brakeFunction || (autoLimitGroundSpeed || !Networking.LocalPlayer.IsUserInVR() && autoLimitGroundSpeedOnDesktop) && groundSpeed >= brakeMaxGroundSpeed) return 0;
             var brakeInput = brakeFunction.BrakeInput;
-            if (airVehicle.Taxiing && rudderBrake > 0.0f)
+            if (airVehicle.Taxiing && rudderBrake > 0.0f && groundSpeed < brakeMaxGroundSpeed)
             {
                 var yawInput = airVehicle.RotationInputs.y;
                 return Mathf.Clamp01(yawInput /rudderBrake - 1 / Mathf.Abs(rudderBrake) + 1) * brakeInput;

@@ -4,6 +4,7 @@ using SaccFlightAndVehicles;
 using UdonSharp;
 using UnityEngine;
 using VRC.Udon.Common.Interfaces;
+using VRC.SDKBase;
 
 namespace EsnyaSFAddons.SFEXT
 {
@@ -126,6 +127,38 @@ namespace EsnyaSFAddons.SFEXT
         /// </summary>
         public float airDensity = 1.2249f;
 
+
+        [Header("Hazard")]
+        /// <summary>
+        /// Enable hazard area.
+        /// </summary>
+        public bool hazardEnabled = true;
+
+        /// <summary>
+        /// Hazard range in min RPM in meters.
+        /// </summary>
+        public float minHazardRange = 1.5f;
+
+        /// <summary>
+        /// Hazard range in max RPM in meters.
+        /// </summary>
+        public float maxHazardRange = 3.0f;
+
+        /// <summary>
+        /// Delay in seconds to kill player.
+        /// </summary>
+        public float hazardKillDelay = 1.0f;
+
+        /// <summary>
+        /// Position to teleport killed player.
+        /// </summary>
+        public Vector3 killedPlayerPosition = new Vector3(0.0f, -10000.0f, 0.0f);
+
+        /// <summary>
+        /// Sound to play when propeller striked.
+        /// </summary>
+        public AudioSource strikedSound;
+
         [NonSerialized] public float mixture = 1.0f;
         [UdonSynced(UdonSyncMode.Smooth)][FieldChangeCallback(nameof(RPM))] private float _rpm;
         public float RPM
@@ -138,6 +171,7 @@ namespace EsnyaSFAddons.SFEXT
             get => _rpm;
         }
 
+        private SaccEntity EntityControl;
         private SaccAirVehicle airVehicle;
         private DFUNC_ToggleEngine toggleEngine;
         private Rigidbody vehicleRigidbody;
@@ -150,6 +184,7 @@ namespace EsnyaSFAddons.SFEXT
         private float slip, seaLevelThrustScale, smoothedTargetRPM;
         private float thrust;
         private float oilTemp;
+        private bool broken;
 
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
         private void Reset()
@@ -168,6 +203,9 @@ namespace EsnyaSFAddons.SFEXT
                 new Keyframe(2000.0f, 0.8f, 0.0f, 0.0f),
                 new Keyframe(20000.0f, 0.1f),
             });
+
+            GetComponent<CapsuleCollider>().radius = diameter / 2.0f;
+            GetComponent<CapsuleCollider>().direction = 2;
         }
 #endif
 
@@ -183,7 +221,6 @@ namespace EsnyaSFAddons.SFEXT
             vehicleRigidbody = GetComponentInParent<Rigidbody>();
             vehicleTransform = vehicleRigidbody.transform;
             animator = vehicleRigidbody.GetComponent<Animator>();
-
             var saccEntity = vehicleRigidbody.GetComponent<SaccEntity>();
             airVehicle = (SaccAirVehicle)saccEntity.GetExtention(GetUdonTypeName<SaccAirVehicle>());
             airVehicle.ThrottleStrength = 0;
@@ -233,6 +270,7 @@ namespace EsnyaSFAddons.SFEXT
         public void SFEXT_G_Reappear()
         {
             engineOn = false;
+            broken = false;
             seaLevelThrust = 0;
             smoothedTargetRPM = 0;
             slip = 0;
@@ -290,7 +328,7 @@ namespace EsnyaSFAddons.SFEXT
 
             var maxRPM = maxRPMCurve.Evaluate(altitude);
 
-            var targetRPM = engineOn
+            var targetRPM = (engineOn && ! broken)
                 ? Mathf.Lerp(minRPM, maxRPM, throttleCurve.Evaluate(throttleInput)) / (1.0f + mixtureError * mixtureErrorCoefficient)
                 : 0;
             smoothedTargetRPM = Mathf.Lerp(smoothedTargetRPM, targetRPM, Time.deltaTime * rpmResponse);
@@ -326,6 +364,63 @@ namespace EsnyaSFAddons.SFEXT
         {
             if (toggleEngine) toggleEngine.ToggleEngine(true);
             else airVehicle.SetEngineOff();
+        }
+
+        private void PostLateUpdate()
+        {
+            var localPlayer = Networking.LocalPlayer;
+
+            if (!Utilities.IsValid(localPlayer) || !hazardEnabled || EntityControl.InVehicle || Mathf.Approximately(RPM, 0)) return;
+
+            var playerPosition = localPlayer.GetPosition();
+
+            var relative = transform.InverseTransformPoint(playerPosition);
+            var distance = relative.magnitude;
+
+            if (distance > maxHazardRange) return;
+
+            var normalizedRpm = RPM / maxRPMCurve.Evaluate(0.0f);
+            var hazardRange = Mathf.Lerp(minHazardRange, maxHazardRange, normalizedRpm);
+
+            if (distance > hazardRange) return;
+
+            var forceScale = 1 - distance / hazardRange;
+
+            if (relative.z >= 0)
+            {
+                PlayStrikeSound();
+                SendCustomNetworkEvent(NetworkEventTarget.Owner, nameof(PlayerStrike));
+                SendCustomEventDelayedSeconds(nameof(_KillPlayer), hazardKillDelay);
+                AddPlayerForce(localPlayer, forceScale * thrust * (transform.position - playerPosition).normalized);
+            }
+            else
+            {
+                AddPlayerForce(localPlayer, - forceScale * thrust * transform.forward);
+            }
+        }
+
+        public void PlayerStrike()
+        {
+            if (!broken)
+            {
+                broken = true;
+                SendCustomNetworkEvent(NetworkEventTarget.All, nameof(PlayStrikeSound));
+            }
+        }
+
+        public void PlayStrikeSound()
+        {
+            if (strikedSound && !strikedSound.isPlaying) strikedSound.Play();
+        }
+
+        private void AddPlayerForce(VRCPlayerApi player, Vector3 force)
+        {
+            player.SetVelocity(player.GetVelocity() + (force + (player.IsPlayerGrounded() ? Vector3.up * 0.5f : Vector3.zero)) * Time.deltaTime);
+        }
+
+        public void _KillPlayer()
+        {
+            Networking.LocalPlayer.TeleportTo(killedPlayerPosition, Quaternion.identity);
         }
     }
 }

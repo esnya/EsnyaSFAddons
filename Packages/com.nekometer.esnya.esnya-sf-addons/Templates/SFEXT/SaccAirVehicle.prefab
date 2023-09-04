@@ -248,6 +248,7 @@ MonoBehaviour:
   YawAoaRollForceMulti: 30
   HighPitchAoaMinLift: 0.2
   HighYawAoaMinLift: 0.2
+  ZeroLiftAoA: -2.5
   TaxiRotationSpeed: 35
   TaxiRotationResponse: 2.5
   DisallowTaxiRotationWhileStill: 0

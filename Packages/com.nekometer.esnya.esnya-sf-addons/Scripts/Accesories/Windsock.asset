@@ -326,10 +326,10 @@ MonoBehaviour:
       Data: rotationOffset
     - Name: <UserType>k__BackingField
       Entry: 9
-      Data: 13
+      Data: 7
     - Name: <SystemType>k__BackingField
       Entry: 9
-      Data: 13
+      Data: 7
     - Name: <SyncMode>k__BackingField
       Entry: 7
       Data: System.Nullable`1[[UdonSharp.UdonSyncMode, UdonSharp.Runtime]], mscorlib

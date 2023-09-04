@@ -24,6 +24,7 @@ namespace EsnyaSFAddons.SFEXT
         public float brakeResponse = 1.0f;
         public bool autoLimitGroundSpeed;
         public bool autoLimitGroundSpeedOnDesktop = true;
+        public float rudderBrake = 0.0f;
 
         [Header("Indicators")]
         public GameObject transitionIndicator;
@@ -275,7 +276,13 @@ namespace EsnyaSFAddons.SFEXT
         {
             if (Mathf.Approximately(position, 0.0f) || parkingBrake) return 1.0f;
             if (!brakeFunction || (autoLimitGroundSpeed || !Networking.LocalPlayer.IsUserInVR() && autoLimitGroundSpeedOnDesktop) && groundSpeed >= brakeMaxGroundSpeed) return 0;
-            return brakeFunction.BrakeInput;
+            var brakeInput = brakeFunction.BrakeInput;
+            if (airVehicle.Taxiing && rudderBrake > 0.0f && groundSpeed < brakeMaxGroundSpeed)
+            {
+                var yawInput = airVehicle.RotationInputs.y;
+                return Mathf.Clamp01(yawInput /rudderBrake - 1 / Mathf.Abs(rudderBrake) + 1) * brakeInput;
+            }
+            return brakeInput;
         }
 
         #region Math Utilities

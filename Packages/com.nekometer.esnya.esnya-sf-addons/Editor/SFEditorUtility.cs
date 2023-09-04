@@ -227,7 +227,8 @@ namespace EsnyaSFAddons.Editor
         /// <param name="side"></param>
         public static void AlignMFDFunctions(this UdonSharpBehaviour entity, VRC_Pickup.PickupHand side)
         {
-            var parent = (entity as SaccEntity)?.InVehicleOnly?.transform ?? entity.transform;
+            var parent = entity.transform;
+
             var display = FindByName(parent, $"StickDisplay{side.ToString()[0]}")?.transform ?? (entity.GetProgramVariable(side == VRC_Pickup.PickupHand.Left ? nameof(SaccEntity.LStickDisplayHighlighter) : nameof(SaccEntity.RStickDisplayHighlighter)) as Transform)?.parent;
             if (!display) return;
 

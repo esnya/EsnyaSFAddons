@@ -13,7 +13,7 @@ namespace EsnyaSFAddons.Accesory
         public int updateInterval = 10;
         public float maxWindMagnitude = 100.0f;
         public float rotationResponse = 10f;
-        public float rotationOffset = 0.0f;
+        public Vector3 rotationOffset;
 
         public bool cloth = true;
         public bool negateClothWind = false;
@@ -30,7 +30,7 @@ namespace EsnyaSFAddons.Accesory
             {
                 if (!Mathf.Approximately(WindHeading, value))
                 {
-                    transform.rotation = Quaternion.AngleAxis(value + rotationOffset, windsockAxis);
+                    transform.rotation = Quaternion.AngleAxis(value, windsockAxis) * Quaternion.Euler(rotationOffset);
                 }
                 _windHeading = value;
             }
@@ -78,7 +78,7 @@ namespace EsnyaSFAddons.Accesory
 
         private void _Update()
         {
-            if (!windChanger) return;
+            if (!windChanger || windChanger.SaccAirVehicles == null) return;
 
             if ((Time.frameCount + updateOffset) % updateInterval == 0)
             {

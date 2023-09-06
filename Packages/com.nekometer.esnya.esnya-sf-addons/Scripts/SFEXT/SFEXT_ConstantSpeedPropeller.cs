@@ -119,15 +119,15 @@ namespace EsnyaSFAddons
         public AnimationCurve targetRpmCurve;
 
 
-        [UdonSynced(UdonSyncMode.Smooth)] public float n = 0;
+        [NonSerialized][UdonSynced(UdonSyncMode.Smooth)] public float n = 0;
+        [NonSerialized][UdonSynced(UdonSyncMode.Smooth)] public float brakeTorque;
+        [NonSerialized] public float bladePitch = 0;
 
         [NonSerialized] public SaccEntity EntityControl;
         private Rigidbody vehicleRigidbody;
         private SaccAirVehicle airVehicle;
-        public float bladePitch = 0;
         private bool starter = false;
 
-        [NonSerialized][UdonSynced(UdonSyncMode.Smooth)] public float brakeTorque;
 
         public void SFEXT_L_EntityStart()
         {

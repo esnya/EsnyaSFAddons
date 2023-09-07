@@ -54,8 +54,8 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 8651054561437687221}
   diameter: 1.9
-  kt0: {x: 1.8, y: 0.05}
-  kt1: {x: 2.6, y: 0.1}
+  kt0: {x: 1.8, y: 0.075}
+  kt1: {x: 2.6, y: 0.15}
   kq0: {x: 2, y: 0.005}
   kq1: {x: 2.8, y: 0.015}
   momentOfInertia: 15
@@ -64,7 +64,7 @@ MonoBehaviour:
   engineMinRpm: 500
   engineStarterRpm: 1000
   enginePower: 123500
-  engineIdlePower: 10000
+  engineIdlePower: 1000
   enginePowerCurve:
     serializedVersion: 2
     m_Curve:

@@ -119,11 +119,24 @@ namespace EsnyaSFAddons
         public AnimationCurve targetRpmCurve;
 
 
+        /// <summary>
+        /// Animator parameter name for propeller RPM.
+        /// </summary>
+        [Header("Animation")]
+        public string animatorPropellerRpmParameterName = "propellerrpm";
+
+        /// <summary>
+        /// Max propeller RPM to normalize animator parameter.
+        /// </summary>
+        public float animatorMaxPropellerRpm = 3000;
+
+
         [NonSerialized][UdonSynced(UdonSyncMode.Smooth)] public float n = 0;
         [NonSerialized][UdonSynced(UdonSyncMode.Smooth)] public float brakeTorque;
         [NonSerialized] public float bladePitch = 0;
 
         [NonSerialized] public SaccEntity EntityControl;
+        private Animator vehicleAnimator;
         private Rigidbody vehicleRigidbody;
         private SaccAirVehicle airVehicle;
         private bool starter = false;
@@ -135,6 +148,7 @@ namespace EsnyaSFAddons
             vehicleRigidbody = EntityControl.GetComponent<Rigidbody>();
             airVehicle = (SaccAirVehicle)EntityControl.GetExtention(GetUdonTypeName<SaccAirVehicle>());
             airVehicle.ThrottleStrength = 0;
+            vehicleAnimator = airVehicle.VehicleAnimator;
         }
 
         private bool hasPilot;
@@ -169,6 +183,11 @@ namespace EsnyaSFAddons
         private void Update()
         {
             if (isOwner) PilotUpdate();
+
+            if (vehicleAnimator)
+            {
+                vehicleAnimator.SetFloat(animatorPropellerRpmParameterName, Mathf.Clamp01(n * 60 / animatorMaxPropellerRpm));
+            }
 
             if (propellerVisual)
             {

@@ -130,12 +130,80 @@ namespace EsnyaSFAddons
         /// </summary>
         public float animatorMaxPropellerRpm = 3000;
 
+        /// <summary>
+        /// Enable or disable failures.
+        /// </summary>
+        [Header("Failures")]
+        public bool failures = true;
 
+        /// <summary>
+        /// Mean time between failures in hours.
+        /// </summary>
+        public float mtbf = 1000;
+
+        /// <summary>
+        /// RPM limitations.
+        /// </summary>
+        public float[] rpmLimits = new float[] { 2300, 2500 };
+
+        /// <summary>
+        /// Limit duration in seconds.
+        /// </summary>
+        public float[] rpmLimitDurations = new float[] { 5 * 60 , 20 };
+
+        /// <summary>
+        /// Load factor limitations.
+        /// </summary>
+        public float[] loadLimits = new float[] { 1.0f };
+
+        /// <summary>
+        /// Limit duration in seconds.
+        /// </summary>
+        public float[] loadLimitDurations = new float[] { 5 * 60 };
+
+        /// <summary>
+        /// Effects to enabled when the propeller is broken. Such as smoke or fire, sound, etc.
+        /// </summary>
+        public GameObject brokenEffects;
+
+        [UdonSynced][FieldChangeCallback(nameof(Broken))] private bool _broken;
+        public bool Broken
+        {
+            get => _broken;
+            set
+            {
+                if (_broken != value && brokenEffects)
+                {
+                    brokenEffects.SetActive(value);
+
+                    if (value && Networking.IsOwner(gameObject) && airVehicle)
+                    {
+                        airVehicle.EngineOn = false;
+                    }
+                }
+
+
+                _broken = value;
+            }
+        }
+
+#if ESFA_DEBUG
+        [Header("For Debug")]
+        [UdonSynced(UdonSyncMode.Smooth)] public float n = 0;
+        [UdonSynced(UdonSyncMode.Smooth)] public float brakeTorque;
+        public float bladePitch = 0;
+        public float j;
+        public float thrust;
+#else
         [NonSerialized][UdonSynced(UdonSyncMode.Smooth)] public float n = 0;
         [NonSerialized][UdonSynced(UdonSyncMode.Smooth)] public float brakeTorque;
-        [NonSerialized] public float bladePitch = 0;
+        private float bladePitch = 0;
+        private float j;
+        private float thrust;
+#endif
 
         [NonSerialized] public SaccEntity EntityControl;
+        [NonSerialized] public float load;
         private Animator vehicleAnimator;
         private Rigidbody vehicleRigidbody;
         private SaccAirVehicle airVehicle;
@@ -169,10 +237,17 @@ namespace EsnyaSFAddons
         public void SFEXT_G_EngineOn() => starter = false;
         public void SFEXT_G_EngineOff() => engineOn = false;
 
-        private float thrust;
+        public void SFEXT_G_ReAppear() => SFEXT_O_RespawnButton();
+        public void SFEXT_O_RespawnButton() => ReAppear();
+        public void ReAppear()
+        {
+            Broken = false;
+            n = thrust = load = brakeTorque = bladePitch = 0;
+        }
+
         private void OnEnable()
         {
-            thrust = Mathf.Epsilon;
+            thrust = 0;
         }
 
         public void Deactivate()
@@ -217,7 +292,7 @@ namespace EsnyaSFAddons
 
             var deltaTime = Time.deltaTime;
 
-            var j = v / (n * diameter);
+            j = v / (n * diameter);
             var rho = airVehicle.Atmosphere * 1.225f;
             var c2 = rho * Mathf.Pow(n, 2) * Mathf.Pow(diameter, 4);
             thrust = CalculateK(kt0, kt1, bladePitch, j) * c2;
@@ -230,10 +305,17 @@ namespace EsnyaSFAddons
 
             bladePitch = Mathf.Clamp01(bladePitch - (targetRpm - powerTrainRpm * gearRatio) * deltaTime * governorResponse);
 
-            var availableTorque = engineOn ? Mathf.Lerp(engineIdlePower, enginePower, airVehicle.ThrottleInput) * enginePowerCurve.Evaluate(powerTrainRpm) * gearRatio * efficiency / (Mathf.PI * 2 * powerTrainN) : 0.0f;
+            var availableTorque = (engineOn && !Broken) ? Mathf.Lerp(engineIdlePower, enginePower, airVehicle.ThrottleInput) * enginePowerCurve.Evaluate(powerTrainRpm) * gearRatio * efficiency / (Mathf.PI * 2 * powerTrainN) : 0.0f;
             n += (availableTorque - brakeTorque) * deltaTime / momentOfInertia;
 
+            load = brakeTorque * Mathf.PI * 2 * n * gearRatio / (enginePower * efficiency);
+
             airVehicle.EngineOutput = Mathf.Clamp01(n * 60 / referenceRpm);
+
+            if (failures && CheckForFailure(powerTrainRpm, load, deltaTime))
+            {
+                Broken = true;
+            }
         }
 
         private void FixedUpdate()
@@ -248,6 +330,48 @@ namespace EsnyaSFAddons
             var intercepts = Vector2.Lerp(intercepts0, intercepts1, p);
             return (intercepts.y / -intercepts.x) * j + intercepts.y;
         }
+
+        public float CalculateRpmFailureProbability(float currentRpm)
+        {
+            var mtbf_seconds  = mtbf * 3600;
+            var basicProbability = 1 / mtbf_seconds ;
+
+            for (var i = rpmLimits.Length - 1; i >= 0; i--)
+            {
+                if (currentRpm > rpmLimits[i])
+                {
+                    return basicProbability * (mtbf_seconds / rpmLimitDurations[i]);
+                }
+            }
+
+            return basicProbability * (currentRpm / rpmLimits[0]);
+        }
+
+        public float CalculateLoadFactorFailureProbability(float currentLoadFactor)
+        {
+            var mtbf_seconds  = mtbf * 3600;
+            float basicProbability = 1 / mtbf_seconds;
+
+            for (var i = loadLimits.Length - 1; i >= 0; i--)
+            {
+                if (currentLoadFactor > loadLimits[i])
+                {
+                    return basicProbability * (mtbf_seconds / loadLimitDurations[i]);
+                }
+            }
+            return basicProbability * (currentLoadFactor / loadLimits[0]);
+        }
+
+        public bool CheckForFailure(float currentRpm, float currentLoadFactor, float deltaTime)
+        {
+            var rpmProbability = CalculateRpmFailureProbability(currentRpm);
+            var loadFactorProbability = CalculateLoadFactorFailureProbability(currentLoadFactor);
+
+            var combinedProbability = (rpmProbability + loadFactorProbability) / 2;
+
+            return UnityEngine.Random.value < combinedProbability * deltaTime;
+        }
+
 #if UNITY_EDITOR && !UDONSHARP_COMPILER
         private void Reset()
         {

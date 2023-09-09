@@ -190,20 +190,21 @@ namespace EsnyaSFAddons
 #if ESFA_DEBUG
         [Header("For Debug")]
         [UdonSynced(UdonSyncMode.Smooth)] public float n = 0;
-        [UdonSynced(UdonSyncMode.Smooth)] public float brakeTorque;
+        public float brakeTorque;
+        [UdonSynced(UdonSyncMode.Smooth)] public float load;
         public float bladePitch = 0;
         public float j;
         public float thrust;
 #else
         [NonSerialized][UdonSynced(UdonSyncMode.Smooth)] public float n = 0;
-        [NonSerialized][UdonSynced(UdonSyncMode.Smooth)] public float brakeTorque;
+        [NonSerialized]public float brakeTorque;
+        [NonSerialized][UdonSynced(UdonSyncMode.Smooth)] public float load;
         private float bladePitch = 0;
         private float j;
         private float thrust;
 #endif
 
         [NonSerialized] public SaccEntity EntityControl;
-        [NonSerialized] public float load;
         private Animator vehicleAnimator;
         private Rigidbody vehicleRigidbody;
         private SaccAirVehicle airVehicle;
@@ -286,7 +287,8 @@ namespace EsnyaSFAddons
             if (powerTrainRpm < engineMinRpm)
             {
                 n = 0;
-                if (!hasPilot && !engineOn) SendCustomNetworkEvent(NetworkEventTarget.All, nameof(Deactivate));
+                if (airVehicle && !starter) airVehicle.EngineOn = false;
+                if (!hasPilot && !engineOn && !Broken) SendCustomNetworkEvent(NetworkEventTarget.All, nameof(Deactivate));
                 return;
             }
 

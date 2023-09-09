@@ -26,6 +26,8 @@ namespace EsnyaSFAddons.DFUNC
         public bool writePublicVariable;
         [HideIf("@!writePublicVariable")] public UdonSharpBehaviour targetBehaviour;
         [HideIf("@!writePublicVariable")][Popup("programVariable", "@targetBehaviour", "float")] public string targetVariableName;
+        [HideIf("@!writePublicVariable")] public float targetVariableMin = 0.0f;
+        [HideIf("@!writePublicVariable")] public float targetVariableMax = 1.0f;
 
         [SectionHeader("Animator")]
         public bool writeAnimatorParameter;
@@ -58,7 +60,7 @@ namespace EsnyaSFAddons.DFUNC
             set
             {
                 var clampedValue = Mathf.Clamp01(value);
-                if (writePublicVariable && targetBehaviour) targetBehaviour.SetProgramVariable(targetVariableName, clampedValue);
+                if (writePublicVariable && targetBehaviour) targetBehaviour.SetProgramVariable(targetVariableName, clampedValue * (targetVariableMax - targetVariableMin) + targetVariableMin);
                 if (writeAnimatorParameter && targetAnimator) targetAnimator.SetFloat(targetAnimatorParameterName, clampedValue);
                 if (clampedValue != _value && entity)
                 {

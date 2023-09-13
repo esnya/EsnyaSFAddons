@@ -267,6 +267,7 @@ namespace EsnyaSFAddons.SFEXT
             mixtureCutOffTimer = 0.0f;
         }
 
+        public void SFEXT_G_RespawnButton() => SFEXT_G_Reappear();
         public void SFEXT_G_Reappear()
         {
             engineOn = false;

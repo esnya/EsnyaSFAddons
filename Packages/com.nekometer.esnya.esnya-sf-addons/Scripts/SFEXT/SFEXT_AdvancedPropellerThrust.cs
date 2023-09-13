@@ -234,7 +234,7 @@ namespace EsnyaSFAddons.SFEXT
             var ts = Mathf.Pow(2.0f * airDensity * Mathf.PI * Mathf.Pow(diameter / 2.0f, 2.0f) * Mathf.Pow(power * 735.499f, 2.0f), 1.0f / 3.0f);
             seaLevelThrustScale = ts / t0;
 
-            SFEXT_G_Reappear();
+            SFEXT_G_ReAppear();
 
             isOwner = airVehicle.IsOwner;
         }
@@ -267,8 +267,8 @@ namespace EsnyaSFAddons.SFEXT
             mixtureCutOffTimer = 0.0f;
         }
 
-        public void SFEXT_G_RespawnButton() => SFEXT_G_Reappear();
-        public void SFEXT_G_Reappear()
+        public void SFEXT_G_RespawnButton() => SFEXT_G_ReAppear();
+        public void SFEXT_G_ReAppear()
         {
             engineOn = false;
             broken = false;
@@ -369,38 +369,15 @@ namespace EsnyaSFAddons.SFEXT
 
         private void PostLateUpdate()
         {
-            var localPlayer = Networking.LocalPlayer;
-
-            if (!Utilities.IsValid(localPlayer) || !hazardEnabled || !saccEntity || saccEntity.InVehicle || Mathf.Approximately(RPM, 0)) return;
-
-            var playerPosition = localPlayer.GetPosition();
-
-            var relative = transform.InverseTransformPoint(playerPosition);
-            var distance = relative.magnitude;
-
-            if (distance > maxHazardRange) return;
-
-            var normalizedRpm = RPM / maxRPMCurve.Evaluate(0.0f);
-            var hazardRange = Mathf.Lerp(minHazardRange, maxHazardRange, normalizedRpm);
-
-            if (distance > hazardRange) return;
-
-            var forceScale = 1 - distance / hazardRange;
-
-            if (relative.z >= 0)
+            if (hazardEnabled && PlayerStrike.CheckPlayerStrike(transform, saccEntity, RPM / maxRPMCurve.Evaluate(0), minHazardRange, maxHazardRange, thrust))
             {
                 PlayStrikeSound();
-                SendCustomNetworkEvent(NetworkEventTarget.Owner, nameof(PlayerStrike));
+                SendCustomNetworkEvent(NetworkEventTarget.Owner, nameof(PlayerStriked));
                 SendCustomEventDelayedSeconds(nameof(_KillPlayer), hazardKillDelay);
-                AddPlayerForce(localPlayer, forceScale * thrust * (transform.position - playerPosition).normalized);
-            }
-            else
-            {
-                AddPlayerForce(localPlayer, - forceScale * thrust * transform.forward);
             }
         }
 
-        public void PlayerStrike()
+        public void PlayerStriked()
         {
             if (!broken)
             {
@@ -412,11 +389,6 @@ namespace EsnyaSFAddons.SFEXT
         public void PlayStrikeSound()
         {
             if (strikedSound && !strikedSound.isPlaying) strikedSound.Play();
-        }
-
-        private void AddPlayerForce(VRCPlayerApi player, Vector3 force)
-        {
-            player.SetVelocity(player.GetVelocity() + (force + (player.IsPlayerGrounded() ? Vector3.up * 0.5f : Vector3.zero)) * Time.deltaTime);
         }
 
         public void _KillPlayer()

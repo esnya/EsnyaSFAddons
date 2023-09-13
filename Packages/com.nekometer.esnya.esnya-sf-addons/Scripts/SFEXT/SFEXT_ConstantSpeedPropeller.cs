@@ -166,6 +166,32 @@ namespace EsnyaSFAddons
         /// </summary>
         public GameObject brokenEffects;
 
+        [Header("Hazard")]
+        /// <summary>
+        /// Enable hazard area.
+        /// </summary>
+        public bool hazardEnabled = true;
+
+        /// <summary>
+        /// Hazard range in min RPM in meters.
+        /// </summary>
+        public float minHazardRange = 1.5f;
+
+        /// <summary>
+        /// Hazard range in max RPM in meters.
+        /// </summary>
+        public float maxHazardRange = 3.0f;
+
+        /// <summary>
+        /// Delay in seconds to kill player.
+        /// </summary>
+        public float hazardKillDelay = 1.0f;
+
+        /// <summary>
+        /// Position to teleport killed player.
+        /// </summary>
+        public Vector3 killedPlayerPosition = new Vector3(0.0f, -10000.0f, 0.0f);
+
         [UdonSynced][FieldChangeCallback(nameof(Broken))] private bool _broken;
         public bool Broken
         {
@@ -256,6 +282,13 @@ namespace EsnyaSFAddons
             gameObject.SetActive(false);
         }
 
+        private void FixedUpdate()
+        {
+            if (!isOwner || Mathf.Approximately(thrust, 0)) return;
+
+            vehicleRigidbody.AddForceAtPosition(transform.forward * thrust, transform.position, ForceMode.Force);
+        }
+
         private void Update()
         {
             if (isOwner) PilotUpdate();
@@ -320,11 +353,23 @@ namespace EsnyaSFAddons
             }
         }
 
-        private void FixedUpdate()
+        private void PostLateUpdate()
         {
-            if (!isOwner || Mathf.Approximately(thrust, 0)) return;
+            if (hazardEnabled && PlayerStrike.CheckPlayerStrike(transform, EntityControl, n / referenceRpm, minHazardRange, maxHazardRange, thrust))
+            {
+                SendCustomNetworkEvent(NetworkEventTarget.Owner, nameof(PlayerStriked));
+                SendCustomEventDelayedSeconds(nameof(_KillPlayer), hazardKillDelay);
+            }
+        }
 
-            vehicleRigidbody.AddForceAtPosition(transform.forward * thrust, transform.position, ForceMode.Force);
+        public void PlayerStriked()
+        {
+            Broken = true;
+        }
+
+        public void _KillPlayer()
+        {
+            Networking.LocalPlayer.TeleportTo(killedPlayerPosition, Quaternion.identity);
         }
 
         private float CalculateK(Vector2 intercepts0, Vector2 intercepts1, float p, float j)

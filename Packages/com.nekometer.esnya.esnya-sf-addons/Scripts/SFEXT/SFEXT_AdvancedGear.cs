@@ -280,7 +280,7 @@ namespace EsnyaSFAddons.SFEXT
             if (airVehicle.Taxiing && rudderBrake > 0.0f && groundSpeed < brakeMaxGroundSpeed)
             {
                 var yawInput = airVehicle.RotationInputs.y;
-                return Mathf.Clamp01(yawInput /rudderBrake - 1 / Mathf.Abs(rudderBrake) + 1) * brakeInput;
+                return Mathf.Max(Mathf.Clamp01(Mathf.Abs(yawInput) / rudderBrake / 2 - 1 / Mathf.Abs(rudderBrake) + 1), brakeInput);
             }
             return brakeInput;
         }

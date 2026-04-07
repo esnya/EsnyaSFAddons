@@ -10,8 +10,7 @@
   },
   "type": "library",
   "dependencies": {
-    "com.nekometer.esnya.inari-udon": "9.1.0",
-    "com.unity.textmeshpro": "3.0.6"
+    "com.nekometer.esnya.inari-udon": "9.1.0"
   },
   "legacyFolders": {
     "Assets\\EsnyaSFAddons": ""

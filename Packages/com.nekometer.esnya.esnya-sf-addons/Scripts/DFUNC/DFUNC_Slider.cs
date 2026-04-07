@@ -1,7 +1,6 @@
 ﻿
 using SaccFlightAndVehicles;
 using UdonSharp;
-using UdonToolkit;
 using UnityEngine;
 using VRC.SDKBase;
 
@@ -13,33 +12,32 @@ namespace EsnyaSFAddons.DFUNC
         public float defaultValue = 0.0f;
         public bool resetOnPilotExit = false;
 
-        [SectionHeader("VR Input")]
+        [Header("VR Input")]
         public float vrSensitivity = 5f;
         public Vector3 vrAxis = Vector3.forward;
 
-        [SectionHeader("Desktop Input")]
+        [Header("Desktop Input")]
         public float desktopStep = 0.2f;
         public KeyCode desktopIncrease, desktopDecrease;
         public bool desktopLoop;
 
-        [SectionHeader("Public Variable")]
+        [Header("Public Variable")]
         public bool writePublicVariable;
-        [HideIf("@!writePublicVariable")] public UdonSharpBehaviour targetBehaviour;
-        [HideIf("@!writePublicVariable")][Popup("programVariable", "@targetBehaviour", "float")] public string targetVariableName;
+        public UdonSharpBehaviour targetBehaviour;
+        public string targetVariableName;
 
-        [SectionHeader("Animator")]
+        [Header("Animator")]
         public bool writeAnimatorParameter;
-        [HideIf("@!writeAnimatorParameter")]
         public Animator targetAnimator;
-        [HideIf("@!writeAnimatorParameter")][Popup("animatorFloat", "@targetAnimator")] public string targetAnimatorParameterName;
+        public string targetAnimatorParameterName;
 
-        [SectionHeader("Send Events")]
+        [Header("Send Events")]
         public bool sendOnChange;
-        [HideIf("@!sendOnChange")] public string onChange = "SFEXT_G_SliderValueCange";
+        public string onChange = "SFEXT_G_SliderValueCange";
         public bool sendOnMin;
-        [HideIf("@!sendOnMin")] public string onMin = "SFEXT_G_SliderMin";
+        public string onMin = "SFEXT_G_SliderMin";
         public bool sendOnMax;
-        [HideIf("@!sendOnMax")] public string onMax = "SFEXT_G_SliderMax";
+        public string onMax = "SFEXT_G_SliderMax";
 
         private string triggerAxis;
         private bool prevTrigger;

@@ -1,6 +1,5 @@
 ﻿
 using UdonSharp;
-using UdonToolkit;
 using VRC.Udon.Common.Interfaces;
 
 namespace EsnyaSFAddons.DFUNC
@@ -10,13 +9,13 @@ namespace EsnyaSFAddons.DFUNC
     {
         public UdonSharpBehaviour target;
         public bool networked;
-        [HideIf("@!networked")] public NetworkEventTarget networkEventTarget;
+        public NetworkEventTarget networkEventTarget;
         public bool sendOnTriggerPress;
-        [HideIf("@!sendOnTriggerPress")][Popup("behaviour", "@target")] public string onTriggerPress;
+        public string onTriggerPress;
         public bool sendOnTriggerRelease;
-        [HideIf("@!sendOnTriggerRelease")][Popup("behaviour", "@target")] public string onTriggerRelease;
+        public string onTriggerRelease;
         public bool sendOnKeyboardInput;
-        [HideIf("@!sendOnKeyboardInput")][Popup("behaviour", "@target")] public string onKeyboardInput;
+        public string onKeyboardInput;
 
         public override void DFUNC_TriggerPressed()
         {

@@ -2,7 +2,6 @@
 using JetBrains.Annotations;
 using SaccFlightAndVehicles;
 using UdonSharp;
-using UdonToolkit;
 using UnityEngine;
 using VRC.Udon;
 
@@ -57,19 +56,19 @@ namespace EsnyaSFAddons.SFEXT
         /// <summary>
         /// Is electirc driven.
         /// </summary>
-        [HideIf("@!hasADI")] public bool adiElectric = false;
+        public bool adiElectric = false;
 
         /// <summary>
         /// Max pitch angle in degrees.
         /// </summary>
-        [HideIf("@!hasADI")] public float maxPitch = 30;
+        public float maxPitch = 30;
 
         /// <summary>
         /// Name of parameter in animator.
         ///
         /// -maxPitch to maxPitch will be remapped to 0.0 to 1.0.
         /// </summary>
-        [NotNull][HideIf("@!hasADI")] public string pithFloatParameter = "pitch";
+        [NotNull] public string pithFloatParameter = "pitch";
 
 
         /// <summary>
@@ -77,7 +76,7 @@ namespace EsnyaSFAddons.SFEXT
         ///
         /// -180 to 180 degrees will be remapped to 0.0 to 1.0.
         /// </summary>
-        [NotNull][HideIf("@!hasADI")] public string rollFloatParameter = "roll";
+        [NotNull] public string rollFloatParameter = "roll";
 
         [Header("HI")]
         /// <summary>
@@ -88,14 +87,14 @@ namespace EsnyaSFAddons.SFEXT
         /// <summary>
         /// Is electirc driven.
         /// </summary>
-        [NotNull][HideIf("@!hasHI")] public bool hiElectric = false;
+        [NotNull] public bool hiElectric = false;
 
         /// <summary>
         /// Name of parameter in animator.
         ///
         /// 0 to 360 degrees will be remapped to 0.0 to 1.0.
         /// </summary>
-        [NotNull][HideIf("@!hasHI")] public string headingFloatParameter = "heading";
+        [NotNull] public string headingFloatParameter = "heading";
 
         [Header("ASI")]
         /// <summary>
@@ -106,19 +105,19 @@ namespace EsnyaSFAddons.SFEXT
         /// <summary>
         /// Max indicated airspeed in knots.
         /// </summary>
-        [HideIf("@!hasASI")] public float maxAirspeed = 180.0f;
+        public float maxAirspeed = 180.0f;
 
         /// <summary>
         /// Response of airspeed indicator.
         /// </summary>
-        [HideIf("@!hasASI")] public float asiResponse = 0.25f;
+        public float asiResponse = 0.25f;
 
         /// <summary>
         /// Name of parameter in animator.
         ///
         /// 0 to maxAirspeed will be remapped to 0.0 to 1.0.
         /// </summary>
-        [NotNull][HideIf("@!hasASI")] public string airspeedFloatParameter = "airspeed";
+        [NotNull] public string airspeedFloatParameter = "airspeed";
 
         [Header("Altimeter")]
         /// <summary>
@@ -128,19 +127,19 @@ namespace EsnyaSFAddons.SFEXT
         /// <summary>
         /// Max indicated altitude in feet.
         /// </summary>
-        [HideIf("@!hasAltimeter")] public float maxAltitude = 20000;
+        public float maxAltitude = 20000;
 
         /// <summary>
         /// Response of altimeter.
         /// </summary>
-        [HideIf("@!hasAltimeter")] public float altimeterResponse = 0.25f;
+        public float altimeterResponse = 0.25f;
 
         /// <summary>
         /// Name of parameter in animator.
         ///
         /// 0 to maxAltitude will be remapped to 0.0 to 1.0.
         /// </summary>
-        [NotNull][HideIf("@!hasAltimeter")] public string altitudeFloatParameter = "altitude";
+        [NotNull] public string altitudeFloatParameter = "altitude";
 
         [Header("TC")]
         /// <summary>
@@ -151,24 +150,24 @@ namespace EsnyaSFAddons.SFEXT
         /// <summary>
         /// Is turn coordinator electric.
         /// </summary>
-        [HideIf("@!hasTC")] public bool tcElectric = true;
+        public bool tcElectric = true;
 
         /// <summary>
         /// Max turn rate.
         /// </summary>
-        [HideIf("@!hasTC")] public float maxTurn = 360.0f / 60.0f * 2.0f;
+        public float maxTurn = 360.0f / 60.0f * 2.0f;
 
         /// <summary>
         /// Response of turn coordinator.
         /// </summary>
-        [HideIf("@!hasTC")] public float turnResponse = 1.0f;
+        public float turnResponse = 1.0f;
 
         /// <summary>
         /// Name of parameter in animator.
         ///
         /// -maxTurn to maxTurn will be remapped to 0.0 to 1.0.
         /// </summary>
-        [NotNull][HideIf("@!hasTC")] public string turnRateFloatParameter = "turnrate";
+        [NotNull] public string turnRateFloatParameter = "turnrate";
 
         [Header("SI")]
         /// <summary>
@@ -179,19 +178,19 @@ namespace EsnyaSFAddons.SFEXT
         /// <summary>
         /// Max slip angle in degrees.
         /// </summary>
-        [HideIf("@!hasSI")] public float maxSlip = 12.0f;
+        public float maxSlip = 12.0f;
 
         /// <summary>
         /// Response of slip indicator.
         /// </summary>
-        [HideIf("@!hasSI")] public float slipResponse = 0.2f;
+        public float slipResponse = 0.2f;
 
         /// <summary>
         /// Name of parameter in animator.
         ///
         /// -maxSlip to maxSlip will be remapped to 0.0 to 1.0.
         /// </summary>
-        [NotNull][HideIf("@!hasSI")] public string slipAngleFloatParameter = "slipangle";
+        [NotNull] public string slipAngleFloatParameter = "slipangle";
 
         [Header("VSI")]
         /// <summary>
@@ -202,19 +201,19 @@ namespace EsnyaSFAddons.SFEXT
         /// <summary>
         /// Max indicated vertical speed in feet per minute.
         /// </summary>
-        [HideIf("@!hasVSI")] public float maxVerticalSpeed = 2000;
+        public float maxVerticalSpeed = 2000;
 
         /// <summary>
         /// Response of vertical speed indicator.
         /// </summary>
-        [HideIf("@!hasVSI")] public float vsiResponse = 0.25f;
+        public float vsiResponse = 0.25f;
 
         /// <summary>
         /// Name of parameter in animator.
         ///
         /// -maxVerticalSpeed to maxVerticalSpeed will be remapped to 0.0 to 1.0.
         /// </summary>
-        [NotNull][HideIf("@!hasVSI")] public string verticalSpeedFloatParameter = "vs";
+        [NotNull] public string verticalSpeedFloatParameter = "vs";
 
         [Header("Magnetic Compass")]
         /// <summary>
@@ -225,14 +224,14 @@ namespace EsnyaSFAddons.SFEXT
         /// <summary>
         /// Response of magnetic compass
         /// </summary>
-        [HideIf("@hasMagneticCompass")] public float compassResponse = 0.5f;
+        public float compassResponse = 0.5f;
 
         /// <summary>
         /// Name of parameter in animator
         ///
         /// 0 to 360 degrees will be remapped to 0.0 to 1.0.
         /// </summary>
-        [NotNull][HideIf("@!hasMagneticCompass")] public string magneticCompassFloatParameter = "compass";
+        [NotNull] public string magneticCompassFloatParameter = "compass";
 
 
         [Header("Clock")]
@@ -244,14 +243,14 @@ namespace EsnyaSFAddons.SFEXT
         /// <summary>
         /// Set true to show local time.
         /// </summary>
-        [HideIf("@!hasClock")] public bool localTime;
+        public bool localTime;
 
         /// <summary>
         /// Name of parameter for animator.
         ///
         /// 00:00:00 to 24:00:00 will be remapped to 0.0 to 1.0.
         /// </summary>
-        [NotNull][HideIf("@!hasClock")] public string clockTimeParameter = "clocktime";
+        [NotNull] public string clockTimeParameter = "clocktime";
 
         private SaccAirVehicle airVehicle;
         private Rigidbody vehicleRigidbody;

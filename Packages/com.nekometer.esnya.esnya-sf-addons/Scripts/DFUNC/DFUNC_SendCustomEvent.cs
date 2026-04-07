@@ -32,7 +32,7 @@ namespace EsnyaSFAddons.DFUNC
 
         public void _SendEvent(string eventName)
         {
-            if (!target) return;
+            if (!target || string.IsNullOrEmpty(eventName)) return;
 
             if (networked) target.SendCustomNetworkEvent(networkEventTarget, eventName);
             else target.SendCustomEvent(eventName);

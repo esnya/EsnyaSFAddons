@@ -25,6 +25,8 @@ namespace EsnyaSFAddons.DFUNC
         public bool writePublicVariable;
         public UdonSharpBehaviour targetBehaviour;
         public string targetVariableName;
+        public float targetVariableMin = 0.0f;
+        public float targetVariableMax = 1.0f;
 
         [Header("Animator")]
         public bool writeAnimatorParameter;
@@ -33,7 +35,7 @@ namespace EsnyaSFAddons.DFUNC
 
         [Header("Send Events")]
         public bool sendOnChange;
-        public string onChange = "SFEXT_G_SliderValueCange";
+        public string onChange = "SFEXT_G_SliderValueChange";
         public bool sendOnMin;
         public string onMin = "SFEXT_G_SliderMin";
         public bool sendOnMax;
@@ -56,8 +58,8 @@ namespace EsnyaSFAddons.DFUNC
             set
             {
                 var clampedValue = Mathf.Clamp01(value);
-                if (writePublicVariable && targetBehaviour) targetBehaviour.SetProgramVariable(targetVariableName, clampedValue);
-                if (writeAnimatorParameter && targetAnimator) targetAnimator.SetFloat(targetAnimatorParameterName, clampedValue);
+                if (writePublicVariable && targetBehaviour && !string.IsNullOrEmpty(targetVariableName)) targetBehaviour.SetProgramVariable(targetVariableName, clampedValue * (targetVariableMax - targetVariableMin) + targetVariableMin);
+                if (writeAnimatorParameter && targetAnimator && !string.IsNullOrEmpty(targetAnimatorParameterName)) targetAnimator.SetFloat(targetAnimatorParameterName, clampedValue);
                 if (clampedValue != _value && entity)
                 {
                     if (sendOnChange) entity.SendEventToExtensions(onChange);

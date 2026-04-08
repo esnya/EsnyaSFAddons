@@ -62,9 +62,9 @@ namespace EsnyaSFAddons.DFUNC
                 if (writeAnimatorParameter && targetAnimator && !string.IsNullOrEmpty(targetAnimatorParameterName)) targetAnimator.SetFloat(targetAnimatorParameterName, clampedValue);
                 if (clampedValue != _value && entity)
                 {
-                    if (sendOnChange) entity.SendEventToExtensions(onChange);
-                    if (sendOnMin && Mathf.Approximately(clampedValue, 0)) entity.SendEventToExtensions(onMin);
-                    if (sendOnMax && Mathf.Approximately(clampedValue, 1)) entity.SendEventToExtensions(onMax);
+                    if (sendOnChange && !string.IsNullOrEmpty(onChange)) entity.SendEventToExtensions(onChange);
+                    if (sendOnMin && Mathf.Approximately(clampedValue, 0) && !string.IsNullOrEmpty(onMin)) entity.SendEventToExtensions(onMin);
+                    if (sendOnMax && Mathf.Approximately(clampedValue, 1) && !string.IsNullOrEmpty(onMax)) entity.SendEventToExtensions(onMax);
                 }
                 _value = clampedValue;
             }

@@ -68,7 +68,7 @@ MonoBehaviour:
   targetAnimator: {fileID: 0}
   targetAnimatorParameterName: 
   sendOnChange: 0
-  onChange: SFEXT_G_SliderValueCange
+  onChange: SFEXT_G_SliderValueChange
   sendOnMin: 0
   onMin: SFEXT_G_SliderMin
   sendOnMax: 0

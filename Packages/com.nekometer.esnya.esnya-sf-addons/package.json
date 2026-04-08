@@ -10,15 +10,13 @@
   },
   "type": "library",
   "dependencies": {
-    "com.nekometer.esnya.inari-udon": "9.1.0",
-    "com.unity.textmeshpro": "2.1.6",
-    "sh.orels.udontoolkit": "1.1.2"
+    "com.nekometer.esnya.inari-udon": "10.0.1"
   },
   "legacyFolders": {
     "Assets\\EsnyaSFAddons": ""
   },
   "unity": "2022.3",
   "vpmDependencies": {
-    "com.vrchat.worlds": "3.7.0"
+    "com.vrchat.worlds": "3.10.2"
   }
 }

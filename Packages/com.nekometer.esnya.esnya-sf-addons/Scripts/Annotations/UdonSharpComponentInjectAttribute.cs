@@ -3,7 +3,6 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using System.Reflection;
-using UdonToolkit;
 using UdonSharp;
 
 #if UNITY_EDITOR
@@ -15,26 +14,12 @@ namespace EsnyaSFAddons.Annotations
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
 #if UNITY_EDITOR
-    public class UdonSharpComponentInjectAttribute : UTPropertyAttribute
+    public class UdonSharpComponentInjectAttribute : PropertyAttribute
 #else
     public class UdonSharpComponentInjectAttribute : System.Attribute
 #endif
     {
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
-        public override void BeforeGUI(SerializedProperty property)
-        {
-            if (!property.isArray) EditorGUILayout.BeginHorizontal();
-        }
-        public override void AfterGUI(SerializedProperty property)
-        {
-            if (GUILayout.Button("Force Update", GUILayout.ExpandWidth(false)))
-            {
-                AutoSetup((property.serializedObject.targetObject as Component).gameObject.scene);
-            }
-            if (!property.isArray) EditorGUILayout.EndHorizontal();
-            EditorGUILayout.HelpBox("Auto injected by script.", MessageType.Info);
-        }
-
         public static void AutoSetup(Scene scene)
         {
             var rootGameObjects = scene.GetRootGameObjects();
@@ -61,8 +46,8 @@ namespace EsnyaSFAddons.Annotations
                     var components = isComponent
                         ? rootGameObjects.SelectMany(o => o.GetComponentsInChildren(valueType)).ToArray()
                         : rootGameObjects.SelectMany(o => o.GetComponentsInChildren(valueType)).ToArray();
-                    var value = field.FieldType.GetConstructor(new[] { typeof(int) }).Invoke(new object[] { components.Length });
-                    Array.Copy(components, value as Array, components.Length);
+                    var value = Array.CreateInstance(valueType, components.Length);
+                    Array.Copy(components, value, components.Length);
                     field.SetValue(component, value);
                 }
                 else
@@ -92,6 +77,57 @@ namespace EsnyaSFAddons.Annotations
             {
                 AutoSetup(SceneManager.GetActiveScene());
                 return true;
+            }
+        }
+
+        [CustomPropertyDrawer(typeof(UdonSharpComponentInjectAttribute))]
+        public class Drawer : PropertyDrawer
+        {
+            private const float ButtonWidth = 90f;
+            private const float HelpBoxHeight = 38f;
+            private const float Padding = 2f;
+
+            public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+            {
+                var propertyHeight = EditorGUI.GetPropertyHeight(property, label, true);
+                var isArray = property.isArray;
+                var buttonHeight = isArray ? EditorGUIUtility.singleLineHeight + Padding : 0f;
+                return propertyHeight + buttonHeight + HelpBoxHeight + Padding;
+            }
+
+            public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+            {
+                var propertyHeight = EditorGUI.GetPropertyHeight(property, label, true);
+                var isArray = property.isArray;
+
+                var fieldRect = isArray
+                    ? new Rect(position.x, position.y, position.width, propertyHeight)
+                    : new Rect(position.x, position.y, position.width - ButtonWidth - Padding, propertyHeight);
+
+                EditorGUI.PropertyField(fieldRect, property, label, true);
+
+                float afterFieldY = position.y + propertyHeight + Padding;
+
+                if (isArray)
+                {
+                    var buttonRect = new Rect(position.x, afterFieldY, ButtonWidth, EditorGUIUtility.singleLineHeight);
+                    if (GUI.Button(buttonRect, "Force Update"))
+                    {
+                        AutoSetup((property.serializedObject.targetObject as Component).gameObject.scene);
+                    }
+                    afterFieldY += EditorGUIUtility.singleLineHeight + Padding;
+                }
+                else
+                {
+                    var buttonRect = new Rect(position.x + position.width - ButtonWidth, position.y, ButtonWidth, EditorGUIUtility.singleLineHeight);
+                    if (GUI.Button(buttonRect, "Force Update"))
+                    {
+                        AutoSetup((property.serializedObject.targetObject as Component).gameObject.scene);
+                    }
+                }
+
+                var helpRect = new Rect(position.x, afterFieldY, position.width, HelpBoxHeight);
+                EditorGUI.HelpBox(helpRect, "Auto injected by script.", MessageType.Info);
             }
         }
 #endif

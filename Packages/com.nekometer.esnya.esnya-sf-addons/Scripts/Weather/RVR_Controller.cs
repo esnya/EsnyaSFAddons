@@ -1,6 +1,5 @@
 ﻿
 using UdonSharp;
-using UdonToolkit;
 using UnityEngine;
 using VRC.SDK3.Components;
 using VRC.SDKBase;
@@ -41,14 +40,14 @@ namespace EsnyaSFAddons.Weather
         /// <summary>
         /// Name of material parameter
         /// </summary>
-        [HideIf("@!controlSkybox")] public string parameterName;
+        public string parameterName;
 
         /// <summary>
         /// Curve of parameter value.
         ///
         /// At t = 0 with no fog, at t = 1 with maximum fog.
         /// </summary>
-        [HideIf("@!controlSkybox")] public AnimationCurve parameterCurve = AnimationCurve.Linear(0, 0, 1, 1);
+        public AnimationCurve parameterCurve = AnimationCurve.Linear(0, 0, 1, 1);
 
         private VRCPickup pickup;
         private Quaternion localRotation;

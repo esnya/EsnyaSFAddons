@@ -1,0 +1,23 @@
+name: UdonSharp Lint
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    env:
+      DOTNET_ROLL_FORWARD: LatestMajor
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.x"
+      - name: Install UdonSharp Linter
+        run: dotnet tool restore
+      - name: Run UdonSharp Linter
+        run: dotnet tool run udonsharp-lint Packages

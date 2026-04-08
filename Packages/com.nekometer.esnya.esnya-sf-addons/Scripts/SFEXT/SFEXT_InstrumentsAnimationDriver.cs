@@ -87,7 +87,7 @@ namespace EsnyaSFAddons.SFEXT
         /// <summary>
         /// Is electirc driven.
         /// </summary>
-        [NotNull] public bool hiElectric = false;
+        public bool hiElectric = false;
 
         /// <summary>
         /// Name of parameter in animator.

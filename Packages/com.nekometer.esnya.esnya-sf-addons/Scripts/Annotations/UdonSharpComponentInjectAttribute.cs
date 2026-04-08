@@ -89,7 +89,7 @@ namespace EsnyaSFAddons.Annotations
 
             public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
             {
-                var propertyHeight = EditorGUI.GetPropertyHeight(property, label);
+                var propertyHeight = EditorGUI.GetPropertyHeight(property, label, true);
                 var isArray = property.isArray;
                 var buttonHeight = isArray ? EditorGUIUtility.singleLineHeight + Padding : 0f;
                 return propertyHeight + buttonHeight + HelpBoxHeight + Padding;

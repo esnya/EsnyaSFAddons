@@ -10,7 +10,7 @@
   },
   "type": "library",
   "dependencies": {
-    "com.nekometer.esnya.inari-udon": "9.1.0"
+    "com.nekometer.esnya.inari-udon": "10.0.1"
   },
   "legacyFolders": {
     "Assets\\EsnyaSFAddons": ""

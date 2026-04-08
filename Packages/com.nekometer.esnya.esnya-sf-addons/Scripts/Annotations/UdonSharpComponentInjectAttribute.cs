@@ -97,14 +97,14 @@ namespace EsnyaSFAddons.Annotations
 
             public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
             {
-                var propertyHeight = EditorGUI.GetPropertyHeight(property, label);
+                var propertyHeight = EditorGUI.GetPropertyHeight(property, label, true);
                 var isArray = property.isArray;
 
                 var fieldRect = isArray
                     ? new Rect(position.x, position.y, position.width, propertyHeight)
                     : new Rect(position.x, position.y, position.width - ButtonWidth - Padding, propertyHeight);
 
-                EditorGUI.PropertyField(fieldRect, property, label);
+                EditorGUI.PropertyField(fieldRect, property, label, true);
 
                 float afterFieldY = position.y + propertyHeight + Padding;
 

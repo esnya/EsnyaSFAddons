@@ -89,7 +89,10 @@ namespace EsnyaSFAddons.Annotations
 
             public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
             {
-                return EditorGUI.GetPropertyHeight(property, label) + HelpBoxHeight + Padding;
+                var propertyHeight = EditorGUI.GetPropertyHeight(property, label);
+                var isArray = property.isArray;
+                var buttonHeight = isArray ? EditorGUIUtility.singleLineHeight + Padding : 0f;
+                return propertyHeight + buttonHeight + HelpBoxHeight + Padding;
             }
 
             public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -103,7 +106,18 @@ namespace EsnyaSFAddons.Annotations
 
                 EditorGUI.PropertyField(fieldRect, property, label);
 
-                if (!isArray)
+                float afterFieldY = position.y + propertyHeight + Padding;
+
+                if (isArray)
+                {
+                    var buttonRect = new Rect(position.x, afterFieldY, ButtonWidth, EditorGUIUtility.singleLineHeight);
+                    if (GUI.Button(buttonRect, "Force Update"))
+                    {
+                        AutoSetup((property.serializedObject.targetObject as Component).gameObject.scene);
+                    }
+                    afterFieldY += EditorGUIUtility.singleLineHeight + Padding;
+                }
+                else
                 {
                     var buttonRect = new Rect(position.x + position.width - ButtonWidth, position.y, ButtonWidth, EditorGUIUtility.singleLineHeight);
                     if (GUI.Button(buttonRect, "Force Update"))
@@ -112,7 +126,7 @@ namespace EsnyaSFAddons.Annotations
                     }
                 }
 
-                var helpRect = new Rect(position.x, position.y + propertyHeight + Padding, position.width, HelpBoxHeight);
+                var helpRect = new Rect(position.x, afterFieldY, position.width, HelpBoxHeight);
                 EditorGUI.HelpBox(helpRect, "Auto injected by script.", MessageType.Info);
             }
         }

@@ -14,11 +14,12 @@
   },
   "dependencies": {
     "com.nekometer.esnya.esnya-sf-addons": "5.0.0-beta.49",
-    "com.nekometer.esnya.inari-udon": "10.0.0-alpha.3",
+    "com.nekometer.esnya.inari-udon": "https://github.com/esnya/InariUdon.git?path=/Packages/com.nekometer.esnya.inari-udon#alpha",
     "com.nekometer.esnya.udonchips-fork": "3.0.0"
   },
   "unity": "2022.3",
   "vpmDependencies": {
-    "com.vrchat.worlds": "3.10.2"
+    "com.vrchat.worlds": "3.10.2",
+    "com.nekometer.esnya.inari-udon": ">=10.0.0-alpha"
   }
 }

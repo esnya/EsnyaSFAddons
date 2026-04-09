@@ -32,7 +32,11 @@ namespace EsnyaSFAddons.Weather
 
         public void _RandomWind()
         {
-            if (windChanger.SyncedWind) windChanger.SyncedWind = true;
+            var syncedWindValue = windChanger.GetProgramVariable("SyncedWind");
+            if (syncedWindValue is bool syncedWind && syncedWind)
+            {
+                windChanger.SetProgramVariable("SyncedWind", true);
+            }
 
             var windStrength = randomWindCurve.Evaluate(Random.value) * randomWindStrength;
             var gustStrength = randomGustCurve.Evaluate(Random.value) * randomGustStrength;

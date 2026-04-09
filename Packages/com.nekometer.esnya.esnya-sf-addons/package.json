@@ -10,7 +10,8 @@
   },
   "type": "library",
   "dependencies": {
-    "com.nekometer.esnya.inari-udon": "https://github.com/esnya/InariUdon.git?path=/Packages/com.nekometer.esnya.inari-udon#alpha"
+    "com.nekometer.esnya.inari-udon": "https://github.com/esnya/InariUdon.git?path=/Packages/com.nekometer.esnya.inari-udon#alpha",
+    "io.github.sacchan-vrc.sacc-flight-and-vehicles": "https://github.com/Sacchan-VRC/SaccFlightAndVehicles.git#master"
   },
   "legacyFolders": {
     "Assets\\EsnyaSFAddons": ""
@@ -18,6 +19,7 @@
   "unity": "2022.3",
   "vpmDependencies": {
     "com.vrchat.worlds": "3.10.2",
-    "com.nekometer.esnya.inari-udon": ">=10.0.0-alpha"
+    "com.nekometer.esnya.inari-udon": ">=10.0.0-alpha",
+    "io.github.sacchan-vrc.sacc-flight-and-vehicles": ">=1.8.1"
   }
 }

@@ -3,8 +3,7 @@ using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 using SaccFlightAndVehicles;
-#if !COMPILER_UDONSHARP && UNITY_EDITOR
-using UdonSharpEditor;
+#if ESNYA_SFADDONS_EDITOR_TOOLS && UNITY_EDITOR
 #endif
 
 namespace EsnyaSFAddons.DFUNC
@@ -161,7 +160,7 @@ namespace EsnyaSFAddons.DFUNC
             RequestSerialization();
         }
 
-#if !COMPILER_UDONSHARP && UNITY_EDITOR
+#if ESNYA_SFADDONS_EDITOR_TOOLS && UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
             if (!(Extracted && vehicleRigidbody)) return;

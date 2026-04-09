@@ -4,8 +4,7 @@ using UnityEngine;
 using VRC.SDKBase;
 using SaccFlightAndVehicles;
 
-#if !COMPILER_UDONSHARP && UNITY_EDITOR
-using UdonSharpEditor;
+#if ESNYA_SFADDONS_EDITOR_TOOLS && UNITY_EDITOR
 #endif
 
 namespace EsnyaSFAddons.SFEXT
@@ -191,7 +190,7 @@ namespace EsnyaSFAddons.SFEXT
             PlayerEnterCount--;
         }
 
-#if !COMPILER_UDONSHARP && UNITY_EDITOR
+#if ESNYA_SFADDONS_EDITOR_TOOLS && UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
             if (PlayerEnterCount > 0)

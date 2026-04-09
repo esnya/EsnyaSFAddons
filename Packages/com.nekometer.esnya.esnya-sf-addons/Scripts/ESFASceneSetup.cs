@@ -2,12 +2,11 @@ using EsnyaSFAddons.Accesory;
 using UdonSharp;
 using UnityEngine;
 using SaccFlightAndVehicles;
-using UnityEditor;
 
-#if UNITY_EDITOR
+#if ESNYA_SFADDONS_EDITOR_TOOLS && UNITY_EDITOR
 using UnityEngine.SceneManagement;
 using System.Linq;
-using UdonSharpEditor;
+using UnityEditor;
 using VRC.SDKBase.Editor.BuildPipeline;
 #endif
 
@@ -24,7 +23,7 @@ namespace EsnyaSFAddons
         [Header("Inject Extentions")]
         public UdonSharpBehaviour[] injectExtentions = { };
 
-#if UNITY_EDITOR
+#if ESNYA_SFADDONS_EDITOR_TOOLS && UNITY_EDITOR
         private void Awake()
         {
             Setup();

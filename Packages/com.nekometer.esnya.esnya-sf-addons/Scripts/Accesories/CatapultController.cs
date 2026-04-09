@@ -175,7 +175,7 @@ namespace EsnyaSFAddons.Accesory
             }
 
             dfunc.Launching = true;
-            dfunc.PreLaunchCatapult();
+            dfunc.SendCustomEvent(nameof(DFUNC_Catapult.LaunchCatapult));
         }
 
         /// <summary>

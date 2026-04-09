@@ -57,6 +57,24 @@ namespace EsnyaSFAddons.DFUNC
 
         private Vector3 sliderOrigin;
         private Vector2 adjustedOrigin;
+        private Vector2 GetAdjustedPos()
+        {
+            var value = seat.GetProgramVariable("SeatAdjustedPosXY");
+            if (value is Vector3 vectorValue)
+            {
+                return new Vector2(vectorValue.y, vectorValue.z);
+            }
+
+            return Vector2.zero;
+        }
+
+        private void SetAdjustedPos(Vector2 value)
+        {
+            var current = seat.GetProgramVariable("SeatAdjustedPosXY");
+            var currentVector = current is Vector3 vectorValue ? vectorValue : seat.transform.localPosition;
+            seat.SetProgramVariable("SeatAdjustedPosXY", new Vector3(currentVector.x, value.x, value.y));
+        }
+
         public override void PostLateUpdate()
         {
             if (!seat) return;
@@ -70,11 +88,11 @@ namespace EsnyaSFAddons.DFUNC
                 if (!prevTriggered)
                 {
                     sliderOrigin = trackingPosition;
-                    adjustedOrigin = seat.AdjustedPos;
+                    adjustedOrigin = GetAdjustedPos();
                 }
                 else
                 {
-                    seat.AdjustedPos = adjustedOrigin - XYZtoYZ(trackingPosition - sliderOrigin);
+                    SetAdjustedPos(adjustedOrigin - XYZtoYZ(trackingPosition - sliderOrigin));
                 }
             }
             else
@@ -84,12 +102,12 @@ namespace EsnyaSFAddons.DFUNC
                 var forward = Input.GetKeyDown(desktopForward);
                 var back = Input.GetKeyDown(desktopBack);
                 var keyDown = up || down || forward || back;
-                seat.AdjustedPos += (
+                SetAdjustedPos(GetAdjustedPos() + (
                     (up ? Vector2.right : Vector2.zero)
                     + (down ? Vector2.left : Vector2.zero)
                     + (forward ? Vector2.up : Vector2.zero)
                     + (back ? Vector2.down : Vector2.zero)
-                ) * desktopStep;
+                ) * desktopStep);
                 if (prevTriggered || keyDown) seat.RequestSerialization();
             }
         }

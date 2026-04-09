@@ -1,0 +1,102 @@
+#if UNITY_EDITOR
+using System.Linq;
+using UdonSharp;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using SaccFlightAndVehicles;
+using VRC.SDKBase.Editor.BuildPipeline;
+
+namespace EsnyaSFAddons
+{
+    public static class ESFASceneSetupEditorUtility
+    {
+        public static void SetupAll()
+        {
+            foreach (var setup in SceneManager.GetActiveScene().GetRootGameObjects()
+                         .SelectMany(o => o.GetComponentsInChildren<ESFASceneSetup>(true)))
+            {
+                Setup(setup);
+            }
+        }
+
+        public static void Setup(ESFASceneSetup setup)
+        {
+            if (!setup) return;
+
+            var rootObjects = setup.gameObject.scene.GetRootGameObjects();
+            var killsBoard = rootObjects.SelectMany(o => o.GetComponentsInChildren<SaccScoreboard_Kills>(true)).FirstOrDefault();
+
+            foreach (var entity in rootObjects.SelectMany(o => o.GetComponentsInChildren<SaccEntity>(true)))
+            {
+                var airVehicle = entity.ExtensionUdonBehaviours.FirstOrDefault(e => e is SaccAirVehicle);
+                var extensions = setup.injectExtentions.Select(template =>
+                {
+                    var obj = Object.Instantiate(template.gameObject, entity.transform);
+                    var extension = obj.GetComponent(template.GetType()) as UdonSharpBehaviour;
+                    obj.name = template.gameObject.name;
+
+                    extension.SetProgramVariable("EntityControl", entity);
+                    extension.SetProgramVariable("AirVehicle", airVehicle);
+
+                    EditorUtility.SetDirty(extension);
+
+                    return extension;
+                });
+
+                if (killsBoard)
+                {
+                    var killTracker = entity.GetExtention(UdonSharpBehaviour.GetUdonTypeName<SAV_KillTracker>()) as SAV_KillTracker;
+                    if (killTracker)
+                    {
+                        killTracker.KillsBoard = killsBoard;
+                        EditorUtility.SetDirty(killTracker);
+                    }
+
+                    var killPenalty = entity.GetExtention(UdonSharpBehaviour.GetUdonTypeName<SFEXT_KillPenalty>()) as SFEXT_KillPenalty;
+                    if (killPenalty)
+                    {
+                        killPenalty.KillsBoard = killsBoard;
+                        EditorUtility.SetDirty(killPenalty);
+                    }
+                }
+
+                if (setup.injectExtentions.Length > 0)
+                {
+                    entity.ExtensionUdonBehaviours = entity.ExtensionUdonBehaviours.Concat(extensions).ToArray();
+                }
+
+                EditorUtility.SetDirty(entity);
+            }
+
+            foreach (var airVehicle in rootObjects.SelectMany(o => o.GetComponentsInChildren<SaccAirVehicle>(true)))
+            {
+                airVehicle.SeaLevel = setup.seaLevel;
+                airVehicle.RepeatingWorld = setup.repeatingWorld;
+                airVehicle.RepeatingWorldDistance = setup.repeatingWorldDistance;
+                EditorUtility.SetDirty(airVehicle);
+            }
+
+            var windchanger = rootObjects.Select(o => o.GetComponentInChildren<SAV_WindChanger>()).FirstOrDefault(c => c);
+            foreach (var windsock in rootObjects.SelectMany(o => o.GetComponentsInChildren<Windsock>(true)))
+            {
+                windsock.windChanger = windchanger;
+                EditorUtility.SetDirty(windsock);
+            }
+
+            Object.DestroyImmediate(setup, true);
+        }
+    }
+
+    public class ESFASceneSetupBuildCallback : IVRCSDKBuildRequestedCallback
+    {
+        public int callbackOrder => 11;
+
+        public bool OnBuildRequested(VRCSDKRequestedBuildType requestedBuildType)
+        {
+            ESFASceneSetupEditorUtility.SetupAll();
+            return true;
+        }
+    }
+}
+#endif

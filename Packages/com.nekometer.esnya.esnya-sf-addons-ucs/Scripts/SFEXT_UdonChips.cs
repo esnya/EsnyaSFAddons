@@ -67,7 +67,7 @@ namespace EsnyaSFAddons.UCS
 
         public void SFEXT_G_Explode()
         {
-            if (!EntityControl.LastAttacker || !EntityControl.LastAttacker.Using || Time.time - airVehicle.LastHitTime >= 5) return;
+            if (!EntityControl.LastAttacker || !EntityControl.LastAttacker.Using || Time.time - EntityControl.PilotExitTime >= 5) return;
 
             if (onKilled <= 0 || !airVehicle.Taxiing && (airVehicle.Occupied || Time.time - EntityControl.PilotExitTime < 5))
             {

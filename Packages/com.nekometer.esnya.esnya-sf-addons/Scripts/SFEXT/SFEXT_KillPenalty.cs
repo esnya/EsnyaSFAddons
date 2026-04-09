@@ -29,7 +29,7 @@ namespace EsnyaSFAddons
             if (!KillsBoard || !airVehicle || !EntityControl.LastAttacker || !EntityControl.LastAttacker.Using) return;
 
             var time = Time.time;
-            if (!(airVehicle.Occupied || (time - airVehicle.LastHitTime < 5 && ((time - EntityControl.PilotExitTime) < 5)))) return;
+            if (!(airVehicle.Occupied || (time - EntityControl.PilotExitTime) < 5)) return;
 
             KillsBoard.MyKills = (ushort)Mathf.Clamp(KillsBoard.MyKills - penalty, ushort.MinValue, ushort.MaxValue);
             if (applyToBestKills) {

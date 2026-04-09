@@ -1,7 +1,6 @@
 ﻿
 using SaccFlightAndVehicles;
 using UdonSharp;
-using UdonToolkit;
 using UnityEngine;
 using VRC.SDKBase;
 
@@ -13,33 +12,34 @@ namespace EsnyaSFAddons.DFUNC
         public float defaultValue = 0.0f;
         public bool resetOnPilotExit = false;
 
-        [SectionHeader("VR Input")]
+        [Header("VR Input")]
         public float vrSensitivity = 5f;
         public Vector3 vrAxis = Vector3.forward;
 
-        [SectionHeader("Desktop Input")]
+        [Header("Desktop Input")]
         public float desktopStep = 0.2f;
         public KeyCode desktopIncrease, desktopDecrease;
         public bool desktopLoop;
 
-        [SectionHeader("Public Variable")]
+        [Header("Public Variable")]
         public bool writePublicVariable;
-        [HideIf("@!writePublicVariable")] public UdonSharpBehaviour targetBehaviour;
-        [HideIf("@!writePublicVariable")][Popup("programVariable", "@targetBehaviour", "float")] public string targetVariableName;
+        public UdonSharpBehaviour targetBehaviour;
+        public string targetVariableName;
+        public float targetVariableMin = 0.0f;
+        public float targetVariableMax = 1.0f;
 
-        [SectionHeader("Animator")]
+        [Header("Animator")]
         public bool writeAnimatorParameter;
-        [HideIf("@!writeAnimatorParameter")]
         public Animator targetAnimator;
-        [HideIf("@!writeAnimatorParameter")][Popup("animatorFloat", "@targetAnimator")] public string targetAnimatorParameterName;
+        public string targetAnimatorParameterName;
 
-        [SectionHeader("Send Events")]
+        [Header("Send Events")]
         public bool sendOnChange;
-        [HideIf("@!sendOnChange")] public string onChange = "SFEXT_G_SliderValueCange";
+        public string onChange = "SFEXT_G_SliderValueChange";
         public bool sendOnMin;
-        [HideIf("@!sendOnMin")] public string onMin = "SFEXT_G_SliderMin";
+        public string onMin = "SFEXT_G_SliderMin";
         public bool sendOnMax;
-        [HideIf("@!sendOnMax")] public string onMax = "SFEXT_G_SliderMax";
+        public string onMax = "SFEXT_G_SliderMax";
 
         private string triggerAxis;
         private bool prevTrigger;
@@ -58,13 +58,13 @@ namespace EsnyaSFAddons.DFUNC
             set
             {
                 var clampedValue = Mathf.Clamp01(value);
-                if (writePublicVariable && targetBehaviour) targetBehaviour.SetProgramVariable(targetVariableName, clampedValue);
-                if (writeAnimatorParameter && targetAnimator) targetAnimator.SetFloat(targetAnimatorParameterName, clampedValue);
+                if (writePublicVariable && targetBehaviour && !string.IsNullOrEmpty(targetVariableName)) targetBehaviour.SetProgramVariable(targetVariableName, clampedValue * (targetVariableMax - targetVariableMin) + targetVariableMin);
+                if (writeAnimatorParameter && targetAnimator && !string.IsNullOrEmpty(targetAnimatorParameterName)) targetAnimator.SetFloat(targetAnimatorParameterName, clampedValue);
                 if (clampedValue != _value && entity)
                 {
-                    if (sendOnChange) entity.SendEventToExtensions(onChange);
-                    if (sendOnMin && Mathf.Approximately(clampedValue, 0)) entity.SendEventToExtensions(onMin);
-                    if (sendOnMax && Mathf.Approximately(clampedValue, 1)) entity.SendEventToExtensions(onMax);
+                    if (sendOnChange && !string.IsNullOrEmpty(onChange)) entity.SendEventToExtensions(onChange);
+                    if (sendOnMin && Mathf.Approximately(clampedValue, 0) && !string.IsNullOrEmpty(onMin)) entity.SendEventToExtensions(onMin);
+                    if (sendOnMax && Mathf.Approximately(clampedValue, 1) && !string.IsNullOrEmpty(onMax)) entity.SendEventToExtensions(onMax);
                 }
                 _value = clampedValue;
             }

@@ -103,6 +103,13 @@ namespace EsnyaSFAddons.SFEXT
         public bool EngineOnOnEnter = true;
         [Tooltip("Set Engine Off when entering the vehicle?")]
         public bool EngineOffOnExit = true;
+
+        private float GetLastHitBulletDamageMulti()
+        {
+            var value = EntityControl.GetProgramVariable("LastHitBulletDamageMulti");
+            return value is float floatValue ? floatValue : 1.0f;
+        }
+
         [FieldChangeCallback(nameof(EngineOn))] public bool _EngineOn = false;
         public bool EngineOn
         {
@@ -1113,7 +1120,7 @@ namespace EsnyaSFAddons.SFEXT
             {
                 if (Time.time - LastHitTime > 2)
                 {
-                    PredictedHealth = Health - (BulletDamageTaken * EntityControl.LastHitBulletDamageMulti);
+                    PredictedHealth = Health - (BulletDamageTaken * GetLastHitBulletDamageMulti());
                     if (PredictedHealth <= 0)
                     {
                         SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, nameof(Explode));
@@ -1121,7 +1128,7 @@ namespace EsnyaSFAddons.SFEXT
                 }
                 else
                 {
-                    PredictedHealth -= BulletDamageTaken * EntityControl.LastHitBulletDamageMulti;
+                    PredictedHealth -= BulletDamageTaken * GetLastHitBulletDamageMulti();
                     if (PredictedHealth <= 0)
                     {
                         SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, nameof(Explode));
@@ -1137,7 +1144,7 @@ namespace EsnyaSFAddons.SFEXT
                 LastHitTime = Time.time;
                 if (IsOwner)
                 {
-                    Health -= BulletDamageTaken * EntityControl.LastHitBulletDamageMulti;
+                    Health -= BulletDamageTaken * GetLastHitBulletDamageMulti();
                     if (PredictDamage && Health <= 0)//the attacker calls the explode function in this case
                     {
                         Health = 0.0911f;

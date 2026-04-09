@@ -228,6 +228,24 @@ namespace EsnyaSFAddons.DFUNC
         }
 
         private Vector2 seatAdjustedPos;
+        private Vector2 GetAdjustedPos(SaccVehicleSeat seat)
+        {
+            var value = seat.GetProgramVariable("SeatAdjustedPosXY");
+            if (value is Vector3 vectorValue)
+            {
+                return new Vector2(vectorValue.y, vectorValue.z);
+            }
+
+            return Vector2.zero;
+        }
+
+        private void SetAdjustedPos(SaccVehicleSeat seat, Vector2 value)
+        {
+            var current = seat.GetProgramVariable("SeatAdjustedPosXY");
+            var currentVector = current is Vector3 vectorValue ? vectorValue : seat.transform.localPosition;
+            seat.SetProgramVariable("SeatAdjustedPosXY", new Vector3(currentVector.x, value.x, value.y));
+        }
+
         private void SwapPlayers()
         {
             enterAsPilot = isUser;
@@ -244,7 +262,7 @@ namespace EsnyaSFAddons.DFUNC
 
         private void SaveAdjustedPos(SaccVehicleSeat seat)
         {
-            seatAdjustedPos = seat.AdjustedPos;
+            seatAdjustedPos = GetAdjustedPos(seat);
             pilotSeat.AdjustSeatPosition = false;
             passengerSeat.AdjustSeatPosition = false;
 
@@ -253,7 +271,7 @@ namespace EsnyaSFAddons.DFUNC
 
         private void LoadAdjustedPos(SaccVehicleSeat seat)
         {
-            seat.AdjustedPos = seatAdjustedPos;
+            SetAdjustedPos(seat, seatAdjustedPos);
             seat.RequestSerialization();
 
             pilotSeat.AdjustSeatPosition = pilotSeatAdjust;

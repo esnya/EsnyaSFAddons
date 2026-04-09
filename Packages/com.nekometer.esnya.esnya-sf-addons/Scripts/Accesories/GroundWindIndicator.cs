@@ -34,10 +34,22 @@ namespace EsnyaSFAddons.Accesory
         private Vector3 wind;
         private float gust;
 
+        private float GetWindChangerFloat(string name)
+        {
+            var value = windChanger.GetProgramVariable(name);
+            return value is float floatValue ? floatValue : 0.0f;
+        }
+
+        private Vector3 GetWindChangerVector3(string name)
+        {
+            var value = windChanger.GetProgramVariable(name);
+            return value is Vector3 vectorValue ? vectorValue : Vector3.zero;
+        }
+
         private Vector3 GetFinalWind()
         {
-            var t = Time.time * windChanger.WindGustiness;
-            var turbulanceScale = windChanger.WindTurbulanceScale;
+            var t = Time.time * GetWindChangerFloat("WindGustiness");
+            var turbulanceScale = GetWindChangerFloat("WindTurbulanceScale");
             var gustx = t + transform.position.x * turbulanceScale;
             var gustz = t + transform.position.z * turbulanceScale;
             return wind + Vector3.Normalize(new Vector3(Mathf.PerlinNoise(gustx + 9000, gustz) - .5f, 0, Mathf.PerlinNoise(gustx, gustz + 9999) - .5f)) * gust;
@@ -60,8 +72,8 @@ namespace EsnyaSFAddons.Accesory
             switch (updateStep)
             {
                 case UPDATE_STEP_UPDATE:
-                    wind = windChanger.WindStrenth_3 * 1.944f;
-                    gust = windChanger.WindGustStrength * 1.944f;
+                    wind = GetWindChangerVector3("WindStrenth_3") * 1.944f;
+                    gust = GetWindChangerFloat("WindGustStrength") * 1.944f;
                     break;
                 case UPDATE_STEP_DIRECTION:
                     if (directionIndicator)

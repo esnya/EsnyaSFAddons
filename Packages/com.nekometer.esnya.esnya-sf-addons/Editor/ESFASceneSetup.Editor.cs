@@ -4,37 +4,35 @@ using UdonSharp;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using SaccFlightAndVehicles;
 using VRC.SDKBase.Editor.BuildPipeline;
 
 namespace EsnyaSFAddons
 {
-    public partial class ESFASceneSetup
+    public static class ESFASceneSetupEditorUtility
     {
-        private void Awake()
-        {
-            Setup();
-        }
-
         public static void SetupAll()
         {
-            foreach (var setup in SceneManager.GetActiveScene().GetRootGameObjects().SelectMany(o => o.GetComponentsInChildren<ESFASceneSetup>()))
+            foreach (var setup in SceneManager.GetActiveScene().GetRootGameObjects()
+                         .SelectMany(o => o.GetComponentsInChildren<ESFASceneSetup>(true)))
             {
-                setup.Setup();
+                Setup(setup);
             }
         }
 
-        public void Setup()
+        public static void Setup(ESFASceneSetup setup)
         {
-            var rootObjects = gameObject.scene.GetRootGameObjects();
+            if (!setup) return;
 
+            var rootObjects = setup.gameObject.scene.GetRootGameObjects();
             var killsBoard = rootObjects.SelectMany(o => o.GetComponentsInChildren<SaccScoreboard_Kills>(true)).FirstOrDefault();
 
             foreach (var entity in rootObjects.SelectMany(o => o.GetComponentsInChildren<SaccEntity>(true)))
             {
                 var airVehicle = entity.ExtensionUdonBehaviours.FirstOrDefault(e => e is SaccAirVehicle);
-                var extensions = injectExtentions.Select(template =>
+                var extensions = setup.injectExtentions.Select(template =>
                 {
-                    var obj = Instantiate(template.gameObject, entity.transform);
+                    var obj = Object.Instantiate(template.gameObject, entity.transform);
                     var extension = obj.GetComponent(template.GetType()) as UdonSharpBehaviour;
                     obj.name = template.gameObject.name;
 
@@ -63,7 +61,7 @@ namespace EsnyaSFAddons
                     }
                 }
 
-                if (injectExtentions.Length > 0)
+                if (setup.injectExtentions.Length > 0)
                 {
                     entity.ExtensionUdonBehaviours = entity.ExtensionUdonBehaviours.Concat(extensions).ToArray();
                 }
@@ -73,31 +71,31 @@ namespace EsnyaSFAddons
 
             foreach (var airVehicle in rootObjects.SelectMany(o => o.GetComponentsInChildren<SaccAirVehicle>(true)))
             {
-                airVehicle.SeaLevel = seaLevel;
-                airVehicle.RepeatingWorld = repeatingWorld;
-                airVehicle.RepeatingWorldDistance = repeatingWorldDistance;
+                airVehicle.SeaLevel = setup.seaLevel;
+                airVehicle.RepeatingWorld = setup.repeatingWorld;
+                airVehicle.RepeatingWorldDistance = setup.repeatingWorldDistance;
                 EditorUtility.SetDirty(airVehicle);
             }
 
-            var windchanger = rootObjects.Select(o => o.GetComponentInChildren<SAV_WindChanger>()).Where(c => c).FirstOrDefault();
+            var windchanger = rootObjects.Select(o => o.GetComponentInChildren<SAV_WindChanger>()).FirstOrDefault(c => c);
             foreach (var windsock in rootObjects.SelectMany(o => o.GetComponentsInChildren<Windsock>(true)))
             {
                 windsock.windChanger = windchanger;
                 EditorUtility.SetDirty(windsock);
             }
 
-            Destroy(this);
+            Object.DestroyImmediate(setup, true);
         }
+    }
 
-        public class BuildCallback : IVRCSDKBuildRequestedCallback
+    public class ESFASceneSetupBuildCallback : IVRCSDKBuildRequestedCallback
+    {
+        public int callbackOrder => 11;
+
+        public bool OnBuildRequested(VRCSDKRequestedBuildType requestedBuildType)
         {
-            public int callbackOrder => 11;
-
-            public bool OnBuildRequested(VRCSDKRequestedBuildType requestedBuildType)
-            {
-                SetupAll();
-                return true;
-            }
+            ESFASceneSetupEditorUtility.SetupAll();
+            return true;
         }
     }
 }

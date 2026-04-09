@@ -1,4 +1,4 @@
-#if ESNYA_SFADDONS_EDITOR_TOOLS && UNITY_EDITOR
+#if UNITY_EDITOR
 using System.Linq;
 using UdonSharp;
 using UnityEditor;

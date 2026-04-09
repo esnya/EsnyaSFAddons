@@ -13,7 +13,7 @@
     "name": "esnya"
   },
   "dependencies": {
-    "com.nekometer.esnya.esnya-sf-addons": "5.0.0",
+    "com.nekometer.esnya.esnya-sf-addons": "5.0.0-beta.49",
     "com.nekometer.esnya.inari-udon": "10.0.0-alpha.3",
     "com.nekometer.esnya.udonchips-fork": "3.0.0"
   },

@@ -270,6 +270,7 @@ namespace EsnyaSFAddons
         public void SFEXT_G_EngineOff() => engineOn = false;
 
         public void SFEXT_G_ReAppear() => SFEXT_O_RespawnButton();
+        public void SFEXT_G_RespawnButton() => SFEXT_O_RespawnButton();
         public void SFEXT_O_RespawnButton() => ReAppear();
         public void ReAppear()
         {
@@ -320,7 +321,8 @@ namespace EsnyaSFAddons
             var airVel = airVehicle.AirVel;
             var v = Vector3.Dot(airVel, transform.forward);
 
-            var powerTrainN = n / gearRatio;
+            var safeGearRatio = Mathf.Max(gearRatio, 0.0001f);
+            var powerTrainN = n / safeGearRatio;
             var powerTrainRpm = powerTrainN * 60;
             if (powerTrainRpm < engineMinRpm)
             {
@@ -343,12 +345,14 @@ namespace EsnyaSFAddons
                 targetRpm = targetRpmCurve.Evaluate(airVehicle.ThrottleInput);
             }
 
-            bladePitch = Mathf.Clamp01(bladePitch - (targetRpm - powerTrainRpm * gearRatio) * deltaTime * governorResponse);
+            bladePitch = Mathf.Clamp01(bladePitch - (targetRpm - powerTrainRpm * safeGearRatio) * deltaTime * governorResponse);
 
-            var availableTorque = (engineOn && !Broken) ? Mathf.Lerp(engineIdlePower, enginePower, airVehicle.ThrottleInput) * enginePowerCurve.Evaluate(powerTrainRpm) * gearRatio * efficiency / (Mathf.PI * 2 * powerTrainN) : 0.0f;
+            var availableTorque = (engineOn && !Broken && powerTrainN > 0.0001f)
+                ? Mathf.Lerp(engineIdlePower, enginePower, airVehicle.ThrottleInput) * enginePowerCurve.Evaluate(powerTrainRpm) * safeGearRatio * efficiency / (Mathf.PI * 2 * powerTrainN)
+                : 0.0f;
             n += (availableTorque - brakeTorque) * deltaTime / momentOfInertia;
 
-            load = brakeTorque * Mathf.PI * 2 * n * gearRatio / (enginePower * efficiency);
+            load = brakeTorque * Mathf.PI * 2 * n * safeGearRatio / (enginePower * efficiency);
 
             airVehicle.EngineOutput = Mathf.Clamp01(n * 60 / referenceRpm);
 

@@ -257,10 +257,11 @@ namespace EsnyaSFAddons
         private bool isPiloting = false, isOwner = false;
         public void SFEXT_O_PilotEnter() => isPiloting = isOwner = true;
         public void SFEXT_O_PilotExit() => isPiloting = false;
+        public override void OnOwnershipTransferred(VRCPlayerApi player) => isOwner = Networking.IsOwner(gameObject);
 
         private bool engineOn = false;
         public void SFEXT_G_EngineStartup() => starter = engineOn = true;
-        public void SFEXT_G_EngineStartupCancel() => starter = false;
+        public void SFEXT_G_EngineStartupCancel() => starter = engineOn = false;
         public void SFEXT_G_EngineOn() => starter = false;
         public void SFEXT_G_EngineOff() => engineOn = false;
 
@@ -355,7 +356,7 @@ namespace EsnyaSFAddons
 
         private void PostLateUpdate()
         {
-            if (hazardEnabled && PlayerStrike.CheckPlayerStrike(transform, EntityControl, n / referenceRpm, minHazardRange, maxHazardRange, thrust))
+            if (hazardEnabled && PlayerStrike.CheckPlayerStrike(transform, EntityControl, n * 60 / referenceRpm, minHazardRange, maxHazardRange, thrust))
             {
                 SendCustomNetworkEvent(NetworkEventTarget.Owner, nameof(PlayerStriked));
                 SendCustomEventDelayedSeconds(nameof(_KillPlayer), hazardKillDelay);

@@ -198,9 +198,9 @@ namespace EsnyaSFAddons
             get => _broken;
             set
             {
-                if (_broken != value && brokenEffects)
+                if (_broken != value)
                 {
-                    brokenEffects.SetActive(value);
+                    if (brokenEffects) brokenEffects.SetActive(value);
 
                     if (value && Networking.IsOwner(gameObject) && airVehicle)
                     {
@@ -336,10 +336,11 @@ namespace EsnyaSFAddons
             var safeDiameter = Mathf.Max(diameter, 0.0001f);
             var safeMomentOfInertia = Mathf.Max(momentOfInertia, 0.0001f);
             var safeReferenceRpm = Mathf.Max(referenceRpm, 0.0001f);
+            var safePropellerN = Mathf.Max(n, 0.0001f);
 
-            j = v / (n * safeDiameter);
+            j = v / (safePropellerN * safeDiameter);
             var rho = airVehicle.Atmosphere * 1.225f;
-            var c2 = rho * Mathf.Pow(n, 2) * Mathf.Pow(safeDiameter, 4);
+            var c2 = rho * Mathf.Pow(safePropellerN, 2) * Mathf.Pow(safeDiameter, 4);
             thrust = CalculateK(kt0, kt1, bladePitch, j) * c2;
             brakeTorque = CalculateK(kq0, kq1, bladePitch, j) * c2 * safeDiameter;
 

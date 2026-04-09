@@ -391,8 +391,14 @@ namespace EsnyaSFAddons
         {
             var mtbf_seconds  = mtbf * 3600;
             var basicProbability = 1 / mtbf_seconds ;
+            var rpmPairCount = Mathf.Min(rpmLimits.Length, rpmLimitDurations.Length);
 
-            for (var i = rpmLimits.Length - 1; i >= 0; i--)
+            if (rpmPairCount == 0 || rpmLimits.Length == 0 || Mathf.Approximately(rpmLimits[0], 0f))
+            {
+                return basicProbability;
+            }
+
+            for (var i = rpmPairCount - 1; i >= 0; i--)
             {
                 if (currentRpm > rpmLimits[i])
                 {
@@ -407,8 +413,14 @@ namespace EsnyaSFAddons
         {
             var mtbf_seconds  = mtbf * 3600;
             float basicProbability = 1 / mtbf_seconds;
+            var loadPairCount = Mathf.Min(loadLimits.Length, loadLimitDurations.Length);
 
-            for (var i = loadLimits.Length - 1; i >= 0; i--)
+            if (loadPairCount == 0 || loadLimits.Length == 0 || Mathf.Approximately(loadLimits[0], 0f))
+            {
+                return basicProbability;
+            }
+
+            for (var i = loadPairCount - 1; i >= 0; i--)
             {
                 if (currentLoadFactor > loadLimits[i])
                 {

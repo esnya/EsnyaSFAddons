@@ -333,12 +333,15 @@ namespace EsnyaSFAddons
             }
 
             var deltaTime = Time.deltaTime;
+            var safeDiameter = Mathf.Max(diameter, 0.0001f);
+            var safeMomentOfInertia = Mathf.Max(momentOfInertia, 0.0001f);
+            var safeReferenceRpm = Mathf.Max(referenceRpm, 0.0001f);
 
-            j = v / (n * diameter);
+            j = v / (n * safeDiameter);
             var rho = airVehicle.Atmosphere * 1.225f;
-            var c2 = rho * Mathf.Pow(n, 2) * Mathf.Pow(diameter, 4);
+            var c2 = rho * Mathf.Pow(n, 2) * Mathf.Pow(safeDiameter, 4);
             thrust = CalculateK(kt0, kt1, bladePitch, j) * c2;
-            brakeTorque = CalculateK(kq0, kq1, bladePitch, j) * c2 * diameter;
+            brakeTorque = CalculateK(kq0, kq1, bladePitch, j) * c2 * safeDiameter;
 
             if (enableElectricPropellerRpmControl)
             {
@@ -350,11 +353,11 @@ namespace EsnyaSFAddons
             var availableTorque = (engineOn && !Broken && powerTrainN > 0.0001f)
                 ? Mathf.Lerp(engineIdlePower, enginePower, airVehicle.ThrottleInput) * enginePowerCurve.Evaluate(powerTrainRpm) * safeGearRatio * efficiency / (Mathf.PI * 2 * powerTrainN)
                 : 0.0f;
-            n += (availableTorque - brakeTorque) * deltaTime / momentOfInertia;
+            n += (availableTorque - brakeTorque) * deltaTime / safeMomentOfInertia;
 
             load = brakeTorque * Mathf.PI * 2 * n * safeGearRatio / (enginePower * efficiency);
 
-            airVehicle.EngineOutput = Mathf.Clamp01(n * 60 / referenceRpm);
+            airVehicle.EngineOutput = Mathf.Clamp01(n * 60 / safeReferenceRpm);
 
             if (failures && CheckForFailure(powerTrainRpm, load, deltaTime))
             {
@@ -364,7 +367,8 @@ namespace EsnyaSFAddons
 
         private void PostLateUpdate()
         {
-            if (hazardEnabled && PlayerStrike.CheckPlayerStrike(transform, EntityControl, n * 60 / referenceRpm, minHazardRange, maxHazardRange, thrust))
+            var safeReferenceRpm = Mathf.Max(referenceRpm, 0.0001f);
+            if (hazardEnabled && PlayerStrike.CheckPlayerStrike(transform, EntityControl, n * 60 / safeReferenceRpm, minHazardRange, maxHazardRange, thrust))
             {
                 SendCustomNetworkEvent(NetworkEventTarget.Owner, nameof(PlayerStriked));
                 SendCustomEventDelayedSeconds(nameof(_KillPlayer), hazardKillDelay);

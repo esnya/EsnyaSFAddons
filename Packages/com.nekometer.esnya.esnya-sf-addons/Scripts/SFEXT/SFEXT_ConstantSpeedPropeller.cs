@@ -262,7 +262,11 @@ namespace EsnyaSFAddons
         private bool engineOn = false;
         public void SFEXT_G_EngineStartup() => starter = engineOn = true;
         public void SFEXT_G_EngineStartupCancel() => starter = engineOn = false;
-        public void SFEXT_G_EngineOn() => starter = false;
+        public void SFEXT_G_EngineOn()
+        {
+            starter = false;
+            engineOn = true;
+        }
         public void SFEXT_G_EngineOff() => engineOn = false;
 
         public void SFEXT_G_ReAppear() => SFEXT_O_RespawnButton();
